@@ -8,23 +8,21 @@ menu: 关于
 permalink: /about/
 ---
 
-我是马壮，码而生，码而立。
+我是夏天，一个小小的码农。
 
-仰慕「优雅编码的艺术」。
+正在学习「Angular」
 
-## 坚信
+## 标签
 
-* 熟能生巧
-* 努力改变人生
+* 码农
+* 机电
+* 硕士
 
 ## 联系
 
-* GitHub：[@mzlogin](https://github.com/mzlogin)
-* LinkedIn：[@mazhuang](https://www.linkedin.com/in/mazhuang)
+* GitHub：[@ychost](https://github.com/ychost)
 * 博客：[{{ site.title }}]({{ site.url }})
-* 微博: [@mzlogin](http://weibo.com/mzlogin)
-* 知乎: [@mzlogin](http://www.zhihu.com/people/mzlogin)
-* 豆瓣: [@壮哥不胖](http://www.douban.com/people/freedim)
+* 微博: [@ychost-wb](http://weibo.com/ychost-wb)
 
 ## Skill Keywords
 

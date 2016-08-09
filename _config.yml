@@ -91,21 +91,24 @@ zhihu_username: ychost
 #      Comments    #
 # ---------------- #
 # support provider: disqus, duoshuo, changyan
-comments_provider: changyan
+comments_provider: uyan
 # !!!重要!!! 请修改下面两个用户名为你自己申请的
 # !!!Important!!! Please modify usernames below to yours
 duoshuo_username: mazhuang
 disqus_username: mzlogin
 changyan_username: ychost
+uyan_username: ychost
 # ---------------- #
 #    Analytics     #
 # ---------------- #
-google:
-    analytics_id: UA-80669434-1
+#google:
+#    analytics_id: UA-80669434-1
+#baidu:
+#    analytics_id: 
 
 # ---------------- #
 #      Datas       #
 # ---------------- #
-skill_software_keywords: [Java, C++, Python, Design Patterns]
-skill_mobile_app_keywords: [Android, Reverse Engineering]
-skill_windows_keywords: [Win32 SDK, DuiLib, WTL, COM, WinDbg]
+skill_software_keywords: [Java, C++, C#, JavaScript]
+skill_mobile_app_keywords: [Android]
+skill_windows_keywords: [WPF, Office, ASP.NET]
