@@ -103,8 +103,8 @@ uyan_username: ychost
 # ---------------- #
 #google:
 #    analytics_id: UA-80669434-1
-#baidu:
-#    analytics_id: 
+
+#baidu_analytics:true
 
 # ---------------- #
 #      Datas       #
@@ -112,3 +112,5 @@ uyan_username: ychost
 skill_software_keywords: [Java, C++, C#, JavaScript]
 skill_mobile_app_keywords: [Android]
 skill_windows_keywords: [WPF, Office, ASP.NET]
+
+

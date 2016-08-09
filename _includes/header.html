@@ -22,7 +22,9 @@
     <link rel="stylesheet" href="/assets/css/globals/responsive.css">
     <link rel="stylesheet" href="/assets/css/posts/index.css">
     <!--    baidu  analytics-->
+      {% if site.baidu_analytics %}
     <script>
+  
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");
@@ -31,13 +33,16 @@
         s.parentNode.insertBefore(hm, s);
     })();
     </script>
+    {% endif %}
 
     <!-- Latest compiled and minified CSS -->
     {% for css in page.css %}
     <link rel="stylesheet" href="/assets/css/{{css}}"> {% endfor %} {% if site.ios_app_name %}
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black"> {% endif %}
+{% if site.github.public_repositories != null %}
     <link rel="canonical" href="{{ page.url | prepend: site.url }}">
+{% endif %}
     <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ site.subscribe_rss }}">
     <link rel="shortcut icon" href="/favicon.ico"> {% if page.title %}
     <meta property="og:title" content="{{ page.title }}"> {% if page.keywords %} {% assign keywords = page.keywords %} {% else %} {% assign keywords = site.keywords %} {% endif %}
@@ -69,10 +74,20 @@
             nav.style.display = "inline-flex";
         }
     }
+    $(function(){
+        $("img").mouseover(function(){
+            console.log("in");
+            $(this).addClass("cursorHand");
+        })
+          
+    })
     </script>
  <style type="text/css">
+     .cursorHand{
+        cursor:hand;
+     }
  /*set img style */
-    img {
+      img {
       width:500px;
       box-shadow:0 3px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
       margin-top:10px;
@@ -89,6 +104,8 @@
         right:10px;
         border-radius:100px / 10px;
     }
+
+     
     .markdown-body, body{
         font-size: 18px
     }
