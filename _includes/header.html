@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title>{% if page.title %}{{ page.title }} &mdash; {% endif %}{{ site.title }}</title>
+<!--             <link rel="stylesheet" href="/assets/css/pygments/rouge.css">
+ -->
     <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
     <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
     <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
@@ -14,19 +16,20 @@
     <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
     <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
     <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
     <link rel="stylesheet" href="/assets/css/globals/common.css">
     <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
     <link rel="stylesheet" href="/assets/css/globals/responsive.css">
     <link rel="stylesheet" href="/assets/css/posts/index.css">
-<!--    baidu  analytics-->
+    <!--    baidu  analytics-->
     <script>
-        var _hmt = _hmt || [];
-        (function () {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?9f767c9440692f340fc3243d48ee3931";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?9f767c9440692f340fc3243d48ee3931";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
     </script>
 
     <!-- Latest compiled and minified CSS -->
@@ -58,15 +61,44 @@
     <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
     <script src="/assets/js/jquery-ui.js"></script>
     <script type="text/javascript">
-        function toggleMenu() {
-            var nav = document.getElementsByClassName("site-header-nav")[0];
-            if (nav.style.display == "inline-flex") {
-                nav.style.display = "none";
-            } else {
-                nav.style.display = "inline-flex";
-            }
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
         }
+    }
     </script>
+ <style type="text/css">
+ /*set img style */
+    img {
+      width:500px;
+      box-shadow:0 3px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+      margin-top:10px;
+      }
+      img:before, img:after
+      {
+        content:"";
+        position:absolute; 
+        z-index:-1;
+        box-shadow:0 3 20px rgba(0,0,0,0.8);
+        top:50%;
+        bottom:0;
+        left:10px;
+        right:10px;
+        border-radius:100px / 10px;
+    }
+    .markdown-body, body{
+        font-size: 18px
+    }
+/*    
+    set code font size 
+*/   
+ .markdown-body pre>code{
+        font-size: 15px
+    }
+</style>
 </head>
 
 <body class="{{ page.class }}" data-mz="{{ page.class }}">
