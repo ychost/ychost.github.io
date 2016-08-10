@@ -34,7 +34,7 @@ comments: false
         <div class="column two-thirds" >
             <ol class="repo-list">
                 {% for post in paginator.posts %}
-                {% if (post.hideInGithub != true or site.github == null) %}
+                {% if (site.github == null) or (post.categories[0] != "private") %}
                 <li class="repo-list-item">
                     <h3 class="repo-list-name">
                       <a href="{{ post.url }}">{{ post.title }}</a>
