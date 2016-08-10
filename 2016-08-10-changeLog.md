@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 修改日志
-published: true
-categories: [private]
+public: false
+categories: [changeLog]
 description: 这是我博客系统的修改日志
 keywords: 日志, 博客
 ---
@@ -20,9 +20,3 @@ keywords: 日志, 博客
 3. 添加了一篇博客「固定 Vmware 中的 Linux 的 IP地址」
 
 4. 修正了「关于」的内容。
-
-5. ~~添加 "hideInGithub" 该标签支持只在本地显示某文章而在github上面是隐藏的~~
-
-6. 添加 "private" 的分类标签，该标签内的文章只在本地显示而在 Github 上面是隐藏的
-
-7. 对文章的文件夹进行了按年号的分类

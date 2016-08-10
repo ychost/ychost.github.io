@@ -10,7 +10,7 @@ permalink: /about/
 
 我是夏天，一个小小的码农。
 
-正在学习「Angular」
+为了记录一些笔记，发现还是博客最实在
 
 
 ## 标签
@@ -25,23 +25,23 @@ permalink: /about/
 * 博客：[{{ site.title }}]({{ site.url }})
 * 微博: [@ychost-wb](http://weibo.com/ychost-wb)
 
-## Skill Keywords
+## 技能
 
-#### Software Engineer Keywords
+#### 语言
 <div class="btn-inline">
     {% for keyword in site.skill_software_keywords %}
     <button class="btn btn-outline" type="button">{{ keyword }}</button>
     {% endfor %}
 </div>
 
-#### Mobile Developer Keywords
+#### 平台开发
 <div class="btn-inline">
     {% for keyword in site.skill_mobile_app_keywords %}
     <button class="btn btn-outline" type="button">{{ keyword }}</button>
     {% endfor %}
 </div>
 
-#### Windows Developer Keywords
+#### Windows 开发
 <div class="btn-inline">
     {% for keyword in site.skill_windows_keywords %}
     <button class="btn btn-outline" type="button">{{ keyword }}</button>

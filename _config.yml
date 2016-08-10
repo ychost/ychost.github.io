@@ -5,7 +5,7 @@ baseurl:
 url: http://blog.sudoyc.com
 date_format: "ordinal"
 title: 夏天
-subtitle: "个人博客"
+subtitle: "宁静致远"
 description: "夏天的个人博客"
 keywords: 夏天, ychost, summer
 favicon: /favicon.ico
@@ -109,8 +109,8 @@ baidu_analytics: true
 # ---------------- #
 #      Datas       #
 # ---------------- #
-skill_software_keywords: [Java, C++, C#, JavaScript]
-skill_mobile_app_keywords: [Android]
+skill_software_keywords: [Java, C++,  JavaScript, C#]
+skill_mobile_app_keywords: [Android, Arduino, C51]
 skill_windows_keywords: [WPF, Office, ASP.NET]
 
 
