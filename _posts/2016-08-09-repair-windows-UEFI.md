@@ -37,10 +37,12 @@ keywords: Windows, UEFI
     > 如果EFI分区下面没有这些文件夹自己新建
 
 2. 打开 [bootice软件][href1]{:target="_blank"} 选择 BCD编辑 -> 其它 BCD 文件 -> 智能编辑
-![bootice-config][img1]
+[![bootice-config][img1]][img1]{:data-lightbox="rp-win-uefi"}
+
 
 3. 删除 "Windows 7/8 Loader" -> 添加
-![bootice-bcd-config][img2] 
+[![bootice-bcd-config][img2]][img2]{:data-lightbox="rp-win-uefi"}
+
 
 ```
 	设备类型：Partition
