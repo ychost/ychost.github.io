@@ -23,7 +23,7 @@ keywords: Vmware, Linux, IP
     > 选中 "WLAN" 点击右键 →  属性 → 共享 → 勾选两个选项 →  家庭网络连接(<u>H</u>
 ) →  "VMware Network Adapter VMnet1"
 
-　　[![host-share-wlan][img2]][img2]{:data-lightbox="fx-vm-ip"}
+	[![host-share-wlan][img2]][img2]{:data-lightbox="fx-vm-ip"}
 
 * 固定 "VMnet1" 的IP
 	
@@ -45,7 +45,7 @@ keywords: Vmware, Linux, IP
 	
 	> 这里以 CentOS 为例，其它的 Linux 发行版的 IP 设置请自行百度
 
-　　[![centos-set-ip][img4]][img4]{:data-lightbox="fx-vm-ip"}
+	[![centos-set-ip][img4]][img4]{:data-lightbox="fx-vm-ip"}
 
 #### 访问测试
 * Linux 访问外网和主机测试
