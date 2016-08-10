@@ -104,7 +104,7 @@ uyan_username: ychost
 #google:
 #    analytics_id: UA-80669434-1
 
-baidu_analytics:true
+baidu_analytics: true
 
 # ---------------- #
 #      Datas       #
