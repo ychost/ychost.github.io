@@ -6,7 +6,7 @@ description: 有时候一不小心 Windows 的引导就坏掉了然后开不了�
 keywords: Windows, UEFI
 ---
 　　UEFI出问题是经常的事情，之前在装「黑苹果」的时候就经常忘记保存 EFI 分区的 /EFI/ 文件夹，这样的后果就是之前的Windows是没有引导的，只有一个「黑苹果」的
-引　导但是 Windows 的系统任然在硬盘上的，本文就是教你手动修复 "EFI:/EFI/" 文件夹下面　的 Windows 引导的。
+引导但是 Windows 的系统任然在硬盘上的，本文就是教你手动修复 "EFI:/EFI/" 文件夹下面的 Windows 引导的。
 
 
 ### 第一步 工具准备
@@ -29,12 +29,12 @@ keywords: Windows, UEFI
 
 
 
-### 第三步 EFI文件修复
+### 第三步 EFI 文件修复
 1. 拷贝 "Sys:\Windows\Boot\EFI\bootmgfew.efi" 到 "\EFI\Microsoft\boot"
 
     > Sys 是你的系统所在分区，在 WinPE 下面不一定是 C 盘
 
-    > 如果EFI分区下面没有这些文件夹自己新建
+    > 如果 EFI 分区下面没有这些文件夹自己新建
 
 2. 打开 [bootice软件][href1]{:target="_blank"} 选择 BCD编辑 -> 其它 BCD 文件 -> 智能编辑
 [![bootice-config][img1]][img1]{:data-lightbox="rp-win-uefi"}
@@ -54,7 +54,7 @@ keywords: Windows, UEFI
 
 
 ### 第四步 保存文件
-1. 保存该BCD文件到 "\EFI\Microsoft\Boot"
+1. 保存该 BCD 文件到 "\EFI\Microsoft\Boot"
 
 2. 重启系统即可
 
