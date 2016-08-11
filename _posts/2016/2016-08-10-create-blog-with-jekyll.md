@@ -18,7 +18,7 @@ keywords: Jekyll, Github
 
 <br/>
 
-#### 以下操作可以简单概括为：
+#### 概括
 
 1. 安装 [Rubby][href4]{: target="_blank"} 和 [devkit][href4]{: target="_blank"}
 
@@ -69,19 +69,18 @@ keywords: Jekyll, Github
 
 	> 然后就进入了 CMD 命令行模式，输入如下命令 
 
-{% highlight cmd %}
-	ruby dk.rb init
-	ruby dk.rb install
-{% endhighlight %}
+   ```
+   ruby dk.rb init
+   ruby dk.rb install
+   ```
 
-　２. 检查安装情况
+2. 检查安装情况
 
-{% highlight cmd %}
-	ruby -v
-	gem -v
-{% endhighlight %}
-
-　　　[![pkg-install-info][img6]][img6]{:data-lightbox="create-blog"}
+   ```
+   ruby -v
+   gem -v
+   ```
+	[![pkg-install-info][img6]][img6]{:data-lightbox="create-blog"}
 
 ### jekyll 安装
 
@@ -89,27 +88,28 @@ keywords: Jekyll, Github
 
 	> jekyll 需要用 gem 来进行安装，由于 gem 的官方源被墙了所以需要替换 gem 的源，这里将其替换成 [Ruby China][href5]{: target="_blank"}，顺便安装了bundle已经替换掉它的源
 
-{% highlight cmd %}
-	gem sources --add https://gems.ruby-china.org/ 
-	gem sources --remove https://rubygems.org/
-	gem install bundle
-	bundle config mirror.https://rubygems.org https://gems.ruby-china.org
-{% endhighlight %}
+   ```
+   gem sources --add https://gems.ruby-china.org/ 
+   gem sources --remove https://rubygems.org/
+   gem install bundle
+   bundle config mirror.https://rubygems.org https://gems.ruby-china.org
+   ```
 
-　２. 安装 jekyll
-{% highlight cmd %}
-	gem install jekyll
-{% endhighlight %}
+2. 安装 jekyll
 
-　　　[![jekyll-install-cmd][img7]][img7]{:data-lightbox="create-blog"}
+   ```
+   gem install jekyll
+   ```
 
-　３. 检查安装情况
+	[![jekyll-install-cmd][img7]][img7]{:data-lightbox="create-blog"}
 
-{% highlight cmd %}
-	jekyll --version
-{% endhighlight %}
+3. 检查安装情况
 
-　　　[![jekyll-install-rst][img8]][img8]{:data-lightbox="create-blog"}
+   ```
+   jekyll --version
+   ```
+
+	[![jekyll-install-rst][img8]][img8]{:data-lightbox="create-blog"}
 
 #### 本地调试博客
 
@@ -127,23 +127,25 @@ keywords: Jekyll, Github
 
 	> 到刚刚下载的模板的文件夹打开 CMD 终端执行
 
-{% highlight cmd %}
-bundle exec jekyll serve
-{% endhighlight %}
 
-　　　可能会报很多的错，不要担心看看报错的原因，网上一般都有解决方案的，如果是依赖问题可以用如下命令解决
+   ```
+   bundle exec jekyll serve
+   ```
 
-{% highlight cmd %}
-bundle install
-{% endhighlight %}
 
-　　　[![blog-start-cmd][img10]][img10]{:data-lightbox="create-blog"}
+3. 可能会报很多的错，不要担心看看报错的原因，网上一般都有解决方案的，如果是依赖问题可以用如下命令解决
 
-３. 查看博客
+   ```
+   bundle install
+   ```
 
-　　　浏览器输入 [127.0.0.1:4000][href8]{:target="_blank"} 就可以访问刚刚搭建的博客
+	[![blog-start-cmd][img10]][img10]{:data-lightbox="create-blog"}
 
-　　　[![blog-browse-effect][img11]][img11]{:data-lightbox="create-blog"}
+4. 查看博客
+
+	> 浏览器输入 [127.0.0.1:4000][href8]{:target="_blank"} 就可以访问刚刚搭建的博客
+
+	[![blog-browse-effect][img11]][img11]{:data-lightbox="create-blog"}
 
 #### 远程提交
 
@@ -174,19 +176,19 @@ bundle install
 
 	> 输入如下命令，注意第二行的<font color="red"> userName</font>
 
-{% highlight cmd %}
-	git init 
-	git remote add blog https://github.com/userName/userName.github.io.git
-	git add .
-	git commit -m 'my first blog'
-	git push blog
-{% endhighlight %}
+   ```
+   git init
+   git remote add blog https://github.com/userName/userName.github.io.git  
+   git add .
+   git commit -m 'my first blog'  
+   git push blog  
+   ```
 
-　　　[![git-input-cmd][img14]][img14]{:data-lightbox="create-blog"}
+	[![git-input-cmd][img14]][img14]{:data-lightbox="create-blog"}
 
-　　　然后按照提示输入相应的用户账号和密码进行登录就可以了
+	> 然后按照提示输入相应的用户账号和密码进行登录就可以了
 
-　５. 打开浏览器输入 <font color="red"> userName</font>.github.io 就可以浏览到刚刚上传上去的博客内容
+5. 打开浏览器输入 <font color="red"> userName</font>.github.io 就可以浏览到刚刚上传上去的博客内容
 
 [href1]: http://sspai.com/25137
 [href2]: http://jekyll.bootcss.com/

@@ -6,6 +6,15 @@ categories: [private]
 description: 这是我博客系统的修改日志
 keywords: 日志, 博客
 ---
+### 2016-08
+
+#### 2016-08-11
+
+1. 修改博客中的代码样式「kramdown 的代码[缩进][href160811-1]{:target="_blank"}真恶心」
+
+
+[href160811-1]: http://mazhuang.org/2016/06/28/vim-kramdown-tab/
+
 
 
 #### 2016-8-10
