@@ -18,7 +18,7 @@ keywords: Jekyll, Github
 
 <br/>
 
-#### 概括
+### 概括
 
 1. 安装 [Rubby][href4]{: target="_blank"} 和 [devkit][href4]{: target="_blank"}
 

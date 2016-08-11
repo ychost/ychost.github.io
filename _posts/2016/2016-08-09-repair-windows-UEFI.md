@@ -18,14 +18,14 @@ keywords: Windows, UEFI
 
 2. 打开 CMD 命令端口，输入如下命令加载EFI分区
 
-```
-	diskpart
-	list disk     % 查看所有的磁盘 %
-	select disk 0 % 0 是含有引导分区磁盘号，选中含 EFI 分区的磁盘 %
-	list vol      % 查看选中磁盘下面的分区 %
-	select vol  0 % 0 是引导的分区，选中 EFI 分区 %
-	ass           % 加载 EFI 分区 %
-```
+   ```
+   diskpart
+   list disk     % 查看所有的磁盘 %
+   select disk 0 % 0 是含有引导分区磁盘号，选中含 EFI 分区的磁盘 %
+   list vol      % 查看选中磁盘下面的分区 %
+   select vol  0 % 0 是引导的分区，选中 EFI 分区 %
+   ass           % 加载 EFI 分区 %
+   ```
 
 
 
@@ -44,13 +44,13 @@ keywords: Windows, UEFI
 [![bootice-bcd-config][img2]][img2]{:data-lightbox="rp-win-uefi"}
 
 
-```
-	设备类型：Partition
-	启动磁盘：Windows 系统所在磁盘
-	启动分区：Windows 系统所在分区
-	启动文件：将原有的 \Windows\system32\winload.exe 改成
-	                 \Windows\system32\<>winload.efi
-```
+   ```
+   设备类型：Partition
+   启动磁盘：Windows 系统所在磁盘
+   启动分区：Windows 系统所在分区
+   启动文件：将原有的 \Windows\system32\winload.exe 改成
+                 \Windows\system32\<>winload.efi
+   ```
 
 
 ### 第四步 保存文件
