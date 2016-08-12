@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="/assets/css/custom/custom.css">
 
     <!--    baidu  analytics-->
-    {% if site.baidu_analytics %}
+    {% if site.baidu_analytics and site.local_debug != true %}
     <script>
 
     var _hmt = _hmt || [];

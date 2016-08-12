@@ -6,7 +6,14 @@ categories: [private]
 description: 这是我博客系统的修改日志
 keywords: 日志, 博客，私密
 ---
+#### 2016-08-12
 
+1. 添加[ Coding.net ][h12-1]{:target="_blank"}的镜像站点，解决百度无法抓取 GitHub Pages 的问题，教程 [地址][h12-2]{:target="_blank"}
+
+2. 恢复百度统计 「为了百度抓取页面」
+
+[h12-1]: http://ychost.coding.me/
+[h12-2]: #
 #### 2016-08-11
 
 1. 修改博客中的代码样式「kramdown 的代码[ 缩进 ][h11-1]{:target="_blank"}真恶心」
