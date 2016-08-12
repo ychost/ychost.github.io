@@ -91,7 +91,7 @@ zhihu_username: ychost
 #      Comments    #
 # ---------------- #
 # support provider: disqus, duoshuo, changyan
-comments_provider: uyan
+comments_provider: false
 uyan_username: ychost
 # ---------------- #
 #    Analytics     #
@@ -99,7 +99,7 @@ uyan_username: ychost
 #google:
 #    analytics_id: UA-80669434-1
 
-baidu_analytics: true
+baidu_analytics: false
 
 local_debug: true
 

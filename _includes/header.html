@@ -24,19 +24,7 @@
     <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
     <link rel="stylesheet" href="/assets/css/custom/custom.css">
 
-    <!--    baidu  analytics-->
-    {% if site.baidu_analytics and site.local_debug != true %}
-    <script>
 
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?9f767c9440692f340fc3243d48ee3931";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-    </script>
-    {% endif %}
 
     <!-- Latest compiled and minified CSS -->
     {% for css in page.css %}

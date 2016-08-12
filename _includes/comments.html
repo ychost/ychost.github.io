@@ -1,5 +1,3 @@
-{% if site.github.public_repositories != null %}
-
 {% if page.comments != false %} {% case site.comments_provider %} {% when 'disqus' %} {% if site.disqus_username %} {% assign load_disqus = true %}
 <!-- Disqus Protection, see https://github.com/mzlogin/mzlogin.github.io/issues/2 -->
 {% if site.disqus_username == 'mzlogin' %} {% assign load_disqus = false %} {% if site.url contains 'mazhuang.org' %} {% assign load_disqus = true %} {% endif %} {% endif %} {% if load_disqus %}
@@ -92,4 +90,4 @@
     })();
 </script>
 <!-- Changyan Comment END -->
-{% endcase %}{% endif %}{% endif %}
+{% endcase %}{% endif %}
