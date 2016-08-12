@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 固定 Vmware 中的 Linux 的 IP地址
-categories: Vmware
+categories: [Vmware, 推荐]
 description: 当需要用主机与虚拟机的 Linux 进行通信时，绑定 IP 地址是至关重要的
 keywords: Vmware, Linux, IP
 ---

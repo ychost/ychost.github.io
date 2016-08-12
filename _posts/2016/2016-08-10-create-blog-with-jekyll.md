@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 用 Jekyll 搭建 Github 博客
-categories: [Tutorial]
+categories: [Tutorial, 推荐]
 description: 如果想要以一种优雅的方式写博客，那么 Markdown 是你的第一选择
 keywords: Jekyll, Github
 ---
