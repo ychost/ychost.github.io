@@ -86,7 +86,7 @@ keywords: Jekyll, Github
 
 1. 替换 gem 官方源
 
-	> jekyll 需要用 gem 来进行安装，由于 gem 的官方源被墙了所以需要替换 gem 的源，这里将其替换成 [Ruby China][href5]{: target="_blank"}，顺便安装了bundle已经替换掉它的源
+	> jekyll 需要用 gem 来进行安装，由于 gem 的官方源被墙了所以需要替换 gem 的源，这里将其替换成 [Ruby China][href5]{: target="_blank"}，顺便安装了 bundle 以及将它的源替换掉了
 
    ```
    gem sources --add https://gems.ruby-china.org/ 

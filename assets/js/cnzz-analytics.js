@@ -17,8 +17,9 @@
         var yestodayPvStr = vistAll[3]    
 
         totdayPv =   todayPvStr.replace(/[^\d]/g,'');
-        if(typeof totdayPv != 'number'){
-         totdayPv = 1;
+        console.log(totdayPv);
+        if(totdayPv == 0){
+          totdayPv = 1;
        }
        $("#totdayPv").text(totdayPv);
        clearInterval(itl);
