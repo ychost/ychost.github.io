@@ -28,21 +28,21 @@ permalink: /about/
 
 ## 技能
 
-#### 语言
+#### 熟悉单词拼写
 <div class="btn-inline">
     {% for keyword in site.skill_software_keywords %}
     <button class="btn btn-outline" type="button">{{ keyword }}</button>
     {% endfor %}
 </div>
 
-#### 平台开发
+#### 熟悉系统开关机
 <div class="btn-inline">
     {% for keyword in site.skill_mobile_app_keywords %}
     <button class="btn btn-outline" type="button">{{ keyword }}</button>
     {% endfor %}
 </div>
 
-#### Windows 开发
+#### 熟悉软件安装卸载
 <div class="btn-inline">
     {% for keyword in site.skill_windows_keywords %}
     <button class="btn btn-outline" type="button">{{ keyword }}</button>
