@@ -1,8 +1,8 @@
 ---
 layout: page
 title: About
-description: 打码改变世界
-keywords: Zhuang Ma, 马壮
+description: code is life
+keywords: ychost，夏天
 comments: true
 menu: 关于
 permalink: /about/
@@ -18,6 +18,7 @@ permalink: /about/
 * 码农
 * 机电
 * 学生
+* naive
 
 ## 联系
 
