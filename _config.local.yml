@@ -92,6 +92,7 @@ zhihu_username: ychost
 # ---------------- #
 # support provider: uyan, duoshuo,
 comments_provider: duoshuo
+duoshuo_username: ychost
 uyan_username: ychost
 # ---------------- #
 #    Analytics     #
