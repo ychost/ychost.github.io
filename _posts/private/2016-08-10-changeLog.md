@@ -12,8 +12,15 @@ keywords: 日志, 博客，私密
 
 2. 恢复百度统计 「为了百度抓取页面」
 
+3. 删除 ~~`site.github`~~ 变量，添加 `local_debug` 变量来区分本地与远程服务器
+	
+	> 本地启动服务其使用命令 `bundle exec jekyll serve --config _config.local.yml`
+
+	> liquid 里面 <font color="red">没有</font> `true` <font color="red">只有</font> `false` 这个真坑
+
 [h12-1]: http://ychost.coding.me/
 [h12-2]: #
+
 #### 2016-08-11
 
 1. 修改博客中的代码样式「kramdown 的代码[ 缩进 ][h11-1]{:target="_blank"}真恶心」

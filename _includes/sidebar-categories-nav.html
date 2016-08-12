@@ -4,7 +4,7 @@
   <ul class="list-group">
     {% assign sorted_categories = site.categories | sort %}
     {% for category in sorted_categories %}
-    {% if  (site.local_debug == true) or category[0] != "private" %}
+    {% if  (site.local_debug != false) or category[0] != "private" %}
 
     <li class="list-group-item">
       <a href="#{{ category[0] }}">{{ category | first }}</a>

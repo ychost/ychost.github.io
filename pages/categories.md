@@ -11,7 +11,7 @@ permalink: /categories/
 <section class="container posts-content">
 	{% assign sorted_categories = site.categories | sort %}
 	{% for category in sorted_categories %}
-	{% if  (site.github == null) or category[0] != "private" %}
+	{% if  (site.local_debug) or category[0] != "private" %}
 	<h3>{{ category | first }}</h3>
 	<ol class="posts-list" id="{{ category[0] }}">
 		{% for post in category.last %}
