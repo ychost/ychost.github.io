@@ -90,8 +90,8 @@ zhihu_username: ychost
 # ---------------- #
 #      Comments    #
 # ---------------- #
-# support provider: disqus, duoshuo, changyan
-comments_provider: false
+# support provider: uyan, duoshuo,
+comments_provider: duoshuo
 uyan_username: ychost
 # ---------------- #
 #    Analytics     #
