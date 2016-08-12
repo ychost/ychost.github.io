@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 芯联电科排班表
-categories: [other]
+categories: [private]
 description: 芯联电科科技技术有限公司晚上学生做饭的排班表
 keywords: 芯联电科, 排班表
 ---

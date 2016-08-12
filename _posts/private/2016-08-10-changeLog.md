@@ -16,7 +16,11 @@ keywords: 日志, 博客，私密
 	
 	> 本地启动服务其使用命令 `bundle exec jekyll serve --config _config.local.yml`
 
-	> liquid 里面 <font color="red">没有</font> `true` <font color="red">只有</font> `false` 这个真坑
+	> ~~liquid 里面 <font color="red">没有</font> `true` <font color="red">只有</font> `false` 这个真坑~~
+
+4. html 头中添加`canonical`标签解决重复网页的 SEO 问题
+
+5. 替换首页的「我的 GitHub 仓库」为「推荐文章」
 
 [h12-1]: http://ychost.coding.me/
 [h12-2]: #
