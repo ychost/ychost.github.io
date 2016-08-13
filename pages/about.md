@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About
+title: 关于
 description: code is life
 keywords: ychost，夏天
 comments: true

@@ -1,11 +1,10 @@
 ---
-layout: categories
-title: 分类
+layout: category
 description: 哈哈，你找到了我的文章基因库
-keywords: 分类
-comments: false
-menu: 分类
-permalink: /categories/
+keywords: 同一类文章
+comments: true
+menu: 同一类文章
+permalink: /category/
 ---
 
 <section class="container posts-content">

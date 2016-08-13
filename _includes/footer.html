@@ -28,10 +28,10 @@
     </div>
 </footer>
 <!-- show the onelineTotal in remote -->
-{% unless (site.local_debug) %} 
-<script src="http://s4.cnzz.com/z_stat.php?id=1260117641&online=1" id="cnzz_id"></script>
+{% if (site.cnzz_analytics) %} 
+<script src="http://s4.cnzz.com/z_stat.php?id={{ site.cnzz_analytics_id }}" id="cnzz_id"></script>
 <script src="/assets/js/cnzz-analytics.js"></script>
-{% endunless %}
+{% endif %}
 <script src="/assets/js/lightbox.min.js"></script>
 <script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
 <script src="/assets/js/geopattern.js"></script>
@@ -47,21 +47,6 @@ jQuery(document).ready(function($) {
   });
 });
 </script>
-{% if site.google.analytics_id %}
-<div style="display:none">
-  <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', '{{ site.google.analytics_id }}', 'auto');
-ga('send', 'pageview');
-
-</script>
-</div>
-{% endif %}
-
 
 <!--    baidu  analytics-->
 {% if site.baidu_analytics%}
@@ -70,7 +55,7 @@ ga('send', 'pageview');
 var _hmt = _hmt || [];
 (function () {
     var hm = document.createElement("script");
-    hm.src = "//hm.baidu.com/hm.js?9f767c9440692f340fc3243d48ee3931";
+    hm.src = "//hm.baidu.com/hm.js?{{ site.baidu_analytics_id }}";
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(hm, s);
 })();

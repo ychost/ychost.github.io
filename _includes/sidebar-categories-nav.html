@@ -1,10 +1,10 @@
 
-<h3>Blog Categories</h3>
+<h3>文章分类</h3>
 <div id="blog-categories">
   <ul class="list-group">
     {% assign sorted_categories = site.categories | sort %}
     {% for category in sorted_categories %}
-    {% if  (site.local_debug) or category[0] != "private" %}
+    {% if  (site.private_show) or category[0] != "private" %}
 
     <li class="list-group-item">
       <a href="#{{ category[0] }}">{{ category | first }}</a>

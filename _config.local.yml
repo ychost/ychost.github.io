@@ -15,6 +15,16 @@ source_code: https://github.com/ychost/ychost.github.io
 side_bar_repo_limit: 5
 
 # ---------------- #
+#      Debug       #
+# ---------------- #
+local_debug: true
+
+# ---------------- #
+#     Private      #
+# ---------------- #
+private_show: true
+
+# ---------------- #
 #      Author      #
 # ---------------- #
 author: ychost
@@ -81,34 +91,31 @@ collections:
 #      Socials     #
 # ---------------- #
 github_username: ychost
-#douban_username: freedim
-#facebook_username: mzlogin
-weibo_username: ychost-wb
-zhihu_username: ychost
-#twitter_username: mzlogin
+weibo_username:  ychost-wb
+zhihu_username:  ychost
+
 
 # ---------------- #
 #      Comments    #
 # ---------------- #
 # support provider: uyan, duoshuo,
-comments_provider: duoshuo
-duoshuo_username: ychost
-uyan_username: ychost
+comments_provider: false
+duoshuo_username:  ychost
+
 # ---------------- #
 #    Analytics     #
 # ---------------- #
-#google:
-#    analytics_id: UA-80669434-1
+baidu_analytics:    false
+baidu_analytics_id: 9f767c9440692f340fc3243d48ee3931
+cnzz_analytics:     false
+cnzz_analytics_id:  1260117641&online=1
 
-baidu_analytics: false
-
-local_debug: true
 
 # ---------------- #
 #      Datas       #
 # ---------------- #
-skill_software_keywords: [Java, C++,  JavaScript, C#]
+skill_software_keywords:   [Java, C++,  JavaScript, C#]
 skill_mobile_app_keywords: [Android, Arduino, C51]
-skill_windows_keywords: [WPF, Office, ASP.NET]
+skill_windows_keywords:    [WPF, Office, ASP.NET]
 
 

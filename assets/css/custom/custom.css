@@ -2,8 +2,8 @@
 /*set img style */
 .markdown-body  img {
   cursor:pointer;
-  max-width:88% !important; 
-  margin-top:10px; 
+/*  max-width:88% !important; 
+*/  margin-top:10px; 
   -webkit-box-shadow: 5px 5px 2px #ccc;
   -moz-box-shadow: 5px 5px 2px #ccc;
   border-radius: 9px;

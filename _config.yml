@@ -15,6 +15,16 @@ source_code: https://github.com/ychost/ychost.github.io
 side_bar_repo_limit: 5
 
 # ---------------- #
+#      Debug       #
+# ---------------- #
+local_debug: false
+
+# ---------------- #
+#     Private      #
+# ---------------- #
+private_show: false
+
+# ---------------- #
 #      Author      #
 # ---------------- #
 author: ychost
@@ -46,6 +56,11 @@ navs:
   -
     href: /about/
     label: 关于
+    
+  -
+    href: /category/
+    label: 测试
+
 
 # ---------------- #
 #       RSS        #
@@ -81,31 +96,31 @@ collections:
 #      Socials     #
 # ---------------- #
 github_username: ychost
-#douban_username: freedim
-#facebook_username: mzlogin
-weibo_username: ychost-wb
-zhihu_username: ychost
-#twitter_username: mzlogin
+weibo_username:  ychost-wb
+zhihu_username:  ychost
+
 
 # ---------------- #
 #      Comments    #
 # ---------------- #
 # support provider: uyan, duoshuo,
 comments_provider: duoshuo
-duoshuo_username: ychost
+duoshuo_username:  ychost
+
 # ---------------- #
 #    Analytics     #
 # ---------------- #
-#google:
-#    analytics_id: UA-80669434-1
+baidu_analytics:    true
+baidu_analytics_id: 9f767c9440692f340fc3243d48ee3931
+cnzz_analytics:     true
+cnzz_analytics_id:  1260117641&online=1
 
-baidu_analytics: true
-local_debug: false
+
 # ---------------- #
 #      Datas       #
 # ---------------- #
-skill_software_keywords: [Java, C++,  JavaScript, C#]
+skill_software_keywords:   [Java, C++,  JavaScript, C#]
 skill_mobile_app_keywords: [Android, Arduino, C51]
-skill_windows_keywords: [WPF, Office, ASP.NET]
+skill_windows_keywords:    [WPF, Office, ASP.NET]
 
 

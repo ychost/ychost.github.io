@@ -6,6 +6,21 @@ categories: [private]
 description: 这是我博客系统的修改日志
 keywords: 日志, 博客，私密
 ---
+
+#### 2016-08-13
+
+1. 替换「又言」评论系统为「多说」
+
+2. 删除掉原始的 ReadMe.md
+
+3. .
+
+
+
+
+
+
+
 #### 2016-08-12
 
 1. 添加[ Coding.net ][h12-1]{:target="_blank"}的镜像站点，解决百度无法抓取 GitHub Pages 的问题，教程 [地址][h12-2]{:target="_blank"}

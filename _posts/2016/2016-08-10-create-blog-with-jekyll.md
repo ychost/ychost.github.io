@@ -1,20 +1,23 @@
 ---
 layout: post
-title: 用 Jekyll 搭建 Github 博客
+title: 用 Jekyll 搭建 GitHub 博客
 categories: [Tutorial, 推荐]
 description: 如果想要以一种优雅的方式写博客，那么 Markdown 是你的第一选择
-keywords: Jekyll, Github
+keywords: Jekyll, GitHub
 ---
 
-　　如果想要以一种「优雅」的方式写博客，那么 [Markdown][href1]{: target="_blank"} 是你的第一选择，为了能够将纯文本转成静态博客我们需要用到 [jekyll][href2]{: target="_blank"}，不仅本地可以运行它而且 [Github][href3]{: target="_blank"} 也带有它的运行环境，所以利用 Jekyll 搭建的博客可以放在 [Github][href3]{: target="_blank"} 上面以供他人访问。
+　　如果想要以一种「优雅」的方式写博客，那么 [Markdown][href1]{: target="_blank"} 是你的第一选择，为了能够将纯文本转成静态博客我们需要用到 [jekyll][href2]{: target="_blank"}，不仅本地可以运行它而且 [GitHub][href3]{: target="_blank"} 也带有它的运行环境，所以利用 Jekyll 搭建的博客可以放在 [GitHub][href3]{: target="_blank"} 上面以供他人访问。
 
 > 本文的所有操作都是基于 Windows 平台的
 
-> 本文只是一个简单的搭建 Jekyll 本地调试环境和启用 Github 博客服务的一个教程，未涉及博客的撰写内容
+> 本文只是一个简单的搭建 Jekyll 本地调试环境和启用 GitHub 博客服务的一个教程，未涉及博客的撰写内容
 
-> 环境搭建好了可以参考 Github 官方提供的[教程][href10]{: target="_blank"}
+> 环境搭建好了可以参考 GitHub 官方提供的[教程][href10]{: target="_blank"}
 
-> 谷歌是可以收录 Github 博客的
+> 谷歌是可以收录 GitHub 博客的
+
+> 由于百度不能检索到 GitHub 的博客，故利用国内的 [Coding][href11]{:target="_blank"} 做了一个 [GitHub][href3]{:target="_blank"} 的镜像内容
+
 
 <br/>
 
@@ -28,9 +31,9 @@ keywords: Jekyll, Github
 
 4. 运行下载的模板进行相关修改和调试
 
-5. 创建 Github 账户
+5. 创建 GitHub 账户
 
-6. 上传调试好的博客到 Github 的指定仓库中去
+6. 上传调试好的博客到 GitHub 的指定仓库中去
 
 
 ### 环境搭建
@@ -149,7 +152,7 @@ keywords: Jekyll, Github
 
 #### 远程提交
 
-　　这里只需要创建一个仓库名为 <font color="red">userName</font>.github.io 的仓库 「注：这里的 <font color="red"> userName </font> 为你的 github 账号」，然后将该模板上传上去就可以了。
+　　这里只需要创建一个仓库名为 <font color="red">userName</font>.GitHub.io 的仓库 「注：这里的 <font color="red"> userName </font> 为你的 GitHub 账号」，然后将该模板上传上去就可以了。
 
 1. 安装 [Git][href9]{:target:"_blank"} 软件
 	
@@ -158,19 +161,19 @@ keywords: Jekyll, Github
 	[![git-install-process][img15]][img15]{:data-lightbox="create-blog"}
 
 
-2. 创建建 [Github][href3]{: target="_blank"} 账户
+2. 创建建 [GitHub][href3]{: target="_blank"} 账户
 	
-	[![github-create-acnt][img16]][img16]{:data-lightbox="create-blog"}
+	[![GitHub-create-acnt][img16]][img16]{:data-lightbox="create-blog"}
 
-3. 创建一个名称为 <font color="red">userName</font>.github.io 的仓库「<font color="red">userName </font>为你的 github 账号」
+3. 创建一个名称为 <font color="red">userName</font>.GitHub.io 的仓库「<font color="red">userName </font>为你的 GitHub 账号」
 
 	> 这里的账号名称为 ychost 由于之前创建了这个仓库所以出现了同名错误
 
-	[![github-create-repo][img12]][img12]{:data-lightbox="create-blog"}
+	[![GitHub-create-repo][img12]][img12]{:data-lightbox="create-blog"}
 
-	[![github-submit-repo][img13]][img13]{:data-lightbox="create-blog"}
+	[![GitHub-submit-repo][img13]][img13]{:data-lightbox="create-blog"}
 
-4. 上传项目到 Github
+4. 上传项目到 GitHub
 	
 	> 到博客项目根目录点击右键选择「Git Bash Here」
 
@@ -178,7 +181,7 @@ keywords: Jekyll, Github
 
    ```
    git init
-   git remote add blog https://github.com/userName/userName.github.io.git  
+   git remote add blog https://GitHub.com/userName/userName.GitHub.io.git  
    git add .
    git commit -m 'my first blog'  
    git push blog  
@@ -188,18 +191,19 @@ keywords: Jekyll, Github
 
 	> 然后按照提示输入相应的用户账号和密码进行登录就可以了
 
-5. 打开浏览器输入 <font color="red"> userName</font>.github.io 就可以浏览到刚刚上传上去的博客内容
+5. 打开浏览器输入 <font color="red"> userName</font>.GitHub.io 就可以浏览到刚刚上传上去的博客内容
 
 [href1]: http://sspai.com/25137
 [href2]: http://jekyll.bootcss.com/
-[href3]: https://www.github.com
+[href3]: https://www.GitHub.com
 [href4]: http://rubyinstaller.org/downloads/
 [href5]: https://gems.ruby-china.org/
 [href6]: http://jekyllthemes.org/
 [href7]: http://jekyllthemes.org/themes/hcz-jekyll-material/
 [href8]: http://127.0.0.1:4000
 [href9]: http://rj.baidu.com/soft/detail/30195.html?ald
-[href10]: https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/
+[href10]: https://help.GitHub.com/articles/setting-up-your-GitHub-pages-site-locally-with-jekyll/
+[href11]: https://coding.net
 
 [img1]: /images/post/tutorial/ruby-download-page.jpg
 [img2]: /images/post/tutorial/devkit-download-page.jpg
@@ -212,8 +216,8 @@ keywords: Jekyll, Github
 [img9]: /images/post/tutorial/jekyll-download-theme.jpg
 [img10]: /images/post/tutorial/blog-start-cmd.jpg
 [img11]: /images/post/tutorial/blog-browse-effect.jpg
-[img12]: /images/post/tutorial/github-create-repo.jpg
-[img13]: /images/post/tutorial/github-submit-repo.jpg
+[img12]: /images/post/tutorial/GitHub-create-repo.jpg
+[img13]: /images/post/tutorial/GitHub-submit-repo.jpg
 [img14]: /images/post/tutorial/git-input-cmd.jpg
 [img15]: /images/post/tutorial/git-install-process.jpg
-[img16]: /images/post/tutorial/github-create-acnt.jpg
+[img16]: /images/post/tutorial/GitHub-create-acnt.jpg
