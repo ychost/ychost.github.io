@@ -21,7 +21,7 @@ local_debug: false
 # ---------------- #
 #     Private      #
 # ---------------- #
-private_show: false
+private_show: true
 private_name: "Private"
 
 # ---------------- #
