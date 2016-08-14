@@ -100,7 +100,7 @@
     font-size:18px;
     text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
     border-right: 1px solid #C1C3D1;
-    text-align: center !important;
+  /*  text-align: center !important;*/
   }
 
   td:last-child {

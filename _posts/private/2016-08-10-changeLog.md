@@ -11,23 +11,42 @@ keywords: 日志, 博客，私密
 
 1. 修复「详细分类」中异步回调的问题
 
-2. 修改「分类」界面中单个分类文章数量限制为 3
-
 3. 修复各个指向「详细分类」的连接
 
-4. 修正「详细分类」界面的 `<title>`
+4. 修正「详细分类」界面的 {% ihighlight html%}<title>{% endihighlight %}
 
 5. 修复「详细分类」界面的分享连接抖动问题
 
-6. 删除「推荐文章」的~~`target="_blank"`~~
+6. 删除「推荐文章」的{% ihighlight css %}target="_blank"{% endihighlight %}
 
 7. 添加 `tags` 标签
 
-8. 添加 `repost` 标签
+8. 添加 `repost` 标签 
+
+8. 添加 {% ihighlight liquid %} {% raw %}{{ site.cat_brif_repo_limit }} {% endraw %}{% endihighlight %} 变量限制分类中的预览文章数量
+
+9. 添加 [inline_highlight][h14-1]支持 span code 高亮
+	
+	> 安装方法： [installing-a-plugin][h14-2]{:target="_blank"}
+
+	> 使用方法：{% raw %} {% ihighlight code %} //some conde span {% endihighlight %}   {% endraw %}
+
+10. 在 SublimeText2 `ihighlight` 的snippet `ihigh` 
+
+	> [手把手教你写Sublime中的Snippet][h14-3]{:target="_blank"} 	
+
+	> snippet 的 `scope` [标签值][h14-4]{:target="_blank"} 
+
+11. 给 Post 的文章的所有 {% ihighlight html %} <a> {% endihighlight %} 标签添加属性 	{% ihighlight css %} target="_blank" {% endihighlight %}，如果需要修改请使用 	{% ihighlight markdown %} [text][href]{:target="_self"} {% endihighlight %}
+
+[h14-1]: https://github.com/bdesham/inline_highlight
+[h14-2]: https://jekyllrb.com/docs/plugins/#installing-a-plugin
+[h14-3]: http://www.jianshu.com/p/356bd7b2ea8e
+[h14-4]: https://gist.github.com/iambibhas/4705378
 
 #### 2016-08-13
 
-1. 替换「又言」评论系统为「多说」
+1. 替换「友言」评论系统为「多说」
 
 2. 删除掉原始的 ~~ReadMe.md~~
 
@@ -41,7 +60,7 @@ keywords: 日志, 博客，私密
 
 	> Liquid 当中使用了管道命令 `url_encode`
 
-   ```liquid
+   ```liquid 
    {% raw %}
    {{ category | first | url_encode   }}
    {% endraw  %}
@@ -88,7 +107,7 @@ keywords: 日志, 博客，私密
 [h11-2]: http://www.umeng.com/
 [h11-3]: #
 [h11-4]: http://tongji.baidu.com/
-[h11-5]: /2016//11/show-all-files-in-visualStudio/
+[h11-5]: /2016/11/show-all-files-in-visualStudio/
 
 
 #### 2016-08-10
