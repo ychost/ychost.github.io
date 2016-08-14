@@ -4,15 +4,17 @@
   <ul class="list-group">
     {% assign sorted_categories = site.categories | sort %}
     {% for category in sorted_categories %}
-    {% if  (site.private_show) or category[0] != "private" %}
+    {% if  (site.private_show) or category[0] != site.private_name %}
 
     <li class="list-group-item">
-      <a href="#{{ category[0] }}">{{ category | first }}</a>
-      <span class="badge">{{ category[1].size }}</span>
-    </li>
-    {% endif %}
-    {% endfor %}
-  </ul>
+       <a href="#{{ category[0] }}" class = "cats-nav-hylink">{{ category | first }}</a>
+  <!-- <a href="detail?cat={{category[0] | url_encode  }}" class="cats-nav-hylink" >{{ category | first }}</a>    -->
+
+<span class="badge">{{ category[1].size }}</span>
+</li>
+{% endif %}
+{% endfor %}
+</ul>
 </div>
 
 <script type="text/javascript">
@@ -21,5 +23,18 @@ $(document).ready(function(){
   $("#blog-categories li").css('text-transform','capitalize')
 });
 
+(function(blog){
+	// if cats href is #
+	if(window.location.pathname == "/categories/"){
+
+	// if in cat detail href is detail hylink
+	} else if(window.location.pathname == "/categories/detail/"){
+		$.each($(".cats-nav-hylink"),function(i,v){
+			var href = v.href;			
+			var catName = blog.encodeUrl(href.replace(/(.*)+#/g,""));
+			v.href = "http://"+window.location.host + "/categories/detail/?cat="+catName;
+		})		
+  	}
+}(blog))
 </script>
 

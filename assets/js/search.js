@@ -55,7 +55,7 @@ jQuery(function() {
                     $search_results.append(appendString);
                 });
             } else {
-                $search_results.html('<li>No results found</li>');
+                $search_results.html('<li>未检索到结果</li>');
             }
         });
     }

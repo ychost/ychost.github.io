@@ -4,6 +4,7 @@ title: 用 Jekyll 搭建 GitHub 博客
 categories: [Tutorial, 推荐]
 description: 如果想要以一种优雅的方式写博客，那么 Markdown 是你的第一选择
 keywords: Jekyll, GitHub
+tags: [Jekyll, Blog, GitHub]
 ---
 
 　　如果想要以一种「优雅」的方式写博客，那么 [Markdown][href1]{: target="_blank"} 是你的第一选择，为了能够将纯文本转成静态博客我们需要用到 [jekyll][href2]{: target="_blank"}，不仅本地可以运行它而且 [GitHub][href3]{: target="_blank"} 也带有它的运行环境，所以利用 Jekyll 搭建的博客可以放在 [GitHub][href3]{: target="_blank"} 上面以供他人访问。

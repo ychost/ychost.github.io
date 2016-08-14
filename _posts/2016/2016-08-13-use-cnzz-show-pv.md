@@ -2,10 +2,11 @@
 layout: post
 title: 显示网页访问量
 categories: [Crack, 推荐]
-description: CNZZ 是一个第三方的网站流量统计分析系统，类似于百度统计、谷歌分析这类的网站，它们可以对你自己的网站的IP、PV等数据进行统计分析
+description: CNZZ 是一个第三方的网站流量统计分析系统，类似于百度统计、谷歌分析这类的网站，它们可以对你自己的网站的 IP、PV 等数据进行统计分析
 keywords: CNZZ, show PV
+tags: [CNZZ, PV, IP]
 ---
-　　[CNZZ][href1]{:target="_blank"} 是一个第三方的网站流量统计分析系统，类似于[ 百度统计][href2]{:target="_blank"}、[谷歌分析 ][href3]{:target="_blank"}这类的对网站，它们可以对你自己的网站的IP、PV等数据进行统计分析。它支持前端显示今日和昨日的 IP、 PV 等数据，但是显示的样式很丑而且不能在后台自定义，本文是一个破解这一限制达到自定义其数据显示的一篇教程。
+　　[CNZZ][href1]{:target="_blank"} 是一个第三方的网站流量统计分析系统，类似于[ 百度统计][href2]{:target="_blank"}、[谷歌分析 ][href3]{:target="_blank"}这类的对网站，它们可以对你自己的网站的 IP、PV 等数据进行统计分析。它支持前端显示今日和昨日的 IP、 PV 等数据，但是显示的样式很丑而且不能在后台自定义，本文是一个破解这一限制达到自定义其数据显示的一篇教程。
 
 > 由于「百度统计」没有暴露访问量的 API 以及「谷歌分析」被隔离在墙外了，所以选取了 [CNZZ][href1]{:target="_blank"} 来作为统计工具
 
@@ -28,7 +29,7 @@ keywords: CNZZ, show PV
    ```html
    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_YOURID'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3DYROUID%26online%3D1' type='text/javascript'%3E%3C/script%3E"));</script>
    ```
-2. 利用 [urlDecode][href4]{:target="_blank"} 对 `unescape` 部分解码后的代码
+2. 利用 [urlDecode][href4]{:target="_blank"} 对 `escape` 部分解码后的代码
 
 	> 注意 <font color="red">+</font> 号会被解析掉，请手动添加，以下是我手动格式化后的代码
 

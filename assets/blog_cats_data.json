@@ -1,0 +1,24 @@
+---
+layout: null
+---
+{% assign sorted_categories = site.categories | sort %}
+{
+  {% for category in sorted_categories %}
+{% if  (site.private_show) or category[0] != site.private_name %}
+
+ "{{ category | first  }}":{
+  "posts":[
+  {% for post in category.last %}
+  {
+   "title": "{{  post.title }}",
+   "url":  "{{  post.url }}",
+   "date":"{{ post.date | date: "%Y/%m/%d" }}"
+   
+ }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+  ]
+}
+{% unless forloop.last %},{% endunless %}
+{% endif %}{% endfor %}
+}
+

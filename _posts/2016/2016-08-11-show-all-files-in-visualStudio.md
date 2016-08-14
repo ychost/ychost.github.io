@@ -4,6 +4,7 @@ title: 显示 VisualStudio 未被引用的文件
 categories: [Windows]
 description: 有时候复制一个文件夹到 VS 的一个目录下面但是 VS 仅仅显示该文件夹而文件夹中的文件是不显示的
 keywords: Visual Studio, show all files
+tags: [VS, Files]
 ---
 　　有时候复制一个文件夹到 VS 的一个目录下面但是 VS 仅仅显示该文件夹而文件夹中的文件是不显示的，但是该项目所在的路径里面是包含这些文件的只是 VS 没有添加到工程里面来而已。
 

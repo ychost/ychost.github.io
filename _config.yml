@@ -12,7 +12,6 @@ favicon: /favicon.ico
 timezone: Asia/Shanghai
 encoding: "utf-8"
 source_code: https://github.com/ychost/ychost.github.io
-side_bar_repo_limit: 5
 
 # ---------------- #
 #      Debug       #
@@ -23,6 +22,13 @@ local_debug: false
 #     Private      #
 # ---------------- #
 private_show: false
+private_name: "Private"
+
+# ---------------- #
+#       Limit      #
+# ---------------- #
+cat_brif_repo_limit: 3
+side_bar_repo_limit: 5
 
 # ---------------- #
 #      Author      #
@@ -56,10 +62,6 @@ navs:
   -
     href: /about/
     label: 关于
-    
-  -
-    href: /category/
-    label: 测试
 
 
 # ---------------- #

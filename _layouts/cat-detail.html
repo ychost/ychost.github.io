@@ -1,0 +1,68 @@
+---
+layout: default
+---
+
+<section class="collection-head small geopattern" data-pattern-id="{{ page.title | truncate: 15, ''}}">
+	<div class="container">
+		<div class="columns">
+			<div class="column three-fourths">
+				<div class="collection-title">
+					<h1 class="collection-header cat-detail-title"></h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+	<div class="columns">
+		<div class="column three-fourths" >
+			<article class="article-content markdown-body">
+				<section class="container posts-content">
+					<h3 class="cat-detail-title"> </h3>
+					<ol class="posts-list" id="cat-detail-list">					
+						<!-- <li class="posts-list-item">
+							<span class="posts-list-meta" style="font-size:18px">2016-08-11</span>
+							<a class="posts-list-name" href="#" style="font-size:18px">文章</a>
+						</li>	 -->					
+					</ol>
+
+				</section>
+				<!-- /section.content -->
+			</article>
+			<div class="share">
+				{% include sns-share.html %}
+			</div>
+			<div class="comment">
+				{% include comments.html %}
+			</div>
+		</div>
+		<div class="column one-fourth">
+			{% include sidebar-search.html %}
+			{% include sidebar-categories-nav.html %}
+		</div>
+	</div>
+</section>
+<!-- /section.content -->
+
+<script type="text/javascript">
+$(".share").hide();
+(function(blog,$){
+	var catName = blog.queryString("cat");
+	catName =  blog.decodeUrl(catName);
+	var titleSuffix = " ── {{ site.title }}";
+	document.title = catName + titleSuffix;
+
+	//console.log(catName);
+	$(".cat-detail-title").text(catName);
+	blog.readyCats(function(){
+	//	console.log(blog.cats);
+		$.each( blog.cats[catName].posts,function(key,val){
+			$("#cat-detail-list").append('<li class="posts-list-item"><span class="posts-list-meta" style="font-size:18px">'+val.date+' </span><a class="posts-list-name" href="'+ val.url +'" style="font-size:18px">'+val.title+'</a></li>');
+		});
+		$(".share").show();
+	});
+}(blog,$))
+
+
+</script>

@@ -4,7 +4,7 @@
 {% for category in sorted_categories %}
 {% if   category contains  "推荐" %}
 {% for repo in category.last | limit: site.side_bar_repo_limit %}
-<a href="{{ repo.url }}" target="_blank" class="card text-center">
+<a href="{{ repo.url }}"  class="card text-center">
     <div class="thumbnail">
         <div class="card-image geopattern" data-pattern-id="{{ repo.title }}">
             <div class="card-image-cell">

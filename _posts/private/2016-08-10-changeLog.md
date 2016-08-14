@@ -2,28 +2,60 @@
 layout: post
 title: 2016年8月修改日志
 published: true
-categories: [private]
+categories: [Private]
 description: 这是我博客系统的修改日志
 keywords: 日志, 博客，私密
 ---
+
+#### 2016-08-14
+
+1. 修复「详细分类」中异步回调的问题
+
+2. 修改「分类」界面中单个分类文章数量限制为 3
+
+3. 修复各个指向「详细分类」的连接
+
+4. 修正「详细分类」界面的 `<title>`
+
+5. 修复「详细分类」界面的分享连接抖动问题
+
+6. 删除「推荐文章」的~~`target="_blank"`~~
+
+7. 添加 `tags` 标签
+
+8. 添加 `repost` 标签
 
 #### 2016-08-13
 
 1. 替换「又言」评论系统为「多说」
 
-2. 删除掉原始的 ReadMe.md
+2. 删除掉原始的 ~~ReadMe.md~~
 
-3. .
+3. 添加文章[「显示网页访问量」][h13-1]{:target="_blank"}
 
+4. 修复「推荐文章」在部分界面不显示的问题
 
+5. 添加详细分类子页面修复「中文乱码」问题
 
+	> 这里使用了 jQuery 当中的两个 API `encodeURIComponent(url)` 和 `decodeURIComponent(url)`
 
+	> Liquid 当中使用了管道命令 `url_encode`
 
+   ```liquid
+   {% raw %}
+   {{ category | first | url_encode   }}
+   {% endraw  %}
+   ```
+ 6. 更新 OpenShift 中的 PHP 脚本
+
+    > 删除掉了~~`git fetch`~~命令，使 Coding 的镜像内容与 GitHub 上面完全一致
+
+[h13-1]: /2016/08/13/use-cnzz-show-pv/
 
 
 #### 2016-08-12
 
-1. 添加[ Coding.net ][h12-1]{:target="_blank"}的镜像站点，解决百度无法抓取 GitHub Pages 的问题，教程 [地址][h12-2]{:target="_blank"}
+1. 添加[ Coding.net ][h12-1]{:target="_blank"}的镜像站点，[解决百度无法抓取 GitHub Pages 的问题][h12-2]{:target="_blank"}
 
 2. 恢复百度统计 「为了百度抓取页面」
 
