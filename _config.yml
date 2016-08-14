@@ -11,7 +11,8 @@ keywords: 夏天, ychost, summer
 favicon: /favicon.ico
 timezone: Asia/Shanghai
 encoding: "utf-8"
-source_code: https://github.com/ychost/ychost.github.io
+source_code: https://cdgithub.com/ychost/ychost.github.io
+
 
 # ---------------- #
 #      Debug       #
@@ -21,7 +22,7 @@ local_debug: false
 # ---------------- #
 #     Private      #
 # ---------------- #
-private_show: true
+private_show: false
 private_name: "Private"
 
 # ---------------- #
@@ -63,7 +64,6 @@ navs:
     href: /about/
     label: 关于
 
-
 # ---------------- #
 #       RSS        #
 # ---------------- #
@@ -76,6 +76,7 @@ markdown: kramdown
 kramdown:
     input: GFM
 highlighter: rouge
+ihighlight: rouge
 paginate: 8
 lsi: false
 quiet: false
@@ -106,7 +107,7 @@ zhihu_username:  ychost
 #      Comments    #
 # ---------------- #
 # support provider: uyan, duoshuo,
-comments_provider: duoshuo
+comments_provider: true
 duoshuo_username:  ychost
 
 # ---------------- #
@@ -114,7 +115,7 @@ duoshuo_username:  ychost
 # ---------------- #
 baidu_analytics:    true
 baidu_analytics_id: 9f767c9440692f340fc3243d48ee3931
-cnzz_analytics:     true
+cnzz_analytics:     false
 cnzz_analytics_id:  1260117641&online=1
 
 
