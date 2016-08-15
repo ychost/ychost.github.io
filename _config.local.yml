@@ -109,7 +109,7 @@ zhihu_username:  ychost
 # support provider: uyan, duoshuo,
 comments_provider: false
 duoshuo_username:  ychost
-
+duoshuo_userid: 6279352103223689985
 # ---------------- #
 #    Analytics     #
 # ---------------- #
@@ -127,3 +127,8 @@ skill_mobile_app_keywords: [Android, Arduino, C51]
 skill_windows_keywords:    [WPF, Office, ASP.NET]
 
 
+# ---------------- #
+#     SEO          #
+# ---------------- #
+baidu_share:  false
+baidu_search: false

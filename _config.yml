@@ -24,6 +24,8 @@ local_debug: false
 # ---------------- #
 private_show: false
 private_name: "Private"
+private_exist: true      #true:  the blog-cats-data.json contain private private posts
+                         #false: the blog-cats-data.json not contain private private posts
 
 # ---------------- #
 #       Limit      #
@@ -107,15 +109,16 @@ zhihu_username:  ychost
 #      Comments    #
 # ---------------- #
 # support provider: uyan, duoshuo,
-comments_provider: true
+comments_provider: duoshuo
 duoshuo_username:  ychost
+duoshuo_userid: 6279352103223689985
 
 # ---------------- #
 #    Analytics     #
 # ---------------- #
 baidu_analytics:    true
 baidu_analytics_id: 9f767c9440692f340fc3243d48ee3931
-cnzz_analytics:     false
+cnzz_analytics:     true
 cnzz_analytics_id:  1260117641&online=1
 
 
@@ -125,5 +128,13 @@ cnzz_analytics_id:  1260117641&online=1
 skill_software_keywords:   [Java, C++,  JavaScript, C#]
 skill_mobile_app_keywords: [Android, Arduino, C51]
 skill_windows_keywords:    [WPF, Office, ASP.NET]
+
+
+# ---------------- #
+#     SEO          #
+# ---------------- #
+baidu_share: true
+baidu_search: true
+
 
 

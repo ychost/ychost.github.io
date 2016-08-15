@@ -1,0 +1,1 @@
+bundle exec jekyll --config _config.loca.yml --draft

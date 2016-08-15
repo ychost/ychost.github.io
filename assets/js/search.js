@@ -16,7 +16,7 @@ jQuery(function() {
         $.each(loaded_data, function(index, value){
             window.idx.add(
                 $.extend({ "id": index }, value)
-            );
+                );
         });
     });
 
@@ -59,4 +59,18 @@ jQuery(function() {
             }
         });
     }
+
+//set the input with fit the screen
+var searchFitScreen = function (){
+    var site_search = $("#site_search");
+    var site_search_input = $("#site_search_input");       
+    var width = site_search.width() - 115;
+    $(site_search_input).width(width);
+   $(site_search).css("visibility","visible");
+   console.log("in");
+}
+searchFitScreen();
+$(window).resize(searchFitScreen);
 });
+
+

@@ -4,7 +4,7 @@ layout: null
 {% assign sorted_categories = site.categories | sort %}
 {
   {% for category in sorted_categories %}
-{% if  (site.private_show) or category[0] != site.private_name %}
+{% if  site.private_show or site.private_exist %}
 
  "{{ category | first  }}":{
   "posts":[

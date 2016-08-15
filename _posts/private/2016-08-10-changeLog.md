@@ -7,6 +7,12 @@ description: 这是我博客系统的修改日志
 keywords: 日志, 博客，私密
 ---
 
+#### 2016-08-15
+
+1. 添加 「百度搜索」 「百度分享」(隐藏)  
+
+1. 搜索栏自适应屏幕
+
 #### 2016-08-14
 
 1. 修复「详细分类」中异步回调的问题
@@ -25,7 +31,7 @@ keywords: 日志, 博客，私密
 
 8. 添加 {% ihighlight liquid %} {% raw %}{{ site.cat_brif_repo_limit }} {% endraw %}{% endihighlight %} 变量限制分类中的预览文章数量
 
-9. 添加 [inline_highlight][h14-1]支持 span code 高亮
+9. 添加 [inline_highlight][h14-1] 支持 span code 高亮
 	
 	> 安装方法： [installing-a-plugin][h14-2]{:target="_blank"}
 

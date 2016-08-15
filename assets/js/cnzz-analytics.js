@@ -17,7 +17,7 @@
         var yestodayPvStr = vistAll[3]    
 
         totdayPv =   todayPvStr.replace(/[^\d]/g,'');
-        console.log(totdayPv);
+        //console.log(totdayPv);
         if(totdayPv == 0){
           totdayPv = 1;
        }
