@@ -132,3 +132,8 @@ skill_windows_keywords:    [WPF, Office, ASP.NET]
 # ---------------- #
 baidu_share:  false
 baidu_search: false
+
+# ---------------- #
+#     Exclude      #
+# ---------------- #
+exclude: [Resource]
