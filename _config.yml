@@ -31,7 +31,7 @@ private_exist: true      #true:  the blog-cats-data.json contain private private
 #       Limit      #
 # ---------------- #
 cat_brif_repo_limit: 3
-side_bar_repo_limit: 5
+side_bar_repo_limit: 4
 
 # ---------------- #
 #      Author      #
