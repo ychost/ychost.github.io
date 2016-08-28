@@ -2,7 +2,7 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: http://blog.sudoyc.com
+url: http://www.sudoyc.com
 date_format: "ordinal"
 title: 夏天
 subtitle: "宁静致远"

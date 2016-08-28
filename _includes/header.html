@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="/assets/css/{{css}}"> {% endfor %} {% if site.ios_app_name %}
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black"> {% endif %}
-    {% if site.github.public_repositories == null %}
+    {% if site.github.public_repositories != null %}
     <link rel="canonical" href="{{ page.url | prepend: site.url }}">
     {% endif %}
     <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ site.subscribe_rss }}">

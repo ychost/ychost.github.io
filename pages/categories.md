@@ -14,7 +14,7 @@ permalink: /categories/
 	{% if  site.private_show  or category[0] != site.private_name %}
 	<a href="detail/?cat={{ category | first | url_encode   }}" class="cats-hylink"><h3>{{ category | first }}</h3></a>
 	<ol class="posts-list" id="{{ category[0] }}">
-		{% for post in category.last  %}
+		{% for post in category.last  limit: site.cat_brif_repo_limit %}
 
 		<li class="posts-list-item">
 		<span class="posts-list-meta">{{ post.date | date:"%Y-%m-%d" }}</span>

@@ -10,7 +10,6 @@ tags: [Github 镜像, Coding]
 
 > 如果你还不熟悉如何搭建 GitHub 博客请点击 [「此处」][href1]
 
-> 准备工具 [Putty][href4], [WinScp][href5]
 
 ### 原理
 
@@ -50,7 +49,7 @@ tags: [Github 镜像, Coding]
 
 * #### 登录 OpenShift
 
-	　这里有两种方式登录，第一种是利用 rhc 登录，第二种方式是用putty登录，第一种方式简单快捷不需要自己去配置 .ssh 文件等等，第二种方式比较通用不仅仅限于登录 OpenShift 其它的利用 ssh 登录的都可以，这里我选择以第一种方式来登录 OpenShift, 如果有兴趣使用putty登录，请参考 [###][href7]。
+	　这里有两种方式登录，第一种是利用 rhc 登录，第二种方式是用putty登录，第一种方式简单快捷不需要自己去配置 .ssh 文件等等，第二种方式比较通用不仅限用于登录 OpenShift 其它主机也可以登录，但这里我选择以第一种方式来登录 OpenShift, 如果有兴趣使用putty登录，请参考 [「putty远程连接openshift云服务器」][href7]。
 
 	* 安装 rhc 
 
@@ -58,7 +57,7 @@ tags: [Github 镜像, Coding]
    	gem install rhc
   ```
 
-   * 配置 OpenShift, 在配置种输入自己的 OpenShift 登录帐号及密码
+  * 配置 OpenShift, 在配置种输入自己的 OpenShift 登录帐号及密码
 
   ```
    	rhc setup
@@ -71,19 +70,85 @@ tags: [Github 镜像, Coding]
 
   * 登录成功了如图所示
 
-  [![rch-login-successfully][img4]][img4]{:data-lightbox="github-mirror"}
+    [![rch-login-successfully][img4]][img4]{:data-lightbox="github-mirror"}
+
 
 ###  联动 GitHub 与 Coding
 
+* 利用 rhc 或者 putty 成功登陆了之后，进入 data 文件夹，这个文件夹我们才具有操作权限
+
+  ```
+   cd $OPENSHIFT_DATA_DR
+  ```
+  
+* 将 GitHub 上面的仓库 Clone 一份到该目录，注意将 <font color="red">REPO_URL</font>替换你博客的仓库地址
+
+  ```
+    git clone REPO_URL
+  ```
+
+* 修改 .git/config 文件内容，将 Coding.net 的信息和 GitHub的信息直接添加上去，当然如果觉得不安全可以考虑用 SSH 
+
+  ```
+    vim ./git/config
+  ```
+
+  注意将 <font color="red">GITHUB_PWD</font>, <font color="red">CODING_PWD</font> 等等替换成自己的信息，这里主要是利用 HTTPS 来认证账户，没有 Coding 账户的先去 [Coding.net][href2] 注册
+
+  ```
+      [core]
+        repositoryformatversion = 0
+        filemode = true
+        bare = false
+        logallrefupdates = true
+[remote "origin"]
+        url = https://GITHUB_PWD@github.com/USER_NAME/USER_NAME.github.io.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[remote "coding"]
+        url = https://USER_NAME:CODING_PWD@git.coding.net/USER_NAME/USER_NAME.git
+        fetch = +refs/heads/*:refs/remotes/coding/*
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+  ```
+
 #### PHP 执行脚本
 
-#### GitHub 端配置
+* 进入 app-root/repo 文件夹，app-root 是 data 文件夹的上层目录
 
-### 注意事项
+* 添加 php 脚本文件  pushCodingNet.php ，并加入如下内容，这里就是主要实现请求这个文件后自动获取 GitHub 的最近更新并强行推送到 Coding 上面去，注意替换 <font color="red">YOUR_NAME</font>
 
-#### 重复页面的 SEO 文件
+  ```php
+      <?php
+    if( $_GET['key'] == 'PUSH' ) {
+        echo shell_exec('cd $OPENSHIFT_DATA_DIR/YOUR_NAME.github.io;git pull;git push -f coding');
+    }
+    else {
+        header('HTTP/1.1 400 Bad Request');
+        echo <<<HTML
+    // Fallback
+    HTML;
+    }
+    
+  ```
 
-#### 自动区分 Coding 与 GitHub
+#### 添加 Webhooks
+
+进入你的 GitHub 仓库 → Setting → Webhooks & Services → Add Webhook, 注意 Payload URL 加入 <font color="red">YOUR_OPENSHIFT_WEB</font>/pushCodingNet.php?key=PUSH
+
+  [![github-add-webhooks][img5]][img5]{:data-lightbox="github-mirror"}  
+
+### 完成
+
+　　到这里已经搭建好了，只要我们向 GitHub 提交更新，Github 上面设置的 Webhook 会自动去请求 OpenShift 主机，然后 OpenShift 主机接到请求之后会自动拉取 GitHub 的最新内容然后强行推送到 Coding 的仓库中去，所以 Coding 和 GitHub的内容就保持一致了
+
+#### 注意事项
+
+* SEO 问题
+  
+  如果担心 SEO 问题在每个页面上添加 [canonical][href8] 标签就好
+
+
 
 
 
@@ -93,9 +158,11 @@ tags: [Github 镜像, Coding]
 [href4]: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
 [href5]: http://www.downza.cn/soft/187923.html
 [href6]: https://lanterncn.org/
-[href7]: #
+[href7]: http://jingyan.baidu.com/article/0f5fb099cdc2426d8334ea0d.html
+[href8]: http://www.chinaz.com/web/2011/0630/192530.shtml
 
 [img1]: /images/post/tutorial/github-coding-flow.jpg
 [img2]: /images/post/tutorial/open-openshift-web-console.jpg
 [img3]: /images/post/tutorial/openshift-add-phpapp.jpg
 [img4]: /images/post/tutorial/rch-login-successfully.jpg
+[img5]: /images/post/tutorial/github-add-webhooks.jpg
