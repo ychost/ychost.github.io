@@ -50,10 +50,28 @@ tags: [Github 镜像, Coding]
 
 * #### 登录 OpenShift
 
-	　　这时候就需要祭出神器 Putty 了,打开 
+	　这里有两种方式登录，第一种是利用 rhc 登录，第二种方式是用putty登录，第一种方式简单快捷不需要自己去配置 .ssh 文件等等，第二种方式比较通用不仅仅限于登录 OpenShift 其它的利用 ssh 登录的都可以，这里我选择以第一种方式来登录 OpenShift, 如果有兴趣使用putty登录，请参考 [###][href7]。
 
+	* 安装 rhc 
 
-#### 配置 Git 文件
+  ```
+   	gem install rhc
+  ```
+
+   * 配置 OpenShift, 在配置种输入自己的 OpenShift 登录帐号及密码
+
+  ```
+   	rhc setup
+  ```
+  * 登录 OpenShift, 注意把 <font color="red">APP_NAME</font> 替换成上面建立的 OpenShift 应用名称
+
+  ```
+  	rhc ssh APP_NAME 
+  ```
+
+  * 登录成功了如图所示
+
+  [![rch-login-successfully][img4]][img4]{:data-lightbox="github-mirror"}
 
 ###  联动 GitHub 与 Coding
 
@@ -75,7 +93,9 @@ tags: [Github 镜像, Coding]
 [href4]: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
 [href5]: http://www.downza.cn/soft/187923.html
 [href6]: https://lanterncn.org/
+[href7]: #
 
 [img1]: /images/post/tutorial/github-coding-flow.jpg
 [img2]: /images/post/tutorial/open-openshift-web-console.jpg
 [img3]: /images/post/tutorial/openshift-add-phpapp.jpg
+[img4]: /images/post/tutorial/rch-login-successfully.jpg
