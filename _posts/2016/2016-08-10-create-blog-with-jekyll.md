@@ -17,7 +17,7 @@ tags: [Jekyll, Blog, GitHub]
 
 > 谷歌是可以收录 GitHub 博客的
 
-> 由于百度不能检索到 GitHub 的博客，故利用国内的 [Coding][href11]{:target="_blank"} 做了一个 [GitHub][href3]{:target="_blank"} 的镜像内容
+> 由于百度不能检索到 GitHub 的博客，故利用国内的 [Coding][href11]{:target="_blank"} 做了一个 [GitHub][href3]{:target="_blank"} 的镜像内容 [教程][href12]
 
 
 <br/>
@@ -196,15 +196,16 @@ tags: [Jekyll, Blog, GitHub]
 
 [href1]: http://sspai.com/25137
 [href2]: http://jekyll.bootcss.com/
-[href3]: https://www.GitHub.com
+[href3]: https://www.github.com
 [href4]: http://rubyinstaller.org/downloads/
 [href5]: https://gems.ruby-china.org/
 [href6]: http://jekyllthemes.org/
 [href7]: http://jekyllthemes.org/themes/hcz-jekyll-material/
 [href8]: http://127.0.0.1:4000
 [href9]: http://rj.baidu.com/soft/detail/30195.html?ald
-[href10]: https://help.GitHub.com/articles/setting-up-your-GitHub-pages-site-locally-with-jekyll/
+[href10]: https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/
 [href11]: https://coding.net
+[href12]: /2016/08/28/github-consistent-with-coding/
 
 [img1]: /images/post/tutorial/ruby-download-page.jpg
 [img2]: /images/post/tutorial/devkit-download-page.jpg
@@ -217,8 +218,8 @@ tags: [Jekyll, Blog, GitHub]
 [img9]: /images/post/tutorial/jekyll-download-theme.jpg
 [img10]: /images/post/tutorial/blog-start-cmd.jpg
 [img11]: /images/post/tutorial/blog-browse-effect.jpg
-[img12]: /images/post/tutorial/GitHub-create-repo.jpg
-[img13]: /images/post/tutorial/GitHub-submit-repo.jpg
+[img12]: /images/post/tutorial/github-create-repo.jpg
+[img13]: /images/post/tutorial/github-submit-repo.jpg
 [img14]: /images/post/tutorial/git-input-cmd.jpg
 [img15]: /images/post/tutorial/git-install-process.jpg
-[img16]: /images/post/tutorial/GitHub-create-acnt.jpg
+[img16]: /images/post/tutorial/github-create-acnt.jpg

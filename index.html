@@ -49,7 +49,7 @@ comments: false
                         {% for cat in post.categories %}
                         <span class="meta-info">
                           <span class="octicon octicon-file-directory"></span>
-                          <a href="/categories/detail?cat={{ cat | url_encode }}" class="home-cat-hylink" title="{{ cat }}">{{ cat }}</a>
+                          <a href="/categories/detail/?cat={{ cat | url_encode }}" class="home-cat-hylink" title="{{ cat }}">{{ cat }}</a>
                         </span>
                         {% endfor %}
                     </p>
