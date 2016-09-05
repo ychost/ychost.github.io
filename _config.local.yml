@@ -75,6 +75,8 @@ subscribe_rss: /feed.xml
 markdown: kramdown
 kramdown:
     input: GFM
+mermaid:
+     src: /assets/js/mermaid.min.js
 highlighter: rouge
 ihighlight: rouge
 paginate: 8
