@@ -11,14 +11,11 @@ tags: [C51, KeyDriver]
 
 ### 传统的按键驱动
 
-```flow
-st=>start: start:>http://www.baidu.com
-op1=>operation: 操作1
-cond1=>condition: YES or NO?
-sub=>subroutine: 子程序
-e=>end
+{% mermaid %}
+    graph TD
+        B["fa:fa-twitter for peace"]
+        B-->C[fa:fa-ban forbidden]
+        B-->D(fa:fa-spinner);
+        B-->E(A fa:fa-camera-retro perhaps?);
+{% endmermaid %}.
 
-st->op1->cond1
-cond1(yes)->e
-cond1
-```
