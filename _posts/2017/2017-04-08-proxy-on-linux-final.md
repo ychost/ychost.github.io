@@ -1,7 +1,7 @@
 ---
 layout: post
-title: linux翻墙终极版
-categories: [教程]
+title: linux 翻墙终极版
+categories: [Linux,推荐]
 description: Lnux下面如果不翻墙那还要Linux干啥呢，软件下不了，问题搜不了只能天天看百度新闻，那还不如退回windows玩儿游戏呢
 keywords: Lnux,翻墙,shadowsocks,privoxy
 tags: [Linux,shadowsocks,privoxy]
@@ -11,7 +11,7 @@ tags: [Linux,shadowsocks,privoxy]
 
 ## 总览
 1. 注册[一枝红杏][href1]账号
-2. 安装[Shadowsocks-t5][href2]并配置
+2. 安装[Shadowsocks-qt5][href2]并配置
 3. 安装[Privoxy][href3]并配置
 4. 测试效果
 

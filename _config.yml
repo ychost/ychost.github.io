@@ -110,8 +110,8 @@ zhihu_username:  ychost
 # ---------------- #
 #      Comments    #
 # ---------------- #
-# support provider: uyan, duoshuo,
-comments_provider: duoshuo
+# support provider: uyan, duoshuo,wangyi
+comments_provider: wangyi
 duoshuo_username:  ychost
 duoshuo_userid: 6279352103223689985
 
