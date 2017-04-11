@@ -1,11 +1,19 @@
 ---
 layout: post
-title: 2016年8月修改日志
+title: 修改日志
 published: true
 categories: [Private]
 description: 这是我博客系统的修改日志
 keywords: 日志, 博客，私密
 ---
+
+#### 2017-4-11
+1. 修改 404 页面指向益云的公益广告
+2. 替换「多说」为「网易跟帖」
+3. 关闭「百度分享」和「百度搜索」
+4. 添加「remoteBuild.sh」脚本
+5. 关闭「openshift」的「webhook」改为手动向「coding.net」上面部署
+
 
 #### 2016-08-28
 
