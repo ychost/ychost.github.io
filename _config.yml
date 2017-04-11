@@ -135,8 +135,8 @@ skill_windows_keywords:    [WPF, Office, ASP.NET]
 # ---------------- #
 #     SEO          #
 # ---------------- #
-baidu_share: true
-baidu_search: true
+baidu_share: false
+baidu_search: false
 
 # ---------------- #
 #     Exclude      #

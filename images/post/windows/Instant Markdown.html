@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:8090/ -->
+<html class="cye-disabled cye-nm"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Instant Markdown</title>
+  <style>
+      .markdown-body {
+          box-sizing: border-box;
+          min-width: 200px;
+          max-width: 980px;
+          margin: 0 auto;
+          padding: 45px;
+      }
+    </style>
+<link rel="stylesheet" href="./Instant Markdown_files/github-markdown.css">
+<link rel="stylesheet" href="./Instant Markdown_files/github-highlight.css">
+<script src="./Instant Markdown_files/socket.io.js"></script><style id="nightModeStyle">
+html.cye-enabled.cye-nm:not(*:-webkit-full-screen) body,
+ html.cye-enabled.cye-nm:not(*:-webkit-full-screen) #cye-workaround-body {-webkit-filter:contrast(91%) brightness(84%) invert(1);}</style><style id="cyebody">html.cye-enabled.cye-lm body{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyediv">html.cye-enabled.cye-lm div{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyetable">html.cye-enabled.cye-lm th{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}html.cye-enabled.cye-lm td{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyetextInput">html.cye-enabled.cye-lm input[type=text]{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}html.cye-enabled.cye-lm textarea{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyeselect">html.cye-enabled.cye-lm select{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyeul">html.cye-enabled.cye-lm ul{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style><style id="cyeChangeByClick">html.cye-enabled.cye-lm .cye-lm-tag,html.cye-enabled.cye-lm.cye-lm-tag{background-color:#cce8cf !important;border-color:rgb(51, 58, 51) !important;background-image:none !important;color:#000000  !important}</style>
+<script>
+      var socket = io();
+      socket.on('markdown', function (msg) {
+        document.getElementById("markdown").innerHTML = msg;
+      });
+      socket.on('disconnect', function() {
+        window.close();
+      })
+    </script>
+</head><div id="cyeBlackMaskLayer" style="background-color: rgb(19, 19, 19); position: fixed; width: 1980px; height: 1080px; z-index: -2147483648;"></div>
+
+<body>
+  <article id="markdown" class="markdown-body"><hr>
+<h2>layout: post
+title: 固定 Vmware 中的 Linux 的 IP地址
+categories: [Vmware, 推荐]
+description: 当需要用主机与虚拟机的 Linux 进行通信时，绑定 IP 地址是至关重要的
+keywords: Vmware, Linux, IP
+tags: [Vmware, Linux, IP]</h2>
+<p>当需要主机与 Vmware 虚拟机进行通信或者 Vmware 里面的多个虚拟机进行通信的时候，固定彼此的 IP 和掌控网关是十分必要的。</p>
+<h4>Vmware 软件设置</h4>
+<ul>
+<li>
+<p>Vmware 的上网模式需要设置成特定「虚拟网络」，在 Linux 的虚拟系统点击右键 -&gt; 设置</p>
+<p><a href="./Instant Markdown_files/vmware-config-network.png"><img src="./Instant Markdown_files/vmware-config-network.png" alt="vmware-config-network"></a>{:data-lightbox="fx-vm-ip"}</p>
+</li>
+</ul>
+<h4>主机 IP 设置</h4>
+<ul>
+<li>
+<p>共享你可以上网的无线网络 "VMnet1"</p>
+<blockquote>
+<p>在网络共享里面，这里我讲我的 "WLAN" 无线网络共享给了 "VMnet1"</p>
+</blockquote>
+<blockquote>
+<p>选中 "WLAN" 点击右键 →  属性 → 共享 → 勾选两个选项 →  家庭网络连接(<u>H</u>
+) →  "VMware Network Adapter VMnet1"</p>
+</blockquote>
+<p><a href="./Instant Markdown_files/host-share-wlan.png"><img src="./Instant Markdown_files/host-share-wlan.png" alt="host-share-wlan"></a>{:data-lightbox="fx-vm-ip"}</p>
+</li>
+<li>
+<p>固定 "VMnet1" 的IP</p>
+<blockquote>
+<p>这里设置的 IP 也就是主机相对于 Linux 虚拟机这个局域网的 IP 地址</p>
+</blockquote>
+<blockquote>
+<p>图中设置的 IP 地址为 192.168.183.2</p>
+</blockquote>
+<blockquote>
+<p>默认网关(<u>D</u>)不用设置，DNS 服务器设置主要是便于 Linux 通过此 DNS 上网</p>
+</blockquote>
+<p><a href="./Instant Markdown_files/host-fixed-ip.png"><img src="./Instant Markdown_files/host-fixed-ip.png" alt="host-fixed-ip"></a>{:data-lightbox="fx-vm-ip"}</p>
+</li>
+</ul>
+<h4>Linux IP 设置</h4>
+<ul>
+<li>
+<p>固定 Linux 的IP</p>
+<blockquote>
+<p><font color="red">此 IP 一定要与 "VMnet1" 设置的 IP(192.168.183.2) 这个网段一致，
+	  这里设置的是 192.168.183.101</font></p>
+</blockquote>
+<blockquote>
+<p>这里以 CentOS 为例，其它的 Linux 发行版的 IP 设置请自行百度</p>
+</blockquote>
+<p><a href="./Instant Markdown_files/centos-set-ip.png"><img src="./Instant Markdown_files/centos-set-ip.png" alt="centos-set-ip"></a>{:data-lightbox="fx-vm-ip"}</p>
+</li>
+</ul>
+<h4>访问测试</h4>
+<ul>
+<li>
+<p>Linux 访问外网和主机测试</p>
+<blockquote>
+<p>可以看到 Vmware中的 CentOS ping 通了 baidu 和 主机 "192.168.183.2"</p>
+</blockquote>
+<p><a href="./Instant Markdown_files/centos-ping-network.png"><img src="./Instant Markdown_files/centos-ping-network.png" alt="centos-ping-network"></a>{:data-lightbox="fx-vm-ip"}</p>
+</li>
+<li>
+<p>主机访问 Linux 测试</p>
+<blockquote>
+<p>可以看到主机 ping 通了 Linux</p>
+</blockquote>
+<p>[![host-ping-centos] <a href="http://localhost:8090/images/post/vmware/host-ping-centos.png">img6</a>]<a href="http://localhost:8090/images/post/vmware/host-ping-centos.png">img6</a>{:data-lightbox="fx-vm-ip"}</p>
+</li>
+</ul>
+</article>
+
+
+</body><div id="cye-workaround-body" style="position: absolute; left: 0px; top: 0px; z-index: -2147483646; background: none 0% 0% / auto repeat scroll padding-box border-box white; height: 1328px; width: 1905px;"></div><div id="cye-workaround-body-image" style="position: absolute; left: 0px; top: 0px; z-index: -2147483645; background: none 0% 0% / auto repeat scroll padding-box border-box rgba(0, 0, 0, 0); height: 1328px; width: 1905px;"></div></html>
