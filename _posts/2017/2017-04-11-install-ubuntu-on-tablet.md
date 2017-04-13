@@ -15,6 +15,8 @@ x86 平板安装 win10 太卡，安装 android 兼容性不好，要是在上面
   > 这些系统都是打了补丁的所以可以直接安装，我下载的是「Ubuntu Budgie 17.04 Beta 1」。
   > 我已经将其系统从「谷歌网盘」复制到了「百度网盘」，稍后放出下载链接。
 
+2. 百度网盘链接：[http://pan.baidu.com/s/1c2cjqxU][href3] 密码：knz5
+
 2. 一块容量大于 4G 的 U盘 用来做系统安装盘，一根 OTG 线和一个 USB集线器 用来连鼠标和键盘。
 
 3. [rufus][href2] 用来将系统刻录到 U盘 的软件。
@@ -24,6 +26,8 @@ x86 平板安装 win10 太卡，安装 android 兼容性不好，要是在上面
 1. 「设备」选中用来刻录的 U盘。
 2. 然后点击「ISO镜像」 旁边的那个光驱图标选择将要刻录的系统。
 3. 点击「开始」用默认的设置，点确定直接开始刻录，等待进度条走满。
+> 注意：分区方案和目标系统类型： 「用于UEFI计算机的GPT分区方案」，其余的选项可以默认
+
    [![rufus][img2]][img2]{:data-lightbox="x86-table-linux"}
 
 ### 准备安装
@@ -54,6 +58,7 @@ x86 平板安装 win10 太卡，安装 android 兼容性不好，要是在上面
 
 [href1]: http://linuxiumcomau.blogspot.com/2017/03/ubuntu-16042-and-ubuntu-1704-beta-1.html
 [href2]: https://rufus.akeo.ie/
+[href3]: http://pan.baidu.com/s/1c2cjqxU
 
 [img1]: /images/post/linux/linuxium-page.png
 [img2]: /images/post/windows/rufus.png
