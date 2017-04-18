@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Linux 软件推荐 不定时更新
+title: Linux 软件推荐 「2017-4-18 更新」
 categories: [Linux]
 keywords: Linux,软件
 description: 推荐一些在 Linux 下面常用的软件
@@ -32,13 +32,19 @@ tags: [Lnux]
    [![typroa][img15]][img15]{:data-lightbox="linux-software"}
 
 
-
 ## 开发软件
 1. [JetBrains系列][href1]，包含了常用的 Intellij IDEA,WebStorm 等等，跨平台就是好。该软件解压出来添加到环境变量中即可使用无须安装。
    [![idea-start][img1]][img1]{:data-lightbox="linux-software"}
 
 2. [Visual Studio Code][href2]，直接下载 .deb 或者 .rpm 包安装即可使用，微软出的代码编辑器配合插件特别好使。
    [![vscode][img2]][img2]{:data-lightbox="linux-software"}
+
+3. [dbeaver][href18],sql 客户端功能类似于 navicat。
+   [![dbeaver][img17]][img17]{:data-lightbox="linux-software"}
+
+4. [redis-desktop-manager][href19]，redis 的图形化客户端。-
+   [![redis-desktop-manager][img18]][img18]{:data-lightbox="linux-software"}
+
 
 ## 效率软件
 
@@ -55,6 +61,11 @@ tags: [Lnux]
 
 2. [mpv][href14]，一款影音播放器，界面很清爽而且可以很轻松配置成无边框配置请参考[mpv教程][href15]
    [![mpv][img14]][img14]{:data-lightbox="linux-software"}
+
+3. [kodi][href20]，支持自定义源代的在线视频播放器，功能特别强大，  
+   推荐配置 [https://github.com/taxigps/xbmc-addons-chinese][href21]
+   [![mpv][img19]][img19]{:data-lightbox="linux-software"}
+
  
 ## 小工具
 
@@ -87,6 +98,10 @@ Linux 的软件生态系统还是满丰富的，如果你有什么值得推荐�
 [href15]: http://www.iplaysoft.com/mpv.html
 [href16]: https://www.typora.io/ 
 [href17]: https://github.com/CristianHenzel/ClipIt
+[href18]: http://dbeaver.jkiss.org/download/
+[href19]: https://redisdesktop.com/download
+[href20]: https://kodi.tv
+[href21]: https://github.com/taxigps/xbmc-addons-chinese
 
 [img1]: /images/post/linux/idea-start.png
 [img2]: /images/post/linux/vscode.png
@@ -104,5 +119,8 @@ Linux 的软件生态系统还是满丰富的，如果你有什么值得推荐�
 [img14]: /images/post/linux/mpv.png
 [img15]: /images/post/linux/typroa.png
 [img16]: /images/post/linux/cliplt.png
+[img17]: /images/post/linux/dbeaver.png
+[img18]: /images/post/linux/redis-desktop-manager.png
+[img19]: /images/post/linux/kodi.png
 
 
