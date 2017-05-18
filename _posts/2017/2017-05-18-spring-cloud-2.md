@@ -217,9 +217,8 @@ eureka.client.serviceUrl.defaultZone=http://localhost:1111/eureka/
 
 这一节我们通过Feign以接口和注解配置的方式，轻松实现了对compute-service服务的绑定，这样我们就可以在本地应用中像本地服务一下的调用它，并且做到了客户端均衡负载。
 
-完整示例可参考：[Chapter9-1-2/eureka-feign][href3]
+完整示例可参考：[Chapter9-1-2/eureka-feign][href2]
 
 
 [href1]: /2017/05/18/spring-cloud-1/
 [href2]: http://git.oschina.net/didispace/SpringBoot-Learning/
-[href3]: http://blog.didispace.com/springcloud2/
