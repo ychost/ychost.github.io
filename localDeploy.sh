@@ -1,1 +1,1 @@
-bundle exec jekyll server --config _config.local.yml --draft
+bundle exec jekyll server --config _config.local.yml --draft --host 0.0.0.0
