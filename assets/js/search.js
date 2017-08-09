@@ -67,7 +67,6 @@ var searchFitScreen = function (){
     var width = site_search.width() - 115;
     $(site_search_input).width(width);
    $(site_search).css("visibility","visible");
-   console.log("in");
 }
 searchFitScreen();
 $(window).resize(searchFitScreen);

@@ -24,7 +24,7 @@ tags: [Jekyll, Blog, GitHub]
 
 ### 概括
 
-1. 安装 [Rubby][href4]{: target="_blank"} 和 [devkit][href4]{: target="_blank"}
+1. 安装 [Ruby][href4]{: target="_blank"} 和 [devkit][href4]{: target="_blank"}
 
 2. 用 Gem 安装 Jekyll
 
@@ -41,8 +41,10 @@ tags: [Jekyll, Blog, GitHub]
 
 #### 准备工作
 
-1. 下载 [Rubby][href4]{: target="_blank"}
+1. 下载 [Ruby][href4]{: target="_blank"}
 
+	> 2017-08-09：如果是 windows 平台，由于 Wdm 不支持高版本 Ruby 所以请使用 <font color="red"> ruby2.3 </font>及之前的版本
+	
 	> 注意根据如果电脑是 <font color="red">x64(64位操作系统)</font> 请下载 <font color="red">Ruby2.3.1(x64)</font>, 如果是 <font color="red">x86 (32位系统)</font> 请下载 <font color="red">Ruby2.3.1</font>
 
 	[![ruby-download-page][img1]][img1]{:data-lightbox="create-blog"}
