@@ -51,26 +51,21 @@ tags: [LeetCode, 刷题, Array Topics]
 
 ### 解法
 
-1. 先对数组进行排序，然后取\\((a_i,a_{i+1})\\) (i 为偶数) 为一组，显然该分组满足条件，时间复杂度为 \\(O(n)\\)
+1. 先对数组进行排序，然后取\\((a_i,a_{i+1})\\) (i 为偶数) 为一组，显然该分组满足条件
 
    ```go
         func arrayPairSum(nums []int) int {
-            if len(nums) == 0 || len(nums)%2 != 0 {
-                panic("输入参数有误")
-            }
             sort.Ints(nums)
-            a1, sum := 0, 0
-
+            sum := 0 
             for i:=0;i<len(nums);i+=2{
                 sum +=nums[i]
             } 
-
             return sum
         }
    ```
 2. 调用系统的排序方式很耗时间，所以直接用一大数组来达到排序的效果，数组的序号为 ```nums[i]```，值为 ```nums[i]``` 在数组中出现的次数，然后求 Sum
 
-    > 注：该解法只能在特定的 n 的范围确定，数组元素的范围确定的情况下
+    > 注：该解法只能在 n 的范围确定，数组元素的范围确定的情况下
 
    ```go
      func arrayPairSum2(nums []int) int {
