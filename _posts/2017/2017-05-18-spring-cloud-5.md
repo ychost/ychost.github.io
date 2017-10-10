@@ -188,7 +188,6 @@ public class AccessFilter extends ZuulFilter  {
 * [http://localhost:5555/api-a/add?a=1&b=2]()：返回401错误
 * [http://localhost:5555/api-a/add?a=1&b=2&accessToken=token]()：正确路由到server-A，并返回计算内容
 对于其他一些过滤类型，这里就不一一展开了，根据之前对filterType生命周期介绍，可以参考下图去理解，并根据自己的需要在不同的生命周期中去实现不同类型的过滤器。
-
  [![spring-eureka][img4]][img4]{:data-lightbox="spring-cloud"}
 
 最后，总结一下为什么服务网关是微服务架构的重要部分，是我们必须要去做的原因：
