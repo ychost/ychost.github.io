@@ -4,4 +4,26 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+GetPrimer	../Resources/py/code-art-c2-1.py	/^    def GetPrimer(self, count):$/;"	kind:member	line:31
+IsMatched	../Resources/py/code-art-c2-2.py	/^    def IsMatched(self,str1,str2):$/;"	kind:member	line:7
+IsPrimder	../Resources/py/code-art-c2-1.py	/^    def IsPrimder(self,num):$/;"	kind:member	line:45
+IsStrContains	../Resources/py/code-art-c2-1.py	/^    def IsStrContains(self, bigStrs, smallStrs):$/;"	kind:member	line:8
+IsStrContains2	../Resources/py/code-art-c2-1.py	/^    def IsStrContains2(self,bigStrs,smallStrs):$/;"	kind:member	line:19
+Solution	../Resources/py/code-art-c1-1.py	/^class Solution:$/;"	kind:class	line:4
+Solution	../Resources/py/code-art-c2-1.py	/^class Solution:$/;"	kind:class	line:6
+Solution	../Resources/py/code-art-c2-2.py	/^class Solution:$/;"	kind:class	line:6
 code-art-c1-1.py	../Resources/py/code-art-c1-1.py	1;"	kind:file	line:1
+code-art-c2-1.py	../Resources/py/code-art-c2-1.py	1;"	kind:file	line:1
+code-art-c2-2.py	../Resources/py/code-art-c2-2.py	1;"	kind:file	line:1
+code-art-c2-3.py	../Resources/py/code-art-c2-3.py	1;"	kind:file	line:1
+gcd	../Resources/py/code-art-c1-1.py	/^    def gcd(self,big,small):$/;"	kind:member	line:53
+leftShiftString	../Resources/py/code-art-c1-1.py	/^    def leftShiftString(self,strs,shift):$/;"	kind:member	line:5
+leftShiftString2	../Resources/py/code-art-c1-1.py	/^    def leftShiftString2(self,strs,shift):$/;"	kind:member	line:17
+leftShiftString3	../Resources/py/code-art-c1-1.py	/^    def leftShiftString3(self,strs,shift):$/;"	kind:member	line:30
+listStrs	../Resources/py/code-art-c1-1.py	/^    listStrs = list(strs)$/;"	kind:variable	line:65
+math	../Resources/py/code-art-c2-1.py	/^import math$/;"	kind:namespace	line:4
+reverse	../Resources/py/code-art-c1-1.py	/^    def reverse(self,listStr,start,over):$/;"	kind:member	line:43
+solution	../Resources/py/code-art-c1-1.py	/^    solution = Solution()$/;"	kind:variable	line:63
+solution	../Resources/py/code-art-c2-1.py	/^    solution = Solution()$/;"	kind:variable	line:55
+solution	../Resources/py/code-art-c2-2.py	/^    solution = Solution()$/;"	kind:variable	line:28
+strs	../Resources/py/code-art-c1-1.py	/^    strs="abcdefg"$/;"	kind:variable	line:64

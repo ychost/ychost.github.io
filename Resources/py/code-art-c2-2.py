@@ -5,9 +5,25 @@
 
 class Solution:
     def IsMatched(self,str1,str2):
+        lenStr1 = len(str1)
+        lenStr2 = len(str2)
+        if lenStr1  != lenStr2:
+            return False
+        strDict ={}
+        
+        for v in str1:
+            if not v in strDict:
+                strDict[v] =0
+            strDict[v] +=1
 
+        for v in str2:
+            if not v in strDict:
+                return False
+            strDict[v] -=1
+            if strDict[v] < 0:
+                return False
         return True
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.IsMatched("ababa","babaa"))
+    print(solution.IsMatched("abbac","babaa"))
