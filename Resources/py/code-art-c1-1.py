@@ -63,5 +63,4 @@ if __name__ == "__main__":
     solution = Solution()
     strs="abcdefg"
     listStrs = list(strs)
-    print(solution.gcd(544,119))
     print(solution.leftShiftString2("abcdefg",-2))
