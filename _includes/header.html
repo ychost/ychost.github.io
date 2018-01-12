@@ -39,6 +39,7 @@
 
     <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ site.subscribe_rss }}">
     <link rel="shortcut icon" href="/favicon.ico"> {% if page.title %}
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
     <meta property="og:title" content="{{ page.title }}"> {% if page.keywords %} {% assign keywords = page.keywords %} {% else %} {% assign keywords = site.keywords %} {% endif %}
     <meta name="keywords" content="{{ keywords | strip_html | strip_newlines}}">
     <meta name="og:keywords" content="{{ keywords | strip_html | strip_newlines}}"> {% if page.excerpt %}

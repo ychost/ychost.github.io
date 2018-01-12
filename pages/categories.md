@@ -26,7 +26,7 @@ permalink: /categories/
 		{% if category[1].size > site.cat_brif_repo_limit %}
 		<li class="posts-list-item">
 			<a href="detail?cat={{ category | first | url_encode   }}" class="cats-hylink posts-list-name">　<span class="posts-list-meta">More</span>
-	　·　·　·　·　·　·　·　　</a>
+	　...　　</a>
 		</li>
 		{% endif %}
 	</ol>

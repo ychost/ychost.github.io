@@ -6,6 +6,9 @@ categories: [Private]
 description: 这是我博客系统的修改日志
 keywords: 日志, 博客，私密
 ---
+#### 2018-01-12
+1. 替换「disqus」为「Gitment」
+1. 修复几处编译时候的 Warning
 
 #### 2017-08-09
 1. 替换「网易云更贴」为「disqus」

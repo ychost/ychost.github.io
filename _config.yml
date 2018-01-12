@@ -2,7 +2,7 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: http://www.sudoyc.com
+url: http://blog.sudoyc.com
 date_format: "ordinal"
 title: 夏天
 subtitle: "宁静致远"
@@ -86,7 +86,7 @@ lsi: false
 quiet: false
 excerpt_separator: "\n\n"
 permalink: /:year/:month/:day/:title/
-gems:
+plugins:
     - rouge
 #     - jekyll-html-pipeline
     - jekyll-paginate
@@ -111,7 +111,7 @@ zhihu_username:  ychost
 #      Comments    #
 # ---------------- #
 # support provider: uyan, duoshuo,wangyi,disqus
-comments_provider: disqus 
+comments_provider: getment
 #duoshuo_username:  ychost
 #duoshuo_userid: 6279352103223689985
 

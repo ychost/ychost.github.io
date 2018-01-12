@@ -116,4 +116,39 @@ public class ArrayAndString{
     }
 }
 ```
+
 ##### 第4题
+编写一个方法，将字符串空格替换为“20%”，用字符数组实现假定数组有足够的长度
+> 处理字符串常见的方式是从字符串尾部开始编辑，因为字符数组有额外的缓冲而不用担心覆盖之前的数据
+
+```java
+public class ArrayAndString{
+    /**
+     * 第4题，替换一个字符串中的空格，用字符数组实现，假定数组有足够的长度
+     * 这里@repStr可用任意含非空格字符串代替，包括 %20
+     */
+    public static void replaceSpace(char[] strs, int count, String repStr) {
+        //找出一共多少空格
+        int spaceCount = 0;
+        for (int i = 0; i < count; i++) {
+            if (strs[i] == ' ') {
+                spaceCount += 1;
+            }
+        }
+        //计算新的长度，从后往前进行写数据
+        int newLen = count + (repStr.length() - 1) * spaceCount;
+        for (int i = count - 1; i >= 0; i--) {
+            //替换
+            if (' ' == strs[i]) {
+                for (int j = 0; j < repStr.length(); j++) {
+                    strs[newLen - j - 1] = repStr.charAt(repStr.length() - j - 1);
+                }
+                newLen -= repStr.length();
+            } else {
+                strs[newLen - 1] = strs[i];
+                newLen -= 1;
+            }
+        }
+    }
+}
+```
