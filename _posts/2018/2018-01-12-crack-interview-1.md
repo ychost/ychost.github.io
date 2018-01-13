@@ -6,11 +6,11 @@ description: 程序员面试宝典 第5版本 数组与字符串习题解答，�
 keywords: 面试, Java
 tags: [面试,Java]
 ---
-##### 第 1 题
+##### 第 1 题 √
 实现一个算法确定一个字符串的所有字符是否完全不同，假使不允许是有额外的数据结构又该如何处理？
 
 ``` java
-public class ArrayAndString{
+public class ArrayAndString {
     /**
      * 第 1.1 题，检测字符串中所有字符是否都不相同解法1
      */
@@ -71,11 +71,11 @@ public class ArrayAndString{
 }
 ```
 
-##### 第 2 题
+##### 第 2 题 √
 给定两个字符串，请编写程序，确定其中一个字符串重新排列后能否变成另一个字符串
 
 ```java
-public class ArrayAndString{
+public class ArrayAndString {
     /**
      * 第 1.3 题，两个字符串能否通过排列变成一样
      * 还有一种解法思路，对两个字符串进行排序，排序后如果完全相等这认为可以转化，但是这样效率比较低
@@ -122,7 +122,7 @@ public class ArrayAndString{
 > 处理字符串常见的方式是从字符串尾部开始编辑，因为字符数组有额外的缓冲而不用担心覆盖之前的数据
 
 ```java
-public class ArrayAndString{
+public class ArrayAndString {
     /**
      * 第 1.4 题，替换一个字符串中的空格，用字符数组实现，假定数组有足够的长度
      * 这里@repStr可用任意含非空格字符串代替，包括 %20
@@ -153,11 +153,11 @@ public class ArrayAndString{
 }
 ```
 
-##### 第 4 题
+##### 第 4 题 √
 利用字符串重复出现的次数，编写一个方法基本实现压缩字符串的功能，比如字符串 abbbbcc 会变成 a1b4c2 。若 “压缩” 后的字符串的长度没有变短则返回原来的字符串
 
 ```java
-public class ArrayAndString{
+public class ArrayAndString {
     /**
      * 第 1.5 题
      * 压缩字符串方法2，直接用 StringBuilder 进行构造提升效率
@@ -195,7 +195,7 @@ public class ArrayAndString{
 > 由外向内，一层一层进行旋转
 
 ```java
-public class ArrayAndStrig{
+public class ArrayAndStrig { 
         /**
      * 第 1.6 题，将一个 NxN 的矩阵旋转 90° 且不占用额外的空间
      * 思想：由外向内，一层一层旋转，旋转算法为 
@@ -221,6 +221,109 @@ public class ArrayAndStrig{
                 matrix[increase][lastIndex] = top;
             }
         }
+    }
+}
+```
+##### 第 6 题 √
+编写一个算法，若 MxN 矩阵中某元素为 0 ，则将其所在的行列清零
+> 注意陷阱，清零了某行、列之后如果再遍历「被清零」的元素执行清零操作则会导致 Bug
+
+```java
+public class ArrayAndString {
+    /**
+     * 第 1.7 题，矩阵中某个元素为 0 则将该元素所在行列均的元素均置为 0 
+     */
+    public static void clearMatrixZero(int[][] matrix) {
+        //某行是否被清零
+        boolean[] rowIsClear = new boolean[matrix.length];
+        //某列是否被清零
+        boolean[] colIsClear = new boolean[matrix[0].length];
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                if (rowIsClear[i] || colIsClear[j]) {
+                    continue;
+                }
+                if (matrix[i][j] == 0) {
+                    //置位
+                    rowIsClear[i] = true;
+                    colIsClear[j] = true;
+                    //清零k列
+                    for (int k = 0; k < matrix.length; k++) {
+                        matrix[k][j] = 0;
+                    }
+                    //清零k行
+                    for (int k = 0; k < matrix[0].length; k++) {
+                        matrix[i][k] = 0;
+                    }
+                }
+            }
+        }
+    }
+}
+```
+##### 第 7 题 √
+给定两个字符串 s1 和 s2，判定 s2 可由 s1 旋转，而来且给定一个函数 isSubString 可判定一个字符串是另一个字符串的子串  
+再只能调用一次的 isSubString 的情况下解决该问题
+
+```java
+public class ArrayAndString {
+    /**
+     * 判定 sonStr 是否为 elder 的子串
+     */
+    public static boolean isSubString(String elder, String sonStr) {
+        if (elder == null || sonStr == null || sonStr.length() > elder.length()) {
+            return false;
+        }
+        int sonIndex = 0;
+        for (int i = 0; i < elder.length(); i++) {
+            if (elder.charAt(i) != sonStr.charAt(sonIndex)) {
+                sonIndex = 0;
+                continue;
+            } else {
+                sonIndex += 1;
+                if (sonIndex == sonStr.length()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 第 1.8 题给定两个字符串 s1,s2 判定 s2 是否为 s1 旋转而来，最多只能调用 「一次」 isSubString 或者类似的方法
+     * 可将字符串考虑成两部分 I和II，只要找到旋转后的I和II再分别做比较即可
+     */
+    public static boolean isRotateStr(String str1, String str2) {
+        if (str1 == null || str2 == null || str1.length() != str2.length()) {
+            return false;
+        }
+        for (int i = 0; i < str1.length(); i++) {
+            if (str1.charAt(0) == str2.charAt(i)) {
+                for (int k = i; k < str1.length(); k++) {
+                    //比较旋转部分 I
+                    if (str1.charAt(k - i) != str2.charAt(k)) {
+                        continue;
+                    }
+                }
+                //比较旋转部分 II
+                for (int l = str1.length() - i; l < str1.length(); l++) {
+                    if (str1.charAt(l) != str2.charAt(str2.length() - l - 1)) {
+                        continue;
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 第 1.8 题解法2，如果 s2 可由 s1 旋转而来，那么必然 s2 为 s1+s1 的子串, 反之亦然
+     */
+    public static boolean isRotateStr2(String str1, String str2) {
+        String s1s1 = str1 + str1;
+        return isSubString(s1s1, str2);
     }
 }
 ```
