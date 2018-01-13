@@ -5,7 +5,7 @@ baseurl:
 url: http://blog.sudoyc.com
 date_format: "ordinal"
 title: 夏天
-subtitle: "宁静致远"
+subtitle: "灵静致远"
 description: "夏天的个人博客"
 keywords: 夏天, ychost, summer
 favicon: /favicon.ico
@@ -37,7 +37,7 @@ side_bar_repo_limit: 4
 #      Author      #
 # ---------------- #
 author: ychost
-organization: XHU, UESTC, Univ.
+organization: XHU, UESTC Univ.
 organization_url: http://www.uestc.edu.cn/
 location: ChengDu, China
 email: ychost@outlook.com
@@ -111,7 +111,7 @@ zhihu_username:  ychost
 #      Comments    #
 # ---------------- #
 # support provider: uyan, duoshuo,wangyi,disqus
-comments_provider: getment
+comments_provider: gitment
 #duoshuo_username:  ychost
 #duoshuo_userid: 6279352103223689985
 
@@ -120,7 +120,7 @@ comments_provider: getment
 # ---------------- #
 baidu_analytics:    true
 baidu_analytics_id: 9f767c9440692f340fc3243d48ee3931
-cnzz_analytics:     true
+cnzz_analytics:     false
 cnzz_analytics_id:  1260117641&online=1
 
 

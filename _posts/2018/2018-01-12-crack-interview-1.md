@@ -6,13 +6,13 @@ description: 程序员面试宝典 第5版本 数组与字符串习题解答，�
 keywords: 面试, Java
 tags: [面试,Java]
 ---
-##### 第1题
+##### 第 1 题
 实现一个算法确定一个字符串的所有字符是否完全不同，假使不允许是有额外的数据结构又该如何处理？
 
 ``` java
 public class ArrayAndString{
-           /**
-     * 第1题，检测字符串中所有字符是否都不相同解法1
+    /**
+     * 第 1.1 题，检测字符串中所有字符是否都不相同解法1
      */
     public static boolean isStringUnique1(String str) {
         if (str == null) {
@@ -29,7 +29,7 @@ public class ArrayAndString{
     }
 
     /*
-     * 第1题，检测字符串中所有字符是否都不相同解法2 
+     * 第 1.1 题，检测字符串中所有字符是否都不相同解法2 
      * 假定@str为Unicode
      * 注：Unicode含有65536个字符
      */
@@ -49,7 +49,7 @@ public class ArrayAndString{
     }
 
     /**
-     * 第1题，检测字符串中所有字符是否都不相同解法3 
+     * 第 1.1 题，检测字符串中所有字符是否都不相同解法3 
      * 假定@str只为a-z，相当于用一个int (32位)来保存a-z(26个)
      * 注：str只可能取26个字母
      */
@@ -71,13 +71,13 @@ public class ArrayAndString{
 }
 ```
 
-##### 第3题
+##### 第 2 题
 给定两个字符串，请编写程序，确定其中一个字符串重新排列后能否变成另一个字符串
 
 ```java
 public class ArrayAndString{
     /**
-     * 第3题，两个字符串能否通过排列变成一样
+     * 第 1.3 题，两个字符串能否通过排列变成一样
      * 还有一种解法思路，对两个字符串进行排序，排序后如果完全相等这认为可以转化，但是这样效率比较低
      */
     public static boolean twoStrCanBePerSame(String str1, String str2) {
@@ -117,14 +117,14 @@ public class ArrayAndString{
 }
 ```
 
-##### 第4题
+##### 第 3 题
 编写一个方法，将字符串空格替换为“20%”，用字符数组实现假定数组有足够的长度
 > 处理字符串常见的方式是从字符串尾部开始编辑，因为字符数组有额外的缓冲而不用担心覆盖之前的数据
 
 ```java
 public class ArrayAndString{
     /**
-     * 第4题，替换一个字符串中的空格，用字符数组实现，假定数组有足够的长度
+     * 第 1.4 题，替换一个字符串中的空格，用字符数组实现，假定数组有足够的长度
      * 这里@repStr可用任意含非空格字符串代替，包括 %20
      */
     public static void replaceSpace(char[] strs, int count, String repStr) {
@@ -147,6 +147,78 @@ public class ArrayAndString{
             } else {
                 strs[newLen - 1] = strs[i];
                 newLen -= 1;
+            }
+        }
+    }
+}
+```
+
+##### 第 4 题
+利用字符串重复出现的次数，编写一个方法基本实现压缩字符串的功能，比如字符串 abbbbcc 会变成 a1b4c2 。若 “压缩” 后的字符串的长度没有变短则返回原来的字符串
+
+```java
+public class ArrayAndString{
+    /**
+     * 第 1.5 题
+     * 压缩字符串方法2，直接用 StringBuilder 进行构造提升效率
+     */
+    public static String compressStr2(String str) {
+        if (str == null || str.length() == 0) {
+            return str;
+        }
+        StringBuilder builder = new StringBuilder();
+        int count = 0;
+        char lastCh = str.charAt(0);
+        for (int i = 0; i < str.length(); i++) {
+            if (lastCh == str.charAt(i)) {
+                count++;
+            } else {
+                builder.append(str.charAt(i));
+                builder.append(count);
+                count = 1;
+            }
+            lastCh = str.charAt(i);
+        }
+        builder.append(lastCh);
+        builder.append(count);
+        if (builder.length() >= str.length()) {
+            return str;
+        }
+        return builder.toString();
+    }
+}
+```
+
+##### 第 5 题
+给定一幅由 NxN 矩阵表示的图像，其中每个像素的大小为 4 个字节，编写一个方法，将图像旋转 90° 且不占用额外内存空间
+
+> 由外向内，一层一层进行旋转
+
+```java
+public class ArrayAndStrig{
+        /**
+     * 第 1.6 题，将一个 NxN 的矩阵旋转 90° 且不占用额外的空间
+     * 思想：由外向内，一层一层旋转，旋转算法为 
+     * tmp:=top, top := left, left := bottom, bottom := right, right := tmp;
+     */
+    public static void ratoteMatrix90(int[][] matrix, int n) {
+        for (int layer = 0; layer < n / 2; layer++) {
+            for (int i = layer; i < n - layer - 1; i++) {
+                //索引由大道小
+                int decrease = n - i - 1;
+                //最后一个索引
+                int lastIndex = n - layer - 1;
+                //索引由小到大
+                int increase = i;
+                int top = matrix[layer][i];
+                //左到上
+                matrix[layer][increase] = matrix[decrease][layer];
+                //下到左
+                matrix[decrease][layer] = matrix[lastIndex][decrease];
+                //右到下
+                matrix[lastIndex][decrease] = matrix[increase][lastIndex];
+                //上到右
+                matrix[increase][lastIndex] = top;
             }
         }
     }

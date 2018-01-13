@@ -2,6 +2,7 @@
     获取cnzz统计的今日PV数量
   */
  (function(){
+   return;
   var itl_cnt = 10;
   var itl = setInterval(function(){
      if(--itl_cnt == 0){
