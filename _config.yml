@@ -17,7 +17,7 @@ source_code: https://cdgithub.com/ychost/ychost.github.io
 # ---------------- #
 #      Debug       #
 # ---------------- #
-local_debug: false
+env: "prod"
 
 # ---------------- #
 #     Private      #
