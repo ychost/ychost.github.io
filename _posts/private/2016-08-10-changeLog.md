@@ -6,10 +6,18 @@ categories: [Private]
 description: 这是我博客系统的修改日志
 keywords: 日志, 博客，私密
 ---
+#### 2018-01-15
+1. 替换评论系统为「畅言」
+1. 添加「打赏」功能
+
+#### 2018-01-14
+1. 删除「百度统计」
+
 #### 2018-01-12
 1. 替换「disqus」为「Gitment」
 1. 修复几处编译时候的 Warning
 1. 删除 cnzz 的流量统计
+1. 切换 `canonical` 指向 blog.sudoyc.com
 
 #### 2017-08-09
 1. 替换「网易云更贴」为「disqus」

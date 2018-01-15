@@ -10,4 +10,3 @@ permalink: /links/
 
 > God made relatives. Thank God we can choose our friends.
 
-
