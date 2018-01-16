@@ -234,3 +234,114 @@ public class LinkedList {
     }
 }
 ```
+
+##### 第 6 题 
+给定一个环链表，实现一个算法返回环路的开头结点  
+> 法一：每移动一下 pointer 都从头 header->pointer 开始遍历寻找是否有等于 pointer.next 的节点，有则是起始节点返回  
+> 法二：使用 FastRunner/SlowerRunner 算法
+
+
+```java
+public class LinkedList {
+     /**
+     * 第 2.6 题，若链表中存在环则输出环的起始节点
+     */
+    public static OneWayNode findLoopStart(OneWayNode header) {
+        if (header == null) {
+            return null;
+        }
+        OneWayNode pointer = header;
+        while (pointer != null) {
+            OneWayNode trave = header;
+            while (trave != pointer) {
+                if (trave == pointer.next) {
+                    return trave;
+                }
+                trave = trave.next;
+            }
+            pointer = pointer.next;
+        }
+        return null;
+    }
+
+    /**
+     * 第 2.6 题，方法二，采用 FastRunner/SlowerRunner 算法
+     * 思想：
+     * 0. FasterRunner 与 SlowerRunner 必然相遇，且相遇点距离环起始点的距离和头结点距离环起始点的距离一致
+     * 思路： 
+     * 1. FasterRuuner 每次移动两步，SlowerRunnder 每次移动一步，非环的长度为 K
+     * 2. 第 K 步的时候 SlowerRunner 进入环的起始点，则 FastRunner 处于环中 K 的位置
+     * 3. 现在两则均处于环中，可以看做是 FastRunner 在追赶 SlowerRunner ，且每次两则的距离会减少 1 
+     * 4. SlowerRuuner 领先 FasterRunner LoopSize - K 的距离，则两则相遇的位置是离环的起始点相差 K 
+     * 5. 定义两指针，一个指向 Header，一个指向 相遇点，两者同时出发，则相遇点即为环的起始点
+     */
+    public static OneWayNode findLoopStart2(OneWayNode header) {
+        if (header == null) {
+            return null;
+        }
+        OneWayNode slower = header;
+        OneWayNode faster = header;
+        while (faster != null && faster.next != null) {
+            faster = faster.next.next;
+            slower = slower.next;
+            //两者相遇了
+            if (faster == slower) {
+                break;
+            }
+            //没有环
+            if (faster == null || faster.next == null) {
+                return null;
+            }
+        }
+        slower = header;
+        while (slower != faster) {
+            slower = slower.next;
+            faster = faster.next;
+        }
+        return slower;
+    }
+}
+```
+##### 第 7 题 √
+编写一个数，检查链表是否为回文
+
+```java
+public class LinkedList {
+    /**
+     * 第 2.7 题检查链表是否为回文 
+     * 回文：1->2->3->2->1 这样的链表
+     * 将链表逆序复制在另一个链表中，然后比较是否相等
+     */
+    public static boolean isPalindrome(OneWayNode header) {
+        OneWayNode pointer = header;
+        OneWayNode reverse = null;
+        while (pointer != null) {
+            OneWayNode copyNode = new OneWayNode(pointer.data);
+            if (reverse == null) {
+                reverse = copyNode;
+            } else {
+                copyNode.next = reverse;
+                reverse = copyNode;
+            }
+            pointer = pointer.next;
+        }
+        pointer = header;
+        while (pointer != null) {
+            if (pointer.data != reverse.data) {
+                return false;
+            }
+            reverse = reverse.next;
+            pointer = pointer.next;
+        }
+        return true;
+    }
+}
+```
+
+##### 总结
+链表分为单向链表和双向链表，本次全部采用单向链表解决问题，虽然单向链表构造简单但是在解决问题的时候却很麻烦，有如下思考思路：
+   1. 定义一些临时指针指向链表，最后返回这些临时指针构造的链表
+   2. 将链表数据复制到一个反向链表中，这样就可以同时获得头部和尾部指针进行操作，或者用 Stack 然后 pop 也是反向操作
+   3. FastRunner/SlowRunner 算法 寻找回路
+   4. 能不用递归尽量不用，递归边界条件不是很好判断
+   5. 有时候用 pointer.next 去与目标值比较，这样可以同时持有 pointer 和 pointer.next 两个指针而不用定义临时变量

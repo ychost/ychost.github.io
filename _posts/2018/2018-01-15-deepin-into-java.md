@@ -19,7 +19,7 @@ excerpt: Java 的类加载器、扩展加载器、引导类加载器的加载顺
         这个加载器就是由Java语言实现，负责加载jre\lib\ext目录下的类库，这个目录下的类库都是一些扩展类。
     * 应用程序/系统类加载器（Application）  
         这个类加载器同样使用Java语言实现，它主要负责加载classpath下面的所有类库，通常我们编写的Java类都是由这个类加载器完成加载。
-        
+
 > 三个类加载器的初始化过程：当程序运行时，首先会初始化引导类加载器，它就负责创建和初始化扩展类加载器，当扩展类加载器完成初始化之后，又负责创建和初始化系统类加载器。  
 > 这些类加载器协同起来完成整个类加载的过程，因此这些类加载器的加载模式是基于“双亲委托模型”。
 
@@ -393,15 +393,6 @@ public static void main(String[] args) {
    1. Hibernate的 find(Class clazz)
    1. JavaBean和JSP之间调用
    1. JDBC 的 classForName()
-
-
-
-
-
-
-
-
-
 
 [img1]: /images/post/java/classloader.png
 [img2]: /images/post/java/stack-method.png

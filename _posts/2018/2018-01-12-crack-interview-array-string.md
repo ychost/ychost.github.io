@@ -166,7 +166,7 @@ public class ArrayAndString {
      * 第 1.5 题
      * 压缩字符串方法2，直接用 StringBuilder 进行构造提升效率
      */
-    public static String compressStr2(String str) {
+    public static String compressStr(String str) {
         if (str == null || str.length() == 0) {
             return str;
         }
@@ -331,3 +331,16 @@ public class ArrayAndString {
     }
 }
 ```
+
+##### 总结
+关于字符串的操作一般有两种，一种是直接操作字符串另一种是操作字符数组，思路如下：
+   1. 操作字符数组可以将字符数组扩充，然后反向重写数据，这样不能担心重写数据的时候覆盖原来的数据
+   1. 字符串操作主要注意 [String、StringBuffer、StringBuilder][href1] 的合理使用
+   1. 注意问清楚问题，比如字符串是否为 a-z 或者 Ascii 或者 Unicode 集合，这样就可以选取合理的保存空间大小提升空间效率
+      1. a-z 可以考虑使用一个 int 数据来保存所有可能出现的字符 ( a-z 只有 26 个而一个 int 为 32 位)
+      1. Ascii 可以考虑定义一个长度为 128 的数组来保存所有可能出现的字符
+      1. Unicode 可以考虑定义一个长度为 65536 的数组来保存所有可能出现的字符
+      1. 一般情况用 ArrayList 或者 HashMap 来进行操作
+
+
+   [href1]: /2018/01/13/java-string-buffer-builder/
