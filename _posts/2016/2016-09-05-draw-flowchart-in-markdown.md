@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 在 Jekyll 中 使用 Markdown 画流程图
-categories: [Markdown, 推荐]
+categories: [工具, 推荐]
 description: 传统的 Markdown 是不支持画流程图的，但是可以引用第三方的库来扩展 Markdown 的能力，本文才用了将 Jekyll-Mermaid 插件引入到站点中，从而实现了以 Markdown 的语法画出「优雅」流程图。
 keywords: Jekyll, Markdown, FlowChart
 tags: [Markdown, FlowChart]

@@ -1,10 +1,10 @@
 ---
 layout: post
 title: Linux 软件推荐 「2017-4-18 更新」
-categories: [Linux]
+categories: [系统]
 keywords: Linux,软件
 description: 推荐一些在 Linux 下面常用的软件
-tags: [Lnux]
+tags: [Linux,Software]
 ---
 
 ## 聊天软件

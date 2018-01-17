@@ -1,10 +1,10 @@
 ---
 layout: post
 title: 让百度收录自己的博客
-categories: [Tutorial, 推荐]
+categories: [杂记, 推荐]
 description: 由于 GitHub 的限制百度无法收录搭建在 GitHub 上的博客的，这样我们玩儿的博客就在国内就成单机的了，本文就是一篇解决这个问题的一个教程
-keywords: 镜像, Github, Coding
-tags: [Github 镜像, Coding]
+keywords: 镜像, GitHub, Coding
+tags: [GitHub, Coding]
 ---
 　　由于 GitHub 的限制百度无法收录搭建在 GitHub 上的博客的，这样我们玩儿的博客就在国内就成单机的了，本文就是一篇解决这个问题的一个教程
 
@@ -22,7 +22,7 @@ tags: [Github 镜像, Coding]
 
 	[![github-coding-flow][img1]][img1]{:data-lightbox="github-mirror"}
 	
-	1. 用户{% ihighlight bash %} git push {% endihighlight %}更新到 Github上面
+	1. 用户{% ihighlight bash %} git push {% endihighlight %}更新到 GitHub上面
 
 	2. GitHub 接受到部署更新后会自动调用 Webhooks
 
@@ -140,7 +140,7 @@ tags: [Github 镜像, Coding]
 
 ### 完成
 
-　　到这里已经搭建好了，只要我们向 GitHub 提交更新，Github 上面设置的 Webhook 会自动去请求 OpenShift 主机，然后 OpenShift 主机接到请求之后会自动拉取 GitHub 的最新内容然后强行推送到 Coding 的仓库中去，所以 Coding 和 GitHub的内容就保持一致了
+　　到这里已经搭建好了，只要我们向 GitHub 提交更新，GitHub 上面设置的 Webhook 会自动去请求 OpenShift 主机，然后 OpenShift 主机接到请求之后会自动拉取 GitHub 的最新内容然后强行推送到 Coding 的仓库中去，所以 Coding 和 GitHub的内容就保持一致了
 
 #### 注意事项
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 显示网页访问量
-categories: [Crack]
+categories: [杂记]
 description: CNZZ 是一个第三方的网站流量统计分析系统，类似于百度统计、谷歌分析这类的网站，它们可以对你自己的网站的 IP、PV 等数据进行统计分析
 keywords: CNZZ, show PV
 tags: [CNZZ, PV, IP]

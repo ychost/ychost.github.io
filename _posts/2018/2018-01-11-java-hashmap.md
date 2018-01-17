@@ -1,10 +1,10 @@
 ---
 layout: post
 title: Java HashMap工作原理及实现
-categories: [Java,"推荐"]
+categories: [后端]
 description: 本文主要介绍 Java 中 HashMap 的工作原理
 keywords: Java, HashMap
-tags: [HashMap原理]
+tags: [Java,HashMap]
 repost: ["Java HashMap工作原理及实现", "http://yikun.github.io/2015/04/01/Java-HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/"]
 excerpt: "为什么 HashMap 里面的元素是无序的，为什么可以高效存储，容量、负载因子、线程安全？这些都需要了解"
 ---

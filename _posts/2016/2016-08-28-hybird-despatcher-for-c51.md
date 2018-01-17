@@ -1,7 +1,7 @@
 ---
 layout: post
 title: C51 混合式调度器
-categories: [MCU, 推荐]
+categories: [嵌入式, 推荐]
 description: 在MCU利用调度器可以极大地提高程序的执行效率，保证程序的时序关系以及可以降低单片机的功耗
 keywords: C51, 合作式调度器, 抢占式调度器, 混合式调度器
 tags: [C51, despathcer]

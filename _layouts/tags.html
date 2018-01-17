@@ -18,9 +18,8 @@ layout: default
     </div>
 </section>
 <!-- / .banner -->
-<section class="container content">
+<section class="container content" style="max-width:1500px">
     <div class="columns">
-
         <div class="column two-thirds">
             <article class="article-content markdown-body">
                 {{ content }}
@@ -32,8 +31,9 @@ layout: default
                 {% include comments.html %}
             </div>
         </div>
-        <div class="column one-third">
-            {% include sidebar-search.html %} {% include sidebar-recommend-post.html %}
+        <div class="column one-third" style="width:25%">
+            {% include sidebar-search.html %}
+             {% include sidebar-tags-nav.html %}
         </div>
     </div>
 </section>

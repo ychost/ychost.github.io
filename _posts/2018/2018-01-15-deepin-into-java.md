@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 深入 Java 核心
-categories: [Java, Jvm]
+categories: [后端]
 description: Java 的类加载器、扩展加载器、引导类加载器的加载顺序，一个 Main 函数究竟经历了哪些加载过程，内存中的堆、栈、方法区有何异同，如何利用反射来实现这些操作？
 keywords: Java 虚拟机, Jvm, 反射
 tags: [Java, Jvm]

@@ -1,10 +1,10 @@
 ---
 layout: post
 title: Java LinkedHashMap工作原理及实现
-categories: [Java,推荐]
+categories: [后端]
 description: LinkedHashMap 和 HashMap 非常类似，只是重写了 HashMap 中的部分方法，实现了遍历有序
 keywords: Java, LinkedHashMap
-tags: [LinkedHashMap原理]
+tags: [Java,LinkedHashMap]
 repost: ["Java LinkedHashMap工作原理及实现", "http://yikun.github.io/2015/04/02/Java-LinkedHashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/"]
 ---
 

@@ -1,10 +1,10 @@
 ---
 layout: post
 title: Spring Cloud构建微服务架构（四）分布式配置中心
-categories: [Microservice]
+categories: [后端]
 description: Spring Cloud是一个基于Spring Boot实现的云应用开发工具，它为基于JVM的云应用开发中的配置管理、服务发现、断路器、智能路由、微代理、控制总线、全局锁、决策竞选、分布式会话和集群状态管理等操作提供了一种简单的开发方式。
 keywords: Spring Cloud, microservice, 微服务, 分布式服务中心
-tags: [Spring Cloud, 微服务]
+tags: [Spring, 微服务]
 repost: ["http://blog.didispace.com/springcloud4/", "http://blog.didispace.com/springcloud4/"]
 ---
 

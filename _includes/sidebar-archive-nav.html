@@ -1,0 +1,25 @@
+
+<h3>导航</h3>
+<div id="blog-categories">
+  <ul class="list-group">
+    {% assign total = 1 %}
+    {% assign year = site.posts[0].date | date: "%Y" %}
+    {% for post in site.posts %}
+        {% if site.private_show  or post.categories[0] != site.private_name %}
+            {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+            {% capture next_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
+            {% if year == this_year and year != next_year %}
+                <li class="list-group-item">
+                    <a href="#year-{{ year }}" >{{ year }}</a>
+                    <span class="badge">{{ total }}</span>
+                </li>
+                {% assign year = next_year%}
+                {% assign total = 1 %}
+            {% else %}
+                {% assign total = total | plus: 1   %}
+            {% endif %}
+        {% endif %}
+
+    {% endfor %}
+</ul>
+</div>

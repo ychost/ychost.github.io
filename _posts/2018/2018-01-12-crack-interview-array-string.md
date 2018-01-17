@@ -2,10 +2,10 @@
 layout: post
 title: 程序员面试宝典 第5版 数组与字符串
 subtitle: 面试宝典
-categories: [程序员面试宝典,Java]
+categories: [刷题]
 description: 程序员面试宝典 第5版本 数组与字符串习题解答，主要是 Java 部分的解答
 keywords: 面试, Java
-tags: [面试,Java]
+tags: [刷题,Java]
 ---
 
  程序员面试宝典 第5版本 数组与字符串习题解答笔记

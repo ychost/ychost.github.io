@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 显示 VisualStudio 未被引用的文件
-categories: [Windows]
+categories: [杂记]
 description: 有时候复制一个文件夹到 VS 的一个目录下面但是 VS 仅仅显示该文件夹而文件夹中的文件是不显示的
 keywords: Visual Studio, show all files
 tags: [VS, Files]

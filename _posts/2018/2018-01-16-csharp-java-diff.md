@@ -1,10 +1,10 @@
 ---
 layout: post
 title: C# 与 Java 对比
-categories: [推荐]
+categories: [后端,推荐]
 description: C# 与 Java 同属于 OOP 语言，但是两者却有着很大的不同点，本文着重对比 C# 与 Java 的差异
 keywords: C#, Java, 对比
-tags: [对比]
+tags: [C#,Java]
 excerpt:  C# 与 Java 同属于 OOP 语言，但是两者却有着很大的不同点，本文着重对比 C# 与 Java 的差异
 ---
 C# 与 Java 同属于 OOP 语言，但是两者却有着很大的不同点，本文主要从语法层面对比而未对虚拟机等比较深入的层面进行对比。

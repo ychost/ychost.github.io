@@ -1,7 +1,7 @@
 ---
 layout: post
 title: java 集合继承关系图
-categories: [Java,推荐]
+categories: [后端]
 description: Java 中基于 Collection 类的继承关系，以及各个继承类的异同点
 keywords: Java, 集合关系
 tags: [Java, Collection]

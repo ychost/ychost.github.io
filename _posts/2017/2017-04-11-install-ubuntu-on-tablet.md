@@ -1,10 +1,10 @@
 ---
 layout: post
 title: 在 x86 平板上面安装 Ubuntu 
-categories: [Linux,推荐]
+categories: [系统,推荐]
 description: x86 的平板安装 win10 太卡，安装 android 兼容性不好，要是在上面安装一个 Linux 这岂不是一件很酷的事情
 keywords: x86 平板, Linux, Ubuntu, 蓝魔 R9s Pro
-tags: [Lnux, x86, tablet]
+tags: [Linux, x86, Tablet]
 ---
 
 x86 平板安装 win10 太卡，安装 android 兼容性不好，要是在上面安装一个 Linux 这岂不是一件很酷的事情，而且基于 x86 架构的 Linux 软件资源可谓是异常丰富，本文以国产寨板「蓝魔R9s Pro」为例介绍在普通的 x86 平板上安装 Ubuntu

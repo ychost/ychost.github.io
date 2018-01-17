@@ -1,10 +1,10 @@
 ---
 layout: post
 title: Java 中 String、StringBuffer和StringBuilder的区别
-categories: [Java,推荐]
+categories: [后端]
 description: Java 中的 String、StringBuffer、StringBuilder 是比较常用的字符串处理类，但是在特定的情况下三种类对字符串的处理效率、安全等方面是不一致的，本文主要分析这三个类之间的异同点
 keywords: Java, String, StringBuffer, StringBuilder
-tags: ["String"]
+tags: [Java,String]
 repost: ["kingzone_2008", "http://blog.csdn.net/kingzone_2008/article/details/9220691"]
 ---
 Java 中的 String、StringBuffer、StringBuilder 是比较常用的字符串处理类，但是在特定的情况下三种类对字符串的处理效率、安全等方面是不一致的，本文主要分析这三个类之间的异同点

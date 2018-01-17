@@ -4,6 +4,7 @@ title: 芯联电科排班表
 categories: [Private]
 description: 芯联电科科技技术有限公司晚上学生做饭的排班表
 keywords: 芯联电科, 排班表
+tags: [Private]
 ---
 > 建议使用 Chrome 不要用 IE，因为没考虑 IE 的兼容性问题所以用 IE 访问可能会出现排版出错等问题，以后再去考虑兼容性问题。
 
@@ -21,7 +22,7 @@ keywords: 芯联电科, 排班表
 
 <br />
 
-> 所用的服务器是 [Github][href1]{: target="_blank"} 免费提供的。
+> 所用的服务器是 [GitHub][href1]{: target="_blank"} 免费提供的。
 
 		
 

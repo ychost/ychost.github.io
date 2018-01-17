@@ -1,0 +1,13 @@
+
+<h3>导航</h3>
+  <ul class="list-group" style="width:80%">
+    {% assign sorted_tags = site.tags | sort %}
+    {% for tag in sorted_tags %}
+    {% if  (site.private_show) or tag.first != site.private_name %}
+    <li class="list-group-item">
+       <a href="#tag-{{ tag[0] }}" class = "cats-nav-hylink">{{ tag | first }}</a>
+			<span class="badge">{{ tag[1].size }}</span>
+	</li>
+{% endif %}
+{% endfor %}
+</ul>

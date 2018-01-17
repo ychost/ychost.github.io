@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 使用 JSON 传递函数
-categories: [JSON, 推荐]
+categories: [后端, 推荐]
 description: 一般来说 JSON 只能是包含基础数据，如果要用回调一般采用的是 JSONP, 但是如果 JSON 也能自带 {% ihighlight javascript %} function {% endihighlight %} 就省去了很多麻烦了。
 keywords: JSON, function, 用 JSON 传递 函数
 tags: [JSON]

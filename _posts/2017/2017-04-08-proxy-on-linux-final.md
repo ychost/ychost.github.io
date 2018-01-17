@@ -1,10 +1,10 @@
 ---
 layout: post
 title: linux 翻墙终极版
-categories: [Linux,推荐]
+categories: [系统,推荐]
 description: Lnux下面如果不翻墙那还要Linux干啥呢，软件下不了，问题搜不了只能天天看百度新闻，那还不如退回windows玩儿游戏呢
 keywords: Lnux,翻墙,shadowsocks,privoxy
-tags: [Linux,shadowsocks,privoxy]
+tags: [Linux,Shadowsocks,Privoxy]
 
 ---
 本教程使用了shadowskcs和privoxy，可以让linux的终端和浏览器同时翻墙

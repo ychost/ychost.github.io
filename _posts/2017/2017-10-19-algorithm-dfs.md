@@ -1,10 +1,10 @@
 ---
 layout: post
 title: 深度优先搜索
-categories: [Algorithm]
+categories: [刷题]
 description: 程序员必备算法之搜索算法
 keywords: 深度优先搜索算法
-tags: [搜索算法]
+tags: [算法,刷题]
 ---
 
 ## 深度优先搜索

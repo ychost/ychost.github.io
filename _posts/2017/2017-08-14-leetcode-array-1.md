@@ -1,10 +1,10 @@
 ---
 layout: post
 title: 「LeetCode」Array系列 1：Array Partition I [Easy] 
-categories: [LeetCode]
+categories: [刷题]
 description: LeetCode小白刷题记录，总结刷题经验,Array Topics
 keywords: LeetCode,刷题,面试,Array Topics
-tags: [LeetCode, 刷题, Array Topics]
+tags: [LeetCode, 刷题, Array]
 ---
 
 ### Array Partition I

@@ -1,17 +1,14 @@
 
-<h3>文章分类</h3>
+<h3>导航</h3>
 <div id="blog-categories">
   <ul class="list-group">
     {% assign sorted_categories = site.categories | sort %}
     {% for category in sorted_categories %}
     {% if  (site.private_show) or category[0] != site.private_name %}
-
     <li class="list-group-item">
        <a href="#{{ category[0] }}" class = "cats-nav-hylink">{{ category | first }}</a>
-  <!-- <a href="detail?cat={{category[0] | url_encode  }}" class="cats-nav-hylink" >{{ category | first }}</a>    -->
-
-<span class="badge">{{ category[1].size }}</span>
-</li>
+			<span class="badge">{{ category[1].size }}</span>
+	</li>
 {% endif %}
 {% endfor %}
 </ul>

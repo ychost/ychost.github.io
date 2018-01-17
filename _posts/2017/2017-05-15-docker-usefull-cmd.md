@@ -1,10 +1,10 @@
 ---
 layout: post
 title: docker 实用教程
-categories: [docker]
+categories: [工具]
 description: 主要介绍常用的 docker 命令 
 keywords: docker 
-tags: [docker]
+tags: [Docker]
 ---
 ## docker 镜像加速
 推荐[阿里云镜像加速][href1]，登录后即可获得自己的镜像加速设置命令粘贴到命令行即可

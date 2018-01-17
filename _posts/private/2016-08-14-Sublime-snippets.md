@@ -4,6 +4,7 @@ title: Sublime Text 2 Snippets
 categories: [Private]
 description: 这是我个人为 Jekyll 博客系统打造的 Sublime Text 2 Snippets
 keywords: Sublime Text 2, Snippets
+tags: [Private]
 ---
 
 ## <center> Sublime Text 2 Snippets </center>

@@ -55,12 +55,12 @@ navs:
     label: 分类
 
   -
-    href: /wiki/
-    label: 维基
+    href: /archive/
+    label: 归档
 
   -
-    href: /links/
-    label: 链接
+    href: /tags/
+    label: 标签
 
   -
     href: /about/
@@ -142,6 +142,11 @@ baidu_search: false
 # ---------------- #
 #     Exclude      #
 # ---------------- #
-exclude: [Resource]
+exclude: [resource]
+
+# ---------------------#
+# netease music player #   
+# ---------------------# 
+music: /music.163.com/outchain/player?type=0&id=2052758156&auto=0&height=430
 
 
