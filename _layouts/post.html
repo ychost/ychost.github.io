@@ -13,19 +13,21 @@ layout: default
           <div class="collection-info">
             {% if page.date %}
             <span class="meta-info">
-              <span class="octicon octicon-calendar"></span> {{ page.date | date: "%Y/%m/%d" }}
+              {% assign year = page.date | date:"%Y" %}
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-{{year}}">{{ page.date | date: "%Y/%m/%d" }}</a>
             </span>
             {% endif %}
             {% for cat in page.categories %}
             <span class="meta-info">
               <span class="octicon octicon-file-directory"></span>
-              <a href="/categories/detail/?cat={{ cat | url_encode}}" class="post-cat-hylink" title="{{ cat }}">{{ cat }}</a>
+              <a href="/categories/#{{ cat }}"  title="{{ cat }}">{{ cat }}</a>
             </span>
             {% endfor %}
 
             {% for tag in page.tags %}
             <span class="meta-info">
-              <span class="octicon octicon-tag"></span><a href="#"> {{ tag }} </a>
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-{{tag}}"> {{ tag }} </a>
             </span>
             {% endfor %}
             <br />　

@@ -2,11 +2,11 @@
 layout: post
 title: Java 多线程之原子变量与 CAS 算法
 categories: [后端]
-description: 
-keywords: keyword1, keyword2
+description: 本文主要介绍 CAS 算法的思想以及一些常用的原子类，不用 synchronize,Lock 也能进行线程安全保护
+keywords: Java,后端,CAS,原子操作,多线程
 tags: [Java,CAS,算法]
 repost: ["月光中的污点", "https://www.extlight.com/2018/01/16/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E5%8F%91%E4%B9%8B%E5%8E%9F%E5%AD%90%E5%8F%98%E9%87%8F%E4%B8%8E-CAS-%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/"]
-excerpt: ""
+excerpt: "本文主要介绍 CAS 算法的思想以及一些常用的原子类，不用 synchronize,Lock 也能进行线程安全保护"
 ---
 
 ### 一、前言

@@ -1,10 +1,10 @@
 ---
 layout: post
 title: 程序员面试宝典 第5版 链表
-categories: [面试]
+categories: [刷题]
 description: 程序员面试宝典 第5版本 链表习题解答，主要是 Java 部分的解答
-keywords: 面试, Java
-tags: [面试,Java]
+keywords: 刷题, Java
+tags: [刷题,Java]
 ---
 
 程序员面试宝典 第5版本 链表习题解答笔记

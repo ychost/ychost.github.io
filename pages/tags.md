@@ -8,7 +8,12 @@ menu: 标签
 permalink: /tags/
 ---
 
-> 标签云
+{% assign tag_size = site.tags.size %}
+{% if site.private_show == false %}
+    {% assign tag_size = tag_size | minus:1 %}
+{% endif %}
+
+> 嗯，目前共 {{ tag_size }} 个标签，继续努力
 
 <div id="tags-cloud"></div>
 <section class="container posts-content">
@@ -23,8 +28,8 @@ permalink: /tags/
                     <a class="posts-list-name" href="{{ post.url }}">{{ post.title }}</a>
                 </li>
         {% endfor %}
+        </ol>
     {% endif %}
-    </ol>
     {% endfor %}
 </section>
 
