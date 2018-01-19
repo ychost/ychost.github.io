@@ -157,7 +157,7 @@ class O1Stack {
 
 ```java
 /**
- * 第 2.3 题，一个栈的容量有限，当容量超出的时候用另一个栈来装，但是 pop,push,peek 等方法调用不变
+ * 第 3.3 题，一个栈的容量有限，当容量超出的时候用另一个栈来装，但是 pop,push,peek 等方法调用不变
  * 用数组来模拟一个栈，然后各个栈通过链表连接
  */
 class SetOfStacks {
@@ -259,7 +259,7 @@ class SetOfStacks {
 
 ```java
 /**
- * 第 2.4 题 经典的汉诺塔问题
+ * 第 3.4 题 经典的汉诺塔问题
  */
 class HannuoStack {
     public Stack<String> APillar;
@@ -324,3 +324,72 @@ class HannuoStack {
 
 }
 ```
+
+##### 第 5 题 √
+用两个栈实现一个队列  
+> 一个栈用来存数据，另一个栈用来临时倾倒数据  
+> 注： ```stackA.push(stackB.pop()).pop() == queueB.dequeue()```   
+
+```java
+/**
+ * 第 3.5 题，用两个栈实现一个队列
+ * 一个栈用来装数据，另一个栈用来临时倒数据
+ */
+class MyQueue {
+    Stack<Object> stackA;
+    Stack<Object> stackB;
+
+    public MyQueue() {
+        stackA = new Stack<>();
+        stackB = new Stack<>();
+    }
+
+    public void enqueue(Object data) {
+        stackA.push(data);
+    }
+
+    public boolean isEmpty() {
+        return stackA.isEmpty();
+    }
+
+    public Object dequeue() {
+        //stackB 的出栈顺序就是stackA 的出队顺序
+        while (!stackA.isEmpty()) {
+            stackB.push(stackA.pop());
+        }
+        //stackA 的第一个元素出栈
+        Object data = stackB.pop();
+        //再将出队之后的元素放回 stackA
+        while (!stackB.isEmpty()) {
+            stackA.push(stackB.pop());
+        }
+        return data;
+    }
+}
+```
+
+##### 第 6 题
+实现对栈按升序排列（最大的元素在栈顶），至多只能使用一个额外的栈来保存数据，不能使用数组等其他数据结构  
+> 1. stack 是待排序的队列，stackSorted 是已排序的队列  
+> 1. 从 stack 中取出一个元素 tmp，在 stackSorted 中找到 tmp 的位置，即 stack.peek() <= tmp 的位置
+> 1. 取位置的时候又会将 tmp 之上的元素全部倾倒到 stack 中
+> 1. 迭代 stack 则会将倾倒出来的元素又放回了 stackSorted 中的 tmp 之上
+> 1. 上诉就完成了 tmp 插入到 stackSorted 中的合适位置
+
+```java
+/**
+  * 第 3.6 题，对一个栈按升序排列（最大元素在栈顶），至多只能使用一个栈来保存临时数据
+  */
+public static Stack<Comparable> sortStack(Stack<Comparable> stack) {
+    Stack<Comparable> stackSorted = new Stack<>();
+    while (!stack.isEmpty()) {
+        Comparable tmp = stack.pop();
+        while (!stackSorted.isEmpty() && stackSorted.peek().compareTo(tmp) > 0) {
+            stack.push(stackSorted.pop());
+        }
+        stackSorted.push(tmp);
+    }
+    return stackSorted;
+}
+```
+

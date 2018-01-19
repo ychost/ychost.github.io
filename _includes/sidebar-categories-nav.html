@@ -6,7 +6,7 @@
     {% for category in sorted_categories %}
     {% if  (site.private_show) or category[0] != site.private_name %}
     <li class="list-group-item">
-       <a href="#{{ category[0] }}" class = "cats-nav-hylink">{{ category | first }}</a>
+       <a href="#cat-{{ category[0] }}" class = "cats-nav-hylink">{{ category | first }}</a>
 			<span class="badge">{{ category[1].size }}</span>
 	</li>
 {% endif %}

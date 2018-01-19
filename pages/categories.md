@@ -12,8 +12,8 @@ permalink: /categories/
 	{% assign sorted_categories = site.categories | sort %}
 	{% for category in sorted_categories %}
 	{% if  site.private_show  or category[0] != site.private_name %}
-	<div><h3>{{ category | first }}</h3></div>
-		<ol id="{{ category[0] }}">
+	<div  id="cat-{{ category[0] }}"><h3>{{ category | first }}</h3></div>
+		<ol>
 		{% for post in category.last %}
 			<li class="posts-list-item">
 				<span class="posts-list-meta">{{ post.date | date:"%Y-%m-%d" }}</span>
