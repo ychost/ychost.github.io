@@ -4,7 +4,7 @@ title: 程序员面试宝典 第5版 树与图
 categories: [刷题]
 description:  程序员面试宝典 第5版本 树与图习题解答，主要是 Java 部分的解答
 keywords: 面试,刷题,Java
-tags: [刷题,Java]
+tags: [刷题,Java,Tree]
 excerpt: "程序员面试宝典 第5版本 树与图列习题解答，主要是 Java 部分的解答"
 ---
 ##### 数据结构
@@ -16,8 +16,8 @@ class BinTree {
 }
 ```
 
-##### 第 1 题 实现一个函数检查一颗二叉树是否平衡
-
+##### 第 1 题
+ 现一个函数检查一颗二叉树是否平衡  
 ```java
 public class TreeAndGraph{
     /**

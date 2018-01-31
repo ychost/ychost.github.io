@@ -4,7 +4,7 @@ title: 数据结构（一） 树
 categories: [数据结构]
 description: 树是一种用的比较多的一种数据结构，本文主要介绍了用 Java 实现二叉树的一些性质
 keywords: 二叉树,Java,满树,平衡树,完全树
-tags: [Java,树]
+tags: [Java,Tree]
 excerpt: "主要以 Java 的方式去探索二叉树（平衡树、满树、完全树）"
 ---
 本文使用了 lombok 插件，使用了 ```@Data```,```@Accessors(chain=true)```,```var```等，这些注解可以直接生成```getter```,```setter```和链式调用等方法，详情见 [Project Lombok][href1]，关于二叉树的一些性质和定义请参考[http://www.cnblogs.com/skywang12345/p/3576328.html][href2]。
@@ -94,10 +94,7 @@ public class BitTreeUtils {
 ```
 ##### 平衡二叉树
 __定义：__
-平衡二叉树（Balanced Binary Tree或Height-Balanced Tree）又称AVL树。它或者是一颗空树，或者是具有下列性质的二叉树：它的左子树和右子树都是平衡二叉树，且左子树和右子树的深度之差的绝对值不超过1。若将二叉树上结点的平衡因子bf(balance factor)定义为该结点的左子树的深度减去右子树的深度，则平衡二叉树上所有结点的平衡因子只可能为 -1、0 和 1 这三个值。
-
-```java
-```
+平衡二叉树比较复杂请参考 [http://blog.csdn.net/javazejian/article/details/53892797][href3]
 
 #### 二叉树的遍历
 ##### 前序遍历
@@ -191,7 +188,9 @@ public class BitTreeUtils{
 
 #### 二叉树性质
 ##### 获取树的深度
-深度即为树的高度，叶子节点距离根节点的最大距离
+__定义__ 
+树根下中所有分支结点层数的最大值，递归定义。（一般以根节点深度层数为0）
+
 ```java
 public class BitTreeUtils{
    public static int getDepth(BitTree root){
@@ -222,3 +221,4 @@ public class BitTreeUtils{
 
 [href1]: https://projectlombok.org/features/all
 [href2]: http://www.cnblogs.com/skywang12345/p/3576328.html
+[href3]: http://blog.csdn.net/javazejian/article/details/53892797

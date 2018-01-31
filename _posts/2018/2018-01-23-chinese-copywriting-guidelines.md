@@ -4,7 +4,7 @@ title: 中文文案排版指北（简体中文版）
 categories: [指南]
 description: 统一中文文案、排版的相关用法，降低团队成员之间的沟通成本，增强网站气质。
 keywords: 中文文案,排版指南
-tags: [中文排版]
+tags: [中文排版,指南]
 repost: ["mzlogin", "https://github.com/mzlogin/chinese-copywriting-guidelines/blob/Simplified/README.md"]
 excerpt: "统一中文文案、排版的相关用法，降低团队成员之间的沟通成本，增强网站气质。"
 ---

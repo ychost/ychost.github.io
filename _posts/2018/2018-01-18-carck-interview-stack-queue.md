@@ -4,7 +4,7 @@ title: 程序员面试宝典 第5版 栈和队列
 categories: [刷题]
 description:  程序员面试宝典 第5版本 栈和队列习题解答，主要是 Java 部分的解答
 keywords: 面试,刷题,Java
-tags: [刷题,Java]
+tags: [刷题,Java,Stack,Queue]
 excerpt: "程序员面试宝典 第5版本 栈和队列习题解答，主要是 Java 部分的解答"
 ---
 
