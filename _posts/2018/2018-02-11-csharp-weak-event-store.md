@@ -39,7 +39,7 @@ public class Subscriber1{
 ```
 #### 弱订阅
 上述的 ```AddListener``` 为强引用，即被引用的 ```action``` 如果为某一对象的属性，那么该对象就会被 ```EventSouce``` 强引用了，即使将被引用的对象置空也不能使之被回收掉，所以这里需要自己手动取消订阅即 ```rmLsr()```，在 .Net4.5 以上的版本引入了 ```WeakEventManager<TSource,TArags>``` 实现对事件的弱引用。上面的版本改进如下：  
-> 弱订阅就必须使用 event 且格式必须是 ```Action<object,EventArgs>``` 这种 Widnows 编程常用的事件触发模式，相对繁琐，不过也很简单  
+> 弱订阅就必须使用 event 且格式必须是 ```Action<object,EventArgs>``` 这种 Windows 编程常用的事件触发模式，相对繁琐，不过也很简单  
 
 ```c#
    /// <summary>
