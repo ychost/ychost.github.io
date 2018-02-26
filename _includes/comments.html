@@ -97,9 +97,17 @@ assign load_disqus = true %} {% endif %} {% endif %} {% if load_disqus %}
 
     //删除建议打赏1-10元
     $(function () {
-        $(".cy-reward-txt").each(function () {
-            $(this).html("");
-        })
+        setTimeout(() => {
+            $(".cy-reward-txt").each(function () {
+                $(this).html("");
+            })
+            $(".power-cy").each(function () {
+                $(this).html("");
+            });
+            $(".section-service-w").each(function () {
+                $(this).html("");
+            });
+        }, 1000);
     })
 </script> {% when disqus' %}
 <div id="disqus_thread"></div>
