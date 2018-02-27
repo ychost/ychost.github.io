@@ -3,7 +3,26 @@ layout: default
 ---
 <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
 <link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
 
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
 <section class="collection-head small geopattern" data-pattern-id="{{ page.title | truncate: 15, ''}}">
   <div class="container">
     <div class="columns">
@@ -62,6 +81,18 @@ layout: default
       <article class="article-content markdown-body">
         {{ content }}
       </article>
+      <div class="PageNavigation">
+        {% if page.previous.url %}
+          <a class="prev" href="{{page.previous.url}}"><span style="color:black">上一篇：</span> {{page.previous.title}}</a>
+        {% else %}
+          <a class="prev" href="{{page.previous.url}}"><span style="color:black">上一篇：无</span> </a>
+        {% endif %}
+        {% if page.next.url %}
+          <a class="next" href="{{page.next.url}}"><span style="color:black">下一篇：</span>{{page.next.title}} </a>
+         {% else %}
+          <a class="next" href="{{page.next.url}}"><span style="color:black">下一篇：无</span> </a>
+        {% endif %}
+      </div>
       <div class="share">
         {% include sns-share.html %}
       </div>
