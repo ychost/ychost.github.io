@@ -249,3 +249,179 @@ public class LinkedListIsPalindrome {
 }
 ```
 
+#### 复制含有随机指针节点的链表 ☆☆
+复制如下数据结构的链表，要求时间复杂度 $$o(N)$$，只能使用几个变量
+
+```java
+/**
+ * 比普通的单向链表多了一个随机指针
+ *
+ * @param <T>
+ */
+@Data
+class RandNode<T>  {
+    private T data;
+    private RandNode<T> next;
+    private RandNode<T> rand;
+
+
+    RandNode(T data) {
+        this.data = data;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.data.hashCode();
+    }
+}
+```
+__思路：__  
+1. 在不考虑空间复杂度的情况可以使用```HashMap```来保存原节点和复制节点，然后遍历原节点从```HashMap```中取出复制节点即可。
+1. 考虑空间复杂度的情况下，可以将复制节点直接追加到原节点后面比如原节点为：
+   ```
+    1->2->3->4->null
+   ```
+   复制后的链表如下：
+   ```
+    1->1'->2->2'->3->3'->null
+   ```
+   那么 ```node1.getRande()``` 的复制节点就为 ```node1.getRande().getNext()```
+
+__实现：__   
+```java
+/**
+ * 复制 RandNode 这样的链表
+ *
+ * @author ychost
+ * @date 2018-2-28
+ */
+public class LinkedListCopyRandNode {
+    /**
+     * 复制链表，使用 HashMap 来保存复制对应关系
+     *
+     * @param header 待复制链表的头指针
+     * @return 复制后的链表的头指针
+     */
+    static RandNode<Integer> copy(RandNode<Integer> header) {
+        RandNode<Integer> copyHeader = null, copyPointer = null;
+        var map = new HashMap<RandNode<Integer>, RandNode<Integer>>();
+        var pointer = header;
+        //复制 next 连接
+        while (pointer != null) {
+            //复制对应关系
+            if (!map.containsKey(pointer)) {
+                var node = new RandNode<Integer>(pointer.getData());
+                map.put(pointer, node);
+            }
+            if (!map.containsKey(pointer.getRand())) {
+                if (pointer.getRand() != null) {
+                    var node = new RandNode<Integer>(pointer.getRand().getData());
+                    map.put(pointer.getRand(), node);
+                }
+            }
+            //关联关系对象
+            RandNode<Integer> copyNode = map.get(pointer);
+            if (copyPointer == null) {
+                copyHeader = copyNode;
+            } else {
+                copyPointer.setNext(copyNode);
+            }
+            copyPointer = copyNode;
+            copyPointer.setRand(map.get(pointer.getRand()));
+
+            pointer = pointer.getNext();
+        }
+        return copyHeader;
+    }
+
+    /**
+     * 另一种高效的做法，时间复杂度 o(N)，只使用几个临时变量
+     * 创建这样的数据结构 1-1'-2-2'...
+     * 将复制的节点保存在原节点后面，然后寻找复制 rand 节点就在圆 rand 节点后面
+     *
+     * @param header
+     * @return
+     */
+    static RandNode<Integer> copyEff(RandNode<Integer> header) {
+        var pointer = header;
+        RandNode<Integer> next = null;
+        //复制节点
+        while (pointer != null) {
+            next = pointer.getNext();
+            var copy = new RandNode<Integer>(pointer.getData());
+            pointer.setNext(copy);
+            copy.setNext(next);
+            pointer = next;
+        }
+        //连接 rand 节点
+        pointer = header;
+        while (pointer != null && pointer.getNext() != null) {
+            if (pointer.getRand() != null) {
+                var copyRand = pointer.getRand().getNext();
+                var copyNode = pointer.getNext();
+                copyNode.setRand(copyRand);
+            }
+            pointer = pointer.getNext().getNext();
+        }
+
+        RandNode<Integer> copyHeader = null, copyPointer = null;
+        pointer = header;
+        //取出复制的链表
+        while (pointer != null) {
+            var copyNode = pointer.getNext();
+            if (copyPointer == null) {
+                copyHeader = copyNode;
+            } else {
+                copyPointer.setNext(copyNode);
+            }
+            copyPointer = copyNode;
+            var orgNext = pointer.getNext().getNext();
+            pointer.setNext(orgNext);
+            pointer = orgNext;
+        }
+        return copyHeader;
+    }
+}
+```
+__附：__ 测试代码  
+```java
+
+    @Test
+    public void copy() {
+        var header = new RandNode<Integer>(0);
+        var pointer = header;
+        var nodeArr = (RandNode<Integer>[]) new RandNode[10];
+        for (int i = 0; i < nodeArr.length; i++) {
+            nodeArr[i] = new RandNode<>(i + 1);
+            pointer.setNext(nodeArr[i]);
+            pointer = nodeArr[i];
+        }
+        //数组洗牌
+        var r = new Random();
+        for (int i = nodeArr.length - 1; i >= 1; i--) {
+            int j = r.nextInt(i);
+            var t = nodeArr[i];
+            nodeArr[i] = nodeArr[j];
+            nodeArr[j] = t;
+        }
+        //设置随机连接
+        header.setRand(nodeArr[0]);
+        for (int i = 0; i < nodeArr.length - 1; i++) {
+            nodeArr[i].setRand(nodeArr[i + 1]);
+        }
+        var copyPointer = LinkedListCopyRandNode.copyEff(header);
+        pointer = header;
+        //校验
+        while (copyPointer != null) {
+            Assert.assertEquals(pointer.getData(), copyPointer.getData());
+            Assert.assertNotEquals(pointer, copyPointer);
+
+            if (pointer.getRand() != null) {
+                Assert.assertEquals(pointer.getRand().getData(), copyPointer.getRand().getData());
+                Assert.assertNotEquals(pointer.getRand(), copyPointer.getRand());
+            }
+            copyPointer = copyPointer.getNext();
+            pointer = pointer.getNext();
+        }
+    }
+```
