@@ -425,3 +425,162 @@ __附：__ 测试代码
         }
     }
 ```
+
+#### 两个链表的相交问题 ☆☆☆☆☆
+__要求：__  
+时间负责度 $$o(M+N)$$，空间复杂度 $$o(1)$$
+
+##### 1. 两个无环链表相交
+[![noloop-linked-list-intersect][img1]][img1]{:data-lightbox="intersect"}
+1. 若相交则必有公共的尾节点，相同长度的相交部分
+1. 较长的链表先走两个链表长度之差
+1. 两个链表再同时走必然会相遇，相遇点即为第一个相交点
+
+```java
+     /**
+     * header1->end1 链表和 header2->end2 链表之间的第一个交点
+     *
+     * @param header1 链表1头指针
+     * @param header2 链表2头指针
+     * @param end1    链表1 tail.next
+     * @param end2    链表2 tail.next
+     * @return 第一个相交点
+     */
+    static OneWayNode getNoLoopIntersect(OneWayNode header1, OneWayNode header2,
+                                             OneWayNode end1, OneWayNode end2) {
+        //获取两个链表的长度和尾结点
+        OneWayNode pointer = header1;
+        int len1 = 1, len2 = 1;
+        while (pointer.getNext() != end1) {
+            pointer = pointer.getNext();
+            ++len1;
+        }
+        end1 = pointer;
+        pointer = header2;
+        while (pointer.getNext() != end2) {
+            pointer = pointer.getNext();
+            ++len2;
+        }
+        end2 = pointer;
+        //如果两个链表有交点，则尾结点必定一致
+        if (end1 != end2) {
+            return null;
+        }
+        var diff = Math.abs(len1 - len2);
+        var pLong = len1 > len2 ? header1 : header2;
+        var pShort = pLong == header1 ? header2 : header1;
+        //两个链表剩余的长度一致
+        while ((diff--) > 0) {
+            pLong = pLong.getNext();
+        }
+        //在长度一致的情况下必然相遇点为交点
+        while (pLong != pShort) {
+            pLong = pLong.getNext();
+            pShort = pShort.getNext();
+        }
+        return pLong;
+    }
+```
+##### 2. 两个有环链表相交
+1. 如果一个链表有环，一个链表无环，则必不想交
+###### 情况1：两个链表在入环之前相交
+[![loop-linked-list-intersect][img2]][img2]{:data-lightbox="intersect"}
+1. 该情况和两个无环链表相交的情况类似，只是无环链表的 end 是 null，此时的 end 为 loopNode.next
+###### 情况2：两个链表的相交点在环内
+1. 该情况如下面两种情形
+[![loop-linked-list-intersect-in-loop][img3]][img3]{:data-lightbox="intersect"}
+1. 左图为不相交情形，右图为相交情形
+1. 如果 loop1 遍历环一周没有遇见 loop2 则不想交，否则相交，此时返回 loop1 和 loop2 均可
+> loop1 是离链表1较近的相交点，loop2 是离链表2较近的相交点
+
+```java
+    /**
+     * 获取两个有环链表的交点
+     *
+     * @param header1 有环表
+     * @param header2 有环表
+     * @return
+     */
+    static OneWayNode getLoopIntersect(OneWayNode header1, OneWayNode header2) {
+        var loop1 = getLoopNode(header1);
+        var loop2 = getLoopNode(header2);
+        //如果一个链表有环，另一个链表无环
+        //则必然不相交
+        var noIntersect = loop1 == null ? loop2 != null : loop2 == null;
+        if (noIntersect) {
+            return null;
+        }
+        //两个链表共用一个入环点，则交点在入环点之前
+        //则可视作为 header1->loop1，header2->loop2 之间的无环表的交点
+        if (loop1 == loop2) {
+            return getNoLoopIntersect(header1, header2, loop1.getNext(), loop2.getNext());
+            //两个链表的入环点不一样
+        } else {
+            var pointer = loop2.getNext();
+            while (pointer != loop1 && pointer != loop2) {
+                pointer = pointer.getNext();
+            }
+            //只有两个链表入一个环才有交点
+            //此时返回 loop1，loop2 都可以
+            if (pointer == loop1) {
+                return loop1;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 若链表有环则第一个入环节点
+     * 采用 Fast/Slow Runner 算法
+     *
+     * @param header 链表头部指针
+     * @return 入环节点，如果无环则返回 null
+     */
+    static OneWayNode getLoopNode(OneWayNode header) {
+        var faster = header;
+        var slower = header;
+        //若有环两个指针必然相遇
+        while (faster != null && faster.getNext() != null) {
+            slower = slower.getNext();
+            faster = faster.getNext().getNext();
+            if (faster == slower) {
+                break;
+            }
+        }
+        if (faster != slower) {
+            return null;
+        }
+        //置位 faster，下次相遇节点即为入环点
+        faster = header;
+        while (faster != slower) {
+            faster = faster.getNext();
+            slower = slower.getNext();
+        }
+        return slower;
+    }
+```
+##### 3. 附代码
+```java
+ /**
+     * 获取两个链表的第一个相交点，如果不相交则返回 null
+     * 要求时间复杂度 o(M+N)，空间复杂度 o(1)
+     *
+     * @param header1 链表1，可能有环
+     * @param header2 链表2，可能有环
+     * @return 相交点
+     */
+    static OneWayNode getIntersectPoint(OneWayNode header1, OneWayNode header2) {
+        var loop1 = getLoopNode(header1);
+        var loop2 = getLoopNode(header2);
+        if (loop1 == null && loop2 == null) {
+            return getNoLoopIntersect(header1, header2, null, null);
+        } else if (loop1 != null && loop2 != null) {
+            return getLoopIntersect(header1, header2);
+        }
+        return null;
+    }
+```
+
+[img1]: /images/post/java/noloop-linked-list-intersect.png
+[img2]: /images/post/java/loop-linked-list-intersect.png
+[img3]: /images/post/java/loop-linked-list-intersect-in-loop.png

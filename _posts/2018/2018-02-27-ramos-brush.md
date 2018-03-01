@@ -47,7 +47,7 @@ excerpt: 不仅是蓝魔其它厂的 x86平板 刷机原理都是类似的，支
     * i9s关机，按住 「音量+」「靠近电源键那个音量按钮」不要放开，使用usb线连接到电脑，电脑识别到设备之后就会自动升级，5分钟左右升级完成自动重启 
     * 重启，直接进入Android，点击桌面上的「迈微双启动」图标，启动该应用（解开所需文件）后，即可退出。若出现「该应用需要重启机器后才可使用」，则重启机器后再次启动该应用，然后关机；注意，之后就暂时不要再进入Android，也就是说，在你安装好 Windows 之前，只能够进入 2 次 Android 系统（如果第 3 次不小心开机进入了 Android，必须到 bios setup 里面执行 restore default，否则会没有双启动界面出来！）
 1. 修改 Android 分区大小
-    * 修改 ii9spro-android.rar 的 partition.tbl 最后两个 add 行，例如官方的 24G 如下：
+    * 修改 i9spro-android.rar 的 partition.tbl 最后两个 add 行，例如官方的 24G 如下：
       ```
         add -b 5406760 -s 50331648 -t data -u 80868086-8086-8086-8086-000000000008 -l data -T 0 -P 0 /dev/block/mmcblk0
         add -b 55738408 -s 4096 -t data -u 80868086-8086-8086-8086-000000000009 -l guest-firmware -T 0 -P 0 /dev/block/mmcblk0
@@ -64,8 +64,6 @@ excerpt: 不仅是蓝魔其它厂的 x86平板 刷机原理都是类似的，支
       其中：  
     　　  X = G * 1024 * 2048 (G <= 55.5，G 为 Android 的储存空间 GB 数)  
       　　Y = 5406760 + X
-
-    
 
 ### 共存刷 Windows
 1. 刷入 Windows  BIOS
