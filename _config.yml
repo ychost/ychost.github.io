@@ -79,7 +79,7 @@ markdown: kramdown
 kramdown:
     input: GFM
 mermaid:
-     src: /assets/js/mermaid.min.js
+     src: https://cdn.bootcss.com/mermaid/7.1.2/mermaid.min.js
 highlighter: rouge
 ihighlight: rouge
 paginate: 8
