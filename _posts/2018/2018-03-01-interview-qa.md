@@ -7,13 +7,48 @@ keywords: 刷题, 面试
 tags: [面试]
 excerpt: 为了准备 2018 年校招而总结的一些刷过的题、踩过的坑、面经等等
 ---
-### Java
+<style>
+</style>
 
-### Spring
+### Java
+1. ####  HashMap, HashTable 和 ConcurrentHashMap 的区别
+1. ####  Array 与 ArrayList 的区别
+1. ####  Set 与 List 的区别
+1. ####  hashCode 与 equals 的区别与联系
+1. ####  Volatile的特征
+    1. volatile是在synchronized性能低下的时候提出的。如今synchronized的效率已经大幅提升，所以volatile存在的意义不大。
+    1. 如今非volatile的共享变量，在访问不是超级频繁的情况下，已经和volatile修饰的变量有同样的效果了。
+    1. volatile不能保证原子性，这点是大家没太搞清楚的，所以很容易出错。
+    1. volatile可以禁止重排序。
+1. #### 禁止内存重排序/内存屏障/内存栅栏
+__内存屏障（Memory Barrier，或有时叫做内存栅栏，Memory Fence）：__ 一种CPU指令，用于控制特定条件下的重排序和内存可见性问题。Java编译器也会根据内存屏障的规则禁止重排序。（也就是让一个CPU处理单元中的内存状态对其它处理单元可见的一项技术。）  
+__内存重排序：__ 在一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作。准确地说应该是控制流顺序而不是代码顺序，因为要考虑分支、循环等结构。以下规则可禁止重排序：
+   1. volatile变量规则(Volatile Variable Rule):对一个volatile变量的写操作发生于后面对这个变量的读操作，这里的“后面”也指的是时间上的先后顺序。
+   1. 线程启动规则(Thread Start Rule)：Thread独享的start()方法先行于此线程的每一个动作。
+   1. 线程终止规则(Thread Termination Rule)：线程中的每个操作都先行发生于对此线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值检测到线程已经终止执行。
+   1. 线程中断规则(Thread Interruption Rule)：对线程interrupte()方法的调用优先于被中断线程的代码检测到中断事件的发生，可以通过Thread.interrupted()方法检测线程是否已中断。
+   1. 对象终结原则(Finalizer Rule)：一个对象的初始化完成(构造函数执行结束)先行发生于它的finalize()方法的开始。
+   1. 传递性(Transitivity)：如果操作A先行发生于操作B，操作B先行发生于操作C，那就可以得出操作A先行发生于操作C的结论
+1. #### 重载与重写的区别
+1. #### 接口与抽象类的区别 
+1. #### 自动装/拆箱
+1. #### 基本类型
+1. #### 线程同步、并发控制
+1. #### 死锁，原子操作，
+1. #### 实现多线程的方式
+1. #### 进程的三态转换
+1. #### Java和C/C++之间的差别
+1. #### Poll和Select区别
+
+### Web
+1. #### Session, Cookie的区别
+1. #### sendRedirect, foward的区别
 
 ### Jvm
+1. #### GC 的工作原理
 
 ### SQL
+1. #### 数据库事务隔离机制的特点
 
 ### System
 __1. 在Linux上，对于多进程，子进程继承了父进程的哪些__ 
