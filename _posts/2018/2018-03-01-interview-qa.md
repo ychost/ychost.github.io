@@ -12,9 +12,13 @@ excerpt: 为了准备 2018 年校招而总结的一些刷过的题、踩过的�
 
 ### Java
 1. ####  HashMap, HashTable 和 ConcurrentHashMap 的区别
-1. ####  Array 与 ArrayList 的区别
-1. ####  Set 与 List 的区别
+   1. HashMap是非线程安全的，HashTable 是线程安全的。
+   1. HashMap的键和值都允许有 null 存在，而 HashTable 和 ConcurrentHashMap 都不行。
+   1. 因为线程安全、哈希效率的问题，HashMap 效率比 HashTable 的要
+   1. ConcurrentHashMap 对整个桶数组进行了分割分段(Segment)，然后在每一个分段上都用lock锁进行保护，相对于 HashTable 的 synchronized 关键字锁的粒度更精细了一些，并发性能更好，而 HashMap 没有锁机制，不是线程安全的。
+   1. 三者的 hash 函数不一样
 1. ####  hashCode 与 equals 的区别与联系
+两个 equals 不等的对象可能有相等的 hashCode。
 1. ####  Volatile的特征
     1. volatile是在synchronized性能低下的时候提出的。如今synchronized的效率已经大幅提升，所以volatile存在的意义不大。
     1. 如今非volatile的共享变量，在访问不是超级频繁的情况下，已经和volatile修饰的变量有同样的效果了。
@@ -30,15 +34,19 @@ __内存重排序：__ 在一个线程内，按照代码顺序，书写在前面
    1. 对象终结原则(Finalizer Rule)：一个对象的初始化完成(构造函数执行结束)先行发生于它的finalize()方法的开始。
    1. 传递性(Transitivity)：如果操作A先行发生于操作B，操作B先行发生于操作C，那就可以得出操作A先行发生于操作C的结论
 1. #### 重载与重写的区别
-1. #### 接口与抽象类的区别 
+   1. 重载(Overload)指的是同一个类里面的两个方法具有相同的名称，但是方法参数类型可能不同
+   1. 重写(Override)指的是子类覆盖父类的方法，两个方法属于不同类但是具有相同的签名
 1. #### 自动装/拆箱
+   1. 自动装箱时编译器调用valueOf将原始类型值转换成对象，同时自动拆箱时，编译器通过调用类似intValue(),doubleValue()这类的方法将对象转换成原始类型值。
+   1. 自动装箱是将boolean值转换成Boolean对象，byte值转换成Byte对象，char转换成Character对象，float值转换成Float对象，int转换成Integer，long转换成Long，short转换成Short，自动拆箱则是相反的操作。
 1. #### 基本类型
-1. #### 线程同步、并发控制
+byte(8)、short(18)、int(32)、long(64)、float(32)、double(64)、boolean(1)、char(8) 8种
+1. #### 线程相关面试题
+   > [53道Java线程面试题][href4]
 1. #### 死锁，原子操作，
 1. #### 实现多线程的方式
 1. #### 进程的三态转换
 1. #### Java和C/C++之间的差别
-1. #### Poll和Select区别
 
 ### Web
 1. #### Session, Cookie的区别
@@ -51,19 +59,49 @@ __内存重排序：__ 在一个线程内，按照代码顺序，书写在前面
 1. #### 数据库事务隔离机制的特点
 
 ### System
-__1. 在Linux上，对于多进程，子进程继承了父进程的哪些__ 
-1. 子进程继承父进程  
+1. #### 在Linux上，对于多进程，子进程继承了父进程的哪些
+   1. 子进程继承父进程  
     用户号UIDs和用户组号GIDs、环境Environment、堆栈、共享内存、打开文件的描述符、执行时关闭（Close-on-exec）标志、信号（Signal）控制设定、进程组号、当前工作目录、根目录、文件方式创建屏蔽字、资源限制、控制终端 
-1. 子进程独有  
+    1. 子进程独有  
     进程号PID、不同的父进程号、自己的文件描述符和目录流的拷贝、子进程不继承父进程的进程正文（text），数据和其他锁定内存（memory locks）、不继承异步输入和输出 
-1. 父进程和子进程拥有独立的地址空间和PID参数
+    1. 父进程和子进程拥有独立的地址空间和PID参数
 
-__2. 文件系统管理的最小磁盘空间单位是__  
+1. #### 文件系统管理的最小磁盘空间单位是  
 微软操作系统（DOS、WINDOWS等）中磁盘文件存储管理的最小单位叫做「簇」  
 扇区：硬盘不是一次读写一个字节而是一次读写一个扇区（512个字节）  
 簇：系统读读写文件的基本单位，一般为2的n次方个扇区(由文件系统决定)  
 > 块可以包含若干页，页可以包含若干簇，簇可以包含若干扇区
 > 块-->页-->簇-->扇区
+
+1. #### poll, select 和 epoll 区别
+epoll跟select都能提供多路I/O复用的解决方案。在现在的Linux内核里有都能够支持，其中epoll是Linux所特有，而select则应该是POSIX所规定，一般操作系统均有实现。
+   1. 支持一个进程所能打开的最大连接数  
+     __select__  
+      依赖于宏 FD_SETSIZE（x86 上面为 3232，x64 上面为 3264）  
+     __poll__  
+      无限制，原因是基于链表结构来存储的  
+     __epoll__  
+      有上限，但是很大，1G 内存大概为 10万，2G 内存大概为 20万
+    1. FD 剧增后带来的 IO 效率问题  
+     __select__  
+      因为每次调用时都会对连接进行线性遍历，所以随着FD的增加会造成遍历速度慢的「线性下降性能问题」。  
+     __poll__  
+      同上，有「线性下降性能问题」  
+     __epoll__   
+      epoll 根据每个 fd 的「callback」来实现的，只有活跃的 socket 才能调用 callback，所以没有「线性下降性能问题」
+    1. 消息传递方式  
+      __select__  
+        内核需要将消息传递到用户空间，都需要内核拷贝动作  
+      __poll__  
+       同上  
+      __epoll__  
+       通过内核和用户空间共享一块内存来实现的
+    1. 总结  
+       1. 在连接数少并且连接都十分活跃的情况下，select和poll的性能可能比epoll好，毕竟epoll的通知机制需要很多函数回调。
+       1. select低效是因为每次它都需要轮询。但低效也是相对的，视情况而定，也可通过良好的设计改善
+     
+
+
 
 
 ### Algorithm
@@ -137,3 +175,4 @@ __1. 已知一棵二叉树的前序遍历为CABEFDHG，中序遍历为BAFECHDG�
 [href1]: /2018/03/01/c-x86-x64-type-bytes/
 [href2]: https://www.cnblogs.com/AlexMiller/p/5509609.html
 [href3]: https://www.zhihu.com/question/36193367
+[href4]: https://www.cnblogs.com/king-garden/p/5672853.html
