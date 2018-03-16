@@ -82,12 +82,12 @@ layout: default
         {{ content }}
       </article>
       <div class="PageNavigation">
-        {% if page.previous.url %}
+        {% if page.previous.url and page.next.categories[0] != site.private_name or site.private_show %}
           <a class="prev" href="{{page.previous.url}}"><span style="color:black">上一篇：</span> {{page.previous.title}}</a>
         {% else %}
           <a class="prev" href="{{page.previous.url}}"><span style="color:black">上一篇：无</span> </a>
         {% endif %}
-        {% if page.next.url %}
+        {% if page.next.url and page.next.categories[0] != site.private_name or site.private_show %}
           <a class="next" href="{{page.next.url}}"><span style="color:black">下一篇：</span>{{page.next.title}} </a>
          {% else %}
           <a class="next" href="{{page.next.url}}"><span style="color:black">下一篇：无</span> </a>

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 动态规划[1]-数塔取数问题
+title: 动态规划[2]-数塔取数问题
 categories: [算法]
 description: 一有数字组成的等边金字塔，从塔顶开始依次向下取数，求从塔顶到塔底所有取数中的最大和。  
 keywords: 动态规划, 金字塔, Java

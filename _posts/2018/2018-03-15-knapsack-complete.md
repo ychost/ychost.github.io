@@ -1,12 +1,18 @@
 ---
 layout: post
 title: 动态规划[5]-完全背包问题
-pategories: [算法]
+categories: [算法]
 despription:  有 N 种物品和一个容量为 W 的背包，每种物品都有<font polor="red">无限</font>件可用。第i种物品的费用是 p[i]，价值是 v[i]，求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。
 keywords: 动态规划,完全背包问题
 tags: [动态规划, 完全背包问题]
 experpt: 有 N 种物品和一个容量为 W 的背包，每种物品都有<font polor="red">无限</font>件可用。第i种物品的费用是 p[i]，价值是 v[i]，求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。
 ---
+<style>
+.MathJax {
+    font-size: 0.7em !important;
+}
+</style>
+
 ### 问题
 有 N 种物品和一个容量为 W 的背包，每种物品都有<font polor="red">无限</font>件可用。第i种物品的费用是 p[i]，价值是 v[i]，求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。
 > 注：每种物品都无限量
@@ -23,11 +29,13 @@ experpt: 有 N 种物品和一个容量为 W 的背包，每种物品都有<font
 1. 状态转移：
 $$
 V(i,j) = \begin{cases}
-0　　i=0 或者 j=0  \\
+0 & i=0 或者 j=0  \\
+V(i-1,j) &  j < w(i)  \\
  max \begin{cases}
-    V(i-1,j) &  j < w(i) \times k(i) \\
-    V[i-1,j-w(i) \times k(i)] + p(i) \times k(i) & j \geq w(i) \times k(i) \\
+    V(i-1,j-w(i) \times k(i)) + p(i) \times k(i)  \\
+    V(i-1,j)
 \end{cases}
+& j \geq w(i) \times k(i)
 \end{cases}
 $$
 ### 实现
