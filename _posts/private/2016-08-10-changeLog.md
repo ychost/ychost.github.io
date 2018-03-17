@@ -7,7 +7,17 @@ description: 这是我博客系统的修改日志
 keywords: 日志, 博客，私密
 tags: [Private]
 ---
-#### 2018-3-16
+#### 2018-03-17
+1. 修复搜索框 ```focus``` 事件不存在的 Bug
+1. 添加 ```window.onSearchLoad``` 函数
+   ```javascript
+      window.onSearchLoad(function()){
+		    var results = window.idx.search("动态规划"); 
+            console.log(results);
+	  }
+   ```
+
+#### 2018-03-16
 1. 在 prod 模式下面屏蔽掉「上一篇」，「下一篇」对私密文章的连接
 
 #### 2018-02-27

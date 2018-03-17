@@ -1,3 +1,7 @@
+window._onSearchLoad = [];
+window.onSearchLoad = function(func){
+    window._onSearchLoad.push(func);
+}
 jQuery(function() {
     // Initalize lunr with the fields it will be searching on. I've given title
     // a boost of 10 to indicate matches on this field are more important.
@@ -11,6 +15,7 @@ jQuery(function() {
     // Download the data from the JSON file we generated
     window.data = $.getJSON('/assets/search_data.json');
 
+
     // Wait for the data to load and add it to lunr
     window.data.then(function(loaded_data){
         $.each(loaded_data, function(index, value){
@@ -18,11 +23,16 @@ jQuery(function() {
                 $.extend({ "id": index }, value)
                 );
         });
+
+        for(func of window._onSearchLoad){
+            func();
+        }
     });
 
     // Event when search action triggered
     $("#site_search_do").click(function(){
         var query = $("#search_box").val(); // Get the value for the text field
+        console.log(query);
         var results = window.idx.search(query); // Get lunr to perform a search
         display_search_results(results); // Hand the results off to be displayed
     });
