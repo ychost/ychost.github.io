@@ -7,6 +7,9 @@ description: 这是我博客系统的修改日志
 keywords: 日志, 博客，私密
 tags: [Private]
 ---
+#### 2018-03-24
+1. 添加页面访问量和点击量，来源[不蒜子](http://busuanzi.ibruce.info)
+
 #### 2018-03-17
 1. 修复搜索框 ```focus``` 事件不存在的 Bug
 1. 添加 ```window.onSearchLoad``` 函数

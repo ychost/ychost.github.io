@@ -179,11 +179,39 @@ public class BitTreeUtils{
             }
             if(rightNode != null){
                 rightNode.setVisited(true);
-                queue.add(rightNode);
+                queue.add(rightNode)
+            }
+        }
+    }
+
+    /*
+     * 按层遍历且输出层号
+     */
+    public static void travelWithLevelNum(BitTree root){
+        if(root == null){
+            return;
+        }
+        var queue = new LinkedList<BitTree>();
+        queue.add(root);
+        int levelNum = 0;
+        while(!queue.isEmpty()){
+            var count = queue.size();
+            levelNum += 1;
+            for(int i=0;i<count;i++){
+                var node = queue.poll();
+                node.setVisited(true);
+                System.out.println("level num: "+ levelNum);
+                if(node.getLeft() != null){
+                    queue.add(node.getLeft());
+                }
+                if(node.getRight() != null){
+                    queue.add(node.geteRight());
+                }
             }
         }
     }
 }
+
 ```
 
 #### 二叉树性质

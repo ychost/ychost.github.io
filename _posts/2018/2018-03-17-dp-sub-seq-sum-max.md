@@ -109,3 +109,27 @@ public void getSumMax() {
 //{1,13,5,2,-11,20}
 //30
 ```
+
+### 解法 2
+1. 遍历数组然后不断累加求取累加过程中的最大值即可
+1. 如果累加过程出现了 <0 的情况，那么就暂时中止累加，并将当前值赋予累加临时变量即可
+> 通过如上累加方式取得的最大值，必定是子数列取得的最大和  
+> 因为当出现了累加和 小于 0 那么 当前值 > (累加和+当前值)
+
+```java
+/**
+    * 时间复杂度 o(N)
+    *
+    * @param nums
+    * @return
+    */
+public int maxSubArray2(int[] nums) {
+    int sum = Integer.MIN_VALUE;
+    int temp = 0;
+    for (int i = 0; i < nums.length; i++) {
+        temp = temp < 0 ? nums[i] : temp + nums[i];
+        sum = Math.max(temp, sum);
+    }
+    return sum;
+}
+```
