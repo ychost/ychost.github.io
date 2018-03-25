@@ -117,3 +117,27 @@ finalize：
 1. Minor GC 与 Full GC 的区别  
    * 新生代 GC (Minor GC): 指发生在新生代的垃圾回收集动作，回收速度快。
    * 老年代 GC (Full GC/Major GC): 指发生在老年代的 GC，出现了 Full GC 经常会伴随至少一次的 Minor GC，回收速度慢。
+
+## 虚拟机性能监控与故障处理工具
+/jdk/bin 目录下面的一些工具，比如 jstack/jps/jmap/jstat 等等，这些工具的大小都很小，在 jdk_1_8 里面差不多为 17k，因为这些命令行工具多数是 jdk/lib/tools.jar 类库的一层薄包装，tools.jar 为 17M 在 jdk_1_8 下面。
+
+| 工具 | 主要作用 |
+|:----:|:--------|
+|[jps][href1]   | JVM Process Status Tool，显示指定系统内所有的 HotSpot 虚拟机进程|
+|[jstat][href4] | JVM Statistics Monitoring Tool，用于收集 HotSpot 各方面运行数据|
+|[jinfo][href5] | Configuration Info for Java，显示虚拟机配置信息|
+|[jmap][href3]  | Memory Map for Java，生成虚拟机内存转储快照（heapdump 文件）|
+|[jhat][href6]  | JVM Heap Dump Browser，分析 heapdump 文件 |
+|[jstack][href2]| Stack Trace for Java，显示虚拟机线程快照 |
+|jConsole       | 简易的可视化控制台 |
+|jvisualVM      | 功能强大的控制台   |
+
+
+
+
+[href1]: http://www.hollischuang.com/archives/105
+[href2]: http://www.hollischuang.com/archives/110
+[href3]: http://www.hollischuang.com/archives/303
+[href4]: http://www.hollischuang.com/archives/481
+[href5]: http://www.hollischuang.com/archives/1094
+[href6]: http://www.hollischuang.com/archives/1047

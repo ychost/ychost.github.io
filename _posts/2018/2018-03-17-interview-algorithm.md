@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 面试-算法总结
+title: 算法总结
 categories: [面试]
 description: 为了准备 2018 年春招实习和秋招而做的算法总结 
 keywords: 面试, 算法
