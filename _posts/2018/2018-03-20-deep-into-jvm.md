@@ -108,7 +108,7 @@ finalize：
 1. 老年代收集器
    * Serail Old(串行收集器)，标记-整理算法
    * Parallel Old(并行收集器)，标记-整理算法
-   * CMS(并发收集器)，标记-清除算法，与用户线程一起工作，容易产生内存碎片
+   * [CMS(并发收集器)][href7]，标记-清除算法，与用户线程一起工作，容易产生内存碎片
    
 1. 新生代+老年代收集器
    * G1(并行+并发收集器),可预测停顿，不会产生内存碎片
@@ -132,8 +132,67 @@ finalize：
 |jConsole       | 简易的可视化控制台 |
 |jvisualVM      | 功能强大的控制台   |
 
+## 虚拟机调优
+
+## 虚拟机执行子系统
+### class 文件结构  
+class 文件是一组以 8 位字节为基础单位的二进制流，各项数据按顺序紧凑地排列在的 Class 文件中，中间没有添加任何分隔符。当遇到 8 位以上空间数据项时，按 Big-Endian(大端) 分割成若干个 8 个字节进行存储。
+   
+| 类型             | 名称                  | 数量                    | 备注     |
+| -------------- | ------------------- | --------------------- | ------ |
+| u4             | magic               | 1                     | 魔数     |
+| u2             | minor_version       | 1                     | 次版本    |
+| u2             | major_version       | 1                     | 主版本    |
+| u2             | constant_pool_count | 1                     | 常量池容量  |
+| cp_info        | constant_pool       | constant_pool_count-1 | 常量表    |
+| u2             | access_flags        | 1                     | 访问标志   |
+| u2             | this_class          | 1                     | 类索引    |
+| u2             | super_class         | 1                     | 父类索引   |
+| u2             | interfaces_count    | 1                     | 接口数量   |
+| u2             | interfaces          | interfaces_count      | 接口索引集合 |
+| u2             | fields_count        | 1                     | 字段数量   |
+| field_info     | fields              | fields_count          | 字段表    |
+| u2             | methods_count       | 1                     | 方法数量   |
+| method_info    | methods             | methods_count         | 方法表    |
+| u2             | attributes_count    | 1                     | 属性数量   |
+| attribute_info | attributes          | attributes_count      | 属性表    |
 
 
+> 注：类型 u1 表示 1 个字节，带 info 的表示为一张表  
+> 分析一个 class 文件可以用 ```javap -verbose som.class``` 命令，没必要自己手动查二进制
+
+
+1. constant_pool_count（常量池容量）
+   * 表示 class 所引用的常量计数，从 1 开始，比如 0x0016 表示 22，代表常量池的引用范围为 1~22。
+   * 当为 0 表示「不需要引用任何一个常量池项目」含义
+   * 主要为字面常量和符号引用
+
+1. access_flag（访问标志）
+   * 标识 Class 是类还是接口，是否定义 public，是否为 abstract，是否 final 等等
+
+1. this_class/super_class/interfaces（类、接口相关索引）
+   * 除了 java.lang.Object 外，所有的 java 类的父类索引都不为 0
+
+1. field_info（字段表）
+   * 包括类级别变量以及实例级别变量，不包含局部变量
+   * 含访问标志、属性索引、描述符
+   * 描述符主要描述数据类型、方法参数表、返回值等等
+
+1. method_info（方法表）
+   * 结构和 field_info 一致
+   * 方法表中的方法体放在「Code」的属性值里
+   * 如果子类没有重写（Override）父类的方法，则方法表中就不会出现来自父类的方法信息
+   * 编译器会自动添加「\<clinit\>」（类构造器）和「init」（实例构造器）方法
+   * Java 语言级别的特征签名只含有方法名称、参数顺序及参数类型，而字节码的特征签名还包括方法返回值以及受检查的异常表
+
+1. attribute_info（属性表）
+   * 字段表、方法表均有指向该表的索引
+   * Code 是里面比较重要的属性，包含了方法体的字节码，操作数栈等等
+   * 异常表描述了从某行到某行如果发生某异常则跳转到某行值处理
+   * LineNumberTable 与 LocalVariableTable 分别关联了字节码的行与变量名和源码的映射
+   * Signature 属性包含了普通签名和泛型信息，所以即使是泛型擦除机制，通过反射也可以获取泛型的相关信息，但是是有限制的，只能获取 Class 级别的泛型信息，比如静态变量、字段、继承泛型等等，无法获取到局部变量的泛型信息。
+
+### 字节码
 
 [href1]: http://www.hollischuang.com/archives/105
 [href2]: http://www.hollischuang.com/archives/110
@@ -141,3 +200,4 @@ finalize：
 [href4]: http://www.hollischuang.com/archives/481
 [href5]: http://www.hollischuang.com/archives/1094
 [href6]: http://www.hollischuang.com/archives/1047
+[href7]: https://www.jianshu.com/p/2a1b2f17d3e4

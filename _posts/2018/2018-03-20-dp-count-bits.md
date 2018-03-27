@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 动态规划-Counting Bits
+title: 动态规划[10]-Counting Bits
 categories: [刷题]
 description:  Given a non negative integer number num. For every numbers i in the range 0 ≤ i ≤ num calculate the number of 1's in their binary representation and return them as an array.
 keywords: 动态规划, Counting Bits, LeetCode

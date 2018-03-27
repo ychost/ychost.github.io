@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 动态规划[7]-最长递增子数列
-categories: [算法]
+categories: [刷题]
 description: 给出长度为 N 的数组，找出这个数组的最长递增子序列 (递增子序列是指，子序列的元素是递增的）  
 keywords: 动态规划, 最长递增子数列
 tags: [动态规划, 最长递增子数列]

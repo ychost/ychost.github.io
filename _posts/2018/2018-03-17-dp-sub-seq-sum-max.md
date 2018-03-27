@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 动态规划[8]-最大子段和
-categories: [算法]
+categories: [刷题]
 description:  N 个整数组成的序列 a[1],a[2],a[3],…,a[n]，求该序列如 a[i]+a[i+1]+…+a[j] 的连续子段和的最大值。 
 keywords: 动态规划, 最大子段和
 tags: [动态规划, 最大子段和]

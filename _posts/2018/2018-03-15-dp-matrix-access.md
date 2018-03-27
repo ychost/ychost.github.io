@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 动态规划[3]-矩阵取数问题
-categories: [算法]
+categories: [刷题]
 description: 一个N*N矩阵中有不同的正整数，经过这个格子，就能获得相应价值的奖励，从左上走到右下，只能向下向右走，求能够获得的最大价值。
 keywords: 动态规划, 矩阵取数, Java
 tags: [动态规划, 矩阵取数]

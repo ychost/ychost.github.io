@@ -2,10 +2,10 @@
 layout: post
 title: 题集
 categories: [面试]
-description: 为了准备 2018 找工作而准备的一个错题集，主要收集笔试错题、面试题还有算法方面的问题，主要来源于牛客网、LeetCode
+description: 为了准备 2018 找工作而准备的一个题集，主要收集笔试题、面试题还有算法方面的问题，主要来源于牛客网、LeetCode
 keywords: 面试, 题集
 tags: [错题集, 牛客网, LeetCode]
-excerpt: 为了准备 2018 找工作而准备的一个错题集，主要收集笔试错题、面试题还有算法方面的问题，主要来源于牛客网、LeetCode
+excerpt: 为了准备 2018 找工作而准备的一个题集，主要收集笔试题、面试题还有算法方面的问题，主要来源于牛客网、LeetCode
 ---
 
 ### 选择题

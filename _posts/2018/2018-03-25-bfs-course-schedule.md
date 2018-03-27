@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 广度优先-Course Schedule
+title: 广度优先[1]-Course Schedule
 categories: [刷题]
 description: There are a total of n courses you have to take, labeled from 0 to n - 1. Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair [0,1] Given the total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?
 keywords: LeetCode, Course Schedule
@@ -39,46 +39,84 @@ Note
 
 ### 实现
 ```java
- public boolean canFinish(int numCourses, int[][] prerequisites) {  
-        //索引为节点号，值为该节点指向的所有节点
-        //用 Set 为了过滤掉重复边
+  public boolean canFinish(int numCourses, int[][] prerequisites) {  
+        List<Set<Integer>> list = new ArrayList<>(numCourses);
+        //点与之所指向的点集合
+        for (int i = 0; i < numCourses; i++) {
+            list.add(new  HashSet<>());
+        }
+        //每个点的入度
+        int[] preNums = new int[numCourses];
+        for (int i = 0; i < prerequisites.length; i++) {
+            int pre = prerequisites[i][1];
+            int post = prerequisites[i][0];
+            //过滤掉重复的边
+            if(list.get(pre).add(post)){
+                 preNums[post] += 1;
+            }                     
+        }
+        Queue<Integer> queue = new LinkedList<>();
+        //将入度为 0 的节点放入队列
+        for(int i =0;i<preNums.length;i++){
+            if(preNums[i] == 0){
+                queue.offer(i);
+            }
+        }
+        int count = numCourses;
+        while(!queue.isEmpty()){
+            Integer index = queue.poll();
+            Set<Integer> set = list.get(index);
+            //删除该点为起点的所有边
+            //即：将指向的节点的入度 -1
+            for(Integer v:set){
+                if(--preNums[v] == 0){
+                    queue.offer(v);
+                }
+            }
+            --count;
+        }
+        //是否所有点的入度都为 0
+        return  count == 0;
+    }
+```
+
+### 进阶
+输出拓扑排序，即满足无环要求的节点顺序数组
+
+> 注：直接将入度为 0 的数据依次添加到数组中即可，如果最后所有的数据都添加进来了则会生成一个满足条件的序列，如果未添加完全则返回空数组。
+
+```java
+  public int[] findOrder(int numCourses, int[][] prerequisites) {
         List<Set<Integer>> list = new ArrayList<>(numCourses);
         for (int i = 0; i < numCourses; i++) {
             list.add(new HashSet<>());
         }
         int[] preNums = new int[numCourses];
         for (int i = 0; i < prerequisites.length; i++) {
-            //前驱节点
-            int pre = prerequisites[i][1];
-            //后驱节点
             int post = prerequisites[i][0];
+            int pre = prerequisites[i][1];
             if (list.get(pre).add(post)) {
-                //统计每个节点的入度
                 preNums[post] += 1;
             }
         }
-        for (int i = 0; i < numCourses; i++) {
-            int j = 0;
-            //找到第一个入度为 0 的节点
-            for (; j < numCourses; j++) {
-                if (preNums[j] == 0) {
-                    break;
-                }
-            }
-            //遍历完所有节点，没有发现入度为 0 的节点
-            if (j == numCourses) {
-                return false;
-            }
-            //j 节点置位，防止下次重复遍历
-            preNums[j] = -1;
-            //将 j 节点的指向边删除
-            //即减小与之相关的所有节点的入度
-            Set<Integer> set = list.get(j);
-            for (Integer v : set) {
-                preNums[v] -= 1;
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < preNums.length; i++) {
+            if (preNums[i] == 0) {
+                queue.add(i);
             }
         }
-        return true;
+        int[] array = new int[numCourses];
+        int count = 0;
+        while (!queue.isEmpty()) {
+            int pre = queue.poll();
+            array[count++] = pre;
+            Set<Integer> set = list.get(pre);
+            for (Integer p : set) {
+                if (--preNums[p] == 0) {
+                    queue.add(p);
+                }
+            }
+        }
+        return count == numCourses ? array : new int[0];
     }
 ```
-

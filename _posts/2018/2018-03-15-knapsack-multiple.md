@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 动态规划[6]-多重背包问题
-categories: [算法]
+categories: [刷题]
 description: 有 N 种物品和一个容量为 V 的背包。第 i 种物品最多有 n[i] 件可用，每件价值是 p[i]，重量是 w[i]。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。
 keywords: 动态规划,多重背包问题
 tags: [动态规划, 多重背包问题]

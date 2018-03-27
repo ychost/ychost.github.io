@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 动态规划[9]-正整数分组
-categories: [算法]
+categories: [刷题]
 description: 将一堆正整数分为 2 组，要求 2 组的和相差最小 
 keywords: 动态规划,正整数分组
 tags: [动态规划,正整数分组]

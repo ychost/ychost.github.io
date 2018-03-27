@@ -1,11 +1,11 @@
 ---
 layout: post
-title: 算法总结
-categories: [面试]
-description: 为了准备 2018 年春招实习和秋招而做的算法总结 
-keywords: 面试, 算法
-tags: [面试, 算法]
-excerpt: 为了准备 2018 年春招实习和秋招而做的算法总结
+title: 算法-动态规划
+categories: [算法]
+description: 动态规划(dynamic programming)是运筹学的一个分支，是求解决策过程(decision process)最优化的数学方法。在面试笔试中动态规划也是经常作为考题出现，其中较为简单的 DP 题目我们应该有百分之百的把握顺利解决才可以。
+keywords: 算法
+tags: [动态规划, 算法]
+excerpt: 动态规划(dynamic programming)是运筹学的一个分支，是求解决策过程(decision process)最优化的数学方法。在面试笔试中动态规划也是经常作为考题出现，其中较为简单的 DP 题目我们应该有百分之百的把握顺利解决才可以。  
 ---
 
 ## 动态规划
@@ -35,17 +35,13 @@ excerpt: 为了准备 2018 年春招实习和秋招而做的算法总结
 仔细思考一番，我们能够得到这样的结论，对于前 k 个项的最大子序列和是前 k-1 项的最大子序列和 Fk 与第 k 项的和、或者第k项两者中较大的。
 
 
-#### 例题
+## 例题
 
 <div class="example" search="动态规划">
 </div>
 
-#### 参考
+## 参考文献
 1. [java 动态规划策略原理及例题][href1]
-
-## 广度优先搜索
-
-<div class="example" search="广度优先"></div>
 
 <script>
     $(function(){
@@ -67,6 +63,8 @@ excerpt: 为了准备 2018 年春招实习和秋招而做的算法总结
     });
 </script>
 
+[img1]: /images/post/algorithm/dag-true.png
+[img2]: /images/post/algorithm/dag-false.png
 [href1]: http://blog.csdn.net/QuinnNorris/article/details/77484573
 
    
