@@ -119,3 +119,25 @@ layout: default
 
 }(blog,$))
 </script>
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>

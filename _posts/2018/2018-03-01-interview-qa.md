@@ -67,7 +67,7 @@ __内存重排序：__ 在一个线程内，按照代码顺序，书写在前面
    1. 自动装箱时编译器调用valueOf将原始类型值转换成对象，同时自动拆箱时，编译器通过调用类似intValue(),doubleValue()这类的方法将对象转换成原始类型值。
    1. 自动装箱是将boolean值转换成Boolean对象，byte值转换成Byte对象，char转换成Character对象，float值转换成Float对象，int转换成Integer，long转换成Long，short转换成Short，自动拆箱则是相反的操作。
 1. #### 基本类型
-byte(8)、short(18)、int(32)、long(64)、float(32)、double(64)、boolean(1)、char(8) 8种
+byte(8)、short(8)、int(32)、long(64)、float(32)、double(64)、boolean(1)、char(8) 8种
 1. #### 线程
    > [53道Java线程面试题][href4]  
    > [Java语言定义的线程状态分析][href9]
@@ -290,6 +290,7 @@ __1. 已知一棵二叉树的前序遍历为CABEFDHG，中序遍历为BAFECHDG�
 1. SQL中 count(*) 跟 count(1) 的结果一样，都包括对NULL的统计，而count(column) 是不包括NULL的统计
 1. 树的度与节点的关系
 > 度的和 = 节点数和 - 1
+> 完全二叉树 $$n_0 = n_1+1 或者 n_0 = n_1$$
 
    $$2*n_2 + 1*n_1 + n_0 = n_2 + n_1 + n_0$$ 
 

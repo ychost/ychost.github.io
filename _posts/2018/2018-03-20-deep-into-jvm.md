@@ -268,6 +268,7 @@ public static final int val = 123
    * 直接引用：可以直接指向目标的指针、或者间接定位到目标的句柄
    * 对同一符号引用进行多次解析虚拟机会缓存解析结果，但是对 invokedynamic（目前 java 语言不生成这条指令） 不成立，该指令为「动态」调用指令只有程序实际运行到该指令解析动作才能进行
 
+   注：转换的前提是方法在真正运行之前有一个可确定的调用版本。
 
 1. 初始化  
 开始执行类中定义的 Java 程序代码
@@ -324,7 +325,159 @@ __类初始化顺序__
 OSGi 等为了实现模块化热部署破坏了双亲委托机制
 
 ## 字节码执行引擎
+### 栈帧
+栈帧是虚拟机栈的基本元素，栈帧包括：局部变量表、操作数栈、动态连接、方法返回地址和一些额外附加信息。
+每次只执行栈顶的栈帧（当前栈帧），如下图所示
 
+[![jvm-stack-frame][img1]][img1]{:data-lightbox="deepin-jvm"}
+
+__局部变量表__  
+   * 用于存放方法参数和方法内部定义的局部变量，存放的基本内存单位为 Slot
+   * 对于 64 位的数据类型```long```、```double```，虚拟机会以大端模式分配两个连续的 Slot 空间
+   * 局部变量表（非静态方法）的第 0 位为实例的引用```this```
+   * 里面的 Slot 可以复用，可能会影响到垃圾回收
+   * 局部变量表里面的变量不会执行默认初始化操作，所以使用的时候必须先赋值
+
+```java
+  // 这里并不能回收 placeholder 因为由于 placeholder 占用的 Slot 可能会被复用，
+  //所以 GcRoot 还是保留着对这一部分内存的关联
+  public static void main(String[] args){
+    {
+      byte[] placeholder = new byte[64 * 1024 * 1024];
+    }
+    System.gc();
+  }
+  //这里 placeholder 可以被回收，这里用 a 来占用了 placeholder 的 Slot，
+  //就可以将 placeholder 的空间给清空
+  public static void main(String[] args){
+    {
+      byte[] placeholder = new byte[64 * 1024 * 1024];
+    }
+    int a = 0;// 或者使用 placeholder = null;
+    System.gc();
+  }
+```
+
+__操作数栈__  
+  * 存放字节码指令和数据
+  
+__动态连接__  
+  * 包含一个指向运行时常量池中该栈帧所属方法的引用，即栈帧可连接到该方法的入口地址
+
+__方法返回地址__  
+  * 两种方法可以退出方法，遇到返回的字节码指令和遇到异常
+  * 正常返回的时候直接用调用者的 PC 计数器作为返回地址（栈帧中存有调用者的 PC 计数器值）
+  * 异常返回的返回地址根据异常表来决定
+
+__附加信息__  
+  * 具体的虚拟机可以增加一些没有规范描述的信息到栈中，比如与调试相关的信息等等
+
+### 方法调用
+方法调用不是方法执行，它的唯一任务是确定被调用方法的版本（即调用哪个方法），一切方法在 Class 文件里面存储都只是符号引用，而不是实际内存布局中的入口地址，只有在类加载期间，甚至到运行期间才能确定目标方法的直接引用。  
+
+__解析__  
+  * 编译时期就确定下来的方法的调用成为解析
+  * 主要为静态方法和私有方法两大类，```invokestatic```、```invokespecial``` 都能在编译期确定
+  * 静态方法、私有方法、实例构造器、父类方法，它们在类加载的时候就将符号引用解析为直接引用
+
+__分派__  
+  1. 静态分派  
+虚拟机在重载时是通过变量的静态类型而不是实际类型做为判定依据，该过程是编译可知的，典型应用是方法 __重载__
+
+```java
+public class Human{
+
+}
+public class Man extends Human{
+
+}
+public static void main(String[] args){
+  //Human 为变量的静态类型（外观类型）
+  //Man   为变量的实际类型
+  Human xm= new Man();
+  //这里调用的结果为 hey human 
+  sayHello(xm);
+}
+
+static void sayHello(Man man){
+  System.out.println("hey man");
+}
+
+static void sayHello(Human hm){
+  System.out.println("hey human");
+}
+
+```
+
+__动态分派__  
+典型应用为方法的 __重写__  ，方法在编译期间未知只有在运行期间才能确定，主要依赖于 ```invokevirtual``` 指令
+
+```java
+public abstract class Human{
+  public abstract void sayHello();
+}
+
+public class Man extends Human{
+  public void sayHello(){
+    System.out.println("hey man");
+  }
+}
+
+public class Woman extends Man{
+  public void sayHello(){
+    System.out.println("hey woman");
+  }
+}
+
+//这段代码都应该知道结果是啥，这就是典型的动态派发的应用
+public static void main(String[] args){
+  Human man = new Man();
+  Human woman = new Woman();
+  man.sayHello();
+  woman.sayHello();
+  man = woman;
+  man.sayHello();
+}
+```
+
+__单分派与多分派__   
+Java 是一门「静态多分派，动态单分派」语言，C# 引入了 ```dynamic```才实现动态多分派，或者使用```new```关键字来覆盖父类方法，也能实现动态多分派。具体区别如下：
+* Java
+```java
+//如果 Son 重写了父类的 sayHello() 那么这里调用的只能是 Son 的 sayHello()
+Father son = new Son();
+son.sayHello();
+```
+* C#
+```c#
+//如果子类 override 父类的 sayHello() 则调用 Son 的 sayHello()
+//如果子类 new 父类的 sayHello() 则调用 Father 的 
+Father son = new Son();
+son.sayHello();
+```
+
+__动态调用分派过程__  
+采用了虚表法：表中存放着各个方法的实际入口地址，如果某个方法在子类没有重写，那么子类的虚方法表里面的地址入口和父类一致都指向父类的实现入口，如果重写了则分别指向自己方法的入口地址。
+
+### 执行引擎
+虚拟机的执行引擎都有解释执行、编译执行两种选择
+
+编译过程
+
+[![jvm-compile-process][img2]][img2]{:data-lightbox="deepin-jvm"}
+
+Java 的指令集是基于栈的，这种指令集相对于基于寄存器的指令集而言，可移植性高、代码相对紧凑但是速度比基于寄存器的指令集慢（完成相同功能的指令数量一般比寄存器架构多）。
+
+
+
+
+
+
+
+
+
+[img1]: /images/post/java/jvm-stack-frame.png
+[img2]: /images/post/java/jvm-compile-process.png
 
 [href1]: http://www.hollischuang.com/archives/105
 [href2]: http://www.hollischuang.com/archives/110

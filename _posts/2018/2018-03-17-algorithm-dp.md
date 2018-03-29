@@ -43,25 +43,7 @@ excerpt: 动态规划(dynamic programming)是运筹学的一个分支，是求�
 ## 参考文献
 1. [java 动态规划策略原理及例题][href1]
 
-<script>
-    $(function(){
-         window.onSearchLoad(function(){
-            $(".example").each(function(){
-                var search= $(this).attr("search");
-                var results = window.idx.search(search); 
-                $(this).append("<ul></ul>");
-                var $ul = $(this).children("ul");
-                window.data.then(function(loaded_data) {
-                    results.forEach(function(result) {
-                        var item = loaded_data[result.ref];
-                        var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
-                        $ul.append(appendString);
-                    });
-                });
-            });
-        })
-    });
-</script>
+
 
 [img1]: /images/post/algorithm/dag-true.png
 [img2]: /images/post/algorithm/dag-false.png
