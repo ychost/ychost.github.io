@@ -8,6 +8,8 @@ tags: [算法, 广度优先, BFS]
 excerpt: 广度优先遍历是连通图的一种遍历策略。因为它的思想是从一个顶点V0开始，辐射状地优先遍历其周围较广的区域，故得名。
 ---
 
+算法可视化 [连接][href1]
+
 ## 广度优先
 广度优先遍历是连通图的一种遍历策略。因为它的思想是从一个顶点V0开始，辐射状地优先遍历其周围较广的区域，故得名。
 
@@ -68,3 +70,5 @@ public Map<Integer, List<Integer>> travelTreeByLevel(TreeNode root) {
 ```
 ### 例题
 <div class="example" search="广度优先">
+
+[href1]: https://www.cs.usfca.edu/~galles/visualization/BFS.html

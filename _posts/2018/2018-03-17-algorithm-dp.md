@@ -8,6 +8,8 @@ tags: [动态规划, 算法]
 excerpt: 动态规划(dynamic programming)是运筹学的一个分支，是求解决策过程(decision process)最优化的数学方法。在面试笔试中动态规划也是经常作为考题出现，其中较为简单的 DP 题目我们应该有百分之百的把握顺利解决才可以。  
 ---
 
+算法可视化 [连接][href2]
+
 ## 动态规划
 
 ### 定义  
@@ -48,5 +50,6 @@ excerpt: 动态规划(dynamic programming)是运筹学的一个分支，是求�
 [img1]: /images/post/algorithm/dag-true.png
 [img2]: /images/post/algorithm/dag-false.png
 [href1]: http://blog.csdn.net/QuinnNorris/article/details/77484573
+[href2]: https://www.cs.usfca.edu/~galles/visualization/DPChange.html
 
    
