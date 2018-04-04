@@ -41,5 +41,14 @@ System.out.println(s);
 //output
 //[[1, 0], [0, 1], [-1, 0], [0, -1]]
 ```
+1. 排序
+```java
+//数组排序
+int[] array = new int[3];
+Arrays.sort(array);
+//List 排序
+List<Integer> list = new ArrayList<>();
+list.sort((o1,o2)->o1-o2);
 
+```
 
