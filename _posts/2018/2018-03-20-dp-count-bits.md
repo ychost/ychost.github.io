@@ -35,8 +35,8 @@ Credits:
 -------------
 1  0001    1   = 1
 -------------
-2  0010    1   = 1
-3  0011    2   = 1 + dp[0]
+2  0010    1   = 1 + dp[0]
+3  0011    2   = 1 + dp[1]
 -------------
 4  0100    1   = 1 + dp[0]
 5  0101    2   = 1 + dp[1]
@@ -65,20 +65,31 @@ nearest 是离 n 最近的 2 的幂，比如当 n=20 的时候 nearest = 16
 class Solution {
     public int[] countBits(int num) {
         int[] dp = new int[num+1];
-        if(num >=1){
-            dp[1]=1;
-        }
-        int nearest =2,cur =2;
-        while(cur <=num){
-            //判断是否为 2 的幂
-            if((cur & (cur-1)) == 0){
-                nearest = cur;
+        int index = 0;
+        for(int i=1;i<=num;i++){
+            if((i&(i-1)) == 0){
+               index = 0;
             }
-            dp[cur]=1+dp[cur-nearest];
-            cur+=1;
+            dp[i] = 1+dp[index++];
         }
-         
         return dp;
     }
 }
+```
+
+### 另一种高效解法
+1. 该算法十分高效且理解起来十分简单
+1. 对于一个数 i，它里面含有的 1 的个数 dp[i] 肯定等于 dp[i>>2] 的个数加上 i 最后一个是否为 1
+
+```java
+class Solution{
+    public int[] countBits(int num){
+        int[] dp = new int[num+1];
+        for(int i=1;i<=num;i++){
+            dp[i] = dp[i>>2]+(i&1);
+        }
+        return dp;
+    }
+}
+
 ```
