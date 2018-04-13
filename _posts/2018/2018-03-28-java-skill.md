@@ -57,4 +57,7 @@ list.sort((o1,o2)->o1-o2);
 ```java
 (num & (num-1)) == 0
 ```
-
+1. 将一个字符改变大小写
+```java
+ch = (char)(ch ^ 32)
+```

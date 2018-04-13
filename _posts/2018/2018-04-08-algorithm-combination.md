@@ -143,6 +143,8 @@ void find(List<List<Integer>> result,
    * 终止条件
    * 是否允许一个元素取多次
    * 是否需要对数组去重
+   * 下一次取数的迭代方法
+   
 1. 根据以上思路，很快就能解决上述的所有问题，这里就不列出每个问题的具体实现了，百度 LeetCode Combinations 会有各路大神的实现方式，究其根本是一致的。
 
 [href1]: https://leetcode.com/problems/combination-sum/
