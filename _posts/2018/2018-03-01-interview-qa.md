@@ -25,7 +25,7 @@ excerpt: 为了准备 2018 年校招而总结的一些刷过的题、踩过的�
      * 对于随机访问 get(int i)，如果 i < size/2 则正向遍历，否则反向遍历  
      * pollFirst, peekFirst, offerFirst, 与 removeFirst, getLast, addFirst 等价，只是前者会返回特殊值（null或者bool)，后者会抛异常
      * 遍历 LinkedList 尽量使用 iterator 不要使用随机访问 get(i)，后者效率极低
-   1. [Vector][href21] 是矢量队列，线程安全，底层是 Object[], 默认大小是 10，增长量可指定默认增长一倍，实现了 Enumeration 接口（JDK 1.x)，有 fail-fast 特性，不支持序列化
+   1. [Vector][href21] 是矢量队列，线程安全，底层是 Object[], 默认大小是 10，增长量可指定默认增长一倍，实现了 Enumeration 接口（JDK 1.x)，有 fail-fast 特性。
      * Vector本身是一个list，如果使用list来声明它，使用iterator进行迭代，此时的Vector就不是线程安全的啦。但是使用Vector的elements进行迭代就不会出现线程安全性问题
    1. [Stack][href22] 继承与 Vector 所以是线程同步的, 只有无参构造函数
    1. [总结][href23]
@@ -322,7 +322,7 @@ __1. 已知一棵二叉树的前序遍历为CABEFDHG，中序遍历为BAFECHDG�
 [href14]: http://blog.csdn.net/whuslei/article/details/6667471/
 [href15]: https://www.zhihu.com/question/24696366
 [href16]: https://baike.baidu.com/item/%E6%8F%92%E7%A9%BA%E6%B3%95/4862293?fr=aladdin
-[href17]: blog.csdn.net/dreamtdp/article/details/15378329
+[href17]: https://blog.csdn.net/dreamtdp/article/details/15378329
 [href18]: http://www.cnblogs.com/skywang12345/p/3308556.html
 [href19]: http://www.cnblogs.com/skywang12345/p/3308762.html
 [href20]: http://www.cnblogs.com/skywang12345/p/3308807.html
