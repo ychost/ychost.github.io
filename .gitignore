@@ -3,5 +3,6 @@ _site/
 *.~vsd
 \#*\#
 *~
+service-worker.js
 .DS_Store
 Gemfile.lock

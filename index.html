@@ -110,4 +110,9 @@ comments: false
     (function(blog){
         blog.encodeHylinks($(".home-cat-hylink"))
     }(blog))
+// 注册 service worker
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register('/service-worker.js', {scope: '/'})
+}
+
 </script>
