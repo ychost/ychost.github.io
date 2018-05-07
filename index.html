@@ -106,6 +106,10 @@ comments: false
 <!-- /section.content -->
 
 <script>
+var targetProtocol = "https:";
+if (window.location.href.indexOf("localhost") == -1 && window.location.protocol != targetProtocol){
+ window.location.href = targetProtocol + window.location.href.substring(window.location.protocol.length);
+}
 //encode url to solve chinese messy code
     (function(blog){
         blog.encodeHylinks($(".home-cat-hylink"))

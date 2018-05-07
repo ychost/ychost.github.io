@@ -7,6 +7,10 @@ description: 这是我博客系统的修改日志
 keywords: 日志, 博客，私密
 tags: [Private]
 ---
+#### 2018-4-24
+1. 添加 https 访问
+1. 添加 service-worker 支持离线访问博客
+
 #### 2018-03-24
 1. 添加页面访问量和点击量，来源[不蒜子](http://busuanzi.ibruce.info)
 
