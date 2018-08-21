@@ -18,7 +18,7 @@ permalink: /about/
 
 ## 标签
 
-* 全栈
+* 后端开发，伪全栈
 
 
 ## 联系
@@ -29,23 +29,23 @@ permalink: /about/
 
 ## 技能
 
-#### 熟悉单词拼写
+<!-- #### 技术栈 -->
 <div class="btn-inline">
     {% for keyword in site.skill_software_keywords %}
     <button class="btn btn-outline" type="button">{{ keyword }}</button>
     {% endfor %}
 </div>
 
-#### 熟悉系统开关机
+<!-- #### 技术库
 <div class="btn-inline">
     {% for keyword in site.skill_mobile_app_keywords %}
     <button class="btn btn-outline" type="button">{{ keyword }}</button>
     {% endfor %}
 </div>
 
-#### 熟悉软件安装卸载
+#### 技术库
 <div class="btn-inline">
     {% for keyword in site.skill_windows_keywords %}
     <button class="btn btn-outline" type="button">{{ keyword }}</button>
     {% endfor %}
-</div>
+</div> -->

@@ -125,9 +125,9 @@ cnzz_analytics_id:  1260117641&online=1
 # ---------------- #
 #      Datas       #
 # ---------------- #
-skill_software_keywords:   [Java, C++,  JavaScript, C#]
-skill_mobile_app_keywords: [Android, Arduino, C51]
-skill_windows_keywords:    [WPF, Office, ASP.NET]
+skill_software_keywords:   [Java, C#, Typescript]
+skill_mobile_app_keywords: [Spring, Hibernate, Netty]
+skill_windows_keywords:    [WPF, EntityFramework, DevExpress]
 
 
 # ---------------- #
