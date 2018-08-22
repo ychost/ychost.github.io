@@ -7,6 +7,9 @@ description: 这是我博客系统的修改日志
 keywords: 日志, 博客，私密
 tags: [Private]
 ---
+#### 2018-8-22
+1. 将服务器从 github 移动到自己租的腾讯服务器，域名不变
+
 #### 2018-4-24
 1. 添加 https 访问
 1. 添加 service-worker 支持离线访问博客
