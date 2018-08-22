@@ -26,7 +26,7 @@ permalink: /archive/
     {% assign total_len = orpost_len | plus: repost_len %}
 {% endif %}
 
-> 目前共 {{ total_len }} 篇文章，其中「原创」{{orpost_len}}篇，「转载」{{repost_len}} 篇{% if site.private_show %}，「加密」{{prpost_len}} 篇 {% endif %}
+> 目前共 {{ total_len }} 篇文章，其中「原创」{{orpost_len}} 篇，「转载」{{repost_len}} 篇{% if site.private_show %}，「加密」{{prpost_len}} 篇 {% endif %}
 
 <section class="container posts-content">
 {% for post in site.posts  %}
