@@ -1,0 +1,11 @@
+@startuml hook deploy
+
+title git hook auto deploy
+actor    user
+database repo
+user -> repo : git push
+repo -> www : hook invoke
+www  -> repo : git pull
+www  -> www : deploy
+
+@enduml
