@@ -2,10 +2,10 @@
 layout: post
 title: 使用 Git hook 实现自动化部署
 categories: [工具]
-description: 每一次与 Git Rpository 进行交互的周期内可以执行任意的脚步当然包括自动部署
+description: 每一次与 Git Rpository 进行交互的周期内可以执行任意的脚本当然包括自动部署
 keywords: git hook, 自动化部署
 tags: [git, hook, 自动化部署]
-excerpt: 每一次与 Git Rpository 进行交互的周期内可以执行任意的脚步当然包括自动部署
+excerpt: 每一次与 Git Rpository 进行交互的周期内可以执行任意的脚本当然包括自动部署
 ---
 
 ### 背景
