@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="http://blog.sudoyc.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://blog.sudoyc.com/" rel="alternate" type="text/html" /><updated>2018-08-26T14:35:43+08:00</updated><id>http://blog.sudoyc.com/</id><title type="html">夏天</title><subtitle>夏天的个人博客</subtitle><author><name>ychost</name></author><entry><title type="html">使用 Git hook 实现自动化部署</title><link href="http://blog.sudoyc.com/2018/08/23/deploy-with-git-hook/" rel="alternate" type="text/html" title="使用 Git hook 实现自动化部署" /><published>2018-08-23T00:00:00+08:00</published><updated>2018-08-23T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2018/08/23/deploy-with-git-hook</id><content type="html" xml:base="http://blog.sudoyc.com/2018/08/23/deploy-with-git-hook/">&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="http://blog.sudoyc.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://blog.sudoyc.com/" rel="alternate" type="text/html" /><updated>2018-08-26T14:46:28+08:00</updated><id>http://blog.sudoyc.com/</id><title type="html">夏天</title><subtitle>夏天的个人博客</subtitle><author><name>ychost</name></author><entry><title type="html">使用 Git hook 实现自动化部署</title><link href="http://blog.sudoyc.com/2018/08/23/deploy-with-git-hook/" rel="alternate" type="text/html" title="使用 Git hook 实现自动化部署" /><published>2018-08-23T00:00:00+08:00</published><updated>2018-08-23T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2018/08/23/deploy-with-git-hook</id><content type="html" xml:base="http://blog.sudoyc.com/2018/08/23/deploy-with-git-hook/">&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
 &lt;p&gt;传统的部署方式一般通过 FTP 将生成的文件传入到服务器然后进行手动部署操作，该方式繁琐且没啥技术含量。本文通过一个简单的 git hook 的使用旨在说明自动化部署的原理&lt;/p&gt;
 
 &lt;h3 id=&quot;方法&quot;&gt;方法&lt;/h3&gt;
@@ -27,13 +27,14 @@
  vim ./post-receive
  chmod +x ./post-receive
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;post-receive 内容&lt;/p&gt;
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
  &lt;span class=&quot;nb&quot;&gt;unset &lt;/span&gt;GIT_DIR &lt;span class=&quot;c&quot;&gt;# 这句十分重要，去除掉 git 的默认路径&lt;/span&gt;
  &lt;span class=&quot;nv&quot;&gt;DEPLOY_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/srv/www/
  &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$DEPLOY_PATH&lt;/span&gt;
  &lt;span class=&quot;c&quot;&gt;#你的部署脚本&lt;/span&gt;
- git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; git stash
- git pull origin master
+ git fetch &lt;span class=&quot;nt&quot;&gt;--all&lt;/span&gt;
+ git reset &lt;span class=&quot;nt&quot;&gt;--hard&lt;/span&gt; origin/master
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;本地添加远程仓库
