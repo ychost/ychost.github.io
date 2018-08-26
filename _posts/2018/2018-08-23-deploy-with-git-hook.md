@@ -35,15 +35,16 @@ excerpt: 每一次与 Git Rpository 进行交互的周期内可以执行任意�
     vim ./post-receive
     chmod +x ./post-receive
 ```
+post-receive 内容
 ```
     #!/bin/sh
     unset GIT_DIR # 这句十分重要，去除掉 git 的默认路径
     DEPLOY_PATH=/home/srv/www/
     cd $DEPLOY_PATH
     #你的部署脚本
-    git add . -A && git stash
-    git pull origin master
-```
+    git fetch --all
+    git reset --hard origin/master
+  ```
 1. 本地添加远程仓库
 ```
     git remote add origin ssh://git@some.test.com:/home/git/blog
