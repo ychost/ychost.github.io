@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>面试题总结 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2018/03/01/interview-qa/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="面试题总结"> 
+    <meta name="keywords" content="刷题, 面试">
+    <meta name="og:keywords" content="刷题, 面试"> 
+    <meta name="description" content="为了准备 2018 年校招而总结的一些刷过的题、踩过的坑、面经等等">
+    <meta name="og:description" content="为了准备 2018 年校招而总结的一些刷过的题、踩过的坑、面经等等">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2018/03/01/interview-qa/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2018-03-01"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+<section class="collection-head small geopattern" data-pattern-id="面试题总结">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">面试题总结</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2018">2018/03/01</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-面试"  title="面试">面试</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-面试"> 面试 </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            
+            本文共 1081 字，
+             需 6 分钟阅读
+            
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <h3 id="java">Java</h3>
+<ol>
+  <li>
+    <h4 id="hashmap-hashtable-和-concurrenthashmap-的区别">HashMap, HashTable 和 ConcurrentHashMap 的区别</h4>
+    <ol>
+      <li>HashMap是非线程安全的，HashTable 是线程安全的。</li>
+      <li>HashMap的键和值都允许有 null 存在，而 HashTable 和 ConcurrentHashMap 都不行。</li>
+      <li>因为线程安全、哈希效率的问题，HashMap 效率比 HashTable 的要</li>
+      <li>ConcurrentHashMap 对整个桶数组进行了分割分段(Segment)，然后在每一个分段上都用lock锁进行保护，相对于 HashTable 的 synchronized 关键字锁的粒度更精细了一些，并发性能更好，而 HashMap 没有锁机制，不是线程安全的。</li>
+      <li>三者的 hash 函数不一样</li>
+    </ol>
+  </li>
+  <li>
+    <h4 id="java-collection">Java Collection</h4>
+    <blockquote>
+      <p><a href="/2018/01/13/java-collection/">java 集合继承关系图</a></p>
+    </blockquote>
+    <ol>
+      <li>集合都实现了 WriteObject 与 ReadObject 用于序列化/反序列化，先写入的是集合大小，再写入的是集合元素</li>
+      <li><a href="http://www.cnblogs.com/skywang12345/p/3308556.html">ArrayList</a> 底层是 Object[]，默认大小是 10, 每次容量递增 50%，有 <a href="http://www.cnblogs.com/skywang12345/p/3308762.html">fail-fast</a> 特性，常用 T[] toArray(T[] arr)
+        <ul>
+          <li>对于 T[] toArray(T[] arr)，如果 arr.length &gt; size 则将元素直接放入 arr，然后返回  arr,否则新造一个数组大小同 size 然后填充数组并返回</li>
+        </ul>
+      </li>
+      <li><a href="http://www.cnblogs.com/skywang12345/p/3308807.html">LinkedList</a> 底层是双向链表，且 header 不存放数据格式为 tail&lt;-&gt;header&lt;-&gt;first，有 fail-fast 特性，支持随机访问、链表、栈等操作
+        <ul>
+          <li>对于随机访问 get(int i)，如果 i &lt; size/2 则正向遍历，否则反向遍历</li>
+          <li>pollFirst, peekFirst, offerFirst, 与 removeFirst, getLast, addFirst 等价，只是前者会返回特殊值（null或者bool)，后者会抛异常</li>
+          <li>遍历 LinkedList 尽量使用 iterator 不要使用随机访问 get(i)，后者效率极低</li>
+        </ul>
+      </li>
+      <li><a href="http://www.cnblogs.com/skywang12345/p/3308833.html">Vector</a> 是矢量队列，线程安全，底层是 Object[], 默认大小是 10，增长量可指定默认增长一倍，实现了 Enumeration 接口（JDK 1.x)，有 fail-fast 特性。
+        <ul>
+          <li>Vector本身是一个list，如果使用list来声明它，使用iterator进行迭代，此时的Vector就不是线程安全的啦。但是使用Vector的elements进行迭代就不会出现线程安全性问题</li>
+        </ul>
+      </li>
+      <li><a href="http://www.cnblogs.com/skywang12345/p/3308852.html">Stack</a> 继承与 Vector 所以是线程同步的, 只有无参构造函数</li>
+      <li><a href="http://www.cnblogs.com/skywang12345/p/3308900.html">总结</a></li>
+    </ol>
+  </li>
+  <li>
+    <h4 id="java-map">Java Map</h4>
+    <ol>
+      <li><a href="http://www.cnblogs.com/skywang12345/p/3310835.html">HashMap</a> 容量初始化 16 且以 2 倍增长，线程不安全，允许放入 null 放入的地方是 table[0]，继承于 AbstractMap
+        <ul>
+          <li>容量按 2 倍增长的好处可以在扩容的时候方便找出对应的位置</li>
+          <li><a href="https://www.cnblogs.com/andy-zhou/p/5402984.html">HashMap多线程并发问题分析</a> 可以知道 HashMap 在 put 的时候容易引起环状链表而导致死循环</li>
+        </ul>
+      </li>
+      <li><a href="http://www.cnblogs.com/skywang12345/p/3310887.html">HashTable</a> 容量初始化 11 以 2倍+1 的方式增长，线程安全，不允许放入 null，继承于 Dictionary 和 AbstractMap</li>
+      <li><a href="https://www.cnblogs.com/butterfly100/p/8019491.html">ConcurrentHashMap源码阅读</a> 可以知道 segment, size 计算等等</li>
+      <li><a href="http://www.cnblogs.com/skywang12345/p/3311092.html">WeakHashMap</a> 和 HashMap 一样，区别就是如果 key 被回收了，那么 value 也会被回收
+        <ul>
+          <li>key 是弱引用，当 key 被回收的时候，会将 key 的信息放入队列</li>
+          <li>在进行操作的时候首先对比队列，如果队列里面有 key 的信息则删除 key-value</li>
+        </ul>
+      </li>
+      <li><a href="http://www.cnblogs.com/skywang12345/p/3310928.html">TreeMap</a> 底层是通过红黑树实现的，支持排序，线程不安全</li>
+      <li><a href="http://www.cnblogs.com/skywang12345/p/3311126.html">总结</a></li>
+    </ol>
+  </li>
+  <li>
+    <h4 id="io字节流和字符流相互转换">IO字节流和字符流相互转换</h4>
+    <blockquote>
+      <p><a href="http://blog.csdn.net/puppylpg/article/details/45620387">Java 字节流 字符流 转换流</a></p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="hashcode-与-equals-的区别与联系">hashCode 与 equals 的区别与联系</h4>
+    <p>两个 equals 不等的对象可能有相等的 hashCode。</p>
+  </li>
+  <li>
+    <h4 id="volatile的特征">Volatile的特征</h4>
+    <ol>
+      <li>volatile是在synchronized性能低下的时候提出的。如今synchronized的效率已经大幅提升，所以volatile存在的意义不大。</li>
+      <li>如今非volatile的共享变量，在访问不是超级频繁的情况下，已经和volatile修饰的变量有同样的效果了。</li>
+      <li>volatile不能保证原子性。<a href="https://www.cnblogs.com/gossip/p/6182028.html">Java并发_volatile实现可见性但不保证原子性</a></li>
+      <li>volatile可以禁止重排序。</li>
+    </ol>
+  </li>
+  <li>
+    <h4 id="禁止内存重排序内存屏障内存栅栏">禁止内存重排序/内存屏障/内存栅栏</h4>
+    <p><strong>内存屏障（Memory Barrier，或有时叫做内存栅栏，Memory Fence）：</strong> 一种CPU指令，用于控制特定条件下的重排序和内存可见性问题。Java编译器也会根据内存屏障的规则禁止重排序。（也就是让一个CPU处理单元中的内存状态对其它处理单元可见的一项技术。）<br />
+<strong>内存重排序：</strong> 在一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作。准确地说应该是控制流顺序而不是代码顺序，因为要考虑分支、循环等结构。以下规则可禁止重排序：</p>
+    <ol>
+      <li>volatile变量规则(Volatile Variable Rule):对一个volatile变量的写操作发生于后面对这个变量的读操作，这里的“后面”也指的是时间上的先后顺序。</li>
+      <li>线程启动规则(Thread Start Rule)：Thread独享的start()方法先行于此线程的每一个动作。</li>
+      <li>线程终止规则(Thread Termination Rule)：线程中的每个操作都先行发生于对此线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值检测到线程已经终止执行。</li>
+      <li>线程中断规则(Thread Interruption Rule)：对线程interrupte()方法的调用优先于被中断线程的代码检测到中断事件的发生，可以通过Thread.interrupted()方法检测线程是否已中断。</li>
+      <li>对象终结原则(Finalizer Rule)：一个对象的初始化完成(构造函数执行结束)先行发生于它的finalize()方法的开始。</li>
+      <li>传递性(Transitivity)：如果操作A先行发生于操作B，操作B先行发生于操作C，那就可以得出操作A先行发生于操作C的结论</li>
+    </ol>
+  </li>
+  <li>
+    <h4 id="重载与重写的区别">重载与重写的区别</h4>
+    <ol>
+      <li>重载(Overload)指的是同一个类里面的两个方法具有相同的名称，但是方法参数类型可能不同</li>
+      <li>重写(Override)指的是子类覆盖父类的方法，两个方法属于不同类但是具有相同的签名</li>
+    </ol>
+  </li>
+  <li>
+    <h4 id="自动装拆箱">自动装/拆箱</h4>
+    <ol>
+      <li>自动装箱时编译器调用valueOf将原始类型值转换成对象，同时自动拆箱时，编译器通过调用类似intValue(),doubleValue()这类的方法将对象转换成原始类型值。</li>
+      <li>自动装箱是将boolean值转换成Boolean对象，byte值转换成Byte对象，char转换成Character对象，float值转换成Float对象，int转换成Integer，long转换成Long，short转换成Short，自动拆箱则是相反的操作。</li>
+    </ol>
+  </li>
+  <li>
+    <h4 id="基本类型">基本类型</h4>
+    <p>byte(8)、short(8)、int(32)、long(64)、float(32)、double(64)、boolean(1)、char(8) 8种</p>
+  </li>
+  <li>
+    <h4 id="线程">线程</h4>
+    <blockquote>
+      <p><a href="https://www.cnblogs.com/king-garden/p/5672853.html">53道Java线程面试题</a><br />
+<a href="https://www.cnblogs.com/trust-freedom/p/6606594.html">Java语言定义的线程状态分析</a></p>
+    </blockquote>
+    <ul>
+      <li>Java 线程与 Os 线程是 1:1 中间并没有什么优化，底层是 pThread 实现的o</li>
+      <li>Java 可以通过 taskset 实现线程与 Cpu 绑定</li>
+    </ul>
+  </li>
+  <li>
+    <h4 id="静态代理动态代理">静态代理、动态代理</h4>
+    <blockquote>
+      <p><a href="https://www.cnblogs.com/V1haoge/p/5860749.html">java静态代理与动态代理简单分析</a><br />
+<a href="http://blog.csdn.net/heyutao007/article/details/49738887">Java动态代理的两种实现方法</a></p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="过滤器与拦截器">过滤器与拦截器</h4>
+    <blockquote>
+      <p><a href="http://www.cnblogs.com/joyang/p/4973435.html">过滤器与拦截器的区别</a></p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="serializable-接口详解">Serializable 接口详解</h4>
+    <blockquote>
+      <p><a href="https://blog.csdn.net/dreamtdp/article/details/15378329">对Java Serializable（序列化）的理解和总结</a></p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="实现多线程的方式">实现多线程的方式</h4>
+  </li>
+  <li>
+    <h4 id="进程的三态转换">进程的三态转换</h4>
+  </li>
+  <li>
+    <h4 id="string-stringbuffer-stringbuilder-的区别">String, StringBuffer, StringBuilder 的区别</h4>
+    <ul>
+      <li>String字符串是常量，其值不能改变</li>
+      <li>StringBuilder是线程不安全的，速度更快</li>
+      <li>StringBuffer是线程安全的，速度比StringBuilder慢</li>
+      <li><a href="/2018/01/13/java-string-buffer-builder/">Java 中 String、StringBuffer和StringBuilder的区别</a></li>
+    </ul>
+  </li>
+  <li>
+    <h4 id="java和cc之间的差别">Java和C/C++之间的差别</h4>
+  </li>
+  <li>
+    <h4 id="java-的编译过程">Java 的编译过程</h4>
+    <blockquote>
+      <p><a href="https://www.cnblogs.com/straybirds/p/8513870.html">java编译过程（字节码编译和即时编译）</a></p>
+    </blockquote>
+    <ul>
+      <li>词法分析，标记最小元素比如：变量名，类型，操作符，字面量、修饰符等等</li>
+      <li>语法分析，将词法分析的结果生成一颗语法树</li>
+      <li>语义分析，确保语法树的所有节点正确，变量使用前是否声明、赋值、类型是否匹配、方法是否有返回值等等</li>
+      <li>生成中间字节码，该字节码与平台无关，仅仅将上述步骤的结果写入磁盘</li>
+      <li>JIT 编译，如果某个 方法/循环体 执行频率比较高，则会在字节码解释过程中将高频率字节码编译成机器码，这样就不用每次都解释这些代码。
+        <ul>
+          <li>判断高频率代码的两种方法：</li>
+          <li>基于采样的热点探测：周期扫描每个线程栈的栈顶，如果某段字节码出现频率比较高，则认为是「热点代码」
+            <blockquote>
+              <p>该方法虽然简单，但是无法排除因为线程阻塞等因素而干扰判断结果</p>
+            </blockquote>
+          </li>
+          <li>基于计数器的热点探测：为每个方法，甚至代码块添加计数器，如果计数超过一定的阈值则任务是「热点代码」
+            <blockquote>
+              <p>该方法检测准确，实现难度较高</p>
+            </blockquote>
+          </li>
+        </ul>
+      </li>
+      <li>HotStop 等虚拟机采用的是第二种「基于计数器的热点探测」，有两个计数器：方法调用计数器和回边计数器。一个统计方法调用次数，一个统计循环体调用次数</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="web">Web</h3>
+<ol>
+  <li>
+    <h4 id="session-cookie的区别">Session, Cookie的区别</h4>
+  </li>
+  <li>
+    <h4 id="sendredirect-foward的区别">sendRedirect, foward的区别</h4>
+  </li>
+</ol>
+
+<h3 id="jvm">Jvm</h3>
+
+<h3 id="sql">SQL</h3>
+<ol>
+  <li>
+    <h4 id="数据库事务隔离机制的特点">数据库事务隔离机制的特点</h4>
+  </li>
+  <li>
+    <h4 id="数据库优化查询">数据库优化查询</h4>
+    <blockquote>
+      <p><a href="https://jingyan.baidu.com/article/154b463188c29928ca8f4181.html">数据库优化查询</a></p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="三范式">三范式</h4>
+    <blockquote>
+      <p><a href="https://www.zhihu.com/question/24696366">解释一下关系数据库的第一第二第三范式？</a></p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="system">System</h3>
+<ol>
+  <li>
+    <h4 id="在linux上对于多进程子进程继承了父进程的哪些">在Linux上，对于多进程，子进程继承了父进程的哪些</h4>
+    <ol>
+      <li>子进程继承父进程<br />
+ 用户号UIDs和用户组号GIDs、环境Environment、堆栈、共享内存、打开文件的描述符、执行时关闭（Close-on-exec）标志、信号（Signal）控制设定、进程组号、当前工作目录、根目录、文件方式创建屏蔽字、资源限制、控制终端</li>
+      <li>子进程独有<br />
+ 进程号PID、不同的父进程号、自己的文件描述符和目录流的拷贝、子进程不继承父进程的进程正文（text），数据和其他锁定内存（memory locks）、不继承异步输入和输出</li>
+      <li>父进程和子进程拥有独立的地址空间和PID参数</li>
+    </ol>
+  </li>
+  <li>
+    <h4 id="tcp-的三次四次握手">TCP 的三次、四次握手</h4>
+    <blockquote>
+      <p><a href="http://blog.csdn.net/whuslei/article/details/6667471/">TCP协议中的三次握手和四次挥手(图解)</a></p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="文件系统管理的最小磁盘空间单位是">文件系统管理的最小磁盘空间单位是</h4>
+    <p>微软操作系统（DOS、WINDOWS等）中磁盘文件存储管理的最小单位叫做「簇」<br />
+扇区：硬盘不是一次读写一个字节而是一次读写一个扇区（512个字节）<br />
+簇：系统读读写文件的基本单位，一般为2的n次方个扇区(由文件系统决定)</p>
+    <blockquote>
+      <p>块可以包含若干页，页可以包含若干簇，簇可以包含若干扇区
+块–&gt;页–&gt;簇–&gt;扇区</p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="poll-select-和-epoll-区别">poll, select 和 epoll 区别</h4>
+    <p>epoll跟select都能提供多路I/O复用的解决方案。在现在的Linux内核里有都能够支持，其中epoll是Linux所特有，而select则应该是POSIX所规定，一般操作系统均有实现。</p>
+    <ol>
+      <li>支持一个进程所能打开的最大连接数<br />
+  <strong>select</strong><br />
+依赖于宏 FD_SETSIZE（x86 上面为 3232，x64 上面为 3264）<br />
+  <strong>poll</strong><br />
+无限制，原因是基于链表结构来存储的<br />
+  <strong>epoll</strong><br />
+有上限，但是很大，1G 内存大概为 10万，2G 内存大概为 20万</li>
+      <li>FD 剧增后带来的 IO 效率问题<br />
+  <strong>select</strong><br />
+   因为每次调用时都会对连接进行线性遍历，所以随着FD的增加会造成遍历速度慢的「线性下降性能问题」。<br />
+  <strong>poll</strong><br />
+   同上，有「线性下降性能问题」<br />
+  <strong>epoll</strong> <br />
+   epoll 根据每个 fd 的「callback」来实现的，只有活跃的 socket 才能调用 callback，所以没有「线性下降性能问题」</li>
+      <li>消息传递方式<br />
+   <strong>select</strong><br />
+ 内核需要将消息传递到用户空间，都需要内核拷贝动作<br />
+   <strong>poll</strong><br />
+同上<br />
+   <strong>epoll</strong><br />
+通过内核和用户空间共享一块内存来实现的</li>
+      <li>总结
+        <ol>
+          <li>在连接数少并且连接都十分活跃的情况下，select和poll的性能可能比epoll好，毕竟epoll的通知机制需要很多函数回调。</li>
+          <li>select低效是因为每次它都需要轮询。但低效也是相对的，视情况而定，也可通过良好的设计改善</li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <h4 id="伪共享">伪共享</h4>
+    <blockquote>
+      <p><a href="https://www.cnblogs.com/Binhua-Liu/p/5620339.html">伪共享和缓存行填充，从Java 6, Java 7 到Java 8</a></p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="冯洛伊曼体系结构">冯洛伊曼体系结构</h4>
+    <blockquote>
+      <p>计算机的数制采用二进制；计算机应该按照程序顺序执行</p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="信息熵">信息熵</h4>
+    <blockquote>
+      <p>通俗的理解就是，信息储存在计算机上的最小空间</p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="栈溢出攻击">栈溢出攻击</h4>
+    <blockquote>
+      <p><a href="http://blog.csdn.net/guilanl/article/details/51887111">栈溢出攻击</a></p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="程序运行栈的结构">程序运行栈的结构</h4>
+    <blockquote>
+      <p>栈帧：局部变量、操作数、动态链接库、返回地址（从上到下），地址是从高到底进行增长</p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="用户线程和内核线程">用户线程和内核线程</h4>
+    <blockquote>
+      <p><a href="https://www.cnblogs.com/flowerslip/p/5998051.html">用户线程|内核线程</a></p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="正向代理和反向代理">正向代理和反向代理</h4>
+    <blockquote>
+      <p>正向代理：客户端–&gt;服务器，反向代理：服务器–&gt;客户端</p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="netty-百万连接优化">Netty 百万连接优化</h4>
+    <blockquote>
+      <p><a href="http://www.infoq.com/cn/articles/netty-million-level-push-service-design-points/">Netty系列之Netty百万级推送服务设计要点</a></p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="进程线程通信">进程线程通信</h4>
+    <ul>
+      <li>Linux进程间通信：管道、信号、消息队列、共享内存、信号量、套接字(socket)</li>
+      <li>Linux线程间通信：互斥量（mutex），信号量，条件变量</li>
+      <li>Windows进程间通信：管道、消息队列、共享内存、信号量   （semaphore）   、套接字(socket)</li>
+      <li>Windows线程间通信：互斥量（mutex），信号量（semaphore）、临界区（critical section）、事件（event）</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="personal">Personal</h3>
+<ol>
+  <li>
+    <h4 id="mq-的原理">Mq 的原理</h4>
+    <blockquote>
+      <p><a href="https://www.cnblogs.com/SunXiaoQi/p/5898606.html">RabbitMQ 实现原理</a></p>
+    </blockquote>
+    <ul>
+      <li>流程 (Publisher)</li>
+      <li>第一：获取Conection</li>
+      <li>第二：获取Channel</li>
+      <li>第三：定义Exchange，Queue</li>
+      <li>第四：使用一个RoutingKey将Queue Binding到一个Exchange上</li>
+      <li>第五：通过指定一个Exchange和一个RoutingKey来将消息发送到对应的Queue上，</li>
+      <li>第六：Consumer在接收时也是获取connection，接着获取channel，然后指定一个Queue，到Queue上取消息，它对Exchange，RoutingKey及如何Binding都不关心，到对应的Queue上去取消息就行了。</li>
+    </ul>
+  </li>
+  <li>
+    <h4 id="spring-aop">Spring AOP</h4>
+    <blockquote>
+      <p><a href="http://blog.csdn.net/a837199685/article/details/68930987">Java JDK代理、CGLIB、AspectJ代理分析比较</a></p>
+    </blockquote>
+    <ul>
+      <li>JDK 代理：通过反射实现一个代理类，只能代理接口，如果接口没函数则抛错</li>
+      <li>CGLib：通过 ASM 框架实现一个代理类，通过继承被代理的类，所以只能代理非 <code class="highlighter-rouge">final/static/private</code> 的方法，不能代理 <code class="highlighter-rouge">final</code> 的类</li>
+      <li>AspectJ: 使用的是静态代理，即在编译阶段就生成了代理类，所以可代理类的所有方法只要加上注解就行包括 <code class="highlighter-rouge">private/static/final</code> 都可以代理</li>
+      <li>Spring AOP：动态代理，自动选择 JDK 代理 和 CGLib 代理，同时也引入了 AspectJ 的一些注解</li>
+      <li>JDK 代理默认代理了对象的 <code class="highlighter-rouge">equals/toString</code>, CGLib 还代理了 <code class="highlighter-rouge">clone/finalize</code> 等方法</li>
+    </ul>
+  </li>
+  <li>
+    <h4 id="spring-ioc">Spring IOC</h4>
+    <blockquote>
+      <p><a href="https://javadoop.com/post/spring-ioc#">Spring IOC 容器源码分析</a><br />
+<a href="https://zhuanlan.zhihu.com/p/29344811">Spring IOC原理总结</a></p>
+    </blockquote>
+    <ul>
+      <li>读取 Bean 的配置信息可以是 xml 或者注解</li>
+      <li>将 Bean 的信息注册的一张全局表里面</li>
+      <li>在调用 <code class="highlighter-rouge">getBean</code>的时候才会从全局表里面根据依赖关系实例化 Bean，期间会回调 Bean 上注册的方法 (比如：init-method)，以及容器本身的回调方法</li>
+      <li>如果 Bean 的 <code class="highlighter-rouge">scop</code> 设置的时候单例，那么就会将实例化后的 Bean 放入全局的缓存池 (HashMap)</li>
+      <li>对于单例的 Bean 在容器销毁的时候会回调 Bean 的回调方法 <code class="highlighter-rouge">destory-method</code>
+<a href="/images/post/spring/spring-ioc-bean-load-flow.jpg" data-lightbox="spring-bean"><img src="/images/post/spring/spring-ioc-bean-load-flow.jpg" alt="spring-bean-load-flow" /></a></li>
+    </ul>
+  </li>
+  <li>
+    <h4 id="influxdb">InfluxDb</h4>
+    <blockquote>
+      <p><a href="https://segmentfault.com/a/1190000005977485">InfluxDB引擎浅析</a></p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="redis">Redis</h4>
+    <blockquote>
+      <p><a href="http://www.cnblogs.com/jaycekon/p/6227442.html">深入浅出Redis-redis底层数据结构（上）</a><br />
+<a href="http://www.cnblogs.com/jaycekon/p/6277653.html">深入浅出Redis-redis底层数据结构（下）</a><br />
+<a href="https://www.cnblogs.com/Survivalist/p/8119891.html">Redis的那些最常见面试问题</a></p>
+    </blockquote>
+    <ul>
+      <li>Redis 底层有 SDS(字符串)、双向无环链表、跳跃表、压缩列表、Hash字典、整数等数据结构</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="algorithm">Algorithm</h3>
+
+<p><strong>1. 已知一棵二叉树的前序遍历为CABEFDHG，中序遍历为BAFECHDG，那么它的后续遍历是：</strong><br />
+这类由二叉树的（前序遍历+中序遍历 ==&gt; 后序遍历）或者（后续遍历 + 中序遍历 ==&gt; 前序遍历）的解法如下：</p>
+<ul>
+  <li>找到树的根节点，前序遍历的第一个节点，后续遍历的最后一个节点</li>
+  <li>中序遍历中根节点左边的为左子树，根节点右边的为又子树</li>
+  <li>在前序/后序遍历中找到左右子树的根节点，在中序遍历中找到，子树的左右子树</li>
+  <li>通过上面的<font color="red">递归</font>处理，就能复原二叉树，最后根据复原的二叉树进行遍历即可</li>
+</ul>
+
+<p>以本题为例：
+前序遍历：<font color="red">C</font>ABEFDHG
+中序遍历：BAFE<font color="red">C</font>HDG</p>
+<ol>
+  <li>找到根节点 C，左子树：ABEF/BAFE，右子树：DHG/HDG
+    <blockquote>
+      <p>注：ABEF/BAFE 表示前序遍历：ABEF，中序遍历：BAFE</p>
+    </blockquote>
+
+    <script src="https://cdn.bootcss.com/mermaid/7.1.2/mermaid.min.js"></script>
+    <div class="mermaid">
+  graph TD
+      C --&gt; L[ABEF/BAFE]
+      C --&gt; R[DHG/HDG]
+ </div>
+  </li>
+  <li>
+    <p>左子树 ABEF/B<font color="red">A</font>FE 的根节点：A，左子树：B，右子树：EF/FE</p>
+
+    <script src="https://cdn.bootcss.com/mermaid/7.1.2/mermaid.min.js"></script>
+    <div class="mermaid">
+  graph TD
+      A --&gt; L[B]
+      A --&gt; R[EF/FE]
+ </div>
+  </li>
+  <li>
+    <p>左子树 B，右子树：EF/F<font color="red">E</font>（F 是E的左子树），所以整个左子树如下：</p>
+
+    <script src="https://cdn.bootcss.com/mermaid/7.1.2/mermaid.min.js"></script>
+    <div class="mermaid">
+  graph TD
+      C --&gt; A
+      A --&gt; B
+      A --&gt; E
+      E --&gt; NULL
+      E --&gt; F
+ </div>
+  </li>
+  <li>
+    <p>同理，还原整个二叉树如下：</p>
+
+    <script src="https://cdn.bootcss.com/mermaid/7.1.2/mermaid.min.js"></script>
+    <div class="mermaid">
+     graph TD
+       C --&gt; A
+       A --&gt; B
+       A --&gt; E
+       E --&gt; NULL
+       E --&gt; F
+       C --&gt; D
+       D --&gt; H
+       D --&gt; G
+  </div>
+  </li>
+  <li>所以后续遍历为：BFEAHGDC</li>
+</ol>
+
+<h3 id="summary">Summary</h3>
+<ol>
+  <li>C/C++ 各个类型在 x86/x64 的长度
+    <blockquote>
+      <p>详见：<a href="/2018/03/01/c-x86-x64-type-bytes/">C 类型长度</a></p>
+    </blockquote>
+  </li>
+  <li>C/C++ 的 struct 所占的字节数（字节对齐）
+    <blockquote>
+      <p>详见：<a href="https://www.cnblogs.com/AlexMiller/p/5509609.html">C 字节对齐</a></p>
+    </blockquote>
+  </li>
+  <li>C++ 的 class 的多态数原理、析构函数调用顺序等
+    <blockquote>
+      <p>详见：<a href="https://www.zhihu.com/question/36193367">c++中虚析构函数如何实现多态的、内存布局如何？</a></p>
+    </blockquote>
+  </li>
+  <li>二叉树的各项遍历，以及根据（前、中）推后续遍历，根据（后、中）推前序遍历
+    <blockquote>
+      <p>详见：本文的 Algorithm 部分</p>
+    </blockquote>
+  </li>
+  <li>具有 n 个几点二叉树的形态个数公式
+\[C_{2n} ^ n  \over (n+1) \]</li>
+  <li>二叉树度为 0 的点比度为 2 的点多 1 个
+    <blockquote>
+      <ol>
+        <li>设树有 <script type="math/tex">n</script> 个节点，则有 <script type="math/tex">n-1</script> 条边</li>
+        <li>则 <script type="math/tex">2n_2 + n_1 = n-1</script>（2 度节点有两条边，1 度节点只有一条边）</li>
+        <li>而 <script type="math/tex">n_2 + n_1 + n_0 = n</script>，所以 <script type="math/tex">n_0 = n_2 +1</script></li>
+      </ol>
+    </blockquote>
+  </li>
+  <li>SQL中 count(*) 跟 count(1) 的结果一样，都包括对NULL的统计，而count(column) 是不包括NULL的统计</li>
+  <li>树的度与节点的关系
+    <blockquote>
+      <p>度的和 = 节点数和 - 1
+完全二叉树 <script type="math/tex">n_0 = n_1+1 或者 n_0 = n_1</script></p>
+    </blockquote>
+
+    <script type="math/tex; mode=display">2*n_2 + 1*n_1 + n_0 = n_2 + n_1 + n_0</script>
+  </li>
+  <li>P2P 通信，每次只有两个点通信，要使每个节点知道网络全部信息的通信次数，<script type="math/tex">N</script>为节点个数
+\[2N-4\]</li>
+  <li>排列组合的捆绑法、插空法、插板法。
+    <blockquote>
+      <p><a href="https://baike.baidu.com/item/%E6%8F%92%E7%A9%BA%E6%B3%95/4862293?fr=aladdin">排列组合常用方法</a></p>
+    </blockquote>
+  </li>
+  <li>括弧()排列算法，假设()的对数为 <script type="math/tex">N</script>
+\[C_{2n} ^ n \over (N+1) \]</li>
+  <li>选择排列之和</li>
+</ol>
+
+<blockquote>
+  <p>C(0,n)+C(1,n)+C(2,n)+…+C(n-1,n)+C(n,n) =2^n</p>
+</blockquote>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2018/03/01/c-x86-x64-type-bytes/"><span style="color:black">上一篇：</span> C 语言在 x86 和 x64 平台下面各个类型的长度</a>
+        
+        
+          <a class="next" href="/2018/03/05/trave-bin-tree-not-recursive/"><span style="color:black">下一篇：</span>使用非递归的方式遍历二叉树 </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+<!--PC和WAP自适应版-->
+<!-- 打赏-->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div style="text-align: center">
+    <div id="cyReward" role="cylabs" data-use="reward"></div>
+</div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cys8B776p"></script>
+<div id="SOHUCS"></div>
+<script type="text/javascript"> 
+    (function () {
+        var appid = 'cys8B776p';
+        var conf = 'prod_f5e62400886309bd420b5adfe00275c4';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else { var loadJs = function (d, a) { var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement; var b = document.createElement("script"); b.setAttribute("type", "text/javascript"); b.setAttribute("charset", "UTF-8"); b.setAttribute("src", d); if (typeof a === "function") { if (window.attachEvent) { b.onreadystatechange = function () { var e = b.readyState; if (e === "loaded" || e === "complete") { b.onreadystatechange = null; a() } } } else { b.onload = a } } c.appendChild(b) }; loadJs("https://changyan.sohu.com/upload/changyan.js", function () { window.changyan.api.config({ appid: appid, conf: conf }) }); }
+
+    })();
+
+    //删除建议打赏1-10元
+    $(function () {
+        setTimeout(() => {
+            $(".cy-reward-txt").each(function () {
+                $(this).html("");
+            })
+            $(".power-cy").each(function () {
+                $(this).html("");
+            });
+            $(".section-service-w").each(function () {
+                $(this).html("");
+            });
+        }, 1000);
+    })
+</script> 
+      </div>
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <span id="busuanzi_container_site_pv" > 您是本站第 
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span> 次点击</span>
+
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://cdgithub.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页" target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类" target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档" target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签" target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于" target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script>
+
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+</body>
+</html>

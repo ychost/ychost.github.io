@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>Spring Cloud构建微服务架构（五）服务网关 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2017/05/18/spring-cloud-5/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="Spring Cloud构建微服务架构（五）服务网关"> 
+    <meta name="keywords" content="Spring Cloud, microservice, 微服务, 服务网关">
+    <meta name="og:keywords" content="Spring Cloud, microservice, 微服务, 服务网关"> 
+    <meta name="description" content="通过之前几篇Spring Cloud中几个核心组件的介绍，我们已经可以构建一个简略的（不够完善）微服务架构了。比如下图所示：">
+    <meta name="og:description" content="通过之前几篇Spring Cloud中几个核心组件的介绍，我们已经可以构建一个简略的（不够完善）微服务架构了。比如下图所示：">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2017/05/18/spring-cloud-5/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2017-05-18"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+<section class="collection-head small geopattern" data-pattern-id="Spring Cloud构建微">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">Spring Cloud构建微服务架构（五）服务网关</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2017">2017/05/18</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-后端"  title="后端">后端</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Spring"> Spring </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-微服务"> 微服务 </a>
+            </span>
+            
+            <br />　
+            
+            <span>本文章为<font color="#aabbff" style="font-size:18px">「转载」</font>内容，转载地址为 <a style="text-decoration: underline" target="_blank" href="http://blog.didispace.com/springcloud5/">http://blog.didispace.com/springcloud5/</a></span> 　　　
+
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            
+            本文共 607 字，
+             需 3 分钟阅读
+            
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <p>通过之前几篇Spring Cloud中几个核心组件的介绍，我们已经可以构建一个简略的（不够完善）微服务架构了。比如下图所示：</p>
+
+<p><a href="/images/post/spring/spring-structure.png" data-lightbox="spring-cloud"><img src="/images/post/spring/spring-structure.png" alt="spring-structure" /></a></p>
+
+<p>我们使用Spring Cloud Netflix中的Eureka实现了服务注册中心以及服务注册与发现；而服务间通过Ribbon或Feign实现服务的消费以及均衡负载；通过Spring Cloud Config实现了应用多环境的外部化配置以及版本管理。为了使得服务集群更为健壮，使用Hystrix的融断机制来避免在微服务架构中个别服务出现异常时引起的故障蔓延。</p>
+
+<p>在该架构中，我们的服务集群包含：内部服务Service A和Service B，他们都会注册与订阅服务至Eureka Server，而Open Service是一个对外的服务，通过均衡负载公开至服务调用方。本文我们把焦点聚集在对外服务这块，这样的实现是否合理，或者是否有更好的实现方式呢？</p>
+
+<p>先来说说这样架构需要做的一些事儿以及存在的不足：</p>
+
+<ul>
+  <li>首先，破坏了服务无状态特点。为了保证对外服务的安全性，我们需要实现对服务访问的权限控制，而开放服务的权限控制机制将会贯穿并污染整个开放服务的业务逻辑，这会带来的最直接问题是，破坏了服务集群中REST API无状态的特点。从具体开发和测试的角度来说，在工作中除了要考虑实际的业务逻辑之外，还需要额外可续对接口访问的控制处理。</li>
+  <li>其次，无法直接复用既有接口。当我们需要对一个即有的集群内访问接口，实现外部服务访问时，我们不得不通过在原有接口上增加校验逻辑，或增加一个代理调用来实现权限控制，无法直接复用原有的接口。
+面对类似上面的问题，我们要如何解决呢？下面进入本文的正题：服务网关！</li>
+</ul>
+
+<p>为了解决上面这些问题，我们需要将权限控制这样的东西从我们的服务单元中抽离出去，而最适合这些逻辑的地方就是处于对外访问最前端的地方，我们需要一个更强大一些的均衡负载器，它就是本文将来介绍的：服务网关。</p>
+
+<p>服务网关是微服务架构中一个不可或缺的部分。通过服务网关统一向外系统提供REST API的过程中，除了具备服务路由、均衡负载功能之外，它还具备了权限控制等功能。Spring Cloud Netflix中的Zuul就担任了这样的一个角色，为微服务架构提供了前门保护的作用，同时将权限控制这些较重的非业务逻辑内容迁移到服务路由层面，使得服务集群主体能够具备更高的可复用性和可测试性。</p>
+
+<p>下面我们通过实例例子来使用一下Zuul来作为服务的路有功能。</p>
+
+<p><a href="/images/post/spring/spring-eureka-3.png" data-lightbox="spring-cloud"><img src="/images/post/spring/spring-eureka-3.png" alt="spring-eureka" /></a></p>
+
+<h2 id="准备工作">准备工作</h2>
+
+<p>在使用Zuul之前，我们先构建一个服务注册中心、以及两个简单的服务，比如：我构建了一个service-A，一个service-B。然后启动eureka-server和这两个服务。通过访问eureka-server，我们可以看到service-A和service-B已经注册到了服务中心。</p>
+
+<p>如果您还不熟悉如何构建服务中心和注册服务，请先阅读<a href="/2017/05/18/spring-cloud-1/">Spring Cloud构建微服务架构（一）服务注册与发现</a></p>
+
+<p>如果您不想自己动手准备，可以从这里获取示例代码：<a href="http://git.oschina.net/didispace/SpringBoot-Learning">http://git.oschina.net/didispace/SpringBoot-Learning</a></p>
+
+<h2 id="开始使用zuul">开始使用Zuul</h2>
+
+<ul>
+  <li>
+    <p>引入依赖<code class="highlighter-rouge">spring-cloud-starter-zuul</code>、<code class="highlighter-rouge">spring-cloud-starter-eureka</code>，如果不是通过指定serviceId的方式，eureka依赖不需要，但是为了对服务集群细节的透明性，还是用serviceId来避免直接引用url的方式吧。</p>
+
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-zuul<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;/dependency&gt;</span>
+  <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-eureka<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>应用主类使用@EnableZuulProxy注解开启Zuul</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nd">@EnableZuulProxy</span>
+  <span class="nd">@SpringCloudApplication</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">new</span> <span class="nf">SpringApplicationBuilder</span><span class="o">(</span><span class="n">Application</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">web</span><span class="o">(</span><span class="kc">true</span><span class="o">).</span><span class="na">run</span><span class="o">(</span><span class="n">args</span><span class="o">);</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+    <p>这里用了<code class="highlighter-rouge">@SpringCloudApplication</code>注解，之前没有提过，通过源码我们看到，它整合了<code class="highlighter-rouge">@SpringBootApplication</code>、<code class="highlighter-rouge">@EnableDiscoveryClient</code>、<code class="highlighter-rouge">@EnableCircuitBreaker</code>，主要目的还是简化配置。这几个注解的具体作用这里就不做详细介绍了，之前的文章已经都介绍过。</p>
+  </li>
+  <li>
+    <p>application.properties 中配置Zuul应用的基础信息，如：应用名、服务端口等。</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">spring</span><span class="o">.</span><span class="na">application</span><span class="o">.</span><span class="na">name</span><span class="o">=</span><span class="n">api</span><span class="o">-</span><span class="n">gateway</span>
+  <span class="n">server</span><span class="o">.</span><span class="na">port</span><span class="o">=</span><span class="mi">5555</span>
+</code></pre></div>    </div>
+    <h2 id="zuul配置">Zuul配置</h2>
+  </li>
+</ul>
+
+<p>完成上面的工作后，Zuul已经可以运行了，但是如何让它为我们的微服务集群服务，还需要我们另行配置，下面详细的介绍一些常用配置内容。</p>
+
+<h2 id="服务路由">服务路由</h2>
+
+<p>通过服务路由的功能，我们在对外提供服务的时候，只需要通过暴露Zuul中配置的调用地址就可以让调用方统一的来访问我们的服务，而不需要了解具体提供服务的主机信息了。</p>
+
+<p>在Zuul中提供了两种映射方式：</p>
+
+<ul>
+  <li>
+    <p>通过url直接映射，我们可以如下配置：</p>
+
+    <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># routes to url
+</span>  <span class="nv">zuul.routes.api-a-url.path</span><span class="o">=</span>/api-a-url/<span class="k">**</span>
+  <span class="nv">zuul.routes.api-a-url.url</span><span class="o">=</span>http://localhost:2222/
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>该配置，定义了，所有到Zuul的中规则为：/api-a-url/**的访问都映射到<a href="">http://localhost:2222/</a>上，也就是说当我们访问<a href="">http://localhost:5555/api-a-url/add?a=1&amp;b=2</a>的时候，Zuul会将该请求路由到：<a href="">http://localhost:2222/add?a=1&amp;b=2</a>上。</p>
+
+<p>其中，配置属性<code class="highlighter-rouge">zuul.routes.api-a-url.path</code>中的<code class="highlighter-rouge">api-a-url</code>部分为路由的名字，可以任意定义，但是一组映射关系的path和url要相同，下面讲serviceId时候也是如此。</p>
+
+<ul>
+  <li>
+    <p>通过url映射的方式对于Zuul来说，并不是特别友好，Zuul需要知道我们所有为服务的地址，才能完成所有的映射配置。而实际上，我们在实现微服务架构时，服务名与服务实例地址的关系在eureka server中已经存在了，所以只需要将Zuul注册到eureka server上去发现其他服务，我们就可以实现对serviceId的映射。例如，我们可以如下配置：</p>
+
+    <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">zuul.routes.api-a.path</span><span class="o">=</span>/api-a/<span class="k">**</span>
+  <span class="nv">zuul.routes.api-a.serviceId</span><span class="o">=</span>service-A
+  <span class="nv">zuul.routes.api-b.path</span><span class="o">=</span>/api-b/<span class="k">**</span>
+  <span class="nv">zuul.routes.api-b.serviceId</span><span class="o">=</span>service-B
+  <span class="nv">eureka.client.serviceUrl.defaultZone</span><span class="o">=</span>http://localhost:1111/eureka/
+</code></pre></div>    </div>
+    <p>针对我们在准备工作中实现的两个微服务service-A和service-B，定义了两个路由api-a和api-b来分别映射。另外为了让Zuul能发现service-A和service-B，也加入了eureka的配置。</p>
+  </li>
+</ul>
+
+<p>接下来，我们将eureka-server、service-A、service-B以及这里用Zuul实现的服务网关启动起来，在eureka-server的控制页面中，我们可以看到分别注册了service-A、service-B以及api-gateway</p>
+
+<p><a href="/images/post/spring/spring-eureka-4.png" data-lightbox="spring-cloud"><img src="/images/post/spring/spring-eureka-4.png" alt="spring-eureka" /></a></p>
+
+<p>尝试通过服务网关来访问service-A和service-B，根据配置的映射关系，分别访问下面的url</p>
+
+<ul>
+  <li><a href="">http://localhost:5555/api-a/add?a=1&amp;b=2</a> ：通过serviceId映射访问service-A中的add服务</li>
+  <li><a href="">http://localhost:5555/api-b/add?a=1&amp;b=2</a>：通过serviceId映射访问service-B中的add服务</li>
+  <li><a href="">http://localhost:5555/api-a-url/add?a=1&amp;b=2</a>：通过url映射访问service-A中的add服务
+推荐使用serviceId的映射方式，除了对Zuul维护上更加友好之外，serviceId映射方式还支持了断路器，对于服务故障的情况下，可以有效的防止故障蔓延到服务网关上而影响整个系统的对外服务</li>
+</ul>
+
+<h2 id="服务过滤">服务过滤</h2>
+
+<p>在完成了服务路由之后，我们对外开放服务还需要一些安全措施来保护客户端只能访问它应该访问到的资源。所以我们需要利用Zuul的过滤器来实现我们对外服务的安全控制。</p>
+
+<p>在服务网关中定义过滤器只需要继承<code class="highlighter-rouge">ZuulFilter</code>抽象类实现其定义的四个抽象函数就可对请求进行拦截与过滤。</p>
+
+<p>比如下面的例子，定义了一个Zuul过滤器，实现了在请求被路由之前检查请求中是否有<code class="highlighter-rouge">accessToken</code>参数，若有就进行路由，若没有就拒绝访问，返回<code class="highlighter-rouge">401 Unauthorized</code>错误。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AccessFilter</span> <span class="kd">extends</span> <span class="n">ZuulFilter</span>  <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Logger</span> <span class="n">log</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">AccessFilter</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">filterType</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"pre"</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">filterOrder</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">shouldFilter</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">RequestContext</span> <span class="n">ctx</span> <span class="o">=</span> <span class="n">RequestContext</span><span class="o">.</span><span class="na">getCurrentContext</span><span class="o">();</span>
+        <span class="n">HttpServletRequest</span> <span class="n">request</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="na">getRequest</span><span class="o">();</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%s request to %s"</span><span class="o">,</span> <span class="n">request</span><span class="o">.</span><span class="na">getMethod</span><span class="o">(),</span> <span class="n">request</span><span class="o">.</span><span class="na">getRequestURL</span><span class="o">().</span><span class="na">toString</span><span class="o">()));</span>
+        <span class="n">Object</span> <span class="n">accessToken</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getParameter</span><span class="o">(</span><span class="s">"accessToken"</span><span class="o">);</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">accessToken</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">log</span><span class="o">.</span><span class="na">warn</span><span class="o">(</span><span class="s">"access token is empty"</span><span class="o">);</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="na">setSendZuulResponse</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="na">setResponseStatusCode</span><span class="o">(</span><span class="mi">401</span><span class="o">);</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"access token ok"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>自定义过滤器的实现，需要继承ZuulFilter，需要重写实现下面四个方法：</p>
+
+<ul>
+  <li>filterType：返回一个字符串代表过滤器的类型，在zuul中定义了四种不同生命周期的过滤器类型，具体如下：
+    <ul>
+      <li>pre：可以在请求被路由之前调用</li>
+      <li>routing：在路由请求时候被调用</li>
+      <li>post：在routing和error过滤器之后被调用</li>
+      <li>error：处理请求时发生错误时被调用</li>
+    </ul>
+  </li>
+  <li>filterOrder：通过int值来定义过滤器的执行顺序</li>
+  <li>shouldFilter：返回一个boolean类型来判断该过滤器是否要执行，所以通过此函数可实现过滤器的开关。在上例中，我们直接返回true，所以该过滤器总是生效。</li>
+  <li>
+    <p>run：过滤器的具体逻辑。需要注意，这里我们通过ctx.setSendZuulResponse(false)令zuul过滤该请求，不对其进行路由，然后通过ctx.setResponseStatusCode(401)设置了其返回的错误码，当然我们也可以进一步优化我们的返回，比如，通过ctx.setResponseBody(body)对返回body内容进行编辑等。
+在实现了自定义过滤器之后，还需要实例化该过滤器才能生效，我们只需要在应用主类中增加如下内容：</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nd">@EnableZuulProxy</span>
+  <span class="nd">@SpringCloudApplication</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">new</span> <span class="nf">SpringApplicationBuilder</span><span class="o">(</span><span class="n">Application</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">web</span><span class="o">(</span><span class="kc">true</span><span class="o">).</span><span class="na">run</span><span class="o">(</span><span class="n">args</span><span class="o">);</span>
+      <span class="o">}</span>
+      <span class="nd">@Bean</span>
+      <span class="kd">public</span> <span class="n">AccessFilter</span> <span class="nf">accessFilter</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="k">new</span> <span class="nf">AccessFilter</span><span class="o">();</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>启动该服务网关后，访问：</p>
+
+<ul>
+  <li><a href="">http://localhost:5555/api-a/add?a=1&amp;b=2</a>：返回401错误</li>
+  <li><a href="">http://localhost:5555/api-a/add?a=1&amp;b=2&amp;accessToken=token</a>：正确路由到server-A，并返回计算内容
+对于其他一些过滤类型，这里就不一一展开了，根据之前对filterType生命周期介绍，可以参考下图去理解，并根据自己的需要在不同的生命周期中去实现不同类型的过滤器。
+ <a href="/images/post/spring/spring-filter.png" data-lightbox="spring-cloud"><img src="/images/post/spring/spring-filter.png" alt="spring-eureka" /></a></li>
+</ul>
+
+<p>最后，总结一下为什么服务网关是微服务架构的重要部分，是我们必须要去做的原因：</p>
+
+<ul>
+  <li>不仅仅实现了路由功能来屏蔽诸多服务细节，更实现了服务级别、均衡负载的路由。</li>
+  <li>实现了接口权限校验与微服务业务逻辑的解耦。通过服务网关中的过滤器，在各生命周期中去校验请求的内容，将原本在对外服务层做的校验前移，保证了微服务的无状态性，同时降低了微服务的测试难度，让服务本身更集中关注业务逻辑的处理。</li>
+  <li>实现了断路器，不会因为具体微服务的故障而导致服务网关的阻塞，依然可以对外服务。</li>
+</ul>
+
+<p>本文完整示例可参考：<a href="http://git.oschina.net/didispace/SpringBoot-Learning/tree/master/Chapter9-1-5">Chapter9-1-5</a></p>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2017/05/18/spring-cloud-4/"><span style="color:black">上一篇：</span> Spring Cloud构建微服务架构（四）分布式配置中心</a>
+        
+        
+          <a class="next" href="/2017/08/09/leetcode-1/"><span style="color:black">下一篇：</span>「LeetCode」系列 1：Two Sum </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+<!--PC和WAP自适应版-->
+<!-- 打赏-->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div style="text-align: center">
+    <div id="cyReward" role="cylabs" data-use="reward"></div>
+</div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cys8B776p"></script>
+<div id="SOHUCS"></div>
+<script type="text/javascript"> 
+    (function () {
+        var appid = 'cys8B776p';
+        var conf = 'prod_f5e62400886309bd420b5adfe00275c4';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else { var loadJs = function (d, a) { var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement; var b = document.createElement("script"); b.setAttribute("type", "text/javascript"); b.setAttribute("charset", "UTF-8"); b.setAttribute("src", d); if (typeof a === "function") { if (window.attachEvent) { b.onreadystatechange = function () { var e = b.readyState; if (e === "loaded" || e === "complete") { b.onreadystatechange = null; a() } } } else { b.onload = a } } c.appendChild(b) }; loadJs("https://changyan.sohu.com/upload/changyan.js", function () { window.changyan.api.config({ appid: appid, conf: conf }) }); }
+
+    })();
+
+    //删除建议打赏1-10元
+    $(function () {
+        setTimeout(() => {
+            $(".cy-reward-txt").each(function () {
+                $(this).html("");
+            })
+            $(".power-cy").each(function () {
+                $(this).html("");
+            });
+            $(".section-service-w").each(function () {
+                $(this).html("");
+            });
+        }, 1000);
+    })
+</script> 
+      </div>
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <span id="busuanzi_container_site_pv" > 您是本站第 
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span> 次点击</span>
+
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://cdgithub.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页" target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类" target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档" target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签" target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于" target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script>
+
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+</body>
+</html>

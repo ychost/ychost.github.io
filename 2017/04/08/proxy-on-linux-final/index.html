@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>linux 翻墙终极版 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2017/04/08/proxy-on-linux-final/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="linux 翻墙终极版"> 
+    <meta name="keywords" content="Lnux,翻墙,shadowsocks,privoxy">
+    <meta name="og:keywords" content="Lnux,翻墙,shadowsocks,privoxy"> 
+    <meta name="description" content="本教程使用了shadowskcs和privoxy，可以让linux的终端和浏览器同时翻墙">
+    <meta name="og:description" content="本教程使用了shadowskcs和privoxy，可以让linux的终端和浏览器同时翻墙">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2017/04/08/proxy-on-linux-final/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2017-04-08"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+<section class="collection-head small geopattern" data-pattern-id="linux 翻墙终极版">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">linux 翻墙终极版</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2017">2017/04/08</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-系统"  title="系统">系统</a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-推荐"  title="推荐">推荐</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Linux"> Linux </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Shadowsocks"> Shadowsocks </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Privoxy"> Privoxy </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <p>本教程使用了shadowskcs和privoxy，可以让linux的终端和浏览器同时翻墙</p>
+
+<h2 id="总览">总览</h2>
+<ol>
+  <li>注册<a href="http://my.yizhihongxing.com/aff.php?aff=1943">一枝红杏</a>账号</li>
+  <li>安装<a href="https://github.com/shadowsocks/shadowsocks-qt5">Shadowsocks-qt5</a>并配置</li>
+  <li>安装<a href="http://www.privoxy.org/">Privoxy</a>并配置</li>
+  <li>测试效果</li>
+</ol>
+
+<h2 id="购买一枝红杏的ss套餐">购买<a href="http://my.yizhihongxing.com/aff.php?aff=1943" target="_blank">一枝红杏</a>的SS套餐</h2>
+<blockquote>
+  <p><a href="http://my.yizhihongxing.com/aff.php?aff=1943" target="_blank">一枝红杏</a>是的一家shadowsocks服务提供商，一年的价格为99元，经测试速度还不错在youtube上面可以流畅观看1080P的视频，当然你也可以选择其它的shadowsocks服务提供商</p>
+</blockquote>
+
+<ol>
+  <li>点开<a href="http://my.yizhihongxing.com/aff.php?aff=1943" target="_blank">一枝红杏</a>并点击订购服务
+<a href="/images/post/tutorial/hx-home-page.png" data-lightbox="fq-in-linux"><img src="/images/post/tutorial/hx-home-page.png" alt="hx-home-page" /></a></li>
+  <li>点击标准型套餐并订购
+ <a href="/images/post/tutorial/hx-subscribe-page.png" data-lightbox="fq-in-linux"><img src="/images/post/tutorial/hx-subscribe-page.png" alt="hx-subscribe-page" /></a></li>
+  <li>添加到购物车，输入密码，此密码为shadowsck客户端连接需要用到的
+ <a href="/images/post/tutorial/hx-add-shopping-car.png" data-lightbox="fq-in-linux"><img src="/images/post/tutorial/hx-add-shopping-car.png" alt="hx-add-shopping-car" /></a></li>
+  <li>填入页面下的促销代码，然后点击验证，最后点击结账
+ <a href="/images/post/tutorial/hx-checkout.png" data-lightbox="fq-in-linux"><img src="/images/post/tutorial/hx-checkout.png" alt="hx-checkout" /></a></li>
+  <li>弹出注册界面，填好相关信息并注册
+ <a href="/images/post/tutorial/hx-register.png" data-lightbox="fq-in-linux"><img src="/images/post/tutorial/hx-register.png" alt="hx-register" /></a></li>
+  <li>点击账单界面的支付宝付款，然后进行付款
+ <a href="/images/post/tutorial/hx-pay-off.png" data-lightbox="fq-in-linux"><img src="/images/post/tutorial/hx-pay-off.png" alt="hx-pay-off" /></a></li>
+  <li>进入我的SS账号-&gt;管理账号-&gt;查看详情就可以看见刚刚购买SS套餐详情了
+ <a href="/images/post/tutorial/hx-account-info.png" data-lightbox="fq-in-linux"><img src="/images/post/tutorial/hx-account-info.png" alt="hx-account-info" /></a></li>
+</ol>
+
+<h2 id="安装shadowsocks-qt5">安装<a href="https://github.com/shadowsocks/shadowsocks-qt5">Shadowsocks-qt5</a></h2>
+<p>安装过程请参考Shadowsocks-qt5的官方<a href="https://github.com/shadowsocks/shadowsocks-qt5/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97">wiki</a></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo add-apt-repository ppa:hzwhuang/ss-qt5
+sudo apt-get update
+sudo apt-get install shadowsocks-qt5
+</code></pre></div></div>
+
+<h3 id="装好后的效果">装好后的效果</h3>
+<p><a href="/images/post/tutorial/ssqt5-client-gui.png" data-lightbox="fq-in-linux"><img src="/images/post/tutorial/ssqt5-client-gui.png" alt="ssqt5-client-gui" /></a></p>
+
+<h2 id="配置shadowsocks-qt5">配置<a href="https://github.com/shadowsocks/shadowsocks-qt5">Shadowsocks-qt5</a></h2>
+<ol>
+  <li>
+    <p>打开刚刚购买的<a href="http://my.yizhihongxing.com/aff.php?aff=1943">一枝红杏</a>SS套餐详情界面，并点击新加坡节点（新加坡的速度相对比较快）的二维码按钮，然后就会弹出SS配置二维码
+<a href="/images/post/tutorial/hx-qr-code.png" data-lightbox="fq-in-linux"><img src="/images/post/tutorial/hx-qr-code.png" alt="hx-qr-code" /></a></p>
+  </li>
+  <li>
+    <p>打开Shadowsocks-qt5软件，然后点击链接-&gt;添加-&gt;扫描屏幕上的二维码，出现配置界面然后点击OK，然后点击连接</p>
+
+    <p><a href="/images/post/tutorial/ss-config.png" data-lightbox="fq-in-linux"><img src="/images/post/tutorial/ss-config.png" alt="ss-config" /></a></p>
+  </li>
+  <li>
+    <p>打开网络设置并设置代理我这里是deepin的发行版，不同发行版的操作界面可能不大一样，注意这里用的是自动代理指向的是一个pac文件用于实现局部翻墙，我这里已经生成了一个pac文件有需要的自行<a href="/files/autoproxy.pac">下载</a>，当然也可以自己用工具根据gfwlist.txt生成最新的pac文件
+ <a href="/images/post/tutorial/deepin-proxy-setting.png" data-lightbox="fq-in-linux"><img src="/images/post/tutorial/deepin-proxy-setting.png" alt="deepin-proxy-setting" /></a></p>
+  </li>
+  <li>
+    <p>点击应用到整个系统，然后测试是否能打开<a href="https://google.com">Google</a></p>
+
+    <p><a href="/images/post/tutorial/google.com.png" data-lightbox="fq-in-linux"><img src="/images/post/tutorial/google.com.png" alt="google.com" /></a></p>
+  </li>
+  <li>
+    <p>此时浏览器已经可以翻墙了，但是终端还是不行，因为我们走的时候Socks5的代理，然而终端要走http的代理，所以需要使用<a href="http://www.privoxy.org/">Privoxy</a>来实现对其桥接</p>
+  </li>
+</ol>
+
+<h2 id="安装配置privoxy">安装配置<a href="http://www.privoxy.org/">Privoxy</a></h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install privoxy
+</code></pre></div></div>
+<ol>
+  <li>
+    <p>打开配置文件 /etc/privoxy/config</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo vim /etc/privoxy/config
+</code></pre></div>    </div>
+    <p><a href="/images/post/tutorial/vim-privoxy-config.png" data-lightbox="fq-in-linux"><img src="/images/post/tutorial/vim-privoxy-config.png" alt="google.com" /></a></p>
+
+    <p>找到forward-socks5（如果是forward-socks5t改成forward-socks5） 并将后面的值改成 127.0.0.1:1080，将http代理到socks5</p>
+  </li>
+  <li>重启privoxy
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo service privoxy restart
+</code></pre></div>    </div>
+  </li>
+  <li>配置终端的代理，8118端口是默认端口，可以在config里面修改，测试wget去访问google发现终端已经翻墙了
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> export http_proxy=http://127.0.0.1:8118/
+ export https_proxy=http://127.0.0.1:8118/
+ wget www.google.com
+</code></pre></div>    </div>
+    <p><a href="/images/post/tutorial/terminal-http-proxy.png" data-lightbox="fq-in-linux"><img src="/images/post/tutorial/terminal-http-proxy.png" alt="terminal-http-proxy" /></a></p>
+  </li>
+  <li>这只是临时修改了代理的环境变量，重启终端会丢失的，所以可以将这两个环境变量配置在 ~/.bashrc 里面这样就始终有效了，但是由于是全局翻墙的所以这样会导致访问国内的服务很慢，所以还是设置临时翻墙比较好，当然 privoxy也是支持类似于pac那种局部翻墙的，但是语法上稍有区别，可以参考<a href="https://www.zfanw.com/blog/privoxy-tutorial.html">Privoxy 简明教程</a></li>
+</ol>
+
+<h3 id="总结">总结</h3>
+<p>　　 Linux下面的全局翻墙设置很麻烦，不像windows或者mac在shadowsocks里面勾选全局翻墙就行了，一般来说浏览器翻墙就行了，当遇到npm或者gem，gradle在终端编译不过的时候一般都是被墙了，所以需要里面privoxy来设置代理转发给socks5实现翻墙</p>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2016/09/05/timetable-2016-2017-01/"><span style="color:black">上一篇：</span> 2016-2017 第二学期课程表</a>
+        
+        
+          <a class="next" href="/2017/04/09/linux-recommended-software/"><span style="color:black">下一篇：</span>Linux 软件推荐 「2017-4-18 更新」 </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+<!--PC和WAP自适应版-->
+<!-- 打赏-->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div style="text-align: center">
+    <div id="cyReward" role="cylabs" data-use="reward"></div>
+</div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cys8B776p"></script>
+<div id="SOHUCS"></div>
+<script type="text/javascript"> 
+    (function () {
+        var appid = 'cys8B776p';
+        var conf = 'prod_f5e62400886309bd420b5adfe00275c4';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else { var loadJs = function (d, a) { var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement; var b = document.createElement("script"); b.setAttribute("type", "text/javascript"); b.setAttribute("charset", "UTF-8"); b.setAttribute("src", d); if (typeof a === "function") { if (window.attachEvent) { b.onreadystatechange = function () { var e = b.readyState; if (e === "loaded" || e === "complete") { b.onreadystatechange = null; a() } } } else { b.onload = a } } c.appendChild(b) }; loadJs("https://changyan.sohu.com/upload/changyan.js", function () { window.changyan.api.config({ appid: appid, conf: conf }) }); }
+
+    })();
+
+    //删除建议打赏1-10元
+    $(function () {
+        setTimeout(() => {
+            $(".cy-reward-txt").each(function () {
+                $(this).html("");
+            })
+            $(".power-cy").each(function () {
+                $(this).html("");
+            });
+            $(".section-service-w").each(function () {
+                $(this).html("");
+            });
+        }, 1000);
+    })
+</script> 
+      </div>
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <span id="busuanzi_container_site_pv" > 您是本站第 
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span> 次点击</span>
+
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://cdgithub.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页" target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类" target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档" target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签" target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于" target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script>
+
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+</body>
+</html>

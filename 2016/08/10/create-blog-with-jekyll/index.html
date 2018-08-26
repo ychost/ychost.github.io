@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>用 Jekyll 搭建 GitHub 博客 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2016/08/10/create-blog-with-jekyll/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="用 Jekyll 搭建 GitHub 博客"> 
+    <meta name="keywords" content="Jekyll, GitHub">
+    <meta name="og:keywords" content="Jekyll, GitHub"> 
+    <meta name="description" content="　　如果想要以一种「优雅」的方式写博客，那么 Markdown 是你的第一选择，为了能够将纯文本转成静态博客我们需要用到 jekyll，不仅本地可以运行它而且 GitHub 也带有它的运行环境，所以利用 Jekyll 搭建的博客可以放在 GitHub 上面以供他人访问。">
+    <meta name="og:description" content="　　如果想要以一种「优雅」的方式写博客，那么 Markdown 是你的第一选择，为了能够将纯文本转成静态博客我们需要用到 jekyll，不仅本地可以运行它而且 GitHub 也带有它的运行环境，所以利用 Jekyll 搭建的博客可以放在 GitHub 上面以供他人访问。">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2016/08/10/create-blog-with-jekyll/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2016-08-10"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+<section class="collection-head small geopattern" data-pattern-id="用 Jekyll 搭建 Git">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">用 Jekyll 搭建 GitHub 博客</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2016">2016/08/10</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-杂记"  title="杂记">杂记</a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-推荐"  title="推荐">推荐</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Jekyll"> Jekyll </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Blog"> Blog </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-GitHub"> GitHub </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            
+            本文共 561 字，
+             需 3 分钟阅读
+            
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <p>　　如果想要以一种「优雅」的方式写博客，那么 <a href="http://sspai.com/25137" target="_blank">Markdown</a> 是你的第一选择，为了能够将纯文本转成静态博客我们需要用到 <a href="http://jekyll.bootcss.com/" target="_blank">jekyll</a>，不仅本地可以运行它而且 <a href="https://www.github.com" target="_blank">GitHub</a> 也带有它的运行环境，所以利用 Jekyll 搭建的博客可以放在 <a href="https://www.github.com" target="_blank">GitHub</a> 上面以供他人访问。</p>
+
+<blockquote>
+  <p>本文的所有操作都是基于 Windows 平台的</p>
+</blockquote>
+
+<blockquote>
+  <p>本文只是一个简单的搭建 Jekyll 本地调试环境和启用 GitHub 博客服务的一个教程，未涉及博客的撰写内容</p>
+</blockquote>
+
+<blockquote>
+  <p>环境搭建好了可以参考 GitHub 官方提供的<a href="https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/" target="_blank">教程</a></p>
+</blockquote>
+
+<blockquote>
+  <p>谷歌是可以收录 GitHub 博客的</p>
+</blockquote>
+
+<blockquote>
+  <p>由于百度不能检索到 GitHub 的博客，故利用国内的 <a href="https://coding.net" target="_blank">Coding</a> 做了一个 <a href="https://www.github.com" target="_blank">GitHub</a> 的镜像内容 <a href="/2016/08/28/github-consistent-with-coding/">教程</a></p>
+</blockquote>
+
+<p><br /></p>
+
+<h3 id="概括">概括</h3>
+
+<ol>
+  <li>
+    <p>安装 <a href="http://rubyinstaller.org/downloads/" target="_blank">Ruby</a> 和 <a href="http://rubyinstaller.org/downloads/" target="_blank">devkit</a></p>
+  </li>
+  <li>
+    <p>用 Gem 安装 Jekyll</p>
+  </li>
+  <li>
+    <p>下载 Jekyll 博客模板</p>
+  </li>
+  <li>
+    <p>运行下载的模板进行相关修改和调试</p>
+  </li>
+  <li>
+    <p>创建 GitHub 账户</p>
+  </li>
+  <li>
+    <p>上传调试好的博客到 GitHub 的指定仓库中去</p>
+  </li>
+</ol>
+
+<h3 id="环境搭建">环境搭建</h3>
+
+<h4 id="准备工作">准备工作</h4>
+
+<ol>
+  <li>
+    <p>下载 <a href="http://rubyinstaller.org/downloads/" target="_blank">Ruby</a></p>
+
+    <blockquote>
+      <p>2017-08-09：如果是 windows 平台，由于 Wdm 不支持高版本 Ruby 所以请使用 <font color="red"> ruby2.3 </font>及之前的版本</p>
+    </blockquote>
+
+    <blockquote>
+      <p>注意根据如果电脑是 <font color="red">x64(64位操作系统)</font> 请下载 <font color="red">Ruby2.3.1(x64)</font>, 如果是 <font color="red">x86 (32位系统)</font> 请下载 <font color="red">Ruby2.3.1</font></p>
+    </blockquote>
+
+    <p><a href="/images/post/tutorial/ruby-download-page.jpg" data-lightbox="create-blog"><img src="/images/post/tutorial/ruby-download-page.jpg" alt="ruby-download-page" /></a></p>
+  </li>
+  <li>
+    <p>下载 <a href="http://rubyinstaller.org/downloads/" target="_blank">devkit</a></p>
+
+    <blockquote>
+      <p>这个软件和 Ruby 是同一个下载网页，它在<font color="red">下载网页的底部</font>，这个也分<font color="red"> x86 </font>和<font color="red"> x64 </font>两个版本，请根据自己的情况下载，<del>第一个下载连接是支持 Ruby1.8.7和1.9.3 这个是不需要的，因为刚刚下载的 Ruby 是 2.3.1 版本</del></p>
+    </blockquote>
+
+    <p><a href="/images/post/tutorial/devkit-download-page.jpg" data-lightbox="create-blog"><img src="/images/post/tutorial/devkit-download-page.jpg" alt="devkit-download-page" /></a></p>
+  </li>
+</ol>
+
+<h4 id="安装工作">安装工作</h4>
+
+<ol>
+  <li>
+    <p>安装 Ruby 和 devkit</p>
+
+    <blockquote>
+      <p>Ruby 的安装是典型的 Windows 软件的安装流程 <font color="red">建议以默认的路径安装，注意<font color="blue">勾选</font> Add Ruby executables to your PATH</font>，不然只有自己手动添加 Ruby 的环境变量</p>
+    </blockquote>
+
+    <p><a href="/images/post/tutorial/ruby-install-step.jpg" data-lightbox="create-blog"><img src="/images/post/tutorial/ruby-install-step.jpg" alt="ruby-install-step" /></a></p>
+
+    <blockquote>
+      <p>devkit 的安装稍微麻烦一点，不过只是多一条命令而已</p>
+    </blockquote>
+
+    <blockquote>
+      <p>首先，打开 devkit 安装包会自动弹出解压窗口，这里将它解压到了桌面的 blog 文件夹</p>
+    </blockquote>
+
+    <p><a href="/images/post/tutorial/devkit-unzip-process.jpg" data-lightbox="create-blog"><img src="/images/post/tutorial/devkit-unzip-process.jpg" alt="unzip-devkit-pkg" /></a></p>
+
+    <blockquote>
+      <p>接着，到 devkit 解压的目录目录打开 CMD 命令窗口，这里有一个快捷键的方式：在该目录下面按住 「Shift + 鼠标右键」会出现「在此处打开命令窗口(W)」点击它</p>
+    </blockquote>
+
+    <p><a href="/images/post/tutorial/cmd-open-infolder.jpg" data-lightbox="create-blog"><img src="/images/post/tutorial/cmd-open-infolder.jpg" alt="cmd-open-infolder" /></a></p>
+
+    <blockquote>
+      <p>然后就进入了 CMD 命令行模式，输入如下命令</p>
+    </blockquote>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby dk.rb init
+ruby dk.rb install
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>检查安装情况</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby -v
+gem -v
+</code></pre></div>    </div>
+    <p><a href="/images/post/tutorial/pkg-install-info.jpg" data-lightbox="create-blog"><img src="/images/post/tutorial/pkg-install-info.jpg" alt="pkg-install-info" /></a></p>
+  </li>
+</ol>
+
+<h3 id="jekyll-安装">jekyll 安装</h3>
+
+<ol>
+  <li>
+    <p>替换 gem 官方源</p>
+
+    <blockquote>
+      <p>jekyll 需要用 gem 来进行安装，由于 gem 的官方源被墙了所以需要替换 gem 的源，这里将其替换成 <a href="https://gems.ruby-china.org/" target="_blank">Ruby China</a>，顺便安装了 bundle 以及将它的源替换掉了</p>
+    </blockquote>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem sources --add https://gems.ruby-china.org/ 
+gem sources --remove https://rubygems.org/
+gem install bundle
+bundle config mirror.https://rubygems.org https://gems.ruby-china.org
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>安装 jekyll</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem install jekyll
+</code></pre></div>    </div>
+
+    <p><a href="/images/post/tutorial/jekyll-install-cmd.jpg" data-lightbox="create-blog"><img src="/images/post/tutorial/jekyll-install-cmd.jpg" alt="jekyll-install-cmd" /></a></p>
+  </li>
+  <li>
+    <p>检查安装情况</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll --version
+</code></pre></div>    </div>
+
+    <p><a href="/images/post/tutorial/jekyll-install-rst.jpg" data-lightbox="create-blog"><img src="/images/post/tutorial/jekyll-install-rst.jpg" alt="jekyll-install-rst" /></a></p>
+  </li>
+</ol>
+
+<h4 id="本地调试博客">本地调试博客</h4>
+
+<ol>
+  <li>
+    <p>下载模板</p>
+
+    <blockquote>
+      <p>网上有很多利用 jekyll 搭建起来的博客模板，这里推荐 <a href="http://jekyllthemes.org/" target="_blank">jekyllthemes.org</a></p>
+    </blockquote>
+
+    <blockquote>
+      <p>自己选一个看的上眼的模板并下载下来，这里以 <a href="http://jekyllthemes.org/themes/hcz-jekyll-material/" target="_blank">hcz-keyll-material</a> 为例</p>
+    </blockquote>
+
+    <p><a href="/images/post/tutorial/jekyll-download-theme.jpg" data-lightbox="create-blog"><img src="/images/post/tutorial/jekyll-download-theme.jpg" alt="jekyll-download-theme" /></a></p>
+  </li>
+  <li>
+    <p>启用服务</p>
+
+    <blockquote>
+      <p>解压刚刚下载的模板，文件夹里一般含有一个名为 <font color="red">Readme.md</font> 的文件，该文件包含了此模板的一些介绍和相应的配置</p>
+    </blockquote>
+
+    <blockquote>
+      <p>到刚刚下载的模板的文件夹打开 CMD 终端执行</p>
+    </blockquote>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle exec jekyll serve
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>可能会报很多的错，不要担心看看报错的原因，网上一般都有解决方案的，如果是依赖问题可以用如下命令解决</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle install
+</code></pre></div>    </div>
+
+    <p><a href="/images/post/tutorial/blog-start-cmd.jpg" data-lightbox="create-blog"><img src="/images/post/tutorial/blog-start-cmd.jpg" alt="blog-start-cmd" /></a></p>
+  </li>
+  <li>
+    <p>查看博客</p>
+
+    <blockquote>
+      <p>浏览器输入 <a href="http://127.0.0.1:4000" target="_blank">127.0.0.1:4000</a> 就可以访问刚刚搭建的博客</p>
+    </blockquote>
+
+    <p><a href="/images/post/tutorial/blog-browse-effect.jpg" data-lightbox="create-blog"><img src="/images/post/tutorial/blog-browse-effect.jpg" alt="blog-browse-effect" /></a></p>
+  </li>
+</ol>
+
+<h4 id="远程提交">远程提交</h4>
+
+<p>　　这里只需要创建一个仓库名为 <font color="red">userName</font>.GitHub.io 的仓库 「注：这里的 <font color="red"> userName </font> 为你的 GitHub 账号」，然后将该模板上传上去就可以了。</p>
+
+<ol>
+  <li>
+    <p>安装 <a href="http://rj.baidu.com/soft/detail/30195.html?ald">Git</a> 软件</p>
+
+    <blockquote>
+      <p>一路默认下去就行</p>
+    </blockquote>
+
+    <p><a href="/images/post/tutorial/git-install-process.jpg" data-lightbox="create-blog"><img src="/images/post/tutorial/git-install-process.jpg" alt="git-install-process" /></a></p>
+  </li>
+  <li>
+    <p>创建建 <a href="https://www.github.com" target="_blank">GitHub</a> 账户</p>
+
+    <p><a href="/images/post/tutorial/github-create-acnt.jpg" data-lightbox="create-blog"><img src="/images/post/tutorial/github-create-acnt.jpg" alt="GitHub-create-acnt" /></a></p>
+  </li>
+  <li>
+    <p>创建一个名称为 <font color="red">userName</font>.GitHub.io 的仓库「<font color="red">userName </font>为你的 GitHub 账号」</p>
+
+    <blockquote>
+      <p>这里的账号名称为 ychost 由于之前创建了这个仓库所以出现了同名错误</p>
+    </blockquote>
+
+    <p><a href="/images/post/tutorial/github-create-repo.jpg" data-lightbox="create-blog"><img src="/images/post/tutorial/github-create-repo.jpg" alt="GitHub-create-repo" /></a></p>
+
+    <p><a href="/images/post/tutorial/github-submit-repo.jpg" data-lightbox="create-blog"><img src="/images/post/tutorial/github-submit-repo.jpg" alt="GitHub-submit-repo" /></a></p>
+  </li>
+  <li>
+    <p>上传项目到 GitHub</p>
+
+    <blockquote>
+      <p>到博客项目根目录点击右键选择「Git Bash Here」</p>
+    </blockquote>
+
+    <blockquote>
+      <p>输入如下命令，注意第二行的<font color="red"> userName</font></p>
+    </blockquote>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git init
+git remote add blog https://GitHub.com/userName/userName.GitHub.io.git  
+git add .
+git commit -m 'my first blog'  
+git push blog  
+</code></pre></div>    </div>
+
+    <p><a href="/images/post/tutorial/git-input-cmd.jpg" data-lightbox="create-blog"><img src="/images/post/tutorial/git-input-cmd.jpg" alt="git-input-cmd" /></a></p>
+
+    <blockquote>
+      <p>然后按照提示输入相应的用户账号和密码进行登录就可以了</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>打开浏览器输入 <font color="red"> userName</font>.GitHub.io 就可以浏览到刚刚上传上去的博客内容</p>
+  </li>
+</ol>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2016/08/09/repair-windows-UEFI/"><span style="color:black">上一篇：</span> 修复 Windows10 的 UEFI 引导</a>
+        
+        
+          <a class="next" href="/2016/08/10/fixed-ip-in-vmware-linux/"><span style="color:black">下一篇：</span>固定 Vmware 中的 Linux 的 IP地址 </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+<!--PC和WAP自适应版-->
+<!-- 打赏-->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div style="text-align: center">
+    <div id="cyReward" role="cylabs" data-use="reward"></div>
+</div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cys8B776p"></script>
+<div id="SOHUCS"></div>
+<script type="text/javascript"> 
+    (function () {
+        var appid = 'cys8B776p';
+        var conf = 'prod_f5e62400886309bd420b5adfe00275c4';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else { var loadJs = function (d, a) { var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement; var b = document.createElement("script"); b.setAttribute("type", "text/javascript"); b.setAttribute("charset", "UTF-8"); b.setAttribute("src", d); if (typeof a === "function") { if (window.attachEvent) { b.onreadystatechange = function () { var e = b.readyState; if (e === "loaded" || e === "complete") { b.onreadystatechange = null; a() } } } else { b.onload = a } } c.appendChild(b) }; loadJs("https://changyan.sohu.com/upload/changyan.js", function () { window.changyan.api.config({ appid: appid, conf: conf }) }); }
+
+    })();
+
+    //删除建议打赏1-10元
+    $(function () {
+        setTimeout(() => {
+            $(".cy-reward-txt").each(function () {
+                $(this).html("");
+            })
+            $(".power-cy").each(function () {
+                $(this).html("");
+            });
+            $(".section-service-w").each(function () {
+                $(this).html("");
+            });
+        }, 1000);
+    })
+</script> 
+      </div>
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <span id="busuanzi_container_site_pv" > 您是本站第 
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span> 次点击</span>
+
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://cdgithub.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页" target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类" target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档" target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签" target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于" target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script>
+
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+</body>
+</html>

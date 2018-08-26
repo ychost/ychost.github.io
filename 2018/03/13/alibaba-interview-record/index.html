@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>记录 Alibaba 2018 春招实习面试 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2018/03/13/alibaba-interview-record/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="记录 Alibaba 2018 春招实习面试"> 
+    <meta name="keywords" content="阿里巴巴, 2018春招实习, 打卡">
+    <meta name="og:keywords" content="阿里巴巴, 2018春招实习, 打卡"> 
+    <meta name="description" content="投了「阿里巴巴」的春招实习，从一面开始打卡记录">
+    <meta name="og:description" content="投了「阿里巴巴」的春招实习，从一面开始打卡记录">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2018/03/13/alibaba-interview-record/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2018-03-13"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+<section class="collection-head small geopattern" data-pattern-id="记录 Alibaba 2018">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">记录 Alibaba 2018 春招实习面试</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2018">2018/03/13</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-Private"  title="Private">Private</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-记录"> 记录 </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            
+            本文共 268 字，
+             需 1 分钟阅读
+            
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <h2 id="蚂蚁金服实习面试">蚂蚁金服实习面试</h2>
+
+<h3 id="2018-3-13">2018-3-13</h3>
+<p>今天下午两点过收到阿里巴巴面试电话，此时的我正在东莞出差，还好当时手上没有太多的活可以顺利进行面试。<br />
+面试官很 Nice 从开始的电话面试到后面的在线笔试一共花了 3 个小时，电话面试中大概有几个问题没有回答上面，这里得好好准备下。<br />
+问题基本都是针对项目的。</p>
+<ol>
+  <li>influxDb 内部的机制，为啥比 Mysql 效率高？</li>
+  <li>Mq 内部的实现原理？</li>
+  <li>轻量级锁和重量级锁有什么区别？</li>
+</ol>
+
+<p>关于在线编程题，考了一个在 0, 1 矩阵中找到所有为 1 的区域当中的封闭区域的个数。<br />
+该题从一开始我就使用的是「广度优先」算法去解决，但是最终没有调试出来，很遗憾！<br />
+不知道这次面试怎么样，希望还有二面的机会，即使失败了还有秋招，所以不能松懈下来！</p>
+
+<h3 id="2018-3-14">2018-3-14</h3>
+<p>今天是一面后的第 1 天，没有接到二面的通知，问了下内推的师兄，显示的是「面试中」的状态，估计应该放备胎池了吧。今天将 Java 的 Collection 和 Map 相关内容进一步熟悉了下，同时也开始准备算法，今天看的是动态规划。</p>
+
+<h3 id="2018-3-15">2018-3-15</h3>
+<p>今天是一面后的第 2 天，没有接到二面通知，个人中心的状态还是「面试中」应该还有机会吧我想。</p>
+
+<h3 id="2018-3-16">2018-3-16</h3>
+<p>今天是一面后的第 3 天，千呼万唤终于等来了二面，14:26 分打来总共面了 38分38秒。<br />
+面试的时候还是先做自我介绍，然后问了下自己印象比较深的项目经验，然后再问了一个算法题，这个算法题就是在一个只有整数的超大文件(10G以上)里面的重复次数超过 3 次的整数写入到另一个文件。<br />
+这个问题我一开始就说用 HashMap 但是内存肯定是装不下的，然后就说先分割文件，然后再处理。
+然后面试官又问怎么分割，分割的依据，我说的取模。<br />
+最后面试官文取模出现某个文件过大怎么办，这个我没想出来。<br />
+其实很简单再对这个文件进行取模即可。。<br />
+在面试官的指点下一步一步接近真相了，但是还差最后一步，我有种不好的预感。。<br />
+希望还有第三面吧。</p>
+
+<h3 id="2018-3-17">2018-3-17</h3>
+<p>今天是一面后的第 4 天，今天周六肯定不会有面试电话打过来的，不过自己还是在背考点、刷算法，今天将「动态规划」的一些基本问题刷完了。 今天的阿里巴巴个人中心的状态还是「面试中」</p>
+
+<h3 id="2018-3-18">2018-3-18</h3>
+<p>今天是一面后的第 5 天，周天，今天睡到了 10 点才起床，下午刷了三道简单的 LeetCode，今天状态依然是「面试中」，下周希望能有三面。</p>
+
+<h3 id="2018-3-19">2018-3-19</h3>
+<p>今天是一面后的第 6 天，周一，今天接到了三面的电话，很激动，但是后果很残酷，被刷了，个人中心显示的是「已回绝」，怎么说呢，心情还是有一点小失落。<br />
+这个面试官很奇怪，没问技术问题都是一些非技术问题，真让人摸不着头脑<br />
+我觉得是一个问题没有处理好，个人的优点是啥，个人的局限性是啥，这两个问题我的好好思考一下。
+不过 5 月 9 日还有正式的校招实习流程，这几个自己努力提升自己的技能吧。</p>
+
+<hr />
+
+<h2 id="钉钉实习面试">钉钉实习面试</h2>
+<h3 id="2018-4-10">2018-4-10</h3>
+<p>被刷快一个月之后居然被钉钉部门给捞起来了，很奇怪。我想估计没什么希望吧，今天晚上 9 点半接到了钉钉的面试电话，很兴奋，也没有多大希望，由于太晚了约的明天下午两点的在线编程测试。</p>
+
+<h3 id="2018-4-11">2018-4-11</h3>
+<p>今天面了阿里「钉钉」的在线算法编程测试，一个 N 个数组排序算法，难度比较低，刚好之前总结了排序算法，快排+合并 就搞定了这个题。希望还能有下次面试。说的是一周之内有通知。此时个人中心的状态从「简历评估」变成了「待安排面试」。</p>
+
+<h3 id="2018-4-12">2018-4-12</h3>
+<p>今天是「钉钉」一面之后的第 1 天，今天状态还是「待安排面试」。</p>
+
+<h3 id="2018-4-13">2018-4-13</h3>
+<p>今天是「钉钉」一面之后的第 2 天，今天状态仍然是「待安排面试」。</p>
+
+<h3 id="2018-4-14">2018-4-14</h3>
+<p>今天是「钉钉」一面之后的第 3 天，今天状态终于更新成「面试中」，熟悉的字眼，熟悉的心情，这次要好好把握。</p>
+
+<h3 id="2018-4-15">2018-4-15</h3>
+<p>今天是「钉钉」一面之后的第 4 天，今天周末肯定不会有面试通知，今天把之前准备的知识点内容都过一遍，加深印象。<br />
+今天我想到了自己的优缺点的答案。</p>
+
+<h3 id="2018-4-16">2018-4-16</h3>
+<p>今天是「钉钉」一面之后的第 5 天，今天周一终于迎来了二面，二面一开始就是做题居然和一面一样的排序题，这真是让我觉得有点意外
+二面的过的还是蛮顺畅的，就做了个题然后问了下多线程和锁方面的问题，二面完了之后然后一面的面试官叫我继续做了个大题，明天中午
+之前交给他，这时候已经是晚上 20：:30 了，题目是「用多线程处理一个超过 100G 的文本，将其反序输出」这种大文本处理的题目是阿里
+最喜欢考的，之前「蚂蚁金服」三面的时候面试官也问了一个类似的问题，不过这次需要自己动手写出来，然后我花了两个小时就写出来了，只是
+还有编码问题没有解决。</p>
+
+<h3 id="2018-4-17">2018-4-17</h3>
+<p>今天是 「钉钉」一面之后的第 6 天，今天我将昨天安排的题目写出来交给了面试官，今天的状态还是「面试中」。</p>
+
+<h3 id="2018-4-18">2018-4-18</h3>
+<p>今天是「钉钉」一面之后的第 7 天，今天头晕，但是没有接到面试通知，状态仍然还是「面试中」。</p>
+
+<h3 id="2018-4-19">2018-4-19</h3>
+<p>今天是「钉钉」一面之后的第 8 天，今天晚上 22:12 接到了「钉钉」的面试电话，终于迎来了第三面还是这么晚的时候，不知道「钉钉」部门一天
+加班加多久，今天主要面了下个人性格，问了你喜欢什么样的人和老师，有了上次的经验之后这次还好能够从容应对，一共面了 27分14 秒。面完之后
+个人状态仍然是「面试中」，心中窃喜。</p>
+
+<h3 id="2018-4-20">2018-4-20</h3>
+<p>今天是「钉钉」一面之后的第 9 天，身体不舒服，去医院输液了，熬夜过多导致身体虚弱。</p>
+
+<h3 id="2018-4-21">2018-4-21</h3>
+<p>今天是「钉钉」一面之后的第 10 天，停电加之身体不舒服，头晕，休息一天。</p>
+
+<h3 id="2018-4-22">2018-4-22</h3>
+<p>今天是「钉钉」一面之后的第 11 天，周末继续休息。</p>
+
+<h3 id="2018-4-23">2018-4-23</h3>
+<p>今天是「钉钉」一面之后的第 12 天，今天状态稍微恢复了点，但是还是依然没法完全集中注意力，今天晚上没有加班，今天仍然没有接到 4 面通知，状态「面试中」。</p>
+
+<h3 id="2018-4-24">2018-4-24</h3>
+<p>今天是「钉钉」一面之后的第 13 天，今天没有接到「钉钉」的面试通知，倒是接到了「七牛」的面试预约，明天下午两点面试「七牛」。</p>
+
+<h3 id="2018-4-25">2018-4-25</h3>
+<p>今天是「钉钉」一面之后的第 14 天，今天没有接到「钉钉」的面试，今天面试了「七牛」，感觉还行。</p>
+
+<h3 id="2018-4-26">2018-4-26</h3>
+<p>今天是「钉钉」一面之后的第 15 天，今天没有接到「钉钉」的面试，今天身体状况依然糟糕。</p>
+
+<h3 id="2018-4-27">2018-4-27</h3>
+<p>今天是「钉钉」一面之后的第 16 天，今天没有接到「钉钉」的面试，今天继续休息。</p>
+
+<h3 id="2018-4-28">2018-4-28</h3>
+<p>今天是「钉钉」一面之后的第 17 天，今天没有接到「钉钉」的面试，今天从启东回成都了，爽。</p>
+
+<h3 id="2018-4-29">2018-4-29</h3>
+<p>今天是「钉钉」一面之后的第 18 天，今天五一放假。</p>
+
+<h3 id="2018-4-30">2018-4-30</h3>
+<p>今天是「钉钉」一面之后的第 19 天，今天五一放假。</p>
+
+<h3 id="2018-5-1">2018-5-1</h3>
+<p>今天是「钉钉」一面之后的第 20 天，今天五一放假。</p>
+
+<h3 id="2018-5-2">2018-5-2</h3>
+<p>今天是「钉钉」一面之后的第 21 天，今天没有接到「钉钉」的面试。</p>
+
+<h3 id="2018-5-3">2018-5-3</h3>
+<p>今天是「钉钉」一面之后的第 22 天，今天终于迎来了「钉钉」的 HR 面试，问了几个问题。</p>
+<ol>
+  <li>对加班怎么看待</li>
+  <li>个人压力最大的时刻</li>
+  <li>怎么解决团队融合问题</li>
+  <li>介绍某个项目个人的职责</li>
+</ol>
+
+<h3 id="2018-5-16">2018-5-16</h3>
+<ol>
+  <li>今天是钉钉一面之后的第 35 天，今天收到了入职体检消息，个人中心变成了「已发起 Offer 流程」</li>
+</ol>
+
+<h3 id="2018-5-25">2018-5-25</h3>
+<ol>
+  <li>今天是钉钉一面之后的第 44 天，今天周五，下周一就要去入职了，周天的飞机。</li>
+</ol>
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2018/03/12/build-tree-by-travel-result/"><span style="color:black">上一篇：</span> 通过前序遍历、中序遍历构建一颗二叉树</a>
+        
+        
+          <a class="next" href="/2018/03/14/dp-edit-distance/"><span style="color:black">下一篇：</span>动态规划[1]-编辑距离问题 </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+<!--PC和WAP自适应版-->
+<!-- 打赏-->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div style="text-align: center">
+    <div id="cyReward" role="cylabs" data-use="reward"></div>
+</div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cys8B776p"></script>
+<div id="SOHUCS"></div>
+<script type="text/javascript"> 
+    (function () {
+        var appid = 'cys8B776p';
+        var conf = 'prod_f5e62400886309bd420b5adfe00275c4';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else { var loadJs = function (d, a) { var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement; var b = document.createElement("script"); b.setAttribute("type", "text/javascript"); b.setAttribute("charset", "UTF-8"); b.setAttribute("src", d); if (typeof a === "function") { if (window.attachEvent) { b.onreadystatechange = function () { var e = b.readyState; if (e === "loaded" || e === "complete") { b.onreadystatechange = null; a() } } } else { b.onload = a } } c.appendChild(b) }; loadJs("https://changyan.sohu.com/upload/changyan.js", function () { window.changyan.api.config({ appid: appid, conf: conf }) }); }
+
+    })();
+
+    //删除建议打赏1-10元
+    $(function () {
+        setTimeout(() => {
+            $(".cy-reward-txt").each(function () {
+                $(this).html("");
+            })
+            $(".power-cy").each(function () {
+                $(this).html("");
+            });
+            $(".section-service-w").each(function () {
+                $(this).html("");
+            });
+        }, 1000);
+    })
+</script> 
+      </div>
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <span id="busuanzi_container_site_pv" > 您是本站第 
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span> 次点击</span>
+
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://cdgithub.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页" target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类" target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档" target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签" target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于" target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script>
+
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+</body>
+</html>

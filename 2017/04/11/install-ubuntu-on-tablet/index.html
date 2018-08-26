@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>在 x86 平板上面安装 Ubuntu &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2017/04/11/install-ubuntu-on-tablet/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="在 x86 平板上面安装 Ubuntu"> 
+    <meta name="keywords" content="x86 平板, Linux, Ubuntu, 蓝魔 R9s Pro">
+    <meta name="og:keywords" content="x86 平板, Linux, Ubuntu, 蓝魔 R9s Pro"> 
+    <meta name="description" content="x86 平板安装 win10 太卡，安装 android 兼容性不好，要是在上面安装一个 Linux 这岂不是一件很酷的事情，而且基于 x86 架构的 Linux 软件资源可谓是异常丰富，本文以国产寨板「蓝魔R9s Pro」为例介绍在普通的 x86 平板上安装 Ubuntu">
+    <meta name="og:description" content="x86 平板安装 win10 太卡，安装 android 兼容性不好，要是在上面安装一个 Linux 这岂不是一件很酷的事情，而且基于 x86 架构的 Linux 软件资源可谓是异常丰富，本文以国产寨板「蓝魔R9s Pro」为例介绍在普通的 x86 平板上安装 Ubuntu">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2017/04/11/install-ubuntu-on-tablet/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2017-04-11"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+<section class="collection-head small geopattern" data-pattern-id="在 x86 平板上面安装 Ub">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">在 x86 平板上面安装 Ubuntu</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2017">2017/04/11</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-系统"  title="系统">系统</a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-推荐"  title="推荐">推荐</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Linux"> Linux </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-x86"> x86 </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Tablet"> Tablet </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <p>x86 平板安装 win10 太卡，安装 android 兼容性不好，要是在上面安装一个 Linux 这岂不是一件很酷的事情，而且基于 x86 架构的 Linux 软件资源可谓是异常丰富，本文以国产寨板「蓝魔R9s Pro」为例介绍在普通的 x86 平板上安装 Ubuntu</p>
+
+<h3 id="准备">准备</h3>
+<ol>
+  <li>在<a href="http://linuxiumcomau.blogspot.com/2017/03/ubuntu-16042-and-ubuntu-1704-beta-1.html">Linuxium.au</a>上面下载自己需要的系统
+    <blockquote>
+      <p>这些系统都是打了补丁的所以可以直接安装，我下载的是「Ubuntu Budgie 17.04 Beta 1」。
+我已经将其系统从「谷歌网盘」复制到了「百度网盘」，稍后放出下载链接。</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>百度网盘链接：<a href="http://pan.baidu.com/s/1c2cjqxU">http://pan.baidu.com/s/1c2cjqxU</a> 密码：knz5</p>
+  </li>
+  <li>
+    <p>一块容量大于 4G 的 U盘 用来做系统安装盘，一根 OTG 线和一个 USB集线器 用来连鼠标和键盘。</p>
+  </li>
+  <li><a href="https://rufus.akeo.ie/">rufus</a> 用来将系统刻录到 U盘 的软件。</li>
+</ol>
+
+<h3 id="刻录系统到-u盘">刻录系统到 U盘</h3>
+<ol>
+  <li>「设备」选中用来刻录的 U盘。</li>
+  <li>然后点击「ISO镜像」 旁边的那个光驱图标选择将要刻录的系统。</li>
+  <li>
+    <p>点击「开始」用默认的设置，点确定直接开始刻录，等待进度条走满。</p>
+
+    <blockquote>
+      <p>注意：分区方案和目标系统类型： 「用于UEFI计算机的GPT分区方案」，其余的选项可以默认</p>
+    </blockquote>
+
+    <p><a href="/images/post/windows/rufus.png" data-lightbox="x86-table-linux"><img src="/images/post/windows/rufus.png" alt="rufus" /></a></p>
+  </li>
+</ol>
+
+<h3 id="准备安装">准备安装</h3>
+<ol>
+  <li>将 U盘，键盘鼠标通过 OTG线 和 USB集线器 连接到平板上面。</li>
+  <li>启动平板然后按 ESC 进入 BIOS。</li>
+  <li>在 Security 选项里面，设置 Secure Boot为 Disable。
+<a href="/images/post/tablet/bios-security.png" data-lightbox="x86-table-linux"><img src="/images/post/tablet/bios-security.png" alt="bios-security" /></a>
+在 Boot 选项里面设置 Boot Option #1 为你的 U盘 这里是 UEFI： SMI USB DISK 1100。
+<a href="/images/post/tablet/bios-boot.png" data-lightbox="x86-table-linux"><img src="/images/post/tablet/bios-boot.png" alt="bios-boot" /></a></li>
+  <li>点击 F4(save &amp; Exit)，重启后进入安装界面</li>
+</ol>
+
+<h3 id="开始安装">开始安装</h3>
+
+<p>安装过程和普通电脑安装 Ubuntu 一样，在这个界面线可以不急着安装可以先看看驱动情况比如 WIFI，蓝牙等等看驱动没有根据驱动情况再决定是否安装，不然安好后发现没有驱动那么这样体验非常不好。</p>
+
+<ol>
+  <li>点击 Install Ubuntu</li>
+  <li>我选的是「擦除整个磁盘」来安装 Ubuntu，然后点击下一步即可</li>
+  <li>输入用户名和密码等等，点击开始安装
+<a href="/images/post/tablet/ubuntu-install.png" data-lightbox="x86-table-linux"><img src="/images/post/tablet/ubuntu-install.png" alt="ubuntu-install" /></a></li>
+</ol>
+
+<h3 id="启动系统">启动系统</h3>
+<ol>
+  <li>安装完成之后，点击重启即可进入系统。
+<a href="/images/post/tablet/ubuntu-preview.png" data-lightbox="x86-table-linux"><img src="/images/post/tablet/ubuntu-preview.png" alt="ubuntu-preview" /></a></li>
+  <li>后面操作就和普通的 Ubuntu 操作一致了，经测试 17.04 的驱动比 16.04 完善，我的在 16.04 下面声卡没有驱动，但是在 17.04 下面直接就驱动了。
+<a href="/images/post/tablet/ubuntu-preview-2.png" data-lightbox="x86-table-linux"><img src="/images/post/tablet/ubuntu-preview-2.png" alt="ubuntu-preview-2" /></a></li>
+</ol>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2017/04/09/linux-recommended-software/"><span style="color:black">上一篇：</span> Linux 软件推荐 「2017-4-18 更新」</a>
+        
+        
+          <a class="next" href="/2017/05/15/docker-usefull-cmd/"><span style="color:black">下一篇：</span>docker 实用教程 </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+<!--PC和WAP自适应版-->
+<!-- 打赏-->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div style="text-align: center">
+    <div id="cyReward" role="cylabs" data-use="reward"></div>
+</div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cys8B776p"></script>
+<div id="SOHUCS"></div>
+<script type="text/javascript"> 
+    (function () {
+        var appid = 'cys8B776p';
+        var conf = 'prod_f5e62400886309bd420b5adfe00275c4';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else { var loadJs = function (d, a) { var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement; var b = document.createElement("script"); b.setAttribute("type", "text/javascript"); b.setAttribute("charset", "UTF-8"); b.setAttribute("src", d); if (typeof a === "function") { if (window.attachEvent) { b.onreadystatechange = function () { var e = b.readyState; if (e === "loaded" || e === "complete") { b.onreadystatechange = null; a() } } } else { b.onload = a } } c.appendChild(b) }; loadJs("https://changyan.sohu.com/upload/changyan.js", function () { window.changyan.api.config({ appid: appid, conf: conf }) }); }
+
+    })();
+
+    //删除建议打赏1-10元
+    $(function () {
+        setTimeout(() => {
+            $(".cy-reward-txt").each(function () {
+                $(this).html("");
+            })
+            $(".power-cy").each(function () {
+                $(this).html("");
+            });
+            $(".section-service-w").each(function () {
+                $(this).html("");
+            });
+        }, 1000);
+    })
+</script> 
+      </div>
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <span id="busuanzi_container_site_pv" > 您是本站第 
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span> 次点击</span>
+
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://cdgithub.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页" target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类" target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档" target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签" target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于" target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script>
+
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+</body>
+</html>

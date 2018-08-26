@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>程序员代码面试指南 链表 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2018/02/23/it-guide-linked-list/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="程序员代码面试指南 链表"> 
+    <meta name="keywords" content="面试,刷题,Java, LinkedList">
+    <meta name="og:keywords" content="面试,刷题,Java, LinkedList"> 
+    <meta name="description" content="程序员面试指南 链表 相关部分的题目">
+    <meta name="og:description" content="程序员面试指南 链表 相关部分的题目">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2018/02/23/it-guide-linked-list/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2018-02-23"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+<section class="collection-head small geopattern" data-pattern-id="程序员代码面试指南 链表">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">程序员代码面试指南 链表</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2018">2018/02/23</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-刷题"  title="刷题">刷题</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-刷题"> 刷题 </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Java"> Java </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-LinkedList"> LinkedList </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            
+            本文共 3554 字，
+             需 19 分钟阅读
+            
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <h4 id="环形单链表的约瑟夫问题-">环形单链表的约瑟夫问题 ☆☆☆</h4>
+<p>从头节点开始报数 1 ，下一个节点报数 2…，当报数为 m 的时候删除该节点，然后下一个节点继续报数 1…，求最后存活下来的节点<br />
+输入：一个环形单向链表的头结点 head 和报数的值 m<br />
+输出：最后存活下来的节点，且这个节点自己组成环形单链表，其它节点都删除 
+要求：如果链表的节点数为 <script type="math/tex">N</script>，要求时间复杂度为 <script type="math/tex">o(N)</script></p>
+
+<p><strong>思路：</strong><br />
+在不考虑时间复杂度的情况可以进行暴力求解，即循环遍历环型链表然后将报数为 m 的节点删除，最后只剩下一个节点的时候即为所求的存活的节点<br />
+当考虑到时间复杂度 <script type="math/tex">o(N)</script> 的时候就不能用不断遍历求值的方式了，必须一步到位计算出存活节点的编号，即给定链表长度 size 、报数值 m 的时候就能直接求出最后存活节点的编号 n</p>
+<ul>
+  <li>找到报数值 <script type="math/tex">M</script> 和节点编号 <script type="math/tex">N</script> 的关系（头结点编号为 1，下一个节点为 2 …，链表的长度为 <script type="math/tex">L</script>，不考虑删除节点）</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">M</th>
+      <th style="text-align: center">N</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">..</td>
+      <td style="text-align: center">..</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">L</td>
+      <td style="text-align: center">L</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">L+1</td>
+      <td style="text-align: center">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">L+2</td>
+      <td style="text-align: center">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">..</td>
+      <td style="text-align: center">..</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+不难看出 <script type="math/tex">M</script>, <script type="math/tex">N</script>, <script type="math/tex">L</script> 之间的关系<br />
+\[N = (M-1) \% L + 1 \]</p>
+
+<ul>
+  <li>在删除节点的情况下，找到长度为 <script type="math/tex">L</script> 的时候存活节点与长度为 <script type="math/tex">L-1</script> 的存活节点之间的关系（令删除的节点为 <script type="math/tex">s</script>）</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">L</th>
+      <th style="text-align: center">L-1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">..</td>
+      <td style="text-align: center">..</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">s-2</td>
+      <td style="text-align: center">L-2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">s-1</td>
+      <td style="text-align: center">L-1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">s</td>
+      <td style="text-align: center">已经被删除了</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">s+1</td>
+      <td style="text-align: center">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">s+2</td>
+      <td style="text-align: center">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">..</td>
+      <td style="text-align: center">..</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+不难看出，在长度为 <script type="math/tex">L</script> 的报数 <script type="math/tex">f(L)</script>，与 <script type="math/tex">L-1</script>的报数 <script type="math/tex">f(L-1)</script> 之间的关系
+\[f(L)= (f(L-1)+ s -1) \% L + 1\]
+令报数到 <script type="math/tex">x</script> 的被删掉，则被删的节点编号为：
+\[s = (x -1) \% L + 1\]
+可得：<br />
+\[f(L) = (f(L-1) + (x - 1)\% L) \%L +1\]
+可知，上面的关系式为一个递推的关系式，特别地，如果 <script type="math/tex">L == 1</script>，那么存活的节点也为 <script type="math/tex">1</script>
+在 <script type="math/tex">o(N)</script> 的时间内直接获得存活节点的代码如下</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/**
+     * 使用递归的方式直接获取约瑟夫问题中存活的节点编号
+     *
+     * @param size 单向链的长度
+     * @param num  报数
+     * @return 唯一存活的节点编号
+     */</span>
+    <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getAliveNum</span><span class="o">(</span><span class="kt">int</span> <span class="n">size</span><span class="o">,</span> <span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">//长度为 size 与 (size-1) 存活节点编号的关系</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">getAliveNum</span><span class="o">(</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="n">num</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">num</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">%</span> <span class="n">size</span><span class="o">)</span> <span class="o">%</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+<p>附完整代码：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 环形单链表的约瑟夫问题
+ *
+ * @author ychost
+ * @date 2018-2-24
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedListJosephus</span> <span class="o">{</span>
+    <span class="cm">/**
+     * 获取存活下来的节点
+     *
+     * @param header 链表头部指针
+     * @param num    报数值
+     * @return 没有报到该数，即存活下来的节点
+     */</span>
+    <span class="kd">static</span> <span class="n">OneWayNode</span> <span class="nf">getAliveNode</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">header</span><span class="o">,</span> <span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">var</span> <span class="n">pointer</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="c1">//形成环状</span>
+        <span class="c1">//如果 header 所在链表已是环状则找到 header 的 previous</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">()</span> <span class="o">!=</span> <span class="n">header</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="n">pointer</span><span class="o">.</span><span class="na">setNext</span><span class="o">(</span><span class="n">header</span><span class="o">);</span>
+        <span class="c1">//尾指针</span>
+        <span class="n">OneWayNode</span> <span class="n">previous</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">;</span>
+        <span class="c1">//头指针</span>
+        <span class="n">pointer</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">pointer</span> <span class="o">!=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">())</span> <span class="o">{</span>
+            <span class="c1">//删除报数到 num 的节点</span>
+            <span class="k">if</span> <span class="o">(++</span><span class="n">i</span> <span class="o">%</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">previous</span><span class="o">.</span><span class="na">setNext</span><span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">());</span>
+            <span class="o">}</span>
+            <span class="n">previous</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">;</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">pointer</span><span class="o">;</span>
+    <span class="o">}</span>
+
+
+    <span class="cm">/**
+     * 另一种高效的方法，在 o(N) 的时间内完成
+     *
+     * @param header
+     * @param num
+     * @return
+     */</span>
+    <span class="kd">static</span> <span class="n">OneWayNode</span> <span class="nf">getAliveNode2</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">header</span><span class="o">,</span> <span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">var</span> <span class="n">pointer</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="c1">//获取链表的长度</span>
+        <span class="n">var</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">()</span> <span class="o">!=</span> <span class="n">header</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">size</span><span class="o">++;</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="n">pointer</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="n">var</span> <span class="n">aliveNum</span> <span class="o">=</span> <span class="n">getAliveNum</span><span class="o">(</span><span class="n">size</span><span class="o">,</span> <span class="n">num</span><span class="o">);</span>
+        <span class="k">while</span> <span class="o">(--</span><span class="n">aliveNum</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="n">pointer</span><span class="o">.</span><span class="na">setNext</span><span class="o">(</span><span class="n">pointer</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">pointer</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * 使用递归的方式直接获取约瑟夫问题中存活的节点编号
+     *
+     * @param size 单向链的长度
+     * @param num  报数
+     * @return 唯一存活的节点编号
+     */</span>
+    <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getAliveNum</span><span class="o">(</span><span class="kt">int</span> <span class="n">size</span><span class="o">,</span> <span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">//长度为 size 与 (size-1) 存活节点编号的关系</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">getAliveNum</span><span class="o">(</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="n">num</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">num</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">%</span> <span class="n">size</span><span class="o">)</span> <span class="o">%</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="判断一个链表是否为回文-">判断一个链表是否为回文 ☆☆☆</h4>
+<p>给定一个链表的头部节点，判断链表是否为回文，例如：<br />
+1-&gt;2-&gt;1 是回文<br />
+1-&gt;2-&gt;2-&gt;1 是回文<br />
+1-&gt;3-&gt;3-&gt;2 不是回文<br />
+如果链表长度为 <script type="math/tex">N</script>，要求时间复杂度为 o(N)，空间复杂度为 <script type="math/tex">o(1)</script></p>
+
+<p><strong>思路：</strong><br />
+在不考虑空间复杂度的情况下，利用栈可以简单实现回文的判断，即出栈的顺序就为链表的反序遍历。<br />
+考虑到空间复杂度，可以将链表从中间分作两部分，将右半部分进行反转，如果结果和左半部分相等，则为回文，最后再将链表恢复即可。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="cm">/**
+ * 判断链表是否是一个回文
+ *
+ * @author ychost
+ * @date 2018-2-26
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedListIsPalindrome</span> <span class="o">{</span>
+    <span class="cm">/**
+     * 判断是否为回文的普通解法
+     *
+     * @param header 单向链表的头指针
+     * @return 判断结果
+     */</span>
+    <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isPalindrome</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">header</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">var</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;();</span>
+        <span class="n">var</span> <span class="n">pointer</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">pointer</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="n">pointer</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(!</span><span class="n">stack</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">pointer</span><span class="o">.</span><span class="na">getData</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">()))</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * 另一种高效解法，时间效率为 o(N)，空间效率为 o(1)
+     * 该方法为反转链表右半部分，然后左半部分遍历的结果应该等于右半部分
+     *
+     * @param header 单向链表的头指针
+     * @return 判断结果
+     */</span>
+    <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isPalindrome2</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">header</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">OneWayNode</span> <span class="n">n1</span><span class="o">,</span> <span class="n">n2</span><span class="o">,</span> <span class="n">n3</span><span class="o">;</span>
+        <span class="n">n1</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="n">n2</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="c1">//使得 n1 指向链表的中间节点</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">n2</span><span class="o">.</span><span class="na">getNext</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">n2</span><span class="o">.</span><span class="na">getNext</span><span class="o">().</span><span class="na">getNext</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">n1</span> <span class="o">=</span> <span class="n">n1</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+            <span class="n">n2</span> <span class="o">=</span> <span class="n">n2</span><span class="o">.</span><span class="na">getNext</span><span class="o">().</span><span class="na">getNext</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="n">n2</span> <span class="o">=</span> <span class="n">n1</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+        <span class="n">n1</span><span class="o">.</span><span class="na">setNext</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+        <span class="c1">//反转链表的右半部分</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">n2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">n3</span> <span class="o">=</span> <span class="n">n2</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+            <span class="n">n2</span><span class="o">.</span><span class="na">setNext</span><span class="o">(</span><span class="n">n1</span><span class="o">);</span>
+            <span class="n">n1</span> <span class="o">=</span> <span class="n">n2</span><span class="o">;</span>
+            <span class="n">n2</span> <span class="o">=</span> <span class="n">n3</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span><span class="o">;</span>
+        <span class="n">n2</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="n">var</span> <span class="n">res</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="c1">//此时 n1 指向右反转链表的第一个节点，n2 指向左链表的第一个节点</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">n1</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">n2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">n1</span><span class="o">.</span><span class="na">getData</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">n2</span><span class="o">.</span><span class="na">getData</span><span class="o">()))</span> <span class="o">{</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">n1</span> <span class="o">=</span> <span class="n">n1</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+            <span class="n">n2</span> <span class="o">=</span> <span class="n">n2</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="c1">//恢复链表</span>
+        <span class="n">n1</span> <span class="o">=</span> <span class="n">n3</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+        <span class="n">n3</span><span class="o">.</span><span class="na">setNext</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+        <span class="c1">//此时 n1 指向原链表的尾节点</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">n1</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">n2</span> <span class="o">=</span> <span class="n">n1</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+            <span class="n">n1</span><span class="o">.</span><span class="na">setNext</span><span class="o">(</span><span class="n">n3</span><span class="o">);</span>
+            <span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span><span class="o">;</span>
+            <span class="n">n1</span> <span class="o">=</span> <span class="n">n2</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="o">;</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="复制含有随机指针节点的链表-">复制含有随机指针节点的链表 ☆☆</h4>
+<p>复制如下数据结构的链表，要求时间复杂度 <script type="math/tex">o(N)</script>，只能使用几个变量</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 比普通的单向链表多了一个随机指针
+ *
+ * @param &lt;T&gt;
+ */</span>
+<span class="nd">@Data</span>
+<span class="kd">class</span> <span class="nc">RandNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>  <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">T</span> <span class="n">data</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">RandNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">RandNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">rand</span><span class="o">;</span>
+
+
+    <span class="n">RandNode</span><span class="o">(</span><span class="n">T</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">data</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><strong>思路：</strong></p>
+<ol>
+  <li>在不考虑空间复杂度的情况可以使用<code class="highlighter-rouge">HashMap</code>来保存原节点和复制节点，然后遍历原节点从<code class="highlighter-rouge">HashMap</code>中取出复制节点即可。</li>
+  <li>考虑空间复杂度的情况下，可以将复制节点直接追加到原节点后面比如原节点为：
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 1-&gt;2-&gt;3-&gt;4-&gt;null
+</code></pre></div>    </div>
+    <p>复制后的链表如下：</p>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 1-&gt;1'-&gt;2-&gt;2'-&gt;3-&gt;3'-&gt;null
+</code></pre></div>    </div>
+    <p>那么 <code class="highlighter-rouge">node1.getRande()</code> 的复制节点就为 <code class="highlighter-rouge">node1.getRande().getNext()</code></p>
+  </li>
+</ol>
+
+<p><strong>实现：</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 复制 RandNode 这样的链表
+ *
+ * @author ychost
+ * @date 2018-2-28
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedListCopyRandNode</span> <span class="o">{</span>
+    <span class="cm">/**
+     * 复制链表，使用 HashMap 来保存复制对应关系
+     *
+     * @param header 待复制链表的头指针
+     * @return 复制后的链表的头指针
+     */</span>
+    <span class="kd">static</span> <span class="n">RandNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">copy</span><span class="o">(</span><span class="n">RandNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">header</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">RandNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">copyHeader</span> <span class="o">=</span> <span class="kc">null</span><span class="o">,</span> <span class="n">copyPointer</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">var</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">RandNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;,</span> <span class="n">RandNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+        <span class="n">var</span> <span class="n">pointer</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="c1">//复制 next 连接</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">pointer</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">//复制对应关系</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">map</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">pointer</span><span class="o">))</span> <span class="o">{</span>
+                <span class="n">var</span> <span class="n">node</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RandNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+                <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">pointer</span><span class="o">,</span> <span class="n">node</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">map</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getRand</span><span class="o">()))</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getRand</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">var</span> <span class="n">node</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RandNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getRand</span><span class="o">().</span><span class="na">getData</span><span class="o">());</span>
+                    <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getRand</span><span class="o">(),</span> <span class="n">node</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="c1">//关联关系对象</span>
+            <span class="n">RandNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">copyNode</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">pointer</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">copyPointer</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">copyHeader</span> <span class="o">=</span> <span class="n">copyNode</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">copyPointer</span><span class="o">.</span><span class="na">setNext</span><span class="o">(</span><span class="n">copyNode</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="n">copyPointer</span> <span class="o">=</span> <span class="n">copyNode</span><span class="o">;</span>
+            <span class="n">copyPointer</span><span class="o">.</span><span class="na">setRand</span><span class="o">(</span><span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getRand</span><span class="o">()));</span>
+
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">copyHeader</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * 另一种高效的做法，时间复杂度 o(N)，只使用几个临时变量
+     * 创建这样的数据结构 1-1'-2-2'...
+     * 将复制的节点保存在原节点后面，然后寻找复制 rand 节点就在圆 rand 节点后面
+     *
+     * @param header
+     * @return
+     */</span>
+    <span class="kd">static</span> <span class="n">RandNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">copyEff</span><span class="o">(</span><span class="n">RandNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">header</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">var</span> <span class="n">pointer</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="n">RandNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="c1">//复制节点</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">pointer</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">next</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+            <span class="n">var</span> <span class="n">copy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RandNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+            <span class="n">pointer</span><span class="o">.</span><span class="na">setNext</span><span class="o">(</span><span class="n">copy</span><span class="o">);</span>
+            <span class="n">copy</span><span class="o">.</span><span class="na">setNext</span><span class="o">(</span><span class="n">next</span><span class="o">);</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">//连接 rand 节点</span>
+        <span class="n">pointer</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">pointer</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getRand</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">var</span> <span class="n">copyRand</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getRand</span><span class="o">().</span><span class="na">getNext</span><span class="o">();</span>
+                <span class="n">var</span> <span class="n">copyNode</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+                <span class="n">copyNode</span><span class="o">.</span><span class="na">setRand</span><span class="o">(</span><span class="n">copyRand</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">().</span><span class="na">getNext</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="n">RandNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">copyHeader</span> <span class="o">=</span> <span class="kc">null</span><span class="o">,</span> <span class="n">copyPointer</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">pointer</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="c1">//取出复制的链表</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">pointer</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">var</span> <span class="n">copyNode</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">copyPointer</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">copyHeader</span> <span class="o">=</span> <span class="n">copyNode</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">copyPointer</span><span class="o">.</span><span class="na">setNext</span><span class="o">(</span><span class="n">copyNode</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="n">copyPointer</span> <span class="o">=</span> <span class="n">copyNode</span><span class="o">;</span>
+            <span class="n">var</span> <span class="n">orgNext</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">().</span><span class="na">getNext</span><span class="o">();</span>
+            <span class="n">pointer</span><span class="o">.</span><span class="na">setNext</span><span class="o">(</span><span class="n">orgNext</span><span class="o">);</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">orgNext</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">copyHeader</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><strong>附：</strong> 测试代码</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">copy</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">var</span> <span class="n">header</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RandNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(</span><span class="mi">0</span><span class="o">);</span>
+        <span class="n">var</span> <span class="n">pointer</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="n">var</span> <span class="n">nodeArr</span> <span class="o">=</span> <span class="o">(</span><span class="n">RandNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;[])</span> <span class="k">new</span> <span class="n">RandNode</span><span class="o">[</span><span class="mi">10</span><span class="o">];</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nodeArr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">nodeArr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RandNode</span><span class="o">&lt;&gt;(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+            <span class="n">pointer</span><span class="o">.</span><span class="na">setNext</span><span class="o">(</span><span class="n">nodeArr</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">nodeArr</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="o">}</span>
+        <span class="c1">//数组洗牌</span>
+        <span class="n">var</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="o">();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">nodeArr</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+            <span class="n">var</span> <span class="n">t</span> <span class="o">=</span> <span class="n">nodeArr</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="n">nodeArr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">nodeArr</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+            <span class="n">nodeArr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">//设置随机连接</span>
+        <span class="n">header</span><span class="o">.</span><span class="na">setRand</span><span class="o">(</span><span class="n">nodeArr</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nodeArr</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">nodeArr</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">setRand</span><span class="o">(</span><span class="n">nodeArr</span><span class="o">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">]);</span>
+        <span class="o">}</span>
+        <span class="n">var</span> <span class="n">copyPointer</span> <span class="o">=</span> <span class="n">LinkedListCopyRandNode</span><span class="o">.</span><span class="na">copyEff</span><span class="o">(</span><span class="n">header</span><span class="o">);</span>
+        <span class="n">pointer</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="c1">//校验</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">copyPointer</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">Assert</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getData</span><span class="o">(),</span> <span class="n">copyPointer</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+            <span class="n">Assert</span><span class="o">.</span><span class="na">assertNotEquals</span><span class="o">(</span><span class="n">pointer</span><span class="o">,</span> <span class="n">copyPointer</span><span class="o">);</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getRand</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">Assert</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getRand</span><span class="o">().</span><span class="na">getData</span><span class="o">(),</span> <span class="n">copyPointer</span><span class="o">.</span><span class="na">getRand</span><span class="o">().</span><span class="na">getData</span><span class="o">());</span>
+                <span class="n">Assert</span><span class="o">.</span><span class="na">assertNotEquals</span><span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getRand</span><span class="o">(),</span> <span class="n">copyPointer</span><span class="o">.</span><span class="na">getRand</span><span class="o">());</span>
+            <span class="o">}</span>
+            <span class="n">copyPointer</span> <span class="o">=</span> <span class="n">copyPointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="两个链表的相交问题-">两个链表的相交问题 ☆☆☆☆☆</h4>
+<p><strong>要求：</strong><br />
+时间负责度 <script type="math/tex">o(M+N)</script>，空间复杂度 <script type="math/tex">o(1)</script></p>
+
+<h5 id="1-两个无环链表相交">1. 两个无环链表相交</h5>
+<p><a href="/images/post/java/noloop-linked-list-intersect.png" data-lightbox="intersect"><img src="/images/post/java/noloop-linked-list-intersect.png" alt="noloop-linked-list-intersect" /></a></p>
+<ol>
+  <li>若相交则必有公共的尾节点，相同长度的相交部分</li>
+  <li>较长的链表先走两个链表长度之差</li>
+  <li>两个链表再同时走必然会相遇，相遇点即为第一个相交点</li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="cm">/**
+     * header1-&gt;end1 链表和 header2-&gt;end2 链表之间的第一个交点
+     *
+     * @param header1 链表1头指针
+     * @param header2 链表2头指针
+     * @param end1    链表1 tail.next
+     * @param end2    链表2 tail.next
+     * @return 第一个相交点
+     */</span>
+    <span class="kd">static</span> <span class="n">OneWayNode</span> <span class="nf">getNoLoopIntersect</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">header1</span><span class="o">,</span> <span class="n">OneWayNode</span> <span class="n">header2</span><span class="o">,</span>
+                                             <span class="n">OneWayNode</span> <span class="n">end1</span><span class="o">,</span> <span class="n">OneWayNode</span> <span class="n">end2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//获取两个链表的长度和尾结点</span>
+        <span class="n">OneWayNode</span> <span class="n">pointer</span> <span class="o">=</span> <span class="n">header1</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">len1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">len2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">()</span> <span class="o">!=</span> <span class="n">end1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+            <span class="o">++</span><span class="n">len1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">end1</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">;</span>
+        <span class="n">pointer</span> <span class="o">=</span> <span class="n">header2</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">()</span> <span class="o">!=</span> <span class="n">end2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+            <span class="o">++</span><span class="n">len2</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">end2</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">;</span>
+        <span class="c1">//如果两个链表有交点，则尾结点必定一致</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">end1</span> <span class="o">!=</span> <span class="n">end2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">var</span> <span class="n">diff</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">len1</span> <span class="o">-</span> <span class="n">len2</span><span class="o">);</span>
+        <span class="n">var</span> <span class="n">pLong</span> <span class="o">=</span> <span class="n">len1</span> <span class="o">&gt;</span> <span class="n">len2</span> <span class="o">?</span> <span class="n">header1</span> <span class="o">:</span> <span class="n">header2</span><span class="o">;</span>
+        <span class="n">var</span> <span class="n">pShort</span> <span class="o">=</span> <span class="n">pLong</span> <span class="o">==</span> <span class="n">header1</span> <span class="o">?</span> <span class="n">header2</span> <span class="o">:</span> <span class="n">header1</span><span class="o">;</span>
+        <span class="c1">//两个链表剩余的长度一致</span>
+        <span class="k">while</span> <span class="o">((</span><span class="n">diff</span><span class="o">--)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">pLong</span> <span class="o">=</span> <span class="n">pLong</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="c1">//在长度一致的情况下必然相遇点为交点</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">pLong</span> <span class="o">!=</span> <span class="n">pShort</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">pLong</span> <span class="o">=</span> <span class="n">pLong</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+            <span class="n">pShort</span> <span class="o">=</span> <span class="n">pShort</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">pLong</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+<h5 id="2-两个有环链表相交">2. 两个有环链表相交</h5>
+<ol>
+  <li>如果一个链表有环，一个链表无环，则必不想交
+    <h6 id="情况1两个链表在入环之前相交">情况1：两个链表在入环之前相交</h6>
+    <p><a href="/images/post/java/loop-linked-list-intersect.png" data-lightbox="intersect"><img src="/images/post/java/loop-linked-list-intersect.png" alt="loop-linked-list-intersect" /></a></p>
+  </li>
+  <li>该情况和两个无环链表相交的情况类似，只是无环链表的 end 是 null，此时的 end 为 loopNode.next
+    <h6 id="情况2两个链表的相交点在环内">情况2：两个链表的相交点在环内</h6>
+  </li>
+  <li>该情况如下面两种情形
+<a href="/images/post/java/loop-linked-list-intersect-in-loop.png" data-lightbox="intersect"><img src="/images/post/java/loop-linked-list-intersect-in-loop.png" alt="loop-linked-list-intersect-in-loop" /></a></li>
+  <li>左图为不相交情形，右图为相交情形</li>
+  <li>如果 loop1 遍历环一周没有遇见 loop2 则不想交，否则相交，此时返回 loop1 和 loop2 均可
+    <blockquote>
+      <p>loop1 是离链表1较近的相交点，loop2 是离链表2较近的相交点</p>
+    </blockquote>
+  </li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/**
+     * 获取两个有环链表的交点
+     *
+     * @param header1 有环表
+     * @param header2 有环表
+     * @return
+     */</span>
+    <span class="kd">static</span> <span class="n">OneWayNode</span> <span class="nf">getLoopIntersect</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">header1</span><span class="o">,</span> <span class="n">OneWayNode</span> <span class="n">header2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">var</span> <span class="n">loop1</span> <span class="o">=</span> <span class="n">getLoopNode</span><span class="o">(</span><span class="n">header1</span><span class="o">);</span>
+        <span class="n">var</span> <span class="n">loop2</span> <span class="o">=</span> <span class="n">getLoopNode</span><span class="o">(</span><span class="n">header2</span><span class="o">);</span>
+        <span class="c1">//如果一个链表有环，另一个链表无环</span>
+        <span class="c1">//则必然不相交</span>
+        <span class="n">var</span> <span class="n">noIntersect</span> <span class="o">=</span> <span class="n">loop1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">loop2</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">:</span> <span class="n">loop2</span> <span class="o">==</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">noIntersect</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">//两个链表共用一个入环点，则交点在入环点之前</span>
+        <span class="c1">//则可视作为 header1-&gt;loop1，header2-&gt;loop2 之间的无环表的交点</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">loop1</span> <span class="o">==</span> <span class="n">loop2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nf">getNoLoopIntersect</span><span class="o">(</span><span class="n">header1</span><span class="o">,</span> <span class="n">header2</span><span class="o">,</span> <span class="n">loop1</span><span class="o">.</span><span class="na">getNext</span><span class="o">(),</span> <span class="n">loop2</span><span class="o">.</span><span class="na">getNext</span><span class="o">());</span>
+            <span class="c1">//两个链表的入环点不一样</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">var</span> <span class="n">pointer</span> <span class="o">=</span> <span class="n">loop2</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">pointer</span> <span class="o">!=</span> <span class="n">loop1</span> <span class="o">&amp;&amp;</span> <span class="n">pointer</span> <span class="o">!=</span> <span class="n">loop2</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="c1">//只有两个链表入一个环才有交点</span>
+            <span class="c1">//此时返回 loop1，loop2 都可以</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">pointer</span> <span class="o">==</span> <span class="n">loop1</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="n">loop1</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * 若链表有环则第一个入环节点
+     * 采用 Fast/Slow Runner 算法
+     *
+     * @param header 链表头部指针
+     * @return 入环节点，如果无环则返回 null
+     */</span>
+    <span class="kd">static</span> <span class="n">OneWayNode</span> <span class="nf">getLoopNode</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">header</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">var</span> <span class="n">faster</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="n">var</span> <span class="n">slower</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="c1">//若有环两个指针必然相遇</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">faster</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">faster</span><span class="o">.</span><span class="na">getNext</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">slower</span> <span class="o">=</span> <span class="n">slower</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+            <span class="n">faster</span> <span class="o">=</span> <span class="n">faster</span><span class="o">.</span><span class="na">getNext</span><span class="o">().</span><span class="na">getNext</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">faster</span> <span class="o">==</span> <span class="n">slower</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">faster</span> <span class="o">!=</span> <span class="n">slower</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">//置位 faster，下次相遇节点即为入环点</span>
+        <span class="n">faster</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">faster</span> <span class="o">!=</span> <span class="n">slower</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">faster</span> <span class="o">=</span> <span class="n">faster</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+            <span class="n">slower</span> <span class="o">=</span> <span class="n">slower</span><span class="o">.</span><span class="na">getNext</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">slower</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+<h5 id="3-附代码">3. 附代码</h5>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cm">/**
+     * 获取两个链表的第一个相交点，如果不相交则返回 null
+     * 要求时间复杂度 o(M+N)，空间复杂度 o(1)
+     *
+     * @param header1 链表1，可能有环
+     * @param header2 链表2，可能有环
+     * @return 相交点
+     */</span>
+    <span class="kd">static</span> <span class="n">OneWayNode</span> <span class="nf">getIntersectPoint</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">header1</span><span class="o">,</span> <span class="n">OneWayNode</span> <span class="n">header2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">var</span> <span class="n">loop1</span> <span class="o">=</span> <span class="n">getLoopNode</span><span class="o">(</span><span class="n">header1</span><span class="o">);</span>
+        <span class="n">var</span> <span class="n">loop2</span> <span class="o">=</span> <span class="n">getLoopNode</span><span class="o">(</span><span class="n">header2</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">loop1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">loop2</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nf">getNoLoopIntersect</span><span class="o">(</span><span class="n">header1</span><span class="o">,</span> <span class="n">header2</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">loop1</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">loop2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nf">getLoopIntersect</span><span class="o">(</span><span class="n">header1</span><span class="o">,</span> <span class="n">header2</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2018/02/11/csharp-weak-event-store/"><span style="color:black">上一篇：</span> C# 事件总线（弱订阅）</a>
+        
+        
+          <a class="next" href="/2018/02/26/java-integer-equals/"><span style="color:black">下一篇：</span>Java 中 Integer 的 == 与 equals </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+<!--PC和WAP自适应版-->
+<!-- 打赏-->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div style="text-align: center">
+    <div id="cyReward" role="cylabs" data-use="reward"></div>
+</div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cys8B776p"></script>
+<div id="SOHUCS"></div>
+<script type="text/javascript"> 
+    (function () {
+        var appid = 'cys8B776p';
+        var conf = 'prod_f5e62400886309bd420b5adfe00275c4';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else { var loadJs = function (d, a) { var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement; var b = document.createElement("script"); b.setAttribute("type", "text/javascript"); b.setAttribute("charset", "UTF-8"); b.setAttribute("src", d); if (typeof a === "function") { if (window.attachEvent) { b.onreadystatechange = function () { var e = b.readyState; if (e === "loaded" || e === "complete") { b.onreadystatechange = null; a() } } } else { b.onload = a } } c.appendChild(b) }; loadJs("https://changyan.sohu.com/upload/changyan.js", function () { window.changyan.api.config({ appid: appid, conf: conf }) }); }
+
+    })();
+
+    //删除建议打赏1-10元
+    $(function () {
+        setTimeout(() => {
+            $(".cy-reward-txt").each(function () {
+                $(this).html("");
+            })
+            $(".power-cy").each(function () {
+                $(this).html("");
+            });
+            $(".section-service-w").each(function () {
+                $(this).html("");
+            });
+        }, 1000);
+    })
+</script> 
+      </div>
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <span id="busuanzi_container_site_pv" > 您是本站第 
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span> 次点击</span>
+
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://cdgithub.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页" target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类" target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档" target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签" target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于" target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script>
+
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+</body>
+</html>

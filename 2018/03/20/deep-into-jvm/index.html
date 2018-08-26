@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>《深入理解 Java 虚拟机》 笔记 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2018/03/20/deep-into-jvm/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="《深入理解 Java 虚拟机》 笔记"> 
+    <meta name="keywords" content="Jvm, 笔记">
+    <meta name="og:keywords" content="Jvm, 笔记"> 
+    <meta name="description" content="《深入理解 Java 虚拟机》一书的笔记">
+    <meta name="og:description" content="《深入理解 Java 虚拟机》一书的笔记">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2018/03/20/deep-into-jvm/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2018-03-20"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+<section class="collection-head small geopattern" data-pattern-id="《深入理解 Java 虚拟机》">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">《深入理解 Java 虚拟机》 笔记</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2018">2018/03/20</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-笔记"  title="笔记">笔记</a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-推荐"  title="推荐">推荐</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Jvm"> Jvm </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-笔记"> 笔记 </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            
+            本文共 2484 字，
+             需 13 分钟阅读
+            
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <h2 id="内存">内存</h2>
+<h3 id="内存划分">内存划分</h3>
+<p>Java 内存分五个区：虚拟机栈、本地方法栈、程序计数器、堆、方法区。</p>
+
+<ol>
+  <li>程序计数器
+    <ul>
+      <li>一块比较小的区域，不同虚拟机实现方式不一样，主要存放当前线程所执行字节码的行号，每一个线程都私有一个，唯一一个不会出现 OutOfMemoryError 异常的区域。</li>
+    </ul>
+  </li>
+  <li>虚拟机栈
+    <ul>
+      <li>线程私有，存放单位为栈帧，栈帧结构：局部变量表、操作数表、动态链接库、方法出口。
+        <blockquote>
+          <p>注：栈溢出攻击就是让局部变量表的内存溢出到方法出口，然后将攻击代码地址覆盖方法出口地址。<br />
+StackOverflowError: 线程请求的栈深度大于虚拟机所允许的深度。</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+  <li>本地方法栈
+    <ul>
+      <li>与虚拟机栈相似，主要服务于虚拟机使用的 Native 方法，也会抛出上述两个异常。
+        <blockquote>
+          <p>在 HotSpot 虚拟机中虚拟机栈和本地方法栈是合二为一的。</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+  <li>堆
+    <ul>
+      <li>线程共享，存放对象实例和数组。
+        <blockquote>
+          <p>HotSpot 为 Eden+FromSurvivor+ToSurvivor+老年代。</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+  <li>方法区
+    <ul>
+      <li>线程共享，存放已被虚拟机加载的类信息，常量，静态变量，JIT后的代码等，不需要连续内存
+        <blockquote>
+          <p>该区的主要回收目标是针对常量池和回收和对类型的卸载</p>
+        </blockquote>
+      </li>
+      <li>运行时常量池，并非 Class 文件定义的常量才能进入，运行期间也能往里添加常量，如：<code class="highlighter-rouge">String.intern()</code></li>
+    </ul>
+  </li>
+</ol>
+
+<p>当出现<code class="highlighter-rouge">StackOverflow</code>异常的时候可以打印线程栈信息定位问题，如果是在建立线程中导致内存溢出，可以考虑减少最大堆和减少栈容量来换取更多的线程。</p>
+<blockquote>
+  <p>减少最大堆则可增加整个栈区的容量，减少栈容量（每个线程的栈容量减少而栈区总容量又增加）所以可以换取更多的线程</p>
+</blockquote>
+
+<h3 id="对象创建">对象创建</h3>
+<ol>
+  <li>类检查，检查类能否在常量池中定位到一个符号引用(ClassNotFoundException)，且检查类是否被加载、解析、初始化过，如果没有则先执行相应的加载过程。</li>
+  <li>
+    <p>分配内存，指针碰撞（内存规整，用指针指向使用过和未使用的临界区）、空闲列表（内存不规整用表来索引空间地址）两种方式。</p>
+  </li>
+  <li>如果在分配内存发生线程冲突。
+    <ul>
+      <li>第一种：采用 CAS 配上失败重试保证更新操作的原子性。</li>
+      <li>第二种：堆预先分配一块内存给各个线程，每个线程只在自己的分配缓冲区进行操作</li>
+    </ul>
+  </li>
+  <li>主要分配三块区域：对象头、实例数据、对齐填充。
+    <ol>
+      <li>空间初始化，分配的内存空间初始化为 0 （不包括对象头）
+        <blockquote>
+          <p>保证 Java 代码在不赋初值的时候就能直接使用，访问的默认值</p>
+        </blockquote>
+      </li>
+      <li>设置对象头信息，元数据、哈希码、GC分代年龄、偏向锁Id、锁标志等等</li>
+      <li>填充实例数据，初始化对象的属性，调用构造函数等</li>
+      <li>填充对其字节，JVM 要求一个对象占的空间必须是 8 的整数倍</li>
+    </ol>
+  </li>
+</ol>
+
+<h3 id="对象访问">对象访问</h3>
+<ol>
+  <li>句柄池，Reference-&gt;句柄池-&gt;{对象实例数据，对象类型数据}
+    <blockquote>
+      <p>移动对象只需要改变句柄池中的指针，而不需要改变 Reference</p>
+    </blockquote>
+  </li>
+  <li>直接指针，Reference-&gt;{对象实例数据，对象类型数据指针-&gt;对象类型数据}
+    <blockquote>
+      <p>访问速度快，直接可访问到对象数据，但是需要维护对象类型数据的指针</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h2 id="垃圾收集">垃圾收集</h2>
+<h3 id="堆区回收">堆区回收</h3>
+<ol>
+  <li>引用计数法，很难解决对象的相互引用问题。</li>
+  <li>可达性分析，当一个对象没有到 GC Roots 的引用链则认为对象可被回收，可作为 GC Roots 的对象包括：
+    <ul>
+      <li>虚拟机栈（本地变量表）中引用的对象</li>
+      <li>方法区中的类静态属性引用的对象</li>
+      <li>方法区中常量引用的对象</li>
+      <li>JNI(Native 方法)引用的对象</li>
+    </ul>
+  </li>
+</ol>
+
+<p>引用分类：</p>
+<ul>
+  <li>强引用：普通引用<code class="highlighter-rouge">Object obj = new Object()</code>，只要引用存在就不会回收</li>
+  <li>软引用：<code class="highlighter-rouge">SoftReference</code>，如果内存不足则会回收引用对象</li>
+  <li>弱引用：<code class="highlighter-rouge">WeakReference</code>，只要发生 GC 则会回收</li>
+  <li>虚引用：<code class="highlighter-rouge">PhantomReference</code>，不能调用对象的任何属性方法，只能在对象被回收的时候收到一个系统通知</li>
+</ul>
+
+<p>finalize：<br />
+当一个对象被判断「死亡」的时候会标记筛选出重写 <code class="highlighter-rouge">finalize()</code> 且未被调用过的对象放置到 F-Queue 统一执行，完毕后再筛选出 GC Roots 不可达的对象将其回收，如果对象在<code class="highlighter-rouge">finalize()</code>方法中将<code class="highlighter-rouge">this</code>赋值给某个变量，那么对象可以逃脱死亡。</p>
+<blockquote>
+  <p>注: 并不能保证<code class="highlighter-rouge">finalize()</code>执行完毕，比如在<code class="highlighter-rouge">finalize()</code>中执行耗时操作，那么虚拟机则会终止其运行防止阻塞 F-Queue。<br />
+一个对象的<code class="highlighter-rouge">finalize()</code>只能被虚拟机调用一次</p>
+</blockquote>
+
+<h3 id="方法区回收">方法区回收</h3>
+<p>方法区的对象并不是必然回收，由虚拟机参数而定。</p>
+<ol>
+  <li>回收无用用类
+    <ul>
+      <li>该类的所有实例都被回收</li>
+      <li>加载该类的<code class="highlighter-rouge">ClassLoader</code>已经被回收</li>
+      <li>没有在任何地方通过反射访问该类</li>
+    </ul>
+  </li>
+  <li>回收常量
+    <ul>
+      <li>没有任何对常量的引用则回收</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="回收算法">回收算法</h3>
+<ol>
+  <li>标记-清除算法，效率低，内存碎片问题
+    <ul>
+      <li>第一步：标记所有需要回收的对象</li>
+      <li>第二步：清除所有标记的对象
+<a href="/images/post/java/jvm-gc-mark-swap.png" data-lightbox="deepin-jvm"><img src="/images/post/java/jvm-gc-mark-swap.png" alt="gc-mark-swap" /></a></li>
+    </ul>
+  </li>
+  <li>复制算法，实现简单，运行高效但是内存利率低
+    <ul>
+      <li>将内存划分为大小相等的两块，每次只使用其中的一块。</li>
+      <li>一块用完了，将活着的对象复制到另一块，然后清理该块
+<a href="/images/post/java/jvm-gc-copying.jpg" data-lightbox="deepin-jvm"><img src="/images/post/java/jvm-gc-copying.jpg" alt="gc-copying" /></a></li>
+    </ul>
+  </li>
+  <li>标记-整理算法，效率比较低
+    <ul>
+      <li>第一步：标记所有需要回收的对象</li>
+      <li>第二步：将标记的对象移动到内存的一端，然后清除
+<a href="/images/post/java/jvm-gc-mark-compact.jpg" data-lightbox="deepin-jvm"><img src="/images/post/java/jvm-gc-mark-compact.jpg" alt="gc-mark-compact" /></a></li>
+    </ul>
+  </li>
+  <li>分代算法，结合了复制算法，标记-整理算法
+    <ul>
+      <li>分为新生代+老年代，新生代(Eden+From Survivor+To Survivor)(8:1:1)</li>
+      <li>新生代采用复制算法，老年代采用标记-整理算法</li>
+      <li>每次只使用 Eden 和一个 Survivor，回收时将存活的对象复制到另一块 Survivor</li>
+      <li>如果复制时 Survivor 空间不够则将其移动到老年代（分配担保）</li>
+      <li>在分配大对象（如大数组）的时候会直接分配到老年代</li>
+    </ul>
+  </li>
+</ol>
+
+<p>虚拟机在枚举 GC Roots 的时候并不需要一个不漏的检查完所有执行上下文和全局引用的位置，而是采用了一个<code class="highlighter-rouge">OopMap</code>数据结构在「特定的位置」记录了引用信息。</p>
+
+<h3 id="垃圾收集器">垃圾收集器</h3>
+<ol>
+  <li>新生代收集器，复制算法
+    <ul>
+      <li>Serial(串行收集器)，单线程，垃圾收集的时候会暂停所有工作线程,效率低，停顿时间长</li>
+      <li>ParNew(并行收集器)，Serial 的多线程版本，与 Serial 特性一致</li>
+      <li>Parallel Scavenge(并行收集器)，达到一个可控的吞吐量(运行用户代码时间/(运行用户代码时间+垃圾收集时间))，其余与 ParNew 类似</li>
+    </ul>
+  </li>
+  <li>老年代收集器
+    <ul>
+      <li>Serial Old(串行收集器)，标记-整理算法</li>
+      <li>Parallel Old(并行收集器)，标记-整理算法</li>
+      <li><a href="https://www.jianshu.com/p/2a1b2f17d3e4">CMS(并发收集器)</a>，标记-清除算法，与用户线程一起工作，容易产生内存碎片</li>
+    </ul>
+  </li>
+  <li>新生代+老年代收集器
+    <ul>
+      <li>G1（并行+并发收集器），可预测停顿，不会产生内存碎片</li>
+      <li>G1（Garbage-First）优先回收价值最大的 Region</li>
+    </ul>
+  </li>
+  <li>Minor GC 与 Full GC 的区别
+    <ul>
+      <li>新生代 GC (Minor GC): 指发生在新生代的垃圾回收集动作，回收速度快</li>
+      <li>老年代 GC (Full GC/Major GC): 指发生在老年代的 GC，出现了 Full GC 经常会伴随至少一次的 Minor GC，回收速度慢</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="虚拟机性能监控与故障处理工具">虚拟机性能监控与故障处理工具</h2>
+<p>/jdk/bin 目录下面的一些工具，比如 jstack/jps/jmap/jstat 等等，这些工具的大小都很小，在 jdk_1_8 里面差不多为 17k，因为这些命令行工具多数是 jdk/lib/tools.jar 类库的一层薄包装，tools.jar 为 17M 在 jdk_1_8 下面。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">工具</th>
+      <th style="text-align: left">主要作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://www.hollischuang.com/archives/105">jps</a></td>
+      <td style="text-align: left">JVM Process Status Tool，显示指定系统内所有的 HotSpot 虚拟机进程</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://www.hollischuang.com/archives/481">jstat</a></td>
+      <td style="text-align: left">JVM Statistics Monitoring Tool，用于收集 HotSpot 各方面运行数据</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://www.hollischuang.com/archives/1094">jinfo</a></td>
+      <td style="text-align: left">Configuration Info for Java，显示虚拟机配置信息</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://www.hollischuang.com/archives/303">jmap</a></td>
+      <td style="text-align: left">Memory Map for Java，生成虚拟机内存转储快照（heapdump 文件）</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://www.hollischuang.com/archives/1047">jhat</a></td>
+      <td style="text-align: left">JVM Heap Dump Browser，分析 heapdump 文件</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://www.hollischuang.com/archives/110">jstack</a></td>
+      <td style="text-align: left">Stack Trace for Java，显示虚拟机线程快照</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">jConsole</td>
+      <td style="text-align: left">简易的可视化控制台</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">jvisualVM</td>
+      <td style="text-align: left">功能强大的控制台</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="虚拟机调优">虚拟机调优</h2>
+
+<h2 id="虚拟机执行子系统">虚拟机执行子系统</h2>
+<h3 id="class-文件结构">class 文件结构</h3>
+<p>class 文件是一组以 8 位字节为基础单位的二进制流，各项数据按顺序紧凑地排列在的 Class 文件中，中间没有添加任何分隔符。当遇到 8 位以上空间数据项时，按 Big-Endian(大端) 分割成若干个 8 个字节进行存储。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>名称</th>
+      <th>数量</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>u4</td>
+      <td>magic</td>
+      <td>1</td>
+      <td>魔数</td>
+    </tr>
+    <tr>
+      <td>u2</td>
+      <td>minor_version</td>
+      <td>1</td>
+      <td>次版本</td>
+    </tr>
+    <tr>
+      <td>u2</td>
+      <td>major_version</td>
+      <td>1</td>
+      <td>主版本</td>
+    </tr>
+    <tr>
+      <td>u2</td>
+      <td>constant_pool_count</td>
+      <td>1</td>
+      <td>常量池容量</td>
+    </tr>
+    <tr>
+      <td>cp_info</td>
+      <td>constant_pool</td>
+      <td>constant_pool_count-1</td>
+      <td>常量表</td>
+    </tr>
+    <tr>
+      <td>u2</td>
+      <td>access_flags</td>
+      <td>1</td>
+      <td>访问标志</td>
+    </tr>
+    <tr>
+      <td>u2</td>
+      <td>this_class</td>
+      <td>1</td>
+      <td>类索引</td>
+    </tr>
+    <tr>
+      <td>u2</td>
+      <td>super_class</td>
+      <td>1</td>
+      <td>父类索引</td>
+    </tr>
+    <tr>
+      <td>u2</td>
+      <td>interfaces_count</td>
+      <td>1</td>
+      <td>接口数量</td>
+    </tr>
+    <tr>
+      <td>u2</td>
+      <td>interfaces</td>
+      <td>interfaces_count</td>
+      <td>接口索引集合</td>
+    </tr>
+    <tr>
+      <td>u2</td>
+      <td>fields_count</td>
+      <td>1</td>
+      <td>字段数量</td>
+    </tr>
+    <tr>
+      <td>field_info</td>
+      <td>fields</td>
+      <td>fields_count</td>
+      <td>字段表</td>
+    </tr>
+    <tr>
+      <td>u2</td>
+      <td>methods_count</td>
+      <td>1</td>
+      <td>方法数量</td>
+    </tr>
+    <tr>
+      <td>method_info</td>
+      <td>methods</td>
+      <td>methods_count</td>
+      <td>方法表</td>
+    </tr>
+    <tr>
+      <td>u2</td>
+      <td>attributes_count</td>
+      <td>1</td>
+      <td>属性数量</td>
+    </tr>
+    <tr>
+      <td>attribute_info</td>
+      <td>attributes</td>
+      <td>attributes_count</td>
+      <td>属性表</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>注：类型 u1 表示 1 个字节，带 info 的表示为一张表<br />
+分析一个 class 文件可以用 <code class="highlighter-rouge">javap -verbose som.class</code> 命令，没必要自己手动查二进制</p>
+</blockquote>
+
+<ol>
+  <li>constant_pool_count（常量池容量）
+    <ul>
+      <li>表示 class 所引用的常量计数，从 1 开始，比如 0x0016 表示 22，代表常量池的引用范围为 1~22。</li>
+      <li>当为 0 表示「不需要引用任何一个常量池项目」含义</li>
+      <li>主要为字面常量和符号引用</li>
+    </ul>
+  </li>
+  <li>access_flag（访问标志）
+    <ul>
+      <li>标识 Class 是类还是接口，是否定义 public，是否为 abstract，是否 final 等等</li>
+    </ul>
+  </li>
+  <li>this_class/super_class/interfaces（类、接口相关索引）
+    <ul>
+      <li>除了 java.lang.Object 外，所有的 java 类的父类索引都不为 0</li>
+    </ul>
+  </li>
+  <li>field_info（字段表）
+    <ul>
+      <li>包括类级别变量以及实例级别变量，不包含局部变量</li>
+      <li>含访问标志、属性索引、描述符</li>
+      <li>描述符主要描述数据类型、方法参数表、返回值等等</li>
+    </ul>
+  </li>
+  <li>method_info（方法表）
+    <ul>
+      <li>结构和 field_info 一致</li>
+      <li>方法表中的方法体放在「Code」的属性值里</li>
+      <li>如果子类没有重写（Override）父类的方法，则方法表中就不会出现来自父类的方法信息</li>
+      <li>编译器会自动添加 <code class="highlighter-rouge">&lt;clinit&gt;()</code>（类构造器）和 <code class="highlighter-rouge">init()</code>（实例构造器）方法</li>
+      <li>Java 语言级别的特征签名只含有方法名称、参数顺序及参数类型，而字节码的特征签名还包括方法返回值以及受检查的异常表</li>
+    </ul>
+  </li>
+  <li>attribute_info（属性表）
+    <ul>
+      <li>字段表、方法表均有指向该表的索引</li>
+      <li>Code 是里面比较重要的属性，包含了方法体的字节码，操作数栈等等</li>
+      <li>异常表描述了从某行到某行如果发生某异常则跳转到某行的处理</li>
+      <li>LineNumberTable 与 LocalVariableTable 分别关联了字节码的行与变量名和源码的映射</li>
+      <li>Signature 属性包含了普通签名和泛型信息，所以即使是泛型擦除机制，通过反射也可以获取泛型的相关信息，但是是有限制的，只能获取 Class 级别的泛型信息，比如静态变量、字段、继承泛型等等，无法获取到局部变量的泛型信息。</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="字节码">字节码</h3>
+<ol>
+  <li>指令集
+    <ul>
+      <li>boolean、byte、short、char 的操作都会扩展为 int 的操作</li>
+    </ul>
+  </li>
+  <li>加载和存储指令
+    <ul>
+      <li>将数据在栈帧中的局部变量表和操作数栈之间来回传输</li>
+      <li>局部变量-&gt;操作数栈：iload、iload&lt;n&gt;、fload、fload_&lt;n&gt;…
+        <blockquote>
+          <p>iload_0 与操作数为 0 时的 iload 指令语义完全一致</p>
+        </blockquote>
+      </li>
+      <li>操作数栈-&gt;局部变量：istore、istore_&lt;n&gt;…</li>
+      <li>常量-&gt;操作数栈 bipush…</li>
+    </ul>
+  </li>
+  <li>运算指令
+    <ul>
+      <li>两个操作数栈的的值进行某种特定的运算</li>
+      <li>iadd、isub、imul、idiv、irem、ineg…</li>
+      <li>浮点数严格遵循 IEEE 754，取整的时候向 0 取整，丢弃小数部分</li>
+    </ul>
+  </li>
+  <li>类型转换指令
+    <ul>
+      <li>将两个不同的数值类型进行相互转换，窄化转换不抛异常</li>
+    </ul>
+  </li>
+  <li>对象创建与访问指令
+    <ul>
+      <li>new、newarray、anewarray…</li>
+    </ul>
+  </li>
+  <li>操作数栈管理指令
+    <ul>
+      <li>pop、pop2、dup、dup2 …</li>
+    </ul>
+  </li>
+  <li>控制转移指令
+    <ul>
+      <li>让虚拟机有条件或者无条件地从指定位置的指令</li>
+      <li>ifeq、goto、iflt…</li>
+    </ul>
+  </li>
+  <li>方法调用和返回指令
+    <ul>
+      <li>invokevirutal、invokeinterface、ireturn、freturn、return(void 的时候) …</li>
+    </ul>
+  </li>
+  <li>异常处理指令
+    <ul>
+      <li>athrow，用异常表匹配来完成异常处理</li>
+    </ul>
+  </li>
+  <li>同步指令
+    <ul>
+      <li>synchronized</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="虚拟机类加载机制">虚拟机类加载机制</h2>
+<h3 id="类加载过程">类加载过程</h3>
+<p><strong>类加载生命周期</strong></p>
+
+<p>加载-&gt;连接-&gt;初始化-&gt;使用-&gt;卸载</p>
+<blockquote>
+  <p>连接阶段包括：验证-&gt;准备-&gt;解析<br />
+注：各个阶段可能交叉进行，并非严格准守该流程</p>
+</blockquote>
+
+<ol>
+  <li>加载
+    <ul>
+      <li>通过类的全限定名获取此类的二进制流</li>
+      <li>将字节流所代表的静态存储结构转化为方法区运行时数据结构</li>
+      <li>在内存中生成代表这个类的 java.lang.Class 对象，作为这个类的各个数据在方法区的入口</li>
+    </ul>
+
+    <p>如果加载的时候数组，则有所区别，数组本身不通过类加载器创建它是由 newarray 指令直接创建</p>
+  </li>
+  <li>验证 <br />
+确保 Class 文件的字节流中包含的信息符合当前虚拟机的要求，且不会危害虚拟机自身的安全。
+    <ul>
+      <li>文件格式验证，验证文件二进制是否符合 JVM 规范</li>
+      <li>元数据验证，语义分析验证，验证该类是否有父类，是否继承了 final 类，是否实现完所有接口方法等等</li>
+      <li>字节码验证，确定程序语义是合法的，保证跳转指令不会跳转到方法体以外，保证类型转换有效等等</li>
+      <li>符号引用验证，类型匹配校验，全限定名是否能找到对应的类、引用的权限时候可被当前类访问等等</li>
+    </ul>
+  </li>
+  <li>
+    <p>准备<br />
+正式为类变量分配内存并设置初始值（设置默认值）</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//在准备阶段分配内存并设置 val 的值为 0 而不是123</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">123</span>
+<span class="c1">//在准备阶段直接设置 val 的值为 123 的常量值</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">123</span>
+</code></pre></div>    </div>
+  </li>
+  <li>解析<br />
+将常量池内的符号引用替换为直接引用
+    <ul>
+      <li>符号引用：符号可以是一组描述所引用的目标只要能定位到目标即可</li>
+      <li>直接引用：可以直接指向目标的指针、或者间接定位到目标的句柄</li>
+      <li>对同一符号引用进行多次解析虚拟机会缓存解析结果，但是对 invokedynamic（目前 java 语言不生成这条指令） 不成立，该指令为「动态」调用指令只有程序实际运行到该指令解析动作才能进行</li>
+    </ul>
+
+    <p>注：转换的前提是方法在真正运行之前有一个可确定的调用版本。</p>
+  </li>
+  <li>初始化<br />
+开始执行类中定义的 Java 程序代码
+    <ul>
+      <li>执行类构造器 <code class="highlighter-rouge">&lt;clinit&gt;()</code>「线程安全」，合并类中所有变量赋值动作和静态语句块并执行，虚拟机自动保证父类 <code class="highlighter-rouge">&lt;clinit&gt;()</code> 先执行，因此第一个被执行的<code class="highlighter-rouge">&lt;clinit&gt;()</code> 方法为 java.lang.Object</li>
+      <li><code class="highlighter-rouge">&lt;clinit&gt;()</code> 的里面的语句顺序为定义的顺序，即下面代码不能通过编译
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+   <span class="kd">static</span> <span class="o">{</span>
+       <span class="n">A</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>                  <span class="c1">//给变量赋值可以正常编译通过，但是最后 A 的值仍然为 1</span>
+       <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">A</span><span class="o">);</span>  <span class="c1">//会提示「非法向前」引用</span>
+    <span class="o">}</span>
+         
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">A</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+ <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p><strong>类初始化条件</strong></p>
+
+<p>只有如下五中情况会触发类的初始化：</p>
+<ol>
+  <li>遇到 new、getstatic、putstatic 或者 invokestatic 这 4 条字节码指令</li>
+  <li>使用 java.lang.reflect 包的方法对类进行反射调用</li>
+  <li>当一个类初始化的时候发现父类没有初始化则对父类初始化</li>
+  <li>虚拟机启动时，会自动初始化包含 main() 方法那个类</li>
+  <li>使用 JDK1.7 时，如果一个 java.lang.invoke.MethodHandle 实例解析结果 REF_getStatic、REF_putStatic、REF_invokeStatic 方法句柄，且这个方法句柄对应的类没有初始化，则需要对其进行初始化</li>
+</ol>
+
+<p>注：声明该类的数组、调用该类的 static final 常量、调用该类父类的 static 变量，均不会对该类进行初始化。</p>
+
+<p><strong>类初始化顺序</strong></p>
+
+<ol>
+  <li>父类静态变量</li>
+  <li>父类静态代码块</li>
+  <li>子类静态变量</li>
+  <li>子类静态代码块</li>
+  <li>父类非静态变量</li>
+  <li>父类非静态代码块</li>
+  <li>父类构造函数</li>
+  <li>子类非静态变量</li>
+  <li>子类非静态代码块</li>
+  <li>子类构造函数</li>
+</ol>
+
+<h3 id="类加载器">类加载器</h3>
+<p>比较两个类是否「相等」，只有这两个类是由同一个类加载器加载的前提下才有意义。</p>
+
+<h4 id="双亲委派模型">双亲委派模型</h4>
+<p><a href="/2018/01/15/deepin-into-java/">深入 Java 核心</a></p>
+<ol>
+  <li>启动类加载器，加载 $JAVA_HOME/lib 目录里面的类</li>
+  <li>扩展类加载器，加载 $JAVA_HOME/lib/ext 目录里面的类</li>
+  <li>应用程序类加载器，加载用户自定义的类</li>
+</ol>
+
+<p>如果一个类加载器收到了类加载请求，它首先不会自己去尝试加载这个类，而是把请求委派给父类加载器去完成，每一层类加载器都是如此，只有当父类加载器反馈无法完成这个加载请求，子类加载器才尝试自己去加载。</p>
+
+<p>使用双亲委派模型可以保证类随着它的加载器具备了一个带有优先级的层级，确保了类的唯一性，比如 java.lang.Object 都是通过启动加载器去加载的，如果用户自定义加载器去加载了一个 java.lang.Object 那么系统将会出现多个 Object 类，应用程序将会变得一片混乱。</p>
+
+<p>OSGi 等为了实现模块化热部署破坏了双亲委托机制。</p>
+
+<h2 id="字节码执行引擎">字节码执行引擎</h2>
+<h3 id="栈帧">栈帧</h3>
+<p>栈帧是虚拟机栈的基本元素，栈帧包括：局部变量表、操作数栈、动态连接、方法返回地址和一些额外附加信息。
+每次只执行栈顶的栈帧（当前栈帧），如下图所示</p>
+
+<p><a href="/images/post/java/jvm-stack-frame.png" data-lightbox="deepin-jvm"><img src="/images/post/java/jvm-stack-frame.png" alt="jvm-stack-frame" /></a></p>
+
+<p><strong>局部变量表</strong></p>
+<ul>
+  <li>用于存放方法参数和方法内部定义的局部变量，存放的基本内存单位为 Slot</li>
+  <li>对于 64 位的数据类型<code class="highlighter-rouge">long</code>、<code class="highlighter-rouge">double</code>，虚拟机会以大端模式分配两个连续的 Slot 空间</li>
+  <li>局部变量表（非静态方法）的第 0 位为实例的引用<code class="highlighter-rouge">this</code></li>
+  <li>里面的 Slot 可以复用，可能会影响到垃圾回收</li>
+  <li>局部变量表里面的变量不会执行默认初始化操作，所以使用的时候必须先赋值</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// 这里并不能回收 placeholder 因为由于 placeholder 占用的 Slot 可能会被复用，</span>
+  <span class="c1">//所以 GcRoot 还是保留着对这一部分内存的关联</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+    <span class="o">{</span>
+      <span class="kt">byte</span><span class="o">[]</span> <span class="n">placeholder</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">64</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">];</span>
+    <span class="o">}</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span>
+  <span class="o">}</span>
+  <span class="c1">//这里 placeholder 可以被回收，这里用 a 来占用了 placeholder 的 Slot，</span>
+  <span class="c1">//就可以将 placeholder 的空间给清空</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+    <span class="o">{</span>
+      <span class="kt">byte</span><span class="o">[]</span> <span class="n">placeholder</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">64</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">];</span>
+    <span class="o">}</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span><span class="c1">// 或者使用 placeholder = null;</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span>
+  <span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>操作数栈</strong></p>
+<ul>
+  <li>存放字节码指令和数据</li>
+</ul>
+
+<p><strong>动态连接</strong></p>
+<ul>
+  <li>包含一个指向运行时常量池中该栈帧所属方法的引用，即栈帧可连接到该方法的入口地址</li>
+</ul>
+
+<p><strong>方法返回地址</strong></p>
+<ul>
+  <li>两种方式可以退出方法，遇到返回的字节码指令和遇到异常</li>
+  <li>正常返回，直接用<code class="highlighter-rouge">caller</code>的 PC 计数器作为返回地址（栈帧中存有<code class="highlighter-rouge">caller</code>的 PC 计数器值）</li>
+  <li>异常返回，返回地址根据异常表来决定</li>
+</ul>
+
+<p><strong>附加信息</strong></p>
+<ul>
+  <li>具体的虚拟机可以增加一些没有规范中没有描述的信息到栈中，比如与调试相关的信息等等</li>
+</ul>
+
+<h3 id="方法调用">方法调用</h3>
+<p>方法调用不是方法执行，它的唯一任务是确定被调用方法的版本（即调用哪个方法），一切方法在 Class 文件里面存储都只是符号引用，而不是实际内存布局中的入口地址，只有在类加载期间，甚至到运行期间才能确定目标方法的直接引用。</p>
+
+<p><strong>解析</strong></p>
+<ul>
+  <li>编译时期就确定下来的方法的调用称为解析</li>
+  <li>主要为静态方法和私有方法两大类，<code class="highlighter-rouge">invokestatic</code>、<code class="highlighter-rouge">invokespecial</code> 都能在编译期确定</li>
+  <li>静态方法、私有方法、实例构造器、父类方法，它们在类加载的时候就将符号引用解析为直接引用</li>
+</ul>
+
+<p><strong>分派</strong></p>
+<ol>
+  <li>静态分派<br />
+虚拟机在重载时是通过变量的静态类型而不是实际类型做为判定依据，该过程是编译可知的，典型应用是方法 <strong>重载</strong></li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Human</span><span class="o">{</span>
+
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Man</span> <span class="kd">extends</span> <span class="n">Human</span><span class="o">{</span>
+
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+  <span class="c1">//Human 为变量的静态类型（外观类型）</span>
+  <span class="c1">//Man   为变量的实际类型</span>
+  <span class="n">Human</span> <span class="n">xm</span><span class="o">=</span> <span class="k">new</span> <span class="n">Man</span><span class="o">();</span>
+  <span class="c1">//这里调用的结果为 hey human </span>
+  <span class="n">sayHello</span><span class="o">(</span><span class="n">xm</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">static</span> <span class="kt">void</span> <span class="nf">sayHello</span><span class="o">(</span><span class="n">Man</span> <span class="n">man</span><span class="o">){</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"hey man"</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">static</span> <span class="kt">void</span> <span class="nf">sayHello</span><span class="o">(</span><span class="n">Human</span> <span class="n">hm</span><span class="o">){</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"hey human"</span><span class="o">);</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p><strong>动态分派</strong><br />
+典型应用为方法的 <strong>重写</strong>  ，方法在编译期间未知只有在运行期间才能确定，主要依赖于 <code class="highlighter-rouge">invokevirtual</code> 指令</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Human</span><span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">sayHello</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Man</span> <span class="kd">extends</span> <span class="n">Human</span><span class="o">{</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sayHello</span><span class="o">(){</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"hey man"</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Woman</span> <span class="kd">extends</span> <span class="n">Man</span><span class="o">{</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sayHello</span><span class="o">(){</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"hey woman"</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//这段代码都应该知道结果是啥，这就是典型的动态派发的应用</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+  <span class="n">Human</span> <span class="n">man</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Man</span><span class="o">();</span>
+  <span class="n">Human</span> <span class="n">woman</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Woman</span><span class="o">();</span>
+  <span class="n">man</span><span class="o">.</span><span class="na">sayHello</span><span class="o">();</span>
+  <span class="n">woman</span><span class="o">.</span><span class="na">sayHello</span><span class="o">();</span>
+  <span class="n">man</span> <span class="o">=</span> <span class="n">woman</span><span class="o">;</span>
+  <span class="n">man</span><span class="o">.</span><span class="na">sayHello</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>单分派与多分派</strong> <br />
+Java 是一门「静态多分派，动态单分派」语言，C# 引入了 <code class="highlighter-rouge">dynamic</code>才实现动态多分派，或者使用<code class="highlighter-rouge">new</code>关键字来覆盖父类方法，也能实现动态多分派。具体区别如下：</p>
+<ul>
+  <li>Java
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//如果 Son 重写了父类的 sayHello() 那么这里调用的只能是 Son 的 sayHello()</span>
+<span class="n">Father</span> <span class="n">son</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Son</span><span class="o">();</span>
+<span class="n">son</span><span class="o">.</span><span class="na">sayHello</span><span class="o">();</span>
+</code></pre></div>    </div>
+  </li>
+  <li>C#
+    <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//如果子类 override 父类的 sayHello() 则调用 Son 的 sayHello()</span>
+<span class="c1">//如果子类 new 父类的 sayHello() 则调用 Father 的 sayHello()</span>
+<span class="n">Father</span> <span class="n">son</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Son</span><span class="p">();</span>
+<span class="n">son</span><span class="p">.</span><span class="nf">sayHello</span><span class="p">();</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong>动态调用分派过程</strong><br />
+采用了虚表法：表中存放着各个方法的实际入口地址，如果某个方法在子类没有重写，那么子类的虚方法表里面的地址入口和父类一致都指向父类的实现入口，如果重写了则分别指向自己方法的入口地址。</p>
+
+<h3 id="执行引擎">执行引擎</h3>
+<p>虚拟机的执行引擎都有解释执行、编译执行两种选择</p>
+
+<p>编译过程</p>
+
+<p><a href="/images/post/java/jvm-compile-process.png" data-lightbox="deepin-jvm"><img src="/images/post/java/jvm-compile-process.png" alt="jvm-compile-process" /></a></p>
+
+<p>Java 的指令集是基于栈的，这种指令集相对于基于寄存器的指令集而言，可移植性高、代码相对紧凑但是速度比基于寄存器的指令集慢（完成相同功能的指令数量一般比寄存器架构多）。</p>
+
+<h2 id="编译期">编译期</h2>
+<p><strong>编译器</strong></p>
+<ol>
+  <li>前端编译器： *.java 到 *.class，比如 Javac、ECJ</li>
+  <li>后端编译器（JIT）： *.class 到机器码，比如 C1、C2</li>
+  <li>前端提前编译器（AOT）：*.java 到机器码，比如 GCJ、JET</li>
+</ol>
+
+<p>虚拟机设计团队把对性能优化集中到了后端的即时编译器（JIT）</p>
+
+<p><strong>Javac 的编译过程</strong></p>
+<ol>
+  <li>解析与填充符号表过程
+    <ul>
+      <li>解析：词法分析（字符流转变为 Tokens）、语法分析（生成抽象语法树「AST」)</li>
+      <li>填充符号表：将符号地址和符号信息填充到表格中，供其它阶段使用，比如语义检查等等</li>
+    </ul>
+  </li>
+  <li>插入注解处理器的注解处理过程
+    <ul>
+      <li>注解可以干涉语法树，当处理了一个注解之后又会回到解析过程，直到所有注解处理完毕</li>
+    </ul>
+  </li>
+  <li>分析与字节码生成过
+    <ul>
+      <li>主要为语义分析（保证符合逻辑），如类型是否匹配、变量使用是否声明、方法每条路径是否有返回值等等</li>
+      <li>字节码生成：添加<code class="highlighter-rouge">&lt;clinit&gt;()</code>、<code class="highlighter-rouge">&lt;init&gt;()</code> 方法到语法树中<br />
+注：
+        <ul>
+          <li><code class="highlighter-rouge">&lt;init&gt;()</code>、<code class="highlighter-rouge">&lt;init&gt;()</code>并非的默认构造函数。</li>
+          <li>这两个方法实际上是一个代码收敛过程，把语句块（<code class="highlighter-rouge">{}</code>、<code class="highlighter-rouge">static{}</code>）、变量初始化（实例变量、类变量）、调用父类实例构造器（仅仅是实例，不含<code class="highlighter-rouge">&lt;clinit&gt;()</code>）收敛到一起。</li>
+          <li>收敛顺序：父类实例构造器、成员变量、语句块（保证了父类构造器必然先执行）。</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p><a href="/images/post/java/jvm-javac-process.png" data-lightbox="deepin-jvm"><img src="/images/post/java/jvm-javac-process.png" alt="jvm-javac-process" /></a></p>
+
+<p><strong>泛型</strong></p>
+<ol>
+  <li>Java 的泛型只存在于源码中，编译后替换为原生类型，并且在相应地方插入了强制转换代码。</li>
+  <li><code class="highlighter-rouge">Signature</code>属性的出现使得擦除仅仅是对方法 Code 属性的字节代码进行擦除，实际上元数据中还保留泛型的信息，这也是我们能通过反射获取参数化类型的根本依据。</li>
+</ol>
+
+<p><strong>条件编译</strong></p>
+<ol>
+  <li><code class="highlighter-rouge">c/c++</code>支持<code class="highlighter-rouge">#ifdef</code>编译，java 也能实现类似的条件编译。
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//源码</span>
+ <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+   <span class="k">if</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+     <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"block 1"</span><span class="o">)</span>
+   <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+     <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"block 2"</span><span class="o">);</span>
+   <span class="o">}</span>
+ <span class="o">}</span>
+ <span class="c1">//Class 反编译</span>
+ <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"block 1"</span><span class="o">);</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>可知，Java 的条件编译是 Java 的一颗语法糖，根据布尔变量值的真假编译器自动将分支不成立的代码块消除掉</p>
+  </li>
+</ol>
+
+<h2 id="运行期">运行期</h2>
+<h3 id="解释与编译执行">解释与编译执行</h3>
+
+<ol>
+  <li>解释执行：启动速度快，空间占用少。</li>
+  <li>编译执行：执行效率高。（主要编译「热点代码」）</li>
+  <li>当编译器激进优化的时候，比如内联虚方法，出现了类继承结构改变、「罕见陷阱」时通过逆优化可以回退到解释状态继续执行。</li>
+  <li>
+    <p>查看虚拟机的运行模式</p>
+
+    <p><a href="/images/post/java/jvm-java-version.png" data-lightbox="deepin-jvm"><img src="/images/post/java/jvm-java-version.png" alt="jvm-java-version" /></a></p>
+
+    <ul>
+      <li>mixed mode：混合模式（解释 + 编译）</li>
+      <li>interpreted mode：解释</li>
+      <li>compiled mode：编译</li>
+    </ul>
+  </li>
+  <li>分层编译，在程序启动响应速度与运行效率之间达到最佳平衡
+    <ul>
+      <li>第 0 层，程序解释执行，不开启性能监控功能，可触发第 1 层编译。</li>
+      <li>第 1 层，将字节码编译成本地代码，简单优化，有必要会加入性能监控。</li>
+      <li>第 2 层，将字节码编译成本地代码，会启用编译耗时较长的优化，甚至不可靠的激进优化。</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="编译对象">编译对象</h3>
+<ol>
+  <li>热点代码：被多次调用的方法，被多次执行的循环体。</li>
+  <li>对于两种热点代码，都会编译整个方法（循环体也是编译整个包含循环体的方法）。</li>
+  <li>热点探测判断方法：
+    <ul>
+      <li>基于采样的热点探测，虚拟机周期检查各个线程栈顶将频繁出现在栈顶的方法定位「热点方法」，该方法简单、高效，但是容易受到线程阻塞等影响。</li>
+      <li>基于计数器的热点探测，为每个方法建立计数器，当计数超过一定的阈值则为「热点方法」，该方法复杂但是更精确可靠。</li>
+      <li>HotSpot 采用的是「基于计数器的热点探测方法」。</li>
+    </ul>
+  </li>
+  <li>
+    <p>方法触发即使编译</p>
+
+    <p><a href="/images/post/java/jvm-jit-process.png" data-lightbox="deepin-jvm"><img src="/images/post/java/jvm-jit-process.png" alt="jvm-jit-process" /></a></p>
+  </li>
+  <li>
+    <p>循环体触发即使编译</p>
+
+    <p><a href="/images/post/java/jvm-jit-for-process.png" data-lightbox="deepin-jvm"><img src="/images/post/java/jvm-jit-for-process.png" alt="jvm-jit-for-process" /></a></p>
+  </li>
+</ol>
+
+<h3 id="即时编译优化">即时编译优化</h3>
+<p><strong>编译优化</strong><br />
+一些常用的优化手段，以下优化是在虚拟机中进行的，所以并非针对 Java 一门语言</p>
+<ol>
+  <li>内联：去除方法调用成本（如建立栈帧），让方法膨胀便于后面可以大范围优化</li>
+  <li>冗余访问消除，将访问公共表达式的进行了消除。
+    <ul>
+      <li>如果一个表达式 E 已经计算过了，而且从之前到现在不会发生变化，那么下次就没必要再去计算 E 了，直接将先前的值代替 E。</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//优化前</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+<span class="n">sum</span> <span class="o">=</span> <span class="n">y</span><span class="o">+</span><span class="n">z</span><span class="o">;</span>
+<span class="c1">//优化后</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+<span class="n">sum</span> <span class="o">=</span> <span class="n">y</span><span class="o">+</span> <span class="n">z</span><span class="o">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>复写传播，将额外的不需要的重复值变量擦除。
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//优化前</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+<span class="n">sum</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="o">;</span>
+<span class="c1">//优化后</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+<span class="n">sum</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>擦除无用代码，将完全没有意义或者永远不执行的代码擦除。
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//优化前</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+<span class="n">sum</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span>
+<span class="c1">//优化后</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+<span class="n">sum</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>逃逸分析</strong><br />
+如果能证明一个对象不会逃逸到方法或线程之外，即别的方法或者线程无法通过任何途径访问到该对象，则可以对这个变量进行一些高效优化。</p>
+<ol>
+  <li>栈上分配，将对象分配在栈上省去垃圾回收时间，让对象随栈的生命周期一致。</li>
+  <li>同步消除，线程同步比较耗时，一个变量不会逃逸出线程即线程安全，此时可以消除同步措施。</li>
+  <li>标量替换，虚拟机原始数据类型（int、long 等值类型以及 reference等）称作标量，如果一个对象能够分解且不会出现逃逸现象，则将该对象的所有成变量恢复到标量访问（有很大概率分配到高速寄存器中），为后续优化做准备。</li>
+</ol>
+
+<p>注：该优化手段是目前比较前沿的技术，但是完全准确判断一个对象是否逃逸是比较耗时的，如果分析完发现没几个不逃逸的对象则整体收益不高，所以目前的虚拟机默认都没有开启该优化手段。</p>
+
+<h2 id="高效并发">高效并发</h2>
+<h3 id="java-内存模型">Java 内存模型</h3>
+<p><strong>主内存与工作内存</strong></p>
+<ol>
+  <li>所有变量存在主内存，这里的「变量」包括实例字段、静态字段、数组对象元素但不包括局部变量与方法参数，后者是线程私有的不会被共享。</li>
+  <li>工作内存中保存了该线程使用到的变量的主内存副本拷贝。
+<a href="/images/post/java/jmm-struct.png" data-lightbox="deepin-jvm"><img src="/images/post/java/jmm-struct.png" alt="jmm-struct" /></a></li>
+</ol>
+
+<p><strong>内存间交互操作</strong><br />
+JMM 定义了 8 种操作完成主内存拷贝到工作内存以及工作内存同步到主内存。</p>
+<ol>
+  <li>lock（锁定）：作用于主内存，把一个变量标识为一条线程独占的状态。</li>
+  <li>unlock（解锁）：作用于主内存，把一个变量的锁定状态释放。</li>
+  <li>read（读取）：作用于主内存，把一个变量的值从主内存传输到线程的工作内存便于后面的 load 操作。</li>
+  <li>load（载入）：作用于工作内存，把 read 操作从主内存中得到的变量值放入工作内存的变量副本中。</li>
+  <li>use（使用）：作用于工作内存，把工作内存的一个变量传递给执行引擎，当指令需要变量的值的时候会执行该操作。</li>
+  <li>assign（赋值）：作用于工作内存，把一个从执行引擎接收到的值赋给工作内存变量。</li>
+  <li>store（存储）：作用与工作内存，把工作内存中的一个变量的值传送到主内存中，以便后面的 write 使用。</li>
+  <li>write（写入）：作用于主内存，把从 store 操作从工作内存中得到的变量值写入主内存中。</li>
+</ol>
+
+<p>注：</p>
+<ol>
+  <li>read 和 load，store 和 write 都要顺序执行，且不能单独存在，但是中间可以插入其它操作比如
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>read a、read b、load b、load a
+</code></pre></div>    </div>
+  </li>
+  <li>变量在工作内存改变了之后必须把变量同步到主内存。</li>
+  <li>不允许线程无原因地把数据从工作内存同步到主内存。</li>
+  <li>一个变量只能在主内存「诞生」，即对一个变量实施 use、store 操作之前必须先执行 assign 和 load 操作。</li>
+  <li>一个变量在同一时刻只允许一条线程对其进行 lock 操作。</li>
+  <li>一个变量执行了 lock 操作，那将会清空工作内存中此变量的值，必须要重新 load 或者 assign。</li>
+  <li>lock 必然发生于 unlock 之前，也不允许 unlock 一个被其它线程使用的变量。</li>
+  <li>对一个变量执行 unlock 操作之前，必须先把此变量同步到主内存中操作（执行 store、write 操作）。</li>
+</ol>
+
+<p><strong>volatile</strong></p>
+<ol>
+  <li>可见性：一个线程修改了变量值，新值对于其它线程立马可见。
+    <ul>
+      <li>不能保证原子性，比如 <code class="highlighter-rouge">v++</code> 等操作。</li>
+    </ul>
+  </li>
+  <li>禁止指令重排优化。</li>
+</ol>
+
+<p>注：</p>
+<ol>
+  <li>use 指令之前必须先 load，保证将最新的值更新到工作内存。</li>
+  <li>assign 指令之后必须 store，保证每次赋值之后都同步到主内存。</li>
+  <li>先使用 use、assign 的动作的相关动作（load、store）优先于后使用的 use、assign 的相关动作。</li>
+</ol>
+
+<p><strong>禁止重排操作</strong></p>
+<ol>
+  <li>程序次序规则：一个线程内按代码顺序执行。</li>
+  <li>管程锁定规则：一个 unlock 操作先行发生于后面对同一个锁的 lock 操作。</li>
+  <li>volatile 变量规则：对一个 volatile 变量的写操作先行发生于后面对这个变量的读操作。</li>
+  <li>线程启动规则：Thread 对象的 start() 方法先行发生于此线程的每一个动作。</li>
+  <li>线程终止规则：操作的所有操作都先行发生于对此线程的终止操作。</li>
+  <li>线程中断规则：interrup() 方法的调用先行发生于被中断代码检测到中断事件的发生。</li>
+  <li>对象终结规则：一个对象初始化完成先行发生于它的 finalize() 方法的执行。</li>
+  <li>传递性：A 先行发生于操作 B，B 先行发生于 C，那么 A 先行发生于 C。</li>
+</ol>
+
+<p>注：这里的「先行发生」并非「时间上的先后顺序」，「先行发生」是针对的结果。</p>
+
+<p><strong>happens-beofre</strong><br />
+A 先行于操作 B：操作 A「影响」能被 B 看到，这里的影响包括修改共享变量的值、发送了消息、调用了方法等等。</p>
+
+<h3 id="java-线程">Java 线程</h3>
+<ol>
+  <li>不同操作系统中 Java 线程与系统线程对应模型不一样。
+    <ul>
+      <li>Windows 和 Linux 对应关系为 1:1。</li>
+      <li>Solaris 支持 1:1 和 M:N。</li>
+    </ul>
+  </li>
+  <li>线程优先级并不可靠，即仅靠线程优先级并不能保证线程优先执行
+    <ul>
+      <li>优先级可能会被系统改变，一个线程特别「勤奋努力」的话，系统可能会跨过优先级为它分配时间。</li>
+      <li>Java 优先级与操作系统优先级不对等，即 Java 的优先级和操作系统的优先级无法一一对应，比如 Java 有 10 个优先级，但是 Windows 上面只有 7 个优先级，那么就会出现优先级重叠。</li>
+    </ul>
+  </li>
+</ol>
+
+<p><strong>线程状态转换</strong><br />
+6 种线程状态</p>
+<ol>
+  <li>新建（New）：创建后尚未启动的线程。</li>
+  <li>运行（Runnable）：包括 Running 与 Ready 两种状态，可能线程正在执行，也可能正在等待着 CPU 为它分配执行时间。</li>
+  <li>无限等待（Waitting）：CPU 不会给它分配时间，需要等到被其它线程显示地唤醒</li>
+  <li>限期等待（Timed Waitting）：CPU 不会为它分配时间，不过无须等待被其它线程显式地唤醒，一定时间后会由系统自动唤醒。</li>
+  <li>阻塞（Blocked）：与「等待状态」的区别是，「阻塞状态」在等待着获取到一个排它锁，这个事件将在另一个线程放弃这个锁的时候发生；而「等待状态」则是在等待一段时间或者唤醒动作的发生。</li>
+  <li>结束（Terminated）：已经终止的线程状态。
+<a href="/images/post/java/jvm-thread-status.png" data-lightbox="deepin-jvm"><img src="/images/post/java/jvm-thread-status.png" alt="jvm-thread-status" /></a></li>
+</ol>
+
+<h2 id="线程安全与锁优化">线程安全与锁优化</h2>
+<h3 id="线程安全">线程安全</h3>
+<p><strong>不可变</strong></p>
+<ol>
+  <li>共享数据是基本数据类型，定义的时候使用<code class="highlighter-rouge">final</code>修饰。</li>
+  <li>共享数据是一个对象，需要保证对象的行为不会对其状态产生任何影响。</li>
+</ol>
+
+<p><strong>线程对立</strong></p>
+<ol>
+  <li>无论是否采取同步措施都无法在多线程环境中使用并发代码。</li>
+  <li>Thread 的 suspend() 和 resume() 被废弃的原因
+    <ul>
+      <li>suspend() 的时候如果持有了某资源「A」的锁，该锁会一直持有不会被任何线程使用，直到被 resume()。</li>
+      <li>如果在 resume() 一个 被 suspend() 的线程之前尝试获取「A」的锁，此时就产生了死锁，两个线程就冻结了。</li>
+    </ul>
+  </li>
+  <li>Thread 的 stop() 被废弃的原因
+    <ul>
+      <li>stop() 会立即停止线程，但是停止的时候如果正在修改一个对象，就会导致每次运行的结果不一致。因为可能会由于环境因素导致线程执行的快慢程度不一致，从而导致在同一时间 stop() 线程的时候结果就不一致。</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="线程同步">线程同步</h3>
+<p><strong>互斥同步</strong></p>
+<ol>
+  <li>临界区、互斥量、信号量都是互斥实现的手段。</li>
+  <li>Java 中最基本的互斥同步为<code class="highlighter-rouge">synchronized</code>。</li>
+</ol>
+
+<p><strong>非阻塞同步</strong></p>
+<ol>
+  <li>互斥同步属于「阻塞同步」的悲观锁，认为任何时候的动作都要加锁，都要挂起线程。
+    <ul>
+      <li>挂起和恢复线程都是转入内核态完成的所以非常耗时。</li>
+    </ul>
+  </li>
+  <li>「非阻塞同步」则是一个乐观锁，在同步的时候不需要挂起线程，而是不断的循环重试，直到获取到同步权利。</li>
+</ol>
+
+<p><strong>无同步方案</strong></p>
+<ol>
+  <li>可重入代码：返回结果可预测的，只要输入相同的数据都能返回相同的结果。</li>
+  <li>线程本地存储：<code class="highlighter-rouge">java.lang.ThreaLocal</code> 存储线程本身的变量不会被其它线程所共享。</li>
+</ol>
+
+<h3 id="锁优化">锁优化</h3>
+<p>适应性自旋、锁消除、锁粗化、轻量级锁和偏向锁等手段达到锁优化的目的。</p>
+
+<p><strong>自旋锁与自适应锁</strong></p>
+<ol>
+  <li>互斥同步的时候挂起和恢复在内核态中完成，这给操作系统并发性能带来了很大压力。</li>
+  <li>自旋锁：如果物理机上有一个以上的处理器，可以让后面请求锁的那个线程「稍等一下」，但是不放弃处理器执行时间，看看持有锁的线程是否很快释放。为了让线程等待，我们需要让线程执行一个忙循环（自旋），这项技术就是所谓的自旋。</li>
+  <li>自旋锁的自旋次数（循环次数）是固定的，默认为 10 次。</li>
+  <li>自适应锁：和自旋锁的区别为自旋次数不固定，由前一次同一个锁的自旋时间和拥有者的状态来决定。
+    <ul>
+      <li>如果上一次自旋过程中获得过锁，很可能此次也能获得锁，那么就会将自旋次数增加，比如 100 个循环。</li>
+      <li>如果对于某个锁，自旋很少成功获得过，那么在以后获取这个锁时可能省略掉自旋过程。</li>
+    </ul>
+  </li>
+</ol>
+
+<p><strong>锁消除</strong></p>
+<ol>
+  <li>虚拟机即时编译器在运行时，对一些代码上要求同步，但是被检测到不可能存在共享数据竞争的锁进行消除。</li>
+  <li>判定依据来源于「逃逸分析」的数据支持。</li>
+</ol>
+
+<p><strong>锁粗化</strong></p>
+<ol>
+  <li>如果一系列连续操作都对同一个对象反复加锁和解锁，甚至加锁操作都是出现在循环体中，那么即使没有线程竞争，频繁地进行互斥同步操作也会导致不必要的性能损耗。</li>
+  <li>锁粗化：如果虚拟机探测到上述的情况，就会把加锁同步的范围扩展（粗化）到整个操作序列的外部。</li>
+</ol>
+
+<p><strong>轻量级锁与偏向锁</strong></p>
+<ol>
+  <li>操作系统互斥量实现的传统锁为「重量级」锁。</li>
+  <li>轻量级锁：在无竞争的情况下使用 CAS 操作去取消同步使用的互斥量</li>
+  <li>偏向锁：在无竞争的情况下 CAS 操作都不做，直接消除整个同步。</li>
+</ol>
+
+<p><strong>Mark Word</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>存储内容</th>
+      <th>标志位</th>
+      <th>状态</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>对象Hash值、对象分代年龄</td>
+      <td>01</td>
+      <td>未锁定</td>
+    </tr>
+    <tr>
+      <td>指向锁记录的指针</td>
+      <td>00</td>
+      <td>轻量级锁定</td>
+    </tr>
+    <tr>
+      <td>指向重量级锁的指针</td>
+      <td>10</td>
+      <td>膨胀（重量级锁定）</td>
+    </tr>
+    <tr>
+      <td>空，不记录信息</td>
+      <td>11</td>
+      <td>GC标记</td>
+    </tr>
+    <tr>
+      <td>偏向线程ID、偏向时间戳、对象分代年龄</td>
+      <td>01</td>
+      <td>可偏向</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>加锁过程</strong></p>
+<ol>
+  <li>如果对象没有被锁定（01 状态），线程将对象的 Mark Word 拷贝到栈帧（Lock Record）空间里。</li>
+  <li>尝试使用 CAS 操作将对象的 Mark Word 存储内容指向栈帧（Lock Record），并且修改状态为 00，即表示此对象处于轻量级锁状态。</li>
+  <li>如果上述 CAS 操作失败，首先检查 Mark Word 是否指向当前线程的栈帧，如果是说明当前线程已经拥有了这个对象的锁，那就可以直接进入同步块继续执行。</li>
+  <li>如果 Mark Word 不是指向当前线程的栈帧，说明这个锁对象已经被其它线程抢占了，如果有两条以上的线程争用同一个锁，那么轻量级锁就会膨胀为重量级锁，Mark Word 的锁标志状态值变为 10，存储就是指向重量级锁（互斥量）指针，后面等待锁的线程也要进入阻塞状态。</li>
+</ol>
+
+<p><strong>解锁过程</strong></p>
+<ol>
+  <li>通过 CAS 操作把（Lock Record）复制 Mark Word 替换掉对象的 Mark Word，如果操作成功整个同步过程就完成了。</li>
+  <li>如果替换失败，说明有其它线程尝试获取该锁，那就要在释放锁的同时，唤醒被挂起的线程。</li>
+</ol>
+
+<p><strong>偏向锁</strong></p>
+<ol>
+  <li>锁对象第一次被线程获取的时候，虚拟机会把对象头的标志设置成 01，即偏向模式。</li>
+  <li>使用 CAS 操作把获取到这个锁的线程 ID 记录到对象的 Mark Word 中，如果操作成功，持有偏向锁的线程以后每次进入这个锁相关的同步块的时候，虚拟机都可以不进行任何同步操作。</li>
+  <li>当有另一个线程尝试获取这个锁时，偏向模式就宣告结束。</li>
+</ol>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2018/03/17/int-array-split/"><span style="color:black">上一篇：</span> 动态规划[9]-正整数分组</a>
+        
+        
+          <a class="next" href="/2018/03/20/dp-count-bits/"><span style="color:black">下一篇：</span>动态规划[10]-Counting Bits </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+<!--PC和WAP自适应版-->
+<!-- 打赏-->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div style="text-align: center">
+    <div id="cyReward" role="cylabs" data-use="reward"></div>
+</div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cys8B776p"></script>
+<div id="SOHUCS"></div>
+<script type="text/javascript"> 
+    (function () {
+        var appid = 'cys8B776p';
+        var conf = 'prod_f5e62400886309bd420b5adfe00275c4';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else { var loadJs = function (d, a) { var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement; var b = document.createElement("script"); b.setAttribute("type", "text/javascript"); b.setAttribute("charset", "UTF-8"); b.setAttribute("src", d); if (typeof a === "function") { if (window.attachEvent) { b.onreadystatechange = function () { var e = b.readyState; if (e === "loaded" || e === "complete") { b.onreadystatechange = null; a() } } } else { b.onload = a } } c.appendChild(b) }; loadJs("https://changyan.sohu.com/upload/changyan.js", function () { window.changyan.api.config({ appid: appid, conf: conf }) }); }
+
+    })();
+
+    //删除建议打赏1-10元
+    $(function () {
+        setTimeout(() => {
+            $(".cy-reward-txt").each(function () {
+                $(this).html("");
+            })
+            $(".power-cy").each(function () {
+                $(this).html("");
+            });
+            $(".section-service-w").each(function () {
+                $(this).html("");
+            });
+        }, 1000);
+    })
+</script> 
+      </div>
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <span id="busuanzi_container_site_pv" > 您是本站第 
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span> 次点击</span>
+
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://cdgithub.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页" target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类" target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档" target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签" target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于" target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script>
+
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+</body>
+</html>

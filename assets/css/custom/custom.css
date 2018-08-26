@@ -1,0 +1,109 @@
+
+/*set img style */
+.markdown-body  img {
+  cursor:pointer;
+/*  max-width:88% !important; 
+*/  margin-top:10px; 
+  -webkit-box-shadow: 5px 5px 2px #ccc;
+  -moz-box-shadow: 5px 5px 2px #ccc;
+  border-radius: 9px;
+  box-shadow: 5px 5px 2px #ccc;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+}
+
+/*
+  set table style
+  */
+  .markdown-body   table {
+    display:  inline-table !important;
+    width: 98% !important;
+    background: white;
+    border-collapse: collapse;
+    border-radius: 5px !important;
+    margin: auto;
+
+    padding:5px;
+    width: 100%;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    animation: float 5s infinite;
+  }
+
+  .markdown-body   th {
+    color:#D5DDE5;;
+    background:#1b1e24;
+    border-bottom:4px solid #9ea7af;
+    border-right: 1px solid #343a45;
+    font-size:18px;
+    padding:24px;
+    text-align:left;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    vertical-align:middle;
+    text-align: center !important;
+  }
+
+  .markdown-body  th:first-child {
+    border-top-left-radius:3px;
+  }
+
+  .markdown-body  th:last-child {
+    border-top-right-radius:3px;
+    border-right:none;
+  }
+  
+  .markdown-body  tr {
+    border-top: 1px solid #C1C3D1;
+    border-bottom-: 1px solid #C1C3D1;
+    color:#666B85;
+    font-size:16px;
+    font-weight:normal;
+    text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+  }
+
+  .markdown-body tr:hover td {
+    background:#4E5066;
+    color:#FFFFFF;
+    border-top: 1px solid #22262e;
+    border-bottom: 1px solid #22262e;
+  }
+
+  tr:first-child {
+    border-top:none;
+  }
+
+  tr:last-child {
+    border-bottom:none;
+  }
+
+  tr:nth-child(odd) td {
+    background:#EBEBEB;
+  }
+
+  tr:nth-child(odd):hover td {
+    background:#4E5066;
+  }
+
+  tr:last-child td:first-child {
+    border-bottom-left-radius:3px;
+  }
+
+  tr:last-child td:last-child {
+    border-bottom-right-radius:3px;
+  }
+
+  td {
+    background:#FFFFFF;
+    padding:20px;
+    text-align:middle;
+    vertical-align:middle;
+    font-weight:300;
+    font-size:18px;
+    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #C1C3D1;
+  /*  text-align: center !important;*/
+  }
+
+  td:last-child {
+    border-right: 0px;
+  }
+

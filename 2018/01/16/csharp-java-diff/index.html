@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>C# 与 Java 对比 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2018/01/16/csharp-java-diff/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="C# 与 Java 对比"> 
+    <meta name="keywords" content="C#, Java, 对比">
+    <meta name="og:keywords" content="C#, Java, 对比"> 
+    <meta name="description" content="C# 与 Java 同属于 OOP 语言，但是两者却有着很大的不同点，本文着重对比 C# 与 Java 的差异">
+    <meta name="og:description" content="C# 与 Java 同属于 OOP 语言，但是两者却有着很大的不同点，本文着重对比 C# 与 Java 的差异">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2018/01/16/csharp-java-diff/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2018-01-16"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+<section class="collection-head small geopattern" data-pattern-id="C# 与 Java 对比">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">C# 与 Java 对比</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2018">2018/01/16</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-后端"  title="后端">后端</a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-推荐"  title="推荐">推荐</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-C#"> C# </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Java"> Java </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            
+            本文共 2040 字，
+             需 11 分钟阅读
+            
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <p>C# 与 Java 同属于 OOP 语言，但是两者却有着很大的不同点，本文主要从语法层面对比而未对虚拟机等比较深入的层面进行对比。
+可能部分地方有错误，请在评论处提出纠正，谢谢。</p>
+
+<h5 id="11-java-不支持-自定义操作符重载">1.1 Java 不支持 自定义操作符重载</h5>
+<p>可能和 Java 起初的设计思想有关（严格的「OOP」思想），为了不产生歧义所以 Java 并没有支持操作符重载。虽然有<code class="highlighter-rouge">String a = "x"; a+="y"</code>这种看起来像操作符重载的操作其实是 JVM 的语法糖。</p>
+<ol>
+  <li>C# 的操作符重载
+    <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="n">Student</span> <span class="k">operator</span> <span class="p">+(</span><span class="n">Student</span> <span class="n">stu</span><span class="p">,</span> <span class="kt">string</span> <span class="n">suffix</span><span class="p">){</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nf">Student</span><span class="p">(</span><span class="n">stu</span><span class="p">.</span><span class="n">Age</span> <span class="p">+</span> <span class="m">11</span><span class="p">,</span> <span class="n">stu</span><span class="p">.</span><span class="n">Name</span> <span class="p">+</span> <span class="n">suffix</span><span class="p">);</span>
+<span class="p">}</span>   
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h5 id="12-java-没有-struct">1.2 Java 没有 struct</h5>
+<p>Java 不支持自定义在 栈 中的类型，而 C# 支持 struct，可以自定义存放在 栈 中的自定义对象</p>
+<ol>
+  <li>C# 的 struct
+    <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">struct</span> <span class="nc">Struct</span> <span class="p">{</span>
+  <span class="k">public</span> <span class="kt">string</span> <span class="n">field</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h5 id="13-java-的参数不能传地址引用">1.3 Java 的参数不能传地址引用</h5>
+<p>Java 没有类似 C# 的 <code class="highlighter-rouge">ref</code>,<code class="highlighter-rouge">in</code>,<code class="highlighter-rouge">out</code>等关键字，即使传递对象也是传递对象引用的 Copy</p>
+<ol>
+  <li>Java 传递对象地址的 Copy
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ *虽然对 obj 属性的操作会改变传进来的的内容
+ *但是如果直接对 obj 赋值，则不会改变传进来的内容
+ */</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">changeRef</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">){</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">anotherObj</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>C# 传递对象的真实地址
+    <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">///&lt;summary&gt;</span>
+<span class="c1">/// 该操作可以直接改变传进来参数</span>
+<span class="c1">///&lt;/summary&gt;</span>
+<span class="k">public</span> <span class="k">void</span> <span class="nf">ChangeRef</span><span class="p">(</span><span class="k">ref</span> <span class="kt">object</span> <span class="n">obj</span><span class="p">){</span>
+    <span class="n">obj</span> <span class="p">=</span> <span class="nf">AnotherObj</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h5 id="14-java-没有-unsigned-整形">1.4 Java 没有 unsigned 整形</h5>
+<p>虽然 Java 没有原生的 unsigned 整形，但是可以通过一些手段进行转换</p>
+<ol>
+  <li>Java 获取 <code class="highlighter-rouge">unsigned</code> 数据
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">//将data字节型数据转换为0~255 (0xFF 即BYTE)。</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getUnsignedByte</span> <span class="o">(</span><span class="kt">byte</span> <span class="n">data</span><span class="o">){</span>     
+   <span class="k">return</span> <span class="n">data</span><span class="o">&amp;</span><span class="mh">0x0FF</span> <span class="o">;</span>
+<span class="o">}</span>
+ <span class="c1">//将data字节型数据转换为0~65535 (0xFFFF 即 WORD)。</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getUnsignedByte</span> <span class="o">(</span><span class="kt">short</span> <span class="n">data</span><span class="o">){</span>     
+      <span class="k">return</span> <span class="n">data</span><span class="o">&amp;</span><span class="mh">0x0FFFF</span> <span class="o">;</span>
+<span class="o">}</span>       
+<span class="c1">//将int数据转换为0~4294967295 (0xFFFFFFFF即DWORD)。</span>
+<span class="kd">public</span> <span class="kt">long</span> <span class="nf">getUnsignedIntt</span> <span class="o">(</span><span class="kt">int</span> <span class="n">data</span><span class="o">){</span>     
+   <span class="k">return</span> <span class="n">data</span><span class="o">&amp;</span><span class="mh">0x0FFFFFFFF</span> <span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h5 id="15-java-没有静态类">1.5 Java 没有静态类</h5>
+<p>Java 支持 final class，但是不支持 static class</p>
+<ol>
+  <li>C# 中的 static class
+    <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">Utils</span><span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">DoNbAction</span><span class="p">(){</span>
+  <span class="c1">//do something</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h5 id="16-java-不能直接操作指针">1.6 Java 不能直接操作指针</h5>
+<p>Java 不支持 C# 中的 unsafe 特性，该特性可以利用指针直接操作</p>
+<ol>
+  <li>C# 中的 unsafe 特性
+    <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">unsafe</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">ChangeValue</span><span class="p">(</span><span class="kt">int</span><span class="p">*</span> <span class="n">pData</span><span class="p">){</span>
+    <span class="p">*</span><span class="n">pData</span> <span class="p">=</span> <span class="m">200</span><span class="p">;</span> 
+<span class="p">}</span>
+<span class="k">unsafe</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">data</span> <span class="p">=</span> <span class="m">100</span><span class="p">;</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"原始值: {0}"</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+    <span class="nf">ChangeValue</span><span class="p">(&amp;</span><span class="n">data</span><span class="p">);</span>    
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"改变地址后: {0}"</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h5 id="17-java-不支持扩展方法">1.7 Java 不支持扩展方法</h5>
+<p>「扩展方法」可以很方便的在不修改原类的基础上给类添加实例方法</p>
+<ol>
+  <li>C# 中的扩展方法
+    <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">/// &lt;summary&gt;</span>
+<span class="c1">/// 让所有的对象都支持获取私有字段方法</span>
+<span class="c1">/// &lt;/summary&gt;</span>
+<span class="c1">/// &lt;typeparam name="T"&gt;&lt;/typeparam&gt;</span>
+<span class="c1">/// &lt;param name="instance"&gt;&lt;/param&gt;</span>
+<span class="c1">/// &lt;param name="fieldname"&gt;&lt;/param&gt;</span>
+<span class="c1">/// &lt;param name="type"&gt;&lt;/param&gt;</span>
+<span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
+<span class="k">public</span> <span class="k">static</span> <span class="n">T</span> <span class="n">GetPrivateField</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="k">this</span> <span class="kt">object</span> <span class="n">instance</span><span class="p">,</span> <span class="kt">string</span> <span class="n">fieldname</span><span class="p">,</span> <span class="n">Type</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">BindingFlags</span> <span class="n">flag</span> <span class="p">=</span> <span class="n">BindingFlags</span><span class="p">.</span><span class="n">Instance</span> <span class="p">|</span> <span class="n">BindingFlags</span><span class="p">.</span><span class="n">NonPublic</span><span class="p">;</span>
+    <span class="n">FieldInfo</span> <span class="n">field</span> <span class="p">=</span> <span class="n">type</span><span class="p">.</span><span class="nf">GetField</span><span class="p">(</span><span class="n">fieldname</span><span class="p">,</span> <span class="n">flag</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">field</span><span class="p">.</span><span class="nf">GetValue</span><span class="p">(</span><span class="n">instance</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h5 id="18-java-不支持委托">1.8 Java 不支持委托</h5>
+<p>「委托」对于 C 语言来说可能就是「函数指针」一个指向函数入口地址的指针，通过委托很容易就实现了观察者模式，Java 中虽然没有委托但是有匿名类通过 lambda 也同样可以的目的，当然 C# 的「委托」更为简洁</p>
+<ol>
+  <li>Java 的 Function
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FunctionDemo</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="kt">void</span> <span class="nf">modifyTheValue</span><span class="o">(</span><span class="kt">int</span> <span class="n">valueToBeOperated</span><span class="o">,</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">function</span><span class="o">)</span> <span class="o">{</span>
+          <span class="kt">int</span> <span class="n">newValue</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">valueToBeOperated</span><span class="o">);</span>
+          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">newValue</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+          <span class="kt">int</span> <span class="n">incr</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span>  <span class="kt">int</span> <span class="n">myNumber</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+          <span class="n">modifyTheValue</span><span class="o">(</span><span class="n">myNumber</span><span class="o">,</span> <span class="n">val</span><span class="o">-&gt;</span> <span class="n">val</span> <span class="o">+</span> <span class="n">incr</span><span class="o">);</span>
+          <span class="n">myNumber</span> <span class="o">=</span> <span class="mi">15</span><span class="o">;</span>  <span class="n">modifyTheValue</span><span class="o">(</span><span class="n">myNumber</span><span class="o">,</span> <span class="n">val</span><span class="o">-&gt;</span> <span class="n">val</span> <span class="o">*</span> <span class="mi">10</span><span class="o">);</span>
+          <span class="n">modifyTheValue</span><span class="o">(</span><span class="n">myNumber</span><span class="o">,</span> <span class="n">val</span><span class="o">-&gt;</span> <span class="n">val</span> <span class="o">-</span> <span class="mi">100</span><span class="o">);</span>
+          <span class="n">modifyTheValue</span><span class="o">(</span><span class="n">myNumber</span><span class="o">,</span> <span class="n">val</span><span class="o">-&gt;</span> <span class="s">"somestring"</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">+</span> <span class="n">val</span> <span class="o">-</span> <span class="mi">100</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>C# 中的委托
+    <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">delegate</span> <span class="k">void</span> <span class="nf">Del</span><span class="p">(</span><span class="kt">string</span> <span class="n">str</span><span class="p">);</span>
+<span class="k">static</span> <span class="k">void</span> <span class="nf">Notify1</span><span class="p">(</span><span class="kt">string</span> <span class="n">name</span><span class="p">){</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Notification received for: {0}"</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">static</span> <span class="k">void</span> <span class="nf">Notify2</span><span class="p">(</span><span class="kt">string</span> <span class="n">name</span><span class="p">){</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Bang Bang Bang"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">public</span> <span class="k">static</span> <span class="nf">Main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Del</span> <span class="p">+=</span> <span class="n">Notify</span><span class="p">;</span>
+    <span class="n">Del</span> <span class="p">+=</span> <span class="n">Notify2</span><span class="p">;</span>
+    <span class="n">Del</span><span class="p">?.</span><span class="nf">Invoke</span><span class="p">(</span><span class="s">"hello"</span><span class="p">);</span>
+    <span class="c1">//Output:</span>
+    <span class="c1">//Notification received for: hello</span>
+    <span class="c1">//Bang Bang Bang</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h5 id="21-c-没有-checked-exception">2.1 C# 没有 Checked Exception</h5>
+<p>关于 Java 的 Checked Exception，各种看法都有，有的支持有的不支持这种繁琐的写法，当前我建议一个项目里面最好选一种，要么选 Checked Exception 要么用 Unchecked Exception，这样就不容易引起混乱，虽然 Checked Exception 可以帮助我们关注异常，但是很多时候异常都是在顶层抓取的，这样下层的函数就得加上 throws 显得过于繁重。</p>
+<ol>
+  <li>Java 的 Checked Exception
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">fileReader</span><span class="o">(</span><span class="n">String</span> <span class="n">fileName</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">FileNotFoundException</span> <span class="o">{</span>
+    <span class="c1">//do some thing </span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h5 id="22-c-的-interface-不能定义字段">2.2 C# 的 interface 不能定义字段</h5>
+<p>Java 的 interface 是可以定义 <code class="highlighter-rouge">static final</code> 字段的，而 C# 不支持定义</p>
+<ol>
+  <li>Java 中的 interface 字段
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 虽然支持不显示指明 static final 但是编译器编译之后都是 d 这种声明
+ */</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">SomeInterface</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">30</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">40</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h5 id="23-c-没有内部类">2.3 C# 没有内部类</h5>
+<p>C# 所有的类里面声明的类都是和 Java 中的「嵌套类」(static class) 效果一样，而 Java 支持「内部类」(inner class)</p>
+<ol>
+  <li>Java 中的内部类
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Outter</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Inner</span><span class="o">{</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+    <span class="n">Outter</span> <span class="n">outter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Outter</span><span class="o">();</span>
+    <span class="n">Outter</span><span class="o">.</span><span class="na">Innter</span> <span class="n">innter</span> <span class="o">=</span> <span class="n">outter</span><span class="o">.</span><span class="na">new</span> <span class="nf">Inner</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h5 id="31-trycatchfinally-对比">3.1 try/catch/finally 对比</h5>
+<p>Java 允许在 finally 里面返回数据，而 C# 是禁止的</p>
+<ol>
+  <li>你知道下面的 Java 程序返回的是多少吗？
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">getValue</span><span class="o">(){</span>
+    <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="k">try</span><span class="o">{</span>
+  <span class="k">return</span> <span class="n">val</span><span class="o">++;</span>
+    <span class="o">}</span><span class="k">finally</span><span class="o">{</span>
+  <span class="n">val</span><span class="o">++;</span>
+  <span class="k">return</span> <span class="n">val</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h5 id="32-泛型对比">3.2 泛型对比</h5>
+<p>Java 的泛型只是编译时支持的而 C# 的泛型在运行的时也支持，Java 有泛型擦除机制所以称之为 「伪泛型」，所以就存在 <code class="highlighter-rouge">List&lt;? extend SomeClass&gt;</code> 这种写法，反正最后都是要擦除的都是 <code class="highlighter-rouge">List&lt;Object&gt;</code>，而 C# 不同所有的泛型信息都是通过反射可取到的所以不能够在 <code class="highlighter-rouge">List&lt;int&gt;</code> 里面放入 string 对象，如果要放也是要先将 <code class="highlighter-rouge">List&lt;int&gt;</code> 赋值到 <code class="highlighter-rouge">List&lt;object&gt;</code> 在添加进去</p>
+<ol>
+  <li>Java 可以直接通过反射在 List<Integer> 中放入 String 对象
+</Integer>    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//声明Integer的泛型ArrayList对象，并放入Integer实例  </span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">intList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>  
+<span class="n">intList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span>  
+<span class="c1">//定义需要被加入list对象的字符串  </span>
+<span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"abc"</span><span class="o">;</span>  
+<span class="c1">//通过反射获取list对象运行时的add方法，此时该方法已经被擦除泛型  </span>
+<span class="n">Method</span> <span class="n">m</span> <span class="o">=</span> <span class="n">intList</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getMethod</span><span class="o">(</span><span class="s">"add"</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Object</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>  
+<span class="c1">//调用泛型方法加入String对象  </span>
+<span class="n">m</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">intList</span><span class="o">,</span> <span class="n">str</span><span class="o">);</span>  
+</code></pre></div>    </div>
+  </li>
+  <li>C# 不能直接在上面添加，只能另外建立一个 List
+    <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">intList</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;();</span>
+<span class="n">intList</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">objList</span> <span class="p">=</span> <span class="n">intList</span><span class="p">.</span><span class="n">OfType</span><span class="p">&lt;</span><span class="kt">object</span><span class="p">&gt;().</span><span class="nf">ToList</span><span class="p">();</span>
+<span class="n">objList</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"hello"</span><span class="p">);</span>  
+</code></pre></div>    </div>
+  </li>
+  <li>C# 可以通过反射获取泛型的信息
+    <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">MyGenericClass</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">{</span>
+<span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">DisplayNestedType</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">).</span><span class="nf">ToString</span><span class="p">());</span>
+    <span class="p">}</span>   
+<span class="p">}</span>
+<span class="k">public</span> <span class="k">void</span> <span class="n">DisplayType</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;()</span> <span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">).</span><span class="nf">ToString</span><span class="p">());</span>
+<span class="p">}</span>
+<span class="k">public</span> <span class="n">oid</span> <span class="nf">DisplayListGenericType</span><span class="p">(</span><span class="n">Type</span> <span class="n">listType</span><span class="p">){</span>
+    <span class="kt">var</span> <span class="n">genType</span> <span class="p">=</span> <span class="n">listType</span><span class="p">.</span><span class="nf">GetGenericArguments</span><span class="p">()[</span><span class="m">0</span><span class="p">];</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">genType</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h5 id="34-继承对比">3.4 继承对比</h5>
+<p>Java 没有 <code class="highlighter-rouge">virtual</code> 关键字且加不加<code class="highlighter-rouge">@Override</code>都能覆盖父类的方法，而 C# 只能在父类中标注了<code class="highlighter-rouge">virtual</code>的方法在子类中才能覆盖，不然可以同时存在父类与子类同名、同签名的函数。</p>
+<ol>
+  <li>C# 支持方法共存
+    <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BaseClass</span> <span class="p">{</span>  
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Method1</span><span class="p">()</span> <span class="p">{</span>  
+      <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Base- Method1"</span><span class="p">);</span>  
+    <span class="p">}</span> 
+<span class="p">}</span>  
+<span class="k">class</span> <span class="nc">DerivedClass</span> <span class="p">:</span> <span class="n">BaseClass</span>  <span class="p">{</span>  
+    <span class="k">public</span> <span class="k">new</span> <span class="k">void</span> <span class="nf">Method2</span><span class="p">()</span> <span class="p">{</span>  
+       <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Derived - Method2"</span><span class="p">);</span>  
+    <span class="p">}</span>  
+<span class="p">}</span>  
+<span class="k">class</span> <span class="nc">Program</span> <span class="p">{</span>  
+    <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>  
+       <span class="n">BaseClass</span> <span class="n">bc</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">BaseClass</span><span class="p">();</span>  
+       <span class="n">DerivedClass</span> <span class="n">dc</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">DerivedClass</span><span class="p">();</span>  
+       <span class="n">BaseClass</span> <span class="n">bcdc</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">DerivedClass</span><span class="p">();</span>  
+       <span class="n">bc</span><span class="p">.</span><span class="nf">Method1</span><span class="p">();</span>  
+       <span class="n">dc</span><span class="p">.</span><span class="nf">Method1</span><span class="p">();</span>  
+       <span class="n">dc</span><span class="p">.</span><span class="nf">Method2</span><span class="p">();</span>  
+       <span class="n">bcdc</span><span class="p">.</span><span class="nf">Method1</span><span class="p">();</span>  
+    <span class="p">}</span>  
+    <span class="c1">// Output:  </span>
+    <span class="c1">// Base - Method1  </span>
+    <span class="c1">// Base - Method1  </span>
+    <span class="c1">// Derived - Method2  </span>
+    <span class="c1">// Base - Method1  </span>
+<span class="p">}</span>  
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h5 id="34-语法糖对比">3.4 语法糖对比</h5>
+<p>C# 有很多的语法糖，虽然这些语法糖并不能起到额外的作用，但是对于一线的代码工人来说真是省了不少力气了，Java 从 JDK7 开始也逐步加入语法糖功能，比如类型推导、lambda 等等。</p>
+<ol>
+  <li><strong>getter/setter 对比</strong>
+    <ol>
+      <li>Java 中的 <code class="highlighter-rouge">getter</code>,<code class="highlighter-rouge">setter</code>
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">(){</span>
+ <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">){</span>
+ <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>C# 中的 <code class="highlighter-rouge">getter</code>,<code class="highlighter-rouge">setter</code>
+        <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span><span class="k">set</span><span class="p">;}</span>
+</code></pre></div>        </div>
+      </li>
+    </ol>
+  </li>
+  <li><strong>C# 支持 partial types</strong> <br />
+Java 只支持一个文件存放一个<code class="highlighter-rouge">public class</code>而且文件名和类名对应，C# 支持一个文件存放多个<code class="highlighter-rouge">public class</code>而且也支持多个文件声明同一个<code class="highlighter-rouge">public parital class</code>
+    <ol>
+      <li>C# 中的 partial
+        <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//a.cs</span>
+<span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">Utils</span><span class="p">{</span>
+ <span class="c1">//do soemthing</span>
+<span class="p">}</span>
+<span class="c1">//b.cs</span>
+<span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">Utils</span><span class="p">{</span>
+ <span class="c1">//do something</span>
+<span class="p">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ol>
+  </li>
+  <li><strong>类型推导</strong><br />
+Java 支持从左往右推泛型，C# 支持从右往左推局部变量
+    <ol>
+      <li>Java 中的类型推导
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+</code></pre></div>        </div>
+      </li>
+      <li>C# 中的类型推导
+        <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">dict</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">int</span><span class="p">&gt;();</span>
+</code></pre></div>        </div>
+      </li>
+    </ol>
+  </li>
+  <li><strong>空指针检查</strong><br />
+空指针检查一直以来是 Java 比较麻烦的一项处理，只能通过手动去检查，但是 C# 提供了漂亮的语法糖去完成了这一操作
+    <ol>
+      <li>Java 中检查空指针
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">valid</span><span class="o">(</span><span class="n">SomeObj</span> <span class="n">obj</span><span class="o">){</span>
+ <span class="k">if</span><span class="o">(</span><span class="n">obj</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">obj</span><span class="o">.</span><span class="na">field</span> <span class="o">==</span> <span class="s">"valid"</span><span class="o">){</span>
+  <span class="n">Object</span> <span class="n">f2</span> <span class="o">=</span> <span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">field</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">?</span> <span class="n">obj</span><span class="o">.</span><span class="na">field</span> <span class="o">:</span> <span class="s">"null value"</span><span class="o">;</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+ <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+  <span class="c1">//do something</span>
+ <span class="o">}</span>
+ <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>C# 中的空指针检查
+        <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="kt">bool</span> <span class="nf">Valid</span><span class="p">(</span><span class="n">SomeObj</span> <span class="n">obj</span><span class="p">){</span>
+ <span class="k">if</span><span class="p">(</span><span class="n">obj</span><span class="p">?.</span><span class="n">field</span><span class="p">==</span><span class="s">"valid"</span><span class="p">){</span>
+  <span class="kt">var</span> <span class="n">f2</span><span class="p">=</span><span class="n">obj</span><span class="p">.</span><span class="n">field</span><span class="p">??</span> <span class="s">"null value"</span><span class="p">;</span>
+  <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+ <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+  <span class="c1">//do something</span>
+ <span class="p">}</span>
+ <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2018/01/15/deepin-into-java/"><span style="color:black">上一篇：</span> 深入 Java 核心</a>
+        
+        
+          <a class="next" href="/2018/01/17/java-thread-cas/"><span style="color:black">下一篇：</span>Java 多线程之原子变量与 CAS 算法 </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+<!--PC和WAP自适应版-->
+<!-- 打赏-->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div style="text-align: center">
+    <div id="cyReward" role="cylabs" data-use="reward"></div>
+</div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cys8B776p"></script>
+<div id="SOHUCS"></div>
+<script type="text/javascript"> 
+    (function () {
+        var appid = 'cys8B776p';
+        var conf = 'prod_f5e62400886309bd420b5adfe00275c4';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else { var loadJs = function (d, a) { var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement; var b = document.createElement("script"); b.setAttribute("type", "text/javascript"); b.setAttribute("charset", "UTF-8"); b.setAttribute("src", d); if (typeof a === "function") { if (window.attachEvent) { b.onreadystatechange = function () { var e = b.readyState; if (e === "loaded" || e === "complete") { b.onreadystatechange = null; a() } } } else { b.onload = a } } c.appendChild(b) }; loadJs("https://changyan.sohu.com/upload/changyan.js", function () { window.changyan.api.config({ appid: appid, conf: conf }) }); }
+
+    })();
+
+    //删除建议打赏1-10元
+    $(function () {
+        setTimeout(() => {
+            $(".cy-reward-txt").each(function () {
+                $(this).html("");
+            })
+            $(".power-cy").each(function () {
+                $(this).html("");
+            });
+            $(".section-service-w").each(function () {
+                $(this).html("");
+            });
+        }, 1000);
+    })
+</script> 
+      </div>
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <span id="busuanzi_container_site_pv" > 您是本站第 
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span> 次点击</span>
+
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://cdgithub.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页" target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类" target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档" target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签" target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于" target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script>
+
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+</body>
+</html>

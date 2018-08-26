@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>显示网页访问量 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2016/08/13/use-cnzz-show-pv/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="显示网页访问量"> 
+    <meta name="keywords" content="CNZZ, show PV">
+    <meta name="og:keywords" content="CNZZ, show PV"> 
+    <meta name="description" content="　　CNZZ 是一个第三方的网站流量统计分析系统，类似于 百度统计、谷歌分析 这类的对网站，它们可以对你自己的网站的 IP、PV 等数据进行统计分析。它支持前端显示今日和昨日的 IP、 PV 等数据，但是显示的样式很丑而且不能在后台自定义，本文是一个破解这一限制达到自定义其数据显示的一篇教程。">
+    <meta name="og:description" content="　　CNZZ 是一个第三方的网站流量统计分析系统，类似于 百度统计、谷歌分析 这类的对网站，它们可以对你自己的网站的 IP、PV 等数据进行统计分析。它支持前端显示今日和昨日的 IP、 PV 等数据，但是显示的样式很丑而且不能在后台自定义，本文是一个破解这一限制达到自定义其数据显示的一篇教程。">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2016/08/13/use-cnzz-show-pv/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2016-08-13"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+<section class="collection-head small geopattern" data-pattern-id="显示网页访问量">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">显示网页访问量</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2016">2016/08/13</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-杂记"  title="杂记">杂记</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-CNZZ"> CNZZ </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-PV"> PV </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-IP"> IP </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            
+            本文共 535 字，
+             需 2 分钟阅读
+            
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <p>　　<a href="https://web.umeng.com/main.php?c=user&amp;a=index" target="_blank">CNZZ</a> 是一个第三方的网站流量统计分析系统，类似于<a href="http://tongji.baidu.com/" target="_blank"> 百度统计</a>、<a href="http://www.google.cn/intl/zh-CN_ALL/analytics/features/analysis-tools.html" target="_blank">谷歌分析 </a>这类的对网站，它们可以对你自己的网站的 IP、PV 等数据进行统计分析。它支持前端显示今日和昨日的 IP、 PV 等数据，但是显示的样式很丑而且不能在后台自定义，本文是一个破解这一限制达到自定义其数据显示的一篇教程。</p>
+
+<blockquote>
+  <p>由于「百度统计」没有暴露访问量的 API 以及「谷歌分析」被隔离在墙外了，所以选取了 <a href="https://web.umeng.com/main.php?c=user&amp;a=index" target="_blank">CNZZ</a> 来作为统计工具</p>
+</blockquote>
+
+<h4 id="获取统计代码">获取统计代码</h4>
+
+<ol>
+  <li>
+    <p>到 <a href="https://web.umeng.com/main.php?c=user&amp;a=index" target="_blank">CNZZ</a> 官网去注册账号，添加一个需要统计的站点</p>
+  </li>
+  <li>
+    <p>在「统计站点」中点击「统计代码」</p>
+  </li>
+  <li>
+    <p>在「统计代码」中往下翻页 <font color="red">开启</font>「统计图标“带数据显示”」</p>
+
+    <p><a href="/images/post/crack/cnzz-get-code.jpg" data-lightbox="cnzz-show-pv"><img src="/images/post/crack/cnzz-get-code.jpg" alt="cnzz-get-code" /></a></p>
+  </li>
+  <li>
+    <p>将上述代码插入到页面的 <code class="highlighter-rouge">&lt;footer&gt;</code> 里面，就可以看其统计的效果</p>
+  </li>
+</ol>
+
+<h4 id="分析统计代码">分析统计代码</h4>
+
+<ol>
+  <li>
+    <p>原始代码</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span><span class="kd">var</span> <span class="nx">cnzz_protocol</span> <span class="o">=</span> <span class="p">((</span><span class="s2">"https:"</span> <span class="o">==</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span><span class="p">)</span> <span class="p">?</span> <span class="s2">" https://"</span> <span class="p">:</span> <span class="s2">" http://"</span><span class="p">);</span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">unescape</span><span class="p">(</span><span class="s2">"%3Cspan id='cnzz_stat_icon_YOURID'%3E%3C/span%3E%3Cscript src='"</span> <span class="o">+</span> <span class="nx">cnzz_protocol</span> <span class="o">+</span> <span class="s2">"s11.cnzz.com/z_stat.php%3Fid%3DYROUID%26online%3D1' type='text/javascript'%3E%3C/script%3E"</span><span class="p">));</span><span class="nt">&lt;/script&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>利用 <a href="http://tool.chinaz.com/tools/urlencode.aspx" target="_blank">urlDecode</a> 对 <code class="highlighter-rouge">escape</code> 部分解码后的代码</p>
+
+    <blockquote>
+      <p>注意 <font color="red">+</font> 号会被解析掉，请手动添加，以下是我手动格式化后的代码</p>
+    </blockquote>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+   
+<span class="kd">var</span> <span class="nx">cnzz_protocol</span> <span class="o">=</span> <span class="p">((</span><span class="s2">"https:"</span> <span class="o">==</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span><span class="p">)</span> <span class="p">?</span> <span class="s2">"</span><span class="err">\</span><span class="s2">
+https://"</span> <span class="p">:</span> <span class="s2">" http://"</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">"</span><span class="err">\</span><span class="s2">
+  	&lt;span id='cnzz_stat_icon_YOURID'&gt;&lt;/span&gt;</span><span class="err">\</span><span class="s2">
+   	&lt;script src='"</span> <span class="o">+</span>  <span class="nx">cnzz_protocol</span> <span class="o">+</span>  
+   	<span class="s2">"s4.cnzz.com/z_stat.php?id=YOURID&amp;online=1'</span><span class="err">\</span><span class="s2">
+   	 type='text/javascript'&gt;&lt;/script"</span><span class="p">);</span>
+
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>自定义统计代码</p>
+
+    <p>可以看出 CNZZ 的统计代码其实是在网页上追加了一个 ID 为 cnzz_stat_icon_<font color="red">YOURID</font> 的 <code class="highlighter-rouge">span</code> 元素，然后跨域访问了一个php脚本「引入 JS 文件」，所以我们可以自己来构建这样两个步骤。</p>
+
+    <ul>
+      <li>在网页的<code class="highlighter-rouge">&lt;footer&gt;</code>里面面追加一个<code class="highlighter-rouge">&lt;span&gt;</code>和一个<code class="highlighter-rouge">&lt;script&gt;</code>元素</li>
+      <li>
+        <p>注意 id 为你的 id，由于原始的显示不好看，所以这里将其隐藏</p>
+
+        <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"display:none"</span> <span class="na">id=</span><span class="s">'cnzz_stat_icon_YOURID'</span><span class="nt">&gt;&lt;/span&gt;</span>
+
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"\
+      http://s4.cnzz.com/z_stat.php?id=YOURID&amp;online=1"</span> 
+      <span class="na">type=</span><span class="s">'text/javascript'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/script&gt;</span>
+
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="破解统计代码">破解统计代码</h4>
+
+<ol>
+  <li>
+    <p>创建一个在页面中自己创建一个展示 PV 的一个<code class="highlighter-rouge">&lt;span&gt;</code>，比如</p>
+
+    <pre><code class="language-HTML">&lt;span&gt; 今日PV量：&lt;span id="totdayPv"&gt;&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+  </li>
+  <li>
+    <p>取出统计值，并赋给创建的<code class="highlighter-rouge">&lt;span&gt;</code></p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="cm">/*
+     获取cnzz统计的今日PV值
+  */</span>
+<span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+ <span class="kd">var</span> <span class="nx">cnzzITLTimes</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+ <span class="kd">var</span> <span class="nx">cnzzITL</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+ <span class="kd">var</span> <span class="nx">cnzz</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">"#cnzz_stat_icon_YOURID a"</span><span class="p">);</span>  
+ <span class="nx">cnzz</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>    
+   <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">().</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">"今日PV"</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="p">){</span>  
+     <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">cnzzITL</span><span class="p">);</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">());</span>
+     <span class="kd">var</span> <span class="nx">vistAll</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="s2">"]"</span><span class="p">);</span>
+     <span class="kd">var</span> <span class="nx">todayIpStr</span> <span class="o">=</span> <span class="nx">vistAll</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+     <span class="kd">var</span> <span class="nx">todayPvStr</span> <span class="o">=</span> <span class="nx">vistAll</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>       
+     <span class="kd">var</span> <span class="nx">yestodayIpStr</span> <span class="o">=</span> <span class="nx">vistAll</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+     <span class="kd">var</span> <span class="nx">yestodayPvStr</span> <span class="o">=</span> <span class="nx">vistAll</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>    
+     <span class="c1">// get today's pv</span>
+     <span class="c1">// you can also get today's ip etc.</span>
+     <span class="nx">totdayPv</span> <span class="o">=</span>   <span class="nx">todayPvStr</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">[^\d]</span><span class="sr">/g</span><span class="p">,</span><span class="s1">''</span><span class="p">);</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">totdayPv</span><span class="p">);</span>
+     <span class="k">if</span><span class="p">(</span><span class="nx">totdayPv</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+       <span class="nx">totdayPv</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s2">"#totdayPv"</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">totdayPv</span><span class="p">);</span>
+ <span class="p">}});</span>
+
+ <span class="k">if</span><span class="p">(</span><span class="o">--</span><span class="nx">cnzzITLTimes</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+     <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">cnzzITL</span><span class="p">);</span>
+ <span class="p">}</span>
+  <span class="p">},</span><span class="mi">500</span><span class="p">);</span>
+<span class="p">})();</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h4 id="结论">结论</h4>
+
+<p>　　这其实就是一个简单 DOM 操作，只是加载的统计代码为跨域的所以需要用<code class="highlighter-rouge">&lt;script&gt;</code>标签，开始考虑用<code class="highlighter-rouge">JSONP</code>然后回调，很明显回调的话就不用<code class="highlighter-rouge">setInterval</code>这种低级的方式了，后来发现使用<code class="highlighter-rouge">JSONP</code>是可以加载到统计的脚本，但是该脚本需要对页面进行 DOM 操作却被浏览器<font color="red">禁止</font>了，可见<code class="highlighter-rouge">JSONP</code>获取的跨域脚本有很多限制，所以还是换回了利用<code class="highlighter-rouge">&lt;script&gt;</code>标签的方式来引入脚本，然后再来获取需要的值</p>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2016/08/11/show-all-files-in-visualStudio/"><span style="color:black">上一篇：无</span> </a>
+        
+        
+          <a class="next" href="/2016/08/14/Sublime-snippets/"><span style="color:black">下一篇：无</span> </a>
+        
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+<!--PC和WAP自适应版-->
+<!-- 打赏-->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div style="text-align: center">
+    <div id="cyReward" role="cylabs" data-use="reward"></div>
+</div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cys8B776p"></script>
+<div id="SOHUCS"></div>
+<script type="text/javascript"> 
+    (function () {
+        var appid = 'cys8B776p';
+        var conf = 'prod_f5e62400886309bd420b5adfe00275c4';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else { var loadJs = function (d, a) { var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement; var b = document.createElement("script"); b.setAttribute("type", "text/javascript"); b.setAttribute("charset", "UTF-8"); b.setAttribute("src", d); if (typeof a === "function") { if (window.attachEvent) { b.onreadystatechange = function () { var e = b.readyState; if (e === "loaded" || e === "complete") { b.onreadystatechange = null; a() } } } else { b.onload = a } } c.appendChild(b) }; loadJs("https://changyan.sohu.com/upload/changyan.js", function () { window.changyan.api.config({ appid: appid, conf: conf }) }); }
+
+    })();
+
+    //删除建议打赏1-10元
+    $(function () {
+        setTimeout(() => {
+            $(".cy-reward-txt").each(function () {
+                $(this).html("");
+            })
+            $(".power-cy").each(function () {
+                $(this).html("");
+            });
+            $(".section-service-w").each(function () {
+                $(this).html("");
+            });
+        }, 1000);
+    })
+</script> 
+      </div>
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <span id="busuanzi_container_site_pv" > 您是本站第 
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span> 次点击</span>
+
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://cdgithub.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页" target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类" target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档" target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签" target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于" target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script>
+
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+</body>
+</html>

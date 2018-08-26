@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>数据结构（一） 树 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2018/01/23/struct-tree/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="数据结构（一） 树"> 
+    <meta name="keywords" content="二叉树,Java,满树,平衡树,完全树">
+    <meta name="og:keywords" content="二叉树,Java,满树,平衡树,完全树"> 
+    <meta name="description" content="主要以 Java 的方式去探索二叉树（平衡树、满树、完全树）">
+    <meta name="og:description" content="主要以 Java 的方式去探索二叉树（平衡树、满树、完全树）">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2018/01/23/struct-tree/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2018-01-23"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+<section class="collection-head small geopattern" data-pattern-id="数据结构（一） 树">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">数据结构（一） 树</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2018">2018/01/23</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-数据结构"  title="数据结构">数据结构</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Java"> Java </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Tree"> Tree </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            
+            本文共 1373 字，
+             需 7 分钟阅读
+            
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <p>本文使用了 lombok 插件，使用了 <code class="highlighter-rouge">@Data</code>,<code class="highlighter-rouge">@Accessors(chain=true)</code>,<code class="highlighter-rouge">var</code>等，这些注解可以直接生成<code class="highlighter-rouge">getter</code>,<code class="highlighter-rouge">setter</code>和链式调用等方法，详情见 <a href="https://projectlombok.org/features/all">Project Lombok</a>，关于二叉树的一些性质和定义请参考<a href="http://www.cnblogs.com/skywang12345/p/3576328.html">http://www.cnblogs.com/skywang12345/p/3576328.html</a>。</p>
+
+<h4 id="数据结构">数据结构</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Data</span>
+<span class="nd">@Accessors</span><span class="o">(</span><span class="n">chain</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BitTreeUtils</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">T</span> <span class="n">data</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">BitTree</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">left</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">BitTree</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">right</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Boolean</span> <span class="n">isVisited</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">level</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="创建一颗二叉树">创建一颗二叉树</h4>
+<h5 id="完全二叉树">完全二叉树</h5>
+<p><strong>定义：</strong>
+若设二叉树的深度为h，除第 h 层外，其它各层 (1～h-1) 的结点数都达到最大个数，第 h 层所有的结点都连续集中在最左边，这就是完全二叉树。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BitTree</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="n">BitTree</span> <span class="nf">createCompleteTree</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="n">dataList</span><span class="o">){</span>
+        <span class="c1">//用队列来存父节点</span>
+        <span class="n">Queue</span><span class="o">&lt;</span><span class="n">BitTree</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;&gt;</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;&gt;();</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+        <span class="n">var</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BitTree</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;().</span><span class="na">setData</span><span class="o">(</span><span class="n">dataList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">count</span><span class="o">++)).</span><span class="na">setLevel</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+        <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+        <span class="k">while</span><span class="o">(</span><span class="n">count</span> <span class="o">&lt;</span> <span class="n">dataList</span><span class="o">.</span><span class="na">size</span><span class="o">()){</span>
+            <span class="n">var</span> <span class="n">node</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+            <span class="c1">//让每个 node 尽量都有 left 和 right 节点</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">count</span> <span class="o">&lt;</span> <span class="n">dataList</span><span class="o">.</span><span class="na">size</span><span class="o">()){</span>
+                <span class="n">var</span> <span class="n">leftNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BitTree</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;().</span><span class="na">setData</span><span class="o">(</span><span class="n">dataList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">count</span><span class="o">++)).</span><span class="na">setLevel</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getLevel</span><span class="o">()+</span><span class="mi">1</span><span class="o">);</span>
+                <span class="n">node</span><span class="o">.</span><span class="na">setLeft</span><span class="o">(</span><span class="n">leftNode</span><span class="o">);</span>
+                <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">leftNode</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">count</span> <span class="o">&lt;</span> <span class="n">dataList</span><span class="o">.</span><span class="na">size</span><span class="o">()){</span>
+                <span class="n">var</span> <span class="n">rightNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BitTree</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;().</span><span class="na">setData</span><span class="o">(</span><span class="n">dataList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">count</span><span class="o">++)).</span><span class="na">setLevel</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getLevel</span><span class="o">()+</span><span class="mi">1</span><span class="o">);</span>
+                <span class="n">node</span><span class="o">.</span><span class="na">setRight</span><span class="o">(</span><span class="n">rightNode</span><span class="o">);</span>
+                <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">rightNode</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">root</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h5 id="满二叉树">满二叉树</h5>
+<p><strong>定义：</strong>
+如果一棵二叉树的结点要么是叶子结点，要么它有两个孩子结点，这样的树就是满二叉树<br />
+<strong>性质：</strong>
+一个二叉树，如果每一个层的结点数都达到最大值，则这个二叉树就是满二叉树。也就是说，如果一个二叉树的层数为 \(K\)，且结点总数是\(2^k -1\) 则它就是满二叉树。 也就是说，满二叉树不存在度为1的结点。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BitTreeUtils</span> <span class="o">{</span>
+    <span class="cm">/**
+     * @param depth 树深度，从 1 开始
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">BitTree</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">createFullTree</span><span class="o">(</span><span class="kt">int</span> <span class="n">depth</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">depth</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">){</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">var</span> <span class="n">total</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="n">depth</span><span class="o">)</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="n">var</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="n">var</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BitTree</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;().</span><span class="na">setData</span><span class="o">(</span><span class="n">count</span><span class="o">++);</span>
+        <span class="n">var</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">BitTree</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+        <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+        <span class="k">while</span><span class="o">(</span><span class="n">count</span> <span class="o">&lt;=</span> <span class="n">total</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">var</span> <span class="n">node</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">count</span> <span class="o">&lt;=</span> <span class="n">total</span><span class="o">){</span>
+                <span class="n">var</span> <span class="n">leftNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BitTree</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;().</span><span class="na">setData</span><span class="o">(</span><span class="n">count</span><span class="o">++).</span><span class="na">setLevel</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getLevel</span><span class="o">()+</span><span class="mi">1</span><span class="o">);</span>
+                <span class="n">node</span><span class="o">.</span><span class="na">setLeft</span><span class="o">(</span><span class="n">leftNode</span><span class="o">);</span>
+                <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">leftNode</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">count</span> <span class="o">&lt;=</span> <span class="n">total</span><span class="o">){</span>
+                <span class="n">var</span> <span class="n">rightNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BitTree</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;().</span><span class="na">setData</span><span class="o">(</span><span class="n">count</span><span class="o">++).</span><span class="na">setLevel</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getLevel</span><span class="o">()+</span><span class="mi">1</span><span class="o">);</span>
+                <span class="n">node</span><span class="o">.</span><span class="na">setRight</span><span class="o">(</span><span class="n">rightNode</span><span class="o">);</span>
+                <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">rightNode</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">root</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<h5 id="平衡二叉树">平衡二叉树</h5>
+<p><strong>定义：</strong>
+平衡二叉树比较复杂请参考 <a href="http://blog.csdn.net/javazejian/article/details/53892797">http://blog.csdn.net/javazejian/article/details/53892797</a></p>
+
+<h4 id="二叉树的遍历">二叉树的遍历</h4>
+<h5 id="前序遍历">前序遍历</h5>
+<p><strong>顺序：</strong>
+根左右</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BitTreeUtils</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">preOrderTraverse</span><span class="o">(</span><span class="n">BitTree</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">){</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">//先遍历中节点</span>
+        <span class="n">root</span><span class="o">.</span><span class="na">setIsVisited</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="c1">//再遍历左节点</span>
+        <span class="n">preOrderTraverse</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">getLeft</span><span class="o">());</span>
+        <span class="c1">//最后遍历右节点</span>
+        <span class="n">preOrderTraverse</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">getRight</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h5 id="中序遍历">中序遍历</h5>
+<p><strong>顺序：</strong>
+左根右</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BitTreeUtils</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">inOrderTraverse</span><span class="o">(</span><span class="n">BitTree</span> <span class="n">root</span><span class="o">){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">){</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">//先遍历左节点</span>
+        <span class="n">inOrderTraverse</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">getLeft</span><span class="o">());</span>
+        <span class="c1">//再遍历中节点</span>
+        <span class="n">root</span><span class="o">.</span><span class="na">setIsVisited</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="c1">//最后遍历右节点</span>
+        <span class="n">inOrderTraverse</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">getRight</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h5 id="后序遍历">后序遍历</h5>
+<p><strong>顺序：</strong>
+左右根</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BitreeUtils</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">postOrderTraverse</span><span class="o">(</span><span class="n">BitTree</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">){</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">//先遍历左节点</span>
+        <span class="n">postOrderTraverse</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">getLeft</span><span class="o">());</span>
+        <span class="c1">//再遍历右节点</span>
+        <span class="n">postOrderTraverse</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">getRight</span><span class="o">());</span>
+        <span class="c1">//最后遍历中节点</span>
+        <span class="n">root</span><span class="o">.</span><span class="na">setVisited</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h5 id="分层遍历">分层遍历</h5>
+<p>从根节点开始，由上而下，从左至右，一层一层遍历</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BitTreeUtils</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">levelTraverse</span><span class="o">(</span><span class="n">BitTree</span> <span class="n">root</span><span class="o">){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">){</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">var</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">BitTree</span><span class="o">&gt;();</span>
+        <span class="n">root</span><span class="o">.</span><span class="na">setVisited</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+        <span class="k">while</span><span class="o">(!</span><span class="n">queue</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()){</span>
+            <span class="n">var</span> <span class="n">node</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+            <span class="n">var</span> <span class="n">leftNode</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">getLeft</span><span class="o">();</span>
+            <span class="n">var</span> <span class="n">rightNode</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">getRight</span><span class="o">();</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">leftNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+                <span class="n">leftNode</span><span class="o">.</span><span class="na">setVisited</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+                <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">leftNode</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">rightNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+                <span class="n">rightNode</span><span class="o">.</span><span class="na">setVisited</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+                <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">rightNode</span><span class="o">)</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="cm">/*
+     * 按层遍历且输出层号
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">travelWithLevelNum</span><span class="o">(</span><span class="n">BitTree</span> <span class="n">root</span><span class="o">){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">){</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">var</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">BitTree</span><span class="o">&gt;();</span>
+        <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">levelNum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">while</span><span class="o">(!</span><span class="n">queue</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()){</span>
+            <span class="n">var</span> <span class="n">count</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+            <span class="n">levelNum</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">count</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+                <span class="n">var</span> <span class="n">node</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+                <span class="n">node</span><span class="o">.</span><span class="na">setVisited</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"level num: "</span><span class="o">+</span> <span class="n">levelNum</span><span class="o">);</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getLeft</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+                    <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getLeft</span><span class="o">());</span>
+                <span class="o">}</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getRight</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+                    <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">geteRight</span><span class="o">());</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<h4 id="二叉树性质">二叉树性质</h4>
+<h5 id="获取树的深度">获取树的深度</h5>
+<p><strong>定义</strong> 
+树根下中所有分支结点层数的最大值，递归定义。（一般以根节点深度层数为0）</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BitTreeUtils</span><span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getDepth</span><span class="o">(</span><span class="n">BitTree</span> <span class="n">root</span><span class="o">){</span>
+       <span class="k">if</span><span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">){</span>
+           <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+       <span class="o">}</span>
+       <span class="c1">//比较左子树和右子树的深度，取其最大值</span>
+       <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">getDepth</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">getLeft</span><span class="o">()),</span><span class="n">getDepth</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">getRight</span><span class="o">()))</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+   <span class="o">}</span> 
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h5 id="判断平衡树">判断平衡树</h5>
+<p><strong>定义：</strong>
+它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BitTreeUtils</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">checkBalance</span><span class="o">(</span><span class="n">BitTree</span> <span class="n">root</span><span class="o">){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">BitTreeUtils</span><span class="o">.</span><span class="na">getDepth</span><span class="o">(</span><span class="n">root</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">){</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">var</span> <span class="n">minus</span> <span class="o">=</span> <span class="n">getDepth</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">getLeft</span><span class="o">())</span> <span class="o">-</span> <span class="n">getDepth</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">getRight</span><span class="o">());</span>
+        <span class="k">return</span> <span class="n">minus</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">minus</span> <span class="o">&lt;=</span><span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2018/01/23/chinese-copywriting-guidelines/"><span style="color:black">上一篇：</span> 中文文案排版指北（简体中文版）</a>
+        
+        
+          <a class="next" href="/2018/01/31/it-guide-stack/"><span style="color:black">下一篇：</span>程序员代码面试指南 栈 </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+<!--PC和WAP自适应版-->
+<!-- 打赏-->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div style="text-align: center">
+    <div id="cyReward" role="cylabs" data-use="reward"></div>
+</div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cys8B776p"></script>
+<div id="SOHUCS"></div>
+<script type="text/javascript"> 
+    (function () {
+        var appid = 'cys8B776p';
+        var conf = 'prod_f5e62400886309bd420b5adfe00275c4';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else { var loadJs = function (d, a) { var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement; var b = document.createElement("script"); b.setAttribute("type", "text/javascript"); b.setAttribute("charset", "UTF-8"); b.setAttribute("src", d); if (typeof a === "function") { if (window.attachEvent) { b.onreadystatechange = function () { var e = b.readyState; if (e === "loaded" || e === "complete") { b.onreadystatechange = null; a() } } } else { b.onload = a } } c.appendChild(b) }; loadJs("https://changyan.sohu.com/upload/changyan.js", function () { window.changyan.api.config({ appid: appid, conf: conf }) }); }
+
+    })();
+
+    //删除建议打赏1-10元
+    $(function () {
+        setTimeout(() => {
+            $(".cy-reward-txt").each(function () {
+                $(this).html("");
+            })
+            $(".power-cy").each(function () {
+                $(this).html("");
+            });
+            $(".section-service-w").each(function () {
+                $(this).html("");
+            });
+        }, 1000);
+    })
+</script> 
+      </div>
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <span id="busuanzi_container_site_pv" > 您是本站第 
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span> 次点击</span>
+
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://cdgithub.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页" target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类" target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档" target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签" target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于" target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script>
+
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+</body>
+</html>

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>程序员面试宝典 第5版 链表 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2018/01/14/crack-interview-linkedlist/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="程序员面试宝典 第5版 链表"> 
+    <meta name="keywords" content="刷题, Java">
+    <meta name="og:keywords" content="刷题, Java"> 
+    <meta name="description" content="程序员面试宝典 第5版本 链表习题解答笔记">
+    <meta name="og:description" content="程序员面试宝典 第5版本 链表习题解答笔记">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2018/01/14/crack-interview-linkedlist/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2018-01-14"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+<section class="collection-head small geopattern" data-pattern-id="程序员面试宝典 第5版 链表">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">程序员面试宝典 第5版 链表</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2018">2018/01/14</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-刷题"  title="刷题">刷题</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-刷题"> 刷题 </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Java"> Java </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            
+            本文共 2161 字，
+             需 12 分钟阅读
+            
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <p>程序员面试宝典 第5版本 链表习题解答笔记</p>
+
+<h5 id="数据结构">数据结构</h5>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 单向链表
+ */</span>
+<span class="kd">class</span> <span class="nc">OneWayNode</span> <span class="o">{</span>
+    <span class="n">Object</span> <span class="n">data</span><span class="o">;</span>
+    <span class="n">OneWayNode</span> <span class="n">next</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">OneWayNode</span><span class="o">(</span><span class="n">Object</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h5 id="第-1-题-">第 1 题 √</h5>
+<p>在不使用额外空间的情况下移除未排序链表中的重复节点</p>
+<blockquote>
+  <p>在不使用额外空间只能用时间换空间，即循环两层，外层为待比较的节点，内层为比较节点后节点的遍历</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedList</span> <span class="o">{</span> 
+    <span class="cm">/**
+     * 第 2.1 题，在不使用额外空间的情况下删除未排序链表的重复节点
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">makeOnWayNodesUnique</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">header</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">header</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="n">OneWayNode</span> <span class="n">std</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">std</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">OneWayNode</span> <span class="n">runner</span> <span class="o">=</span> <span class="n">std</span><span class="o">;</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">runner</span><span class="o">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">//找到重复节点并删除掉</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">runner</span><span class="o">.</span><span class="na">next</span><span class="o">.</span><span class="na">data</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">std</span><span class="o">.</span><span class="na">data</span><span class="o">))</span> <span class="o">{</span>
+                    <span class="n">runner</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="na">next</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">runner</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="n">std</span> <span class="o">=</span> <span class="n">std</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h5 id="第-2-题-">第 2 题 √</h5>
+<p>找出单向表中的倒数第 K 个节点</p>
+<blockquote>
+  <p>可以先求出表的长度，然后在顺序找 Length - K 的点</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedList</span> <span class="o">{</span>
+    <span class="cm">/**
+     * 第 2.2 题，找出单向列表中的倒数第 K 个节点
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">OneWayNode</span> <span class="nf">findKLastNode</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">header</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">header</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">OneWayNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">length</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kt">int</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">length</span> <span class="o">-</span> <span class="n">k</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">lst</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">count</span> <span class="o">!=</span> <span class="n">lst</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">cur</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h5 id="第-3-题-">第 3 题 √</h5>
+<p>删除单向表中的某个节点，假定只能访问该节点</p>
+<blockquote>
+  <p>该方法不能删除尾节点</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedList</span> <span class="o">{</span>
+    <span class="cm">/**
+     * 第 2.3 题，删除某个节点，假定只能访问该节点
+     * 不能删除 Tail 节点
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">deleteNode</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">delNode</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">delNode</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">delNode</span><span class="o">.</span><span class="na">next</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">OneWayNode</span> <span class="n">next</span> <span class="o">=</span> <span class="n">delNode</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="n">delNode</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">next</span><span class="o">.</span><span class="na">data</span><span class="o">;</span>
+        <span class="n">delNode</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h5 id="第-4-题">第 4 题</h5>
+<p>以给定值 x 为基准将链表分为两部分，小于 x 的在前，大于等于 x 的在后</p>
+<blockquote>
+  <p>对于链表的划分操作可以建立临时链表保存划分的部分</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedList</span> <span class="o">{</span>
+    <span class="cm">/**
+     * 第 2.4 题，将链表分成两部分，小于 x 的和不小于 x 的，小于 x 的部分排在前面
+     * 构建三条链表：1.小于 x 的部分，2.等于 x 的部分，3. 大于 x 的部分，将三个链表连接起来即可
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">OneWayNode</span> <span class="nf">sortNode</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">header</span><span class="o">,</span> <span class="n">OneWayNode</span> <span class="n">xNode</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">OneWayNode</span> <span class="n">beforeStart</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">OneWayNode</span> <span class="n">afterStart</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">OneWayNode</span> <span class="n">beforeEnd</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">OneWayNode</span> <span class="n">afterEnd</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">OneWayNode</span> <span class="n">equalsStart</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">OneWayNode</span> <span class="n">equalsEnd</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">OneWayNode</span> <span class="n">pointer</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">pointer</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">isSmaller</span><span class="o">(</span><span class="n">pointer</span><span class="o">,</span> <span class="n">xNode</span><span class="o">))</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">beforeStart</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">beforeStart</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">;</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">beforeEnd</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="n">beforeEnd</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">isBigger</span><span class="o">(</span><span class="n">pointer</span><span class="o">,</span> <span class="n">xNode</span><span class="o">))</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">afterStart</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">afterStart</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">;</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">afterEnd</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="n">afterEnd</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">isEquals</span><span class="o">(</span><span class="n">pointer</span><span class="o">,</span> <span class="n">xNode</span><span class="o">))</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">equalsStart</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">equalsStart</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">;</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">equalsEnd</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="n">equalsEnd</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">OneWayNode</span> <span class="n">start</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">afterStart</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">afterEnd</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">afterStart</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">equalsStart</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">equalsEnd</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="n">equalsEnd</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">afterStart</span><span class="o">;</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">equalsStart</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">beforeStart</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">beforeEnd</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="n">beforeEnd</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">equalsStart</span><span class="o">;</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">beforeStart</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">start</span><span class="o">;</span>
+    <span class="o">}</span>
+
+   <span class="cm">/**
+     * x 节点值小于 y 节点值
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Boolean</span> <span class="nf">isSmaller</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">x</span><span class="o">,</span> <span class="n">OneWayNode</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">data</span><span class="o">.</span><span class="na">toString</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">y</span><span class="o">.</span><span class="na">data</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+        <span class="k">return</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Boolean</span> <span class="nf">isEquals</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">x</span><span class="o">,</span> <span class="n">OneWayNode</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">data</span><span class="o">.</span><span class="na">toString</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">y</span><span class="o">.</span><span class="na">data</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+        <span class="k">return</span> <span class="n">val</span> <span class="o">==</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Boolean</span> <span class="nf">isBigger</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">x</span><span class="o">,</span> <span class="n">OneWayNode</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">data</span><span class="o">.</span><span class="na">toString</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">y</span><span class="o">.</span><span class="na">data</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+        <span class="k">return</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h5 id="第-5-题-">第 5 题 √</h5>
+<p>1-&gt;2-&gt;3 代表数字 321 求这样含义的两个链表之和的链表</p>
+<blockquote>
+  <p>思考，如果用 3-&gt;2-&gt;1 代表 321 又该如何处理</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedList</span> <span class="o">{</span>
+        <span class="cm">/**
+     * 第 2.5 题，1-&gt;2-&gt;3 表示数：321 求这样的两个链表相加的 和 的链表
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">OneWayNode</span> <span class="nf">addTwoIntNode</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">node1</span><span class="o">,</span> <span class="n">OneWayNode</span> <span class="n">node2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">node1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">node2</span> <span class="o">==</span> <span class="kc">null</span><span class="o">){</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kt">int</span> <span class="n">carray</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">OneWayNode</span> <span class="n">pointer</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">OneWayNode</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">node1</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">node2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">Integer</span> <span class="n">val1</span> <span class="o">=</span> <span class="o">(</span><span class="n">Integer</span><span class="o">)</span> <span class="n">node1</span><span class="o">.</span><span class="na">data</span><span class="o">;</span>
+            <span class="n">Integer</span> <span class="n">val2</span> <span class="o">=</span> <span class="o">(</span><span class="n">Integer</span><span class="o">)</span> <span class="n">node2</span><span class="o">.</span><span class="na">data</span><span class="o">;</span>
+            <span class="n">Integer</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">val1</span> <span class="o">+</span> <span class="n">val2</span> <span class="o">+</span> <span class="n">carray</span><span class="o">;</span>
+            <span class="n">Integer</span> <span class="n">ones</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">%</span> <span class="mi">10</span><span class="o">;</span>
+            <span class="n">carray</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">/</span> <span class="mi">10</span><span class="o">;</span>
+            <span class="n">OneWayNode</span> <span class="n">sumNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OneWayNode</span><span class="o">(</span><span class="n">ones</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">pointer</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">pointer</span> <span class="o">=</span> <span class="n">sumNode</span><span class="o">;</span>
+                <span class="n">header</span> <span class="o">=</span> <span class="n">sumNode</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">pointer</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">sumNode</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">sumNode</span><span class="o">;</span>
+            <span class="n">node1</span> <span class="o">=</span> <span class="n">node1</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="n">node2</span> <span class="o">=</span> <span class="n">node2</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">carray</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">OneWayNode</span> <span class="n">carryNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OneWayNode</span><span class="o">(</span><span class="n">carray</span><span class="o">);</span>
+            <span class="n">pointer</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">carryNode</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">header</span><span class="o">;</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h5 id="第-6-题">第 6 题</h5>
+<p>给定一个环链表，实现一个算法返回环路的开头结点</p>
+<blockquote>
+  <p>法一：每移动一下 pointer 都从头 header-&gt;pointer 开始遍历寻找是否有等于 pointer.next 的节点，有则是起始节点返回<br />
+法二：使用 FastRunner/SlowerRunner 算法</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedList</span> <span class="o">{</span>
+     <span class="cm">/**
+     * 第 2.6 题，若链表中存在环则输出环的起始节点
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">OneWayNode</span> <span class="nf">findLoopStart</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">header</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">header</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">OneWayNode</span> <span class="n">pointer</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">pointer</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">OneWayNode</span> <span class="n">trave</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">trave</span> <span class="o">!=</span> <span class="n">pointer</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">trave</span> <span class="o">==</span> <span class="n">pointer</span><span class="o">.</span><span class="na">next</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">return</span> <span class="n">trave</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="n">trave</span> <span class="o">=</span> <span class="n">trave</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * 第 2.6 题，方法二，采用 FastRunner/SlowerRunner 算法
+     * 思想：
+     * 0. FasterRunner 与 SlowerRunner 必然相遇，且相遇点距离环起始点的距离和头结点距离环起始点的距离一致
+     * 思路： 
+     * 1. FasterRuuner 每次移动两步，SlowerRunnder 每次移动一步，非环的长度为 K
+     * 2. 第 K 步的时候 SlowerRunner 进入环的起始点，则 FastRunner 处于环中 K 的位置
+     * 3. 现在两则均处于环中，可以看做是 FastRunner 在追赶 SlowerRunner ，且每次两则的距离会减少 1 
+     * 4. SlowerRuuner 领先 FasterRunner LoopSize - K 的距离，则两则相遇的位置是离环的起始点相差 K 
+     * 5. 定义两指针，一个指向 Header，一个指向 相遇点，两者同时出发，则相遇点即为环的起始点
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">OneWayNode</span> <span class="nf">findLoopStart2</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">header</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">header</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">OneWayNode</span> <span class="n">slower</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="n">OneWayNode</span> <span class="n">faster</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">faster</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">faster</span><span class="o">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">faster</span> <span class="o">=</span> <span class="n">faster</span><span class="o">.</span><span class="na">next</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="n">slower</span> <span class="o">=</span> <span class="n">slower</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="c1">//两者相遇了</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">faster</span> <span class="o">==</span> <span class="n">slower</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="c1">//没有环</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">faster</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">faster</span><span class="o">.</span><span class="na">next</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="n">slower</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">slower</span> <span class="o">!=</span> <span class="n">faster</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">slower</span> <span class="o">=</span> <span class="n">slower</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="n">faster</span> <span class="o">=</span> <span class="n">faster</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">slower</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<h5 id="第-7-题-">第 7 题 √</h5>
+<p>编写一个数，检查链表是否为回文</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedList</span> <span class="o">{</span>
+    <span class="cm">/**
+     * 第 2.7 题检查链表是否为回文 
+     * 回文：1-&gt;2-&gt;3-&gt;2-&gt;1 这样的链表
+     * 将链表逆序复制在另一个链表中，然后比较是否相等
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isPalindrome</span><span class="o">(</span><span class="n">OneWayNode</span> <span class="n">header</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">OneWayNode</span> <span class="n">pointer</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="n">OneWayNode</span> <span class="n">reverse</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">pointer</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">OneWayNode</span> <span class="n">copyNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OneWayNode</span><span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">data</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">reverse</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">reverse</span> <span class="o">=</span> <span class="n">copyNode</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">copyNode</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">reverse</span><span class="o">;</span>
+                <span class="n">reverse</span> <span class="o">=</span> <span class="n">copyNode</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">pointer</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">pointer</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">pointer</span><span class="o">.</span><span class="na">data</span> <span class="o">!=</span> <span class="n">reverse</span><span class="o">.</span><span class="na">data</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">reverse</span> <span class="o">=</span> <span class="n">reverse</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">pointer</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h5 id="总结">总结</h5>
+<p>链表分为单向链表和双向链表，本次全部采用单向链表解决问题，虽然单向链表构造简单但是在解决问题的时候却很麻烦，有如下思考思路：</p>
+<ol>
+  <li>定义一些临时指针指向链表，最后返回这些临时指针构造的链表</li>
+  <li>将链表数据复制到一个反向链表中，这样就可以同时获得头部和尾部指针进行操作，或者用 Stack 然后 pop 也是反向操作</li>
+  <li>FastRunner/SlowRunner 算法 寻找回路</li>
+  <li>能不用递归尽量不用，递归边界条件不是很好判断</li>
+  <li>有时候用 pointer.next 去与目标值比较，这样可以同时持有 pointer 和 pointer.next 两个指针而不用定义临时变量</li>
+</ol>
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2018/01/13/java-string-buffer-builder/"><span style="color:black">上一篇：</span> Java 中 String、StringBuffer和StringBuilder的区别</a>
+        
+        
+          <a class="next" href="/2018/01/15/deepin-into-java/"><span style="color:black">下一篇：</span>深入 Java 核心 </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+<!--PC和WAP自适应版-->
+<!-- 打赏-->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div style="text-align: center">
+    <div id="cyReward" role="cylabs" data-use="reward"></div>
+</div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cys8B776p"></script>
+<div id="SOHUCS"></div>
+<script type="text/javascript"> 
+    (function () {
+        var appid = 'cys8B776p';
+        var conf = 'prod_f5e62400886309bd420b5adfe00275c4';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else { var loadJs = function (d, a) { var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement; var b = document.createElement("script"); b.setAttribute("type", "text/javascript"); b.setAttribute("charset", "UTF-8"); b.setAttribute("src", d); if (typeof a === "function") { if (window.attachEvent) { b.onreadystatechange = function () { var e = b.readyState; if (e === "loaded" || e === "complete") { b.onreadystatechange = null; a() } } } else { b.onload = a } } c.appendChild(b) }; loadJs("https://changyan.sohu.com/upload/changyan.js", function () { window.changyan.api.config({ appid: appid, conf: conf }) }); }
+
+    })();
+
+    //删除建议打赏1-10元
+    $(function () {
+        setTimeout(() => {
+            $(".cy-reward-txt").each(function () {
+                $(this).html("");
+            })
+            $(".power-cy").each(function () {
+                $(this).html("");
+            });
+            $(".section-service-w").each(function () {
+                $(this).html("");
+            });
+        }, 1000);
+    })
+</script> 
+      </div>
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <span id="busuanzi_container_site_pv" > 您是本站第 
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span> 次点击</span>
+
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://cdgithub.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页" target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类" target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档" target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签" target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于" target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script>
+
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+</body>
+</html>
