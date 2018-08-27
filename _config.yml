@@ -119,8 +119,8 @@ comments_provider: changyan
 # ---------------- #
 #    Analytics     #
 # ---------------- #
-baidu_analytics:    false
-baidu_analytics_id: 9f767c9440692f340fc3243d48ee3931
+baidu_analytics: true
+baidu_analytics_id: a908f0985fa9991b706a3f4a299bb47b
 cnzz_analytics:     false
 cnzz_analytics_id:  1260117641&online=1
 
