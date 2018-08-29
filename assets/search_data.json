@@ -1,5 +1,11 @@
 {
   
+  "2018-08-29-algorithm-calculator": {
+    "title": "算法-四则运算",
+    "url": " /2018/08/29/algorithm-calculator/",
+    "category": "算法"
+  },
+  
   "2018-08-23-deploy-with-git-hook": {
     "title": "使用 Git hook 实现自动化部署",
     "url": " /2018/08/23/deploy-with-git-hook/",
@@ -1239,6 +1245,12 @@
     "title": "使用 Git hook 实现自动化部署",
     "url": "/2018/08/23/deploy-with-git-hook/",
     "category": "[&quot;\u5DE5\u5177&quot;]"
+  },
+  
+  "2018-08-29-algorithm-calculator": {
+    "title": "算法-四则运算",
+    "url": "/2018/08/29/algorithm-calculator/",
+    "category": "[&quot;\u7B97\u6CD5&quot;]"
   }
   
 }
