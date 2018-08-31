@@ -95,7 +95,7 @@ sudo apt-get install privoxy
   　　 Linux下面的全局翻墙设置很麻烦，不像windows或者mac在shadowsocks里面勾选全局翻墙就行了，一般来说浏览器翻墙就行了，当遇到npm或者gem，gradle在终端编译不过的时候一般都是被墙了，所以需要里面privoxy来设置代理转发给socks5实现翻墙
     
 
-[href1]: http://my.yizhihongxing.com/aff.php?aff=1943
+[href1]: http://order.yizhihongxing2018.com/aff.php?aff=1943
 [href2]: https://github.com/shadowsocks/shadowsocks-qt5
 [href3]: http://www.privoxy.org/
 [href4]: https://github.com/shadowsocks/shadowsocks-qt5/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97

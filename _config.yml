@@ -147,6 +147,5 @@ exclude: [resource]
 # ---------------------#
 # netease music player #   
 # ---------------------# 
-music: /music.163.com/outchain/player?type=0&id=2052758156&auto=0&height=430
-
+music: /music.163.com/outchain/player?type=0&id=2313686991&auto=1&height=430
 
