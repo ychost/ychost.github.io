@@ -111,7 +111,7 @@ comments: false
         blog.encodeHylinks($(".home-cat-hylink"))
     }(blog))
     // 注册 service worker
-    if (window.location.href.indexOf("localhost") == -1 || window.location.protocol == "https:"){
+    if (window.location.href.indexOf("localhost") == -1 && window.location.protocol == "https:"){
         if (navigator.serviceWorker) {
             navigator.serviceWorker.register('/service-worker.js', {scope: '/'})
         }
