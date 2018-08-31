@@ -1,4 +1,214 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="http://blog.sudoyc.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://blog.sudoyc.com/" rel="alternate" type="text/html" /><updated>2018-08-29T19:22:34+08:00</updated><id>http://blog.sudoyc.com/</id><title type="html">夏天</title><subtitle>夏天的个人博客</subtitle><author><name>ychost</name></author><entry><title type="html">算法-四则运算</title><link href="http://blog.sudoyc.com/2018/08/29/algorithm-calculator/" rel="alternate" type="text/html" title="算法-四则运算" /><published>2018-08-29T00:00:00+08:00</published><updated>2018-08-29T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2018/08/29/algorithm-calculator</id><content type="html" xml:base="http://blog.sudoyc.com/2018/08/29/algorithm-calculator/">&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="http://blog.sudoyc.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://blog.sudoyc.com/" rel="alternate" type="text/html" /><updated>2018-08-31T10:29:55+08:00</updated><id>http://blog.sudoyc.com/</id><title type="html">夏天</title><subtitle>夏天的个人博客</subtitle><author><name>ychost</name></author><entry><title type="html">Jenkins+Docker+Maven+Java+Gogs 持续集成</title><link href="http://blog.sudoyc.com/2018/08/30/jenkins-docker-maven/" rel="alternate" type="text/html" title="Jenkins+Docker+Maven+Java+Gogs 持续集成" /><published>2018-08-30T00:00:00+08:00</published><updated>2018-08-30T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2018/08/30/jenkins-docker-maven</id><content type="html" xml:base="http://blog.sudoyc.com/2018/08/30/jenkins-docker-maven/">&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
+&lt;p&gt;Jenkins 部署流程&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/tutorial/jenkins-process.png&quot; data-lightbox=&quot;jenkins&quot;&gt;&lt;img src=&quot;/images/post/tutorial/jenkins-process.png&quot; alt=&quot;jenkins&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;有了 jenkins 之后我们只需要 push 代码到仓库，后续的编译、测试、打包、启动服务等操作都是自动完成的。第 3-5 步骤可以自己写 Dockerfile 来执行这样可以任意变更执行的内容和结果。&lt;/p&gt;
+
+&lt;p&gt;注：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;关于 Jenkins，Docker  怎么安装不在本文的范围内，网上有很多教程自行搜索&lt;/li&gt;
+  &lt;li&gt;本文测试的时候 Jenkins 和 Docker 是装在同一个服务器的，如果非同一个服务器可以通过 SSH 插件解决&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;jenkins-配置&quot;&gt;Jenkins 配置&lt;/h3&gt;
+&lt;h4 id=&quot;安装插件&quot;&gt;安装插件&lt;/h4&gt;
+&lt;p&gt;系统管理 -&amp;gt; 插件管理 -&amp;gt; 可选插件 -&amp;gt; 直接安装&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Maven Integration&lt;/li&gt;
+  &lt;li&gt;Gogs plugin&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/tutorial/jenkins-3.png&quot; data-lightbox=&quot;jenkins&quot;&gt;&lt;img src=&quot;/images/post/tutorial/jenkins-3.png&quot; alt=&quot;jenkins&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;环境配置&quot;&gt;环境配置&lt;/h4&gt;
+&lt;p&gt;系统管理 -&amp;gt; 全局工具配置&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;配置好 JDK、Git、Maven 等路径
+&lt;a href=&quot;/images/post/tutorial/jenkins-2.png&quot; data-lightbox=&quot;jenkins&quot;&gt;&lt;img src=&quot;/images/post/tutorial/jenkins-2.png&quot; alt=&quot;jenkins&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;创建任务&quot;&gt;创建任务&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;新建任务-&amp;gt;构建一个maven项目
+&lt;a href=&quot;/images/post/tutorial/jenkins-1.png&quot; data-lightbox=&quot;jenkins&quot;&gt;&lt;img src=&quot;/images/post/tutorial/jenkins-1.png&quot; alt=&quot;jenkins&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;源码管理 -&amp;gt; Git&lt;/p&gt;
+
+    &lt;p&gt;输入自己的代码仓库 URL 及登录的 Credentials
+&lt;a href=&quot;/images/post/tutorial/jenkins-4.png&quot; data-lightbox=&quot;jenkins&quot;&gt;&lt;img src=&quot;/images/post/tutorial/jenkins-4.png&quot; alt=&quot;jenkins&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/post/tutorial/jenkins-5.png&quot; data-lightbox=&quot;jenkins&quot;&gt;&lt;img src=&quot;/images/post/tutorial/jenkins-5.png&quot; alt=&quot;jenkins&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;构建触发器 -&amp;gt; Build when a change is pushed to Gogs&lt;/p&gt;
+
+    &lt;p&gt;这样每次 push 到 Gogs 仓库都会触发任务
+&lt;a href=&quot;/images/post/tutorial/jenkins-6.png&quot; data-lightbox=&quot;jenkins&quot;&gt;&lt;img src=&quot;/images/post/tutorial/jenkins-6.png&quot; alt=&quot;jenkins&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Gogs 仓库设置 Webhook
+  &lt;a href=&quot;/images/post/tutorial/jenkins-7.png&quot; data-lightbox=&quot;jenkins&quot;&gt;&lt;img src=&quot;/images/post/tutorial/jenkins-7.png&quot; alt=&quot;jenkins&quot; /&gt;&lt;/a&gt;
+  注意替换 url 中的域名和 taskName
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; http://jenkins.xx.com/gogs-webhook?/?job=taskName
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Build, PostSteps&lt;/p&gt;
+
+    &lt;p&gt;这里设置代码的构建命令和构建完成后执行的命令，第一个是普通 maven 项目的构建命令可以去查相关的构建参数含义，第二个是任务构建成功后执行的命令这里将执行命令的具体内容放到了&lt;font color=&quot;red&quot;&gt;代码根目录的 run.sh&lt;/font&gt;
+&lt;a href=&quot;/images/post/tutorial/jenkins-9.png&quot; data-lightbox=&quot;jenkins&quot;&gt;&lt;img src=&quot;/images/post/tutorial/jenkins-9.png&quot; alt=&quot;jenkins&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/post/tutorial/jenkins-8.png&quot; data-lightbox=&quot;jenkins&quot;&gt;&lt;img src=&quot;/images/post/tutorial/jenkins-8.png&quot; alt=&quot;jenkins&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; clean install &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; maven.test.skip&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+ chmod +x ./run.sh
+ &lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; ./run.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;注：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;通过第 3、4 步设置那么每次的 push 都会触发 Webhook 进而触发 jenkins 的构建任务&lt;/li&gt;
+  &lt;li&gt;一般情况都是自己手工点构建，不需要通过 push 来触发从而可以避免不必要的构建任务&lt;/li&gt;
+  &lt;li&gt;PostSteps 里面执行的是 run.sh 该文件在后面会有介绍&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;创建-maven-项目&quot;&gt;创建 Maven 项目&lt;/h3&gt;
+&lt;p&gt;这里直接创建了一个简单的 SpringBoot 的项目，注意在根目录多加了一个 run.sh 和 Dockerfile，具体内容在 Dockerfile 段落中介绍&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/tutorial/jenkins-10.png&quot; data-lightbox=&quot;jenkins&quot;&gt;&lt;img src=&quot;/images/post/tutorial/jenkins-10.png&quot; alt=&quot;jenkins&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;docker-私有仓库&quot;&gt;Docker 私有仓库&lt;/h3&gt;
+&lt;p&gt;上述步骤基本完成了 Jenkins 的配置，剩下的就是 Docker 方面的配置了。采用 Docker 私有仓库的原因是方便镜像的构建比如同一个内网中需要用到同一个镜像这样拉取速度就很快了而且可以任意的对镜像进行配置。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;拉取创建私有仓库必备的 registry，并创建容器
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; docker run &lt;span class=&quot;nt&quot;&gt;-itd&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 5000:5000 &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$PWD&lt;/span&gt;/data:/var/lib/registry &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; registry registry
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;注：这里是将当前目录下面的 ./data 目录用来挂载的，主要用来存自己的镜像文件&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;修改 /etc/docker/daemon.json 因为没有配置 https 证书所以要直接放行，根据自己的 ip 来设置，这里只放行了本地 ip
+    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;insecure-registries&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;localhost:5000&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;测试推送，假设本地已经有镜像 centos
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; docker tag tomcat localhost:5000/centos
+ docker push localhost:5000/centos
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;注：通过修改本地镜像的 tag，tag 的格式必须是 url/xxx 才能进行正确的推送&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;测试拉取镜像
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; docker pull localhost:5000/centos
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;dockerfile&quot;&gt;Dockerfile&lt;/h3&gt;
+&lt;p&gt;Dockerfile 语法很简单请参考 &lt;a href=&quot;https://www.cnblogs.com/boshen-hzb/p/6400272.html&quot;&gt;dockerfile 介绍&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;基础镜像，替换为国内源的 Centos7，注意 localhost:5000/centos 来自于私有仓库
+    &lt;div class=&quot;language-dockerfile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;c&quot;&gt;# base image is centos&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;# replace repo to aliyun mirror&lt;/span&gt;
+ FROM localhost:5000/centos
+
+ RUN yum install -y wget &amp;amp;&amp;amp; \
+         cd /etc/yum.repos.d/ &amp;amp;&amp;amp; \
+         mv CentOS-Base.repo CentOS-Base.repo_bak &amp;amp;&amp;amp; \
+         wget -O CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo &amp;amp;&amp;amp; \
+         yum clean all &amp;amp;&amp;amp; \
+         yum makecache &amp;amp;&amp;amp; \
+         yum -y update
+
+ ENTRYPOINT bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;ul&gt;
+      &lt;li&gt;将文件命名为 Dockerfile 然后执行命令，注意最后有个 . 代表当前目录
+        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;docker build localhost:5000/base &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+   &lt;span class=&quot;c&quot;&gt;# 提交到私有仓库 &lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;docker push localhost:5000/base
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;JDK8 镜像，在基础镜像的基础上添加了 JDK 文件
+    &lt;div class=&quot;language-dockerfile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; FROM localhost:5000/base
+ &lt;span class=&quot;c&quot;&gt;# 注 jdk1.8.0_181.tar.gz 要与 Dockerfile 同目录&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;# ADD 命令会自动解压&lt;/span&gt;
+ ADD jdk1.8.0_181.tar.gz /opt/
+
+ ENV JAVA_HOME=/opt/jdk1.8.0_181
+ ENV PATH=$JAVA_HOME/bin:$PATH
+
+ ENTRYPOINT bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;ul&gt;
+      &lt;li&gt;将 JDK 文件放到和 Dockerfile 同目录，注意名字，这里是 jdk1.8.0_181.tar.gz&lt;/li&gt;
+      &lt;li&gt;执行命令
+        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;docker build localhost:5000/jdk8 &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+   &lt;span class=&quot;c&quot;&gt;# 提交到私有仓库&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;docker push localhost:5000/jdk8
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;编写工程的 Dockerfile，放在&lt;font color=&quot;red&quot;&gt;工程根目录&lt;/font&gt;，注意 jar 文件名字
+    &lt;div class=&quot;language-dockerfile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;c&quot;&gt;############################################################&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;# Dockerfile to build SpringBoot Installed Containers&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;# Based on Centos&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;############################################################&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;# 基础镜像 jdk8&lt;/span&gt;
+ FROM localhost:5000/jdk8
+
+ &lt;span class=&quot;c&quot;&gt;# 作者&lt;/span&gt;
+ MAINTAINER ychost&amp;lt;ychost@outlook.com&amp;gt;
+
+ # 添加编译结果到镜像里面
+ ADD target/hello-0.0.1-SNAPSHOT.jar /opt
+
+ &lt;span class=&quot;c&quot;&gt;# 暴露端口&lt;/span&gt;
+ EXPOSE 8080
+
+ &lt;span class=&quot;c&quot;&gt;# 容器启动后执行的命令&lt;/span&gt;
+ ENTRYPOINT [&quot;java&quot; ,&quot;-jar&quot;,&quot;/opt/hello-0.0.1-SNAPSHOT.jar&quot;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;编写工程的的入口脚本 run.sh，放在&lt;font color=&quot;red&quot;&gt;工程根目录&lt;/font&gt;
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;c&quot;&gt;#!/usr/bin/env bash&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;# 删除旧容器&lt;/span&gt;
+ docker rm &lt;span class=&quot;nt&quot;&gt;-vf&lt;/span&gt; helloContainer
+ &lt;span class=&quot;c&quot;&gt;# 删除旧镜像&lt;/span&gt;
+ docker rmi &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; helloImage
+ &lt;span class=&quot;c&quot;&gt;# 构建新镜像&lt;/span&gt;
+ docker build &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; helloImage &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;# 创建容器启动服务&lt;/span&gt;
+ docker run &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 10236:8080 &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; helloContainer helloImage
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;注：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;步骤 1、2 只是在私有仓库创建 base 镜像和 jdk8 镜像&lt;/li&gt;
+  &lt;li&gt;步骤 3、4 是自己工程的配置，可根据自己的项目来决定&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;测试&quot;&gt;测试&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;将工程代码提交到 Gogs 仓库&lt;/li&gt;
+  &lt;li&gt;Jenkins 会收到来自 Gogs Webhook 的通知自动构建任务，也可以自己手动在任务界面点击「构建」按钮&lt;/li&gt;
+  &lt;li&gt;点击「控制台输出」可以看到构建的明细&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/tutorial/jenkins-11.png&quot; data-lightbox=&quot;jenkins&quot;&gt;&lt;img src=&quot;/images/post/tutorial/jenkins-11.png&quot; alt=&quot;jenkins&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/post/tutorial/jenkins-12.png&quot; data-lightbox=&quot;jenkins&quot;&gt;&lt;img src=&quot;/images/post/tutorial/jenkins-12.png&quot; alt=&quot;jenkins&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;总结&quot;&gt;总结&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;本文只是一个简单的通过 jenkins 配合 Docker 实现构建任务&lt;/li&gt;
+  &lt;li&gt;大部分的操作还是在于自己手工写 Dockerfile 来解决，当然你也可以选择其他 jenkins 插件来配置&lt;/li&gt;
+  &lt;li&gt;不单是 Maven 项目的构建，其它项目也可以通过 Jenkins 配置，去找找插件就行了&lt;/li&gt;
+  &lt;li&gt;可以通过配置里面的邮件通知，当任务部署后会自动通过邮件通知过来&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>ychost</name></author><category term="Jenkins" /><category term="Docker" /><category term="持续集成" /><summary type="html">记录在使用 Jenkins 与 Docker 的配置过程，方便日后再来进行相关的配置</summary></entry><entry><title type="html">算法-四则运算</title><link href="http://blog.sudoyc.com/2018/08/29/algorithm-calculator/" rel="alternate" type="text/html" title="算法-四则运算" /><published>2018-08-29T00:00:00+08:00</published><updated>2018-08-29T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2018/08/29/algorithm-calculator</id><content type="html" xml:base="http://blog.sudoyc.com/2018/08/29/algorithm-calculator/">&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
 &lt;blockquote&gt;
   &lt;p&gt;为了简化，所有的计算都是针对于整数的&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1346,64 +1556,4 @@ solution:
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;根据以上思路，很快就能解决上述的所有问题，这里就不列出每个问题的具体实现了，百度 LeetCode Combinations 会有各路大神的实现方式，究其根本是一致的。&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>ychost</name></author><category term="组合数" /><category term="Java" /><summary type="html">组合数问题，即从一堆数据中选取元素让所选取的元素满足某种关系，求出所有可能的选择方式。 一般情况为所选取的元素之和为一个定值，然后求解出所有可能的选取方式。</summary></entry><entry><title type="html">算法-桶排序</title><link href="http://blog.sudoyc.com/2018/04/07/algorithm-bucket-sort/" rel="alternate" type="text/html" title="算法-桶排序" /><published>2018-04-07T00:00:00+08:00</published><updated>2018-04-07T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2018/04/07/algorithm-bucket-sort</id><content type="html" xml:base="http://blog.sudoyc.com/2018/04/07/algorithm-bucket-sort/">&lt;ol&gt;
-  &lt;li&gt;算法可视化：&lt;a href=&quot;https://www.cs.usfca.edu/~galles/visualization/BucketSort.html&quot;&gt;连接&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;时间复杂度，&lt;script type=&quot;math/tex&quot;&gt;O(n+C)&lt;/script&gt;，其中&lt;script type=&quot;math/tex&quot;&gt;C=n \times (logn - logm)&lt;/script&gt;&lt;/li&gt;
-  &lt;li&gt;空间复杂度，&lt;script type=&quot;math/tex&quot;&gt;O(n+m)&lt;/script&gt;&lt;/li&gt;
-  &lt;li&gt;是否稳定：稳定&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;算法思想&quot;&gt;算法思想&lt;/h2&gt;
-&lt;p&gt;桶排序是一种十分高效稳定的算法，但是其使用场景比较受限。&lt;br /&gt;
-&lt;strong&gt;场景&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;待排序列的值处于一个可枚举的范围内&lt;/li&gt;
-  &lt;li&gt;待排序列所在的枚举范围不应太大&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;算法&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;根据映射函数将元素放入特定的桶中&lt;/li&gt;
-  &lt;li&gt;对每个分别桶进行排序&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/post/algorithm/bucket-sort.jpg&quot; data-lightbox=&quot;sort&quot;&gt;&lt;img src=&quot;/images/post/algorithm/bucket-sort.jpg&quot; alt=&quot;bucket-sort&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;实现&quot;&gt;实现&lt;/h2&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;cm&quot;&gt;/**
-     * @param array       待排序序列
-     * @param min         &amp;lt;= 最小值
-     * @param max         &amp;gt;= 最大值
-     * @param bucketCount 桶的数量
-     */&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bucketCount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;//最后一个桶号为 bucketCount 所以这里要 + 1&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;//比如 元素为 max 的桶&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bucketCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;//每个桶的容量&lt;/span&gt;
-        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cap&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;max&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bucketCount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;c1&quot;&gt;//当前元素到桶号的索引&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LinkedList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]);&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;c1&quot;&gt;//每个桶分别排序&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]);&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                    &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>ychost</name></author><category term="桶排序" /><category term="Java" /><summary type="html">桶排序 (Bucket sort)或所谓的箱排序，是一个排序算法，工作的原理是将数组分到有限数量的桶子里。每个桶子再个别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排序）。</summary></entry></feed>
+&lt;/ol&gt;</content><author><name>ychost</name></author><category term="组合数" /><category term="Java" /><summary type="html">组合数问题，即从一堆数据中选取元素让所选取的元素满足某种关系，求出所有可能的选择方式。 一般情况为所选取的元素之和为一个定值，然后求解出所有可能的选取方式。</summary></entry></feed>

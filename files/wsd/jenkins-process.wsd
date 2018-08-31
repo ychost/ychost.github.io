@@ -1,0 +1,14 @@
+@startuml jenkins-process
+autonumber
+title jenkins process
+actor user
+database repo
+
+user -> repo : git push
+repo -> jenkins: webhook
+jenkins -> jenkins: compile
+jenkins -> registry: docer pull image
+jenkins -> jenkins: create container, start server
+jenkins -> user: notify build complete
+
+@enduml

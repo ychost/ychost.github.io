@@ -421,6 +421,13 @@
   "posts":[
   
   {
+   "title": "Jenkins+Docker+Maven+Java+Gogs 持续集成",
+   "url":  "/2018/08/30/jenkins-docker-maven/",
+   "date":"2018/08/30"
+   
+ },
+  
+  {
    "title": "使用 Git hook 实现自动化部署",
    "url":  "/2018/08/23/deploy-with-git-hook/",
    "date":"2018/08/23"

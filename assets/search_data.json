@@ -1,5 +1,11 @@
 {
   
+  "2018-08-30-jenkins-docker-maven": {
+    "title": "Jenkins+Docker+Maven+Java+Gogs 持续集成",
+    "url": " /2018/08/30/jenkins-docker-maven/",
+    "category": "工具"
+  },
+  
   "2018-08-29-algorithm-calculator": {
     "title": "算法-四则运算",
     "url": " /2018/08/29/algorithm-calculator/",
@@ -1251,6 +1257,12 @@
     "title": "算法-四则运算",
     "url": "/2018/08/29/algorithm-calculator/",
     "category": "[&quot;\u7B97\u6CD5&quot;]"
+  },
+  
+  "2018-08-30-jenkins-docker-maven": {
+    "title": "Jenkins+Docker+Maven+Java+Gogs 持续集成",
+    "url": "/2018/08/30/jenkins-docker-maven/",
+    "category": "[&quot;\u5DE5\u5177&quot;]"
   }
   
 }
