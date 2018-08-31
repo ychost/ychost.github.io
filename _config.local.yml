@@ -110,7 +110,7 @@ zhihu_username:  ychost
 #      Comments    #
 # ---------------- #
 # support provider: uyan, duoshuo,wangyi,disqus,gitment,changyan,valine
-comments_provider: private
+comments_provider: valine
 #duoshuo_username:  ychost
 #duoshuo_userid: 6279352103223689985
 # ---------------- #
