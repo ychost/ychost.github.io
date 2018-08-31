@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Jenkins+Docker+Maven+Java+Gogs 持续集成
-categories: [工具]
+categories: [工具, 推荐]
 description: 记录在使用 Jenkins 与 Docker 的配置过程，方便日后再来进行相关的配置
 keywords: Jenkins, Docker, Maven, Java, Gogs, Dockerfile
 tags: [Jenkins, Docker, 持续集成]
