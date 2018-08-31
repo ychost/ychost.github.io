@@ -7,10 +7,14 @@ description: 这是我博客系统的修改日志
 keywords: 日志, 博客，私密
 tags: [Private]
 ---
-#### 2018-8-22
+
+#### 2018-08-31	
+1. 切换评论系统为 [valine](https://panjunwen.com/diy-a-comment-system/)
+
+#### 2018-08-22
 1. 将服务器从 github 移动到自己租的腾讯服务器，域名不变
 
-#### 2018-4-24
+#### 2018-04-24
 1. 添加 https 访问
 1. 添加 service-worker 支持离线访问博客
 
