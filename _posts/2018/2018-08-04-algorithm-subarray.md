@@ -53,6 +53,13 @@ excerpt: 这是一个在 Leetcode 上面的一些子数组方面的题，最长�
     Explanation: 
     The repeated subarray with maximum length is [3, 2, 1].
    ```
+1. 找出数组 A 中连续数列的最长长度，要求时间复杂度$$o(N)$$
+   ```
+    Input: [100, 4, 200, 1, 3, 2]
+    Output: 4
+    Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
+   ```
+   
 
 ### 算法
 #### 最长递增子序列
@@ -277,5 +284,36 @@ excerpt: 这是一个在 Leetcode 上面的一些子数组方面的题，最长�
         return maxLen;
     }
 ```
+
+#### 最长连续子数列
+原题连接 [Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/description/)
+1. 本题要求时间复杂度必须为$$o(N)$$，所以不能使用排序
+1. 只能考虑用空间换时间，所以用一个 map 来保存每个数字的连续情况，然后得到一个最大的连续值即可
+   ```java
+    public int longestConsecutive(int[] nums) {
+        Map<Integer,Integer> map = new HashMap<>();
+        int res = 0;  
+        for(int num:nums){
+            if(map.containsKey(num)){
+                continue;
+            }
+            // 因为每个值只遍历了一次，所以 left、right 没有连续
+            // 左边的连续长度
+            int left  = map.getOrDefault(num-1,0);
+            // 右边的连续长度
+            int right = map.getOrDefault(num+1,0);
+            // 当前值得连续长度
+            int len   = left + right + 1;
+            res = Math.max(res,len);    
+            // 更新连续长度
+            map.put(num,len);
+            map.put(num-left,len);
+            map.put(num+right,len);
+        }
+        return res;
+    }
+   ```
+
+
 [href1]: http://blog.sudoyc.com/2018/04/08/algorithm-combination/
 [href2]: /2018/03/16/dp-long-inc-sub-seq/

@@ -8,6 +8,9 @@ keywords: 日志, 博客，私密
 tags: [Private]
 ---
 
+#### 2018-09-05
+1. 删除网易云音乐播放器
+
 #### 2018-08-31	
 1. 切换评论系统为 [valine](https://panjunwen.com/diy-a-comment-system/)
 
