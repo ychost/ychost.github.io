@@ -6,7 +6,6 @@ description: 这是一个在 Leetcode 上面的一些雨水容量方面的题，
 keywords: 算法, 雨水
 tags: [Java, 雨水]
 excerpt: 这是一个在 Leetcode 上面的一些雨水容量方面的题，做一个适当的总结
-
 ---
 
 ### 背景

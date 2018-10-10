@@ -35,9 +35,13 @@ x86 平板安装 win10 太卡，安装 android 兼容性不好，要是在上面
 1. 将 U盘，键盘鼠标通过 OTG线 和 USB集线器 连接到平板上面。
 2. 启动平板然后按 ESC 进入 BIOS。
 3. 在 Security 选项里面，设置 Secure Boot为 Disable。
+
    [![bios-security][img3]][img3]{:data-lightbox="x86-table-linux"}
+
    在 Boot 选项里面设置 Boot Option #1 为你的 U盘 这里是 UEFI： SMI USB DISK 1100。
+
    [![bios-boot][img4]][img4]{:data-lightbox="x86-table-linux"}
+   
 4. 点击 F4(save & Exit)，重启后进入安装界面
 
 ### 开始安装
