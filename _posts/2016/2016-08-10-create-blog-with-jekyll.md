@@ -42,6 +42,7 @@ tags: [Jekyll, Blog, GitHub]
 #### 准备工作
 
 1. 下载 [Ruby][href4]{: target="_blank"}
+	> 2019-3-27：这里最好下载 [Ruby2.3.1.exe][href14] 和 [DevKit-mingw64-64-4.7.2-20130224-1432-sfx.exe][href13]，其它版本测了兼容性有点问题
 
 	> 2017-08-09：如果是 windows 平台，由于 Wdm 不支持高版本 Ruby 所以请使用 <font color="red"> ruby2.3 </font>及之前的版本
 	
@@ -91,14 +92,15 @@ tags: [Jekyll, Blog, GitHub]
 ### jekyll 安装
 
 1. 替换 gem 官方源
+	> 2019-3-27：<font color="red">现在不用换源国内也可以访问</font>
 
 	> jekyll 需要用 gem 来进行安装，由于 gem 的官方源被墙了所以需要替换 gem 的源，这里将其替换成 [Ruby China][href5]{: target="_blank"}，顺便安装了 bundle 以及将它的源替换掉了
 
    ```
-   gem sources --add https://gems.ruby-china.org/ 
+   gem sources --add https://gems.ruby-china.com/ 
    gem sources --remove https://rubygems.org/
    gem install bundle
-   bundle config mirror.https://rubygems.org https://gems.ruby-china.org
+   bundle config mirror.https://rubygems.org https://gems.ruby-china.com
    ```
 
 2. 安装 jekyll
@@ -199,7 +201,7 @@ tags: [Jekyll, Blog, GitHub]
 [href1]: http://sspai.com/25137
 [href2]: http://jekyll.bootcss.com/
 [href3]: https://www.github.com
-[href4]: http://rubyinstaller.org/downloads/
+[href4]: https://rubyinstaller.org/downloads/archives/
 [href5]: https://gems.ruby-china.org/
 [href6]: http://jekyllthemes.org/
 [href7]: http://jekyllthemes.org/themes/hcz-jekyll-material/
@@ -208,6 +210,8 @@ tags: [Jekyll, Blog, GitHub]
 [href10]: https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/
 [href11]: https://coding.net
 [href12]: /2016/08/28/github-consistent-with-coding/
+[href13]: https://dl.bintray.com/oneclick/rubyinstaller/DevKit-mingw64-64-4.7.2-20130224-1432-sfx.exe
+[href14]: https://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-2.3.1-x64.exe
 
 [img1]: /images/post/tutorial/ruby-download-page.jpg
 [img2]: /images/post/tutorial/devkit-download-page.jpg
