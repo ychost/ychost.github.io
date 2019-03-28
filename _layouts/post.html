@@ -65,7 +65,7 @@ layout: default
             {% endcapture %}
             {% unless words contains "-" %}
             本文共 {{ page.content | number_of_words }} 字，
-             需 {{ words | plus: 250 | divided_by: 180 | append: " 分钟阅读" }}
+             需 {{ words | plus: 250 | divided_by: 80 | append: " 分钟阅读" }}
             {% endunless %}
             </span>
           </div>
