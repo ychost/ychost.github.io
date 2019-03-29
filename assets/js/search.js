@@ -32,8 +32,8 @@ jQuery(function() {
     // Event when search action triggered
     $("#site_search_do").click(function(){
         var query = $("#search_box").val(); // Get the value for the text field
-        console.log(query);
         var results = window.idx.search(query); // Get lunr to perform a search
+        console.log(window.data)
         display_search_results(results); // Hand the results off to be displayed
     });
 
