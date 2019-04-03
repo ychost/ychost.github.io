@@ -23,6 +23,7 @@ layout: default
 }
 
 </style>
+{% if page.pdfLink == null %}
 <section class="collection-head small geopattern" data-pattern-id="{{ page.title | truncate: 15, ''}}">
   <div class="container">
     <div class="columns">
@@ -99,6 +100,7 @@ layout: default
       <div class="comment">
         {% include comments.html %}
       </div>
+
     </div>
     <div class="column one-fourth">
       {% include sidebar-search.html %}
@@ -106,6 +108,9 @@ layout: default
     </div>
   </div>
 </section>
+{% else %}
+  <iframe src="{{ page.pdfLink }}#view=fit" id="pdf_iframe" style="width:100%;height: 1080px" ></iframe>
+{% endif %}
 <!-- /section.content -->
 
 <script>
@@ -119,6 +124,8 @@ layout: default
 
 }(blog,$))
 </script>
+
+{% if page.pdfLink == null %}
 <script>
     $(function(){
          window.onSearchLoad(function(){
@@ -141,3 +148,4 @@ layout: default
         })
     });
 </script>
+{% endif %}
