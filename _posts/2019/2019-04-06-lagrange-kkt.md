@@ -4,7 +4,7 @@ title: 真正理解拉格朗日乘子法和 KKT 条件
 categories: [机器学习]
 description: KKT 条件是解决最优化问题的时用到的一种方法。最优化问题通常是指对于给定的某一函数，求其在指定作用域上的全局最小值。
 keywords: 机器学习, 拉格朗日乘子法, KKT 条件
-tags: [机器学习, KKT, 拉格朗日乘子法]
+tags: [机器学习, KKT, 拉格朗日乘子法]
 repost: ["https://www.cnblogs.com/xinchen1111/p/8804858.html", "https://www.cnblogs.com/xinchen1111/p/8804858.html"]
 readMins: 30
 excerpt: "KKT 条件是解决最优化问题的时用到的一种方法。最优化问题通常是指对于给定的某一函数，求其在指定作用域上的全局最小值。"
