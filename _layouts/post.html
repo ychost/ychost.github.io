@@ -112,7 +112,17 @@ layout: default
   </div>
 </section>
 {% else %}
-  <iframe src="{{ page.pdfLink }}#view=fit" id="pdf_iframe" style="width:100%;height: 1080px" ></iframe>
+<object data="{{ page.pdfLink }}#view=fit" type="application/pdf" width="100%" height="100%" style="height:1000px">
+  <iframe src="{{ page.pdfLink }}#view=fit" id="pdf_iframe" width="100%" height="100%" style="height:1000px;border:none">
+    浏览器不支持 PDF 预览，请下载后阅读: <a href="{{ page.pdfLink }}}">下载 PDF</a>
+  </iframe>
+</object>
+    <div class="share">
+        {% include sns-share.html %}
+      </div>
+      <div class="comment">
+        {% include comments.html %}
+      </div>
 {% endif %}
 <!-- /section.content -->
 
