@@ -7,6 +7,10 @@ description: 这是我博客系统的修改日志
 keywords: 日志, 博客，私密
 tags: [Private]
 ---
+#### 2019=04-06
+1. 添加阅读分钟数自定义配置
+> 在 post 文章里面通过 readMins 配置
+
 #### 2019-04-03
 1. 添加对 PDF 文章的支持
 > 在 post 文章里面通过 pdfLink 指向文件即可

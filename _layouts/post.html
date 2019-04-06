@@ -56,7 +56,7 @@ layout: default
             <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
             　　　　　　　　
             {% else %}
-            <span>本文章为<font color="#aabbff" style="font-size:18px">「转载」</font>内容，转载地址为 <a style="text-decoration: underline" target="_blank" href="{{ page.repost[1] }}">{{ page.repost[0] }}</a></span> 　　　
+            <span>本文为<font color="#aabbff" style="font-size:18px">「转载」</font>内容，转载地址为 <a style="text-decoration: underline" target="_blank" href="{{ page.repost[1] }}">{{ page.repost[0] }}</a></span> 　　　
 
             {% endif %}　　　
             <br/>
@@ -64,10 +64,13 @@ layout: default
             {% capture words %}
               {{ page.content | number_of_words | minus: 250 }}
             {% endcapture %}
-            {% unless words contains "-" %}
             本文共 {{ page.content | number_of_words }} 字，
-             需 {{ words | plus: 250 | divided_by: 80 | append: " 分钟阅读" }}
-            {% endunless %}
+             需
+              {% if page.readMins == null %}
+               {{ words | plus: 250 | divided_by: 80 | append: " 分钟阅读" }}
+              {% else %}
+                {{page.readMins}} 分钟阅读
+              {% endif %}
             </span>
           </div>
         </div>
