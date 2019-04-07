@@ -117,12 +117,12 @@ layout: default
     浏览器不支持 PDF 预览，请下载后阅读: <a href="{{ page.pdfLink }}}">下载 PDF</a>
   </iframe>
 </object>
-    <div class="share">
-        {% include sns-share.html %}
-      </div>
-      <div class="comment">
-        {% include comments.html %}
-      </div>
+<section class="container content" style="text-align: center">
+  <div class="columns">
+      {% include sns-share.html %}
+      {% include comments.html %}
+</div>
+</section>
 {% endif %}
 <!-- /section.content -->
 
