@@ -62,12 +62,12 @@ layout: default
             <br/>
             <span style="margin:20px"> 
             {% capture words %}
-              {{ page.content | number_of_words | minus: 250 }}
+              {{ content | strip_html | strip_newlines | split: "" | size }}
             {% endcapture %}
-            本文共 {{ page.content | number_of_words }} 字，
-             需
+            <!-- 本文共 {{ page.content | number_of_words }} 字， -->
+            本文共 {{ content | strip_html | strip_newlines | split: "" | size }} 字，需
               {% if page.readMins == null %}
-               {{ words | plus: 250 | divided_by: 80 | append: " 分钟阅读" }}
+               {{ words  | divided_by: 80 | append: " 分钟阅读" }}
               {% else %}
                 {{page.readMins}} 分钟阅读
               {% endif %}

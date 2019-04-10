@@ -110,14 +110,14 @@ comments: false
     (function(blog){
         blog.encodeHylinks($(".home-cat-hylink"))
     }(blog))
-
-    {% if site.useServiceWorker %} 
-    // 注册 service worker
-        if (window.location.href.indexOf("localhost") == -1 && window.location.protocol == "https:"){
-            if (navigator.serviceWorker) {
-                navigator.serviceWorker.register('/service-worker.js', {scope: '/'})
-            }
-        }
-    {% endif %}
-  
 </script>
+{% if site.useServiceWorker %} 
+    <script>
+        // 注册 service worker
+            if (window.location.href.indexOf("localhost") == -1 && window.location.protocol == "https:"){
+                if (navigator.serviceWorker) {
+                    navigator.serviceWorker.register('/service-worker.js', {scope: '/'})
+                }
+            }
+    </script>
+{% endif %}

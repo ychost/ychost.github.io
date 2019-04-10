@@ -9,9 +9,12 @@
 
         <ul class="site-footer-links right mobile-hidden">
             <li>
+            {% if site.env == "prod" %}
                 <span id="busuanzi_container_site_pv" > 您是本站第 
                     <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span> 次点击</span>
-
+            {% else %}
+                <span > 调试模式 </span>
+            {% endif %}
                 <a href="javascript:window.scrollTo(0,0)">TOP</a>
             </li>
         </ul>
@@ -61,7 +64,9 @@
 <script src="/assets/js/custom/blog.js"></script>
 <script src="/assets/js/custom/blog-cats-data.js"></script>
 <script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+{% if site.env == "prod %}
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+{% endif %}
 
 
 {% case site.env %}
