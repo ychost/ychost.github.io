@@ -7,6 +7,9 @@ description: 这是我博客系统的修改日志
 keywords: 日志, 博客，私密
 tags: [Private]
 ---
+#### 2019-04-13
+1. 添加图片水印
+> 通过 site.useWatermark 来控制
 
 #### 2019-04-10
 1. 添加本地调试模式底部显示
