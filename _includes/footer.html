@@ -9,12 +9,13 @@
 
         <ul class="site-footer-links right mobile-hidden">
             <li>
-            {% if site.env == "prod" %}
-                <span id="busuanzi_container_site_pv" > 您是本站第 
-                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span> 次点击</span>
-            {% else %}
-                <span > 调试模式 </span>
-            {% endif %}
+                {% if site.env == "prod" %}
+                <span id="busuanzi_container_site_pv"> 您是本站第
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span>
+                    次点击</span>
+                {% else %}
+                <span> 调试模式 </span>
+                {% endif %}
                 <a href="javascript:window.scrollTo(0,0)">TOP</a>
             </li>
         </ul>
@@ -25,7 +26,8 @@
         <ul class="site-footer-links mobile-hidden">
             {% for nav in site.navs %}
             <li>
-                <a href="{{ nav.href }}" title="{{ nav.label }}" target="{{ nav.target | default: _self }}">{{ nav.label }}</a>
+                <a href="{{ nav.href }}" title="{{ nav.label }}"
+                    target="{{ nav.target | default: _self }}">{{ nav.label }}</a>
             </li>
             {% endfor %}
             <li>
@@ -47,12 +49,13 @@
         <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
         <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
     </div>
-    <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "1", "bdSize": "16" }, "share": {}, "image": { "viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16" }, "selectShare": { "bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"] } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script> {% endif %}
+    <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "1", "bdSize": "16" }, "share": {}, "image": { "viewList": ["qzone", "tsina", "tqq", "renren", "weixin"], "viewText": "分享到：", "viewSize": "16" }, "selectShare": { "bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"] } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+    {% endif %}
 </footer>
 <!-- show the onelineTotal in remote -->
 {% if (site.cnzz_analytics) %}
 <script src="http://s4.cnzz.com/z_stat.php?id={{ site.cnzz_analytics_id }}" id="cnzz_id"></script>
-<script src="/assets/js/cnzz-analytics.js"></script> 
+<script src="/assets/js/cnzz-analytics.js"></script>
 {% endif %}
 <script src="/assets/js/jqcloud.min.js"></script>
 <script src="/assets/js/lightbox.min.js"></script>
@@ -69,24 +72,47 @@
 {% endif %}
 
 
-{% case site.env %}
-{% when "prod" %}
-{% endcase %}
-
-
 <script>
-
     jQuery(document).ready(function ($) {
         $('.geopattern').each(function () {
             $(this).geopattern($(this).data('pattern-id'));
         });
+
     });
 </script>
-
+{% if site.useWatermark %}
+<script src="/assets/js/img2blob.js"></script>
+<script>
+    jQuery(document).ready(function ($) {
+        //begin 图片水印设置
+        $('a img').each(function (i, v) {
+            $(v).attr("data-img2blob", $(v).attr("src"));
+            $(v).attr("class", "img2blob")
+            $(v).removeAttr("src")
+        });
+        $('.img2blob').img2blob({
+            watermark: '@blog.sudoyc.com',
+            fontStyle: 'Consolas',
+            fontSize: '25',
+            fontColor: '#ef5350',
+        });
+        setTimeout(function () {
+            $('a').each(function (i, v) {
+                if ($(v).attr("href") != null && $(v).attr("href").indexOf("/images/post") != -1) {
+                    var $img = $(v).children(":first");
+                    $img.removeAttr("data-img2blob")
+                    var src = $img.attr("src")
+                    $(v).attr("href", src)
+                }
+            })
+        }, 1000)
+        //end 图片水印设置
+    })
+</script>
+{% endif %}
 <!--    baidu  analytics-->
 {% if site.baidu_analytics%}
 <script>
-
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");
@@ -94,6 +120,9 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
-</script> {% endif %}
+</script>
+{% endif %}
+
 </body>
+
 </html>
