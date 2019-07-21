@@ -1,1 +1,1 @@
-bundle exec jekyll serve -P 4800 --config _config.local.yml --incremental 
+bundle exec jekyll serve -P 4800 --config _config.local.yml --incremental --host=0.0.0.0
