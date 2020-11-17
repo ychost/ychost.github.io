@@ -142,7 +142,7 @@ baidu_search: false
 # ---------------- #
 #     Exclude      #
 # ---------------- #
-exclude: [resource,remoteBuild.bat,remoteBuild.sh,localDeploy.bat,localDeploy.sh,sw-precache.js,Gemfile,remotePush.sh,remotePush.bat]
+exclude: [resource,remoteBuild.bat,remoteBuild.sh,localDeploy.bat,localDeploy.sh,sw-precache.js,Gemfile,remotePush.sh,remotePush.bat,docker]
 
 # ---------------------#
 # netease music player #   
@@ -154,3 +154,8 @@ music: /music.163.com/outchain/player?type=0&id=2313686991&auto=1&height=430
 # ---------------------# 
 useServiceWorker: false
 useWatermark: false
+
+# ---------------------#
+#        dest          #
+# ---------------------# 
+destination: _www

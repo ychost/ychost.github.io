@@ -1,0 +1,1 @@
+docker run -it --rm -v /home/pi/docker/code-server/project/blog.sudoyc.com/:/usr/src/app  blog bash  /usr/src/app/remoteBuild.sh
