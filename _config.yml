@@ -142,7 +142,7 @@ baidu_search: false
 # ---------------- #
 #     Exclude      #
 # ---------------- #
-exclude: [resource,remoteBuild.bat,remoteBuild.sh,localDeploy.bat,localDeploy.sh,sw-precache.js,Gemfile,remotePush.sh,remotePush.bat,docker]
+exclude: [_www,_site,resource,remoteBuild.bat,remoteBuild.sh,localDeploy.bat,localDeploy.sh,sw-precache.js,Gemfile,remotePush.sh,remotePush.bat,docker]
 
 # ---------------------#
 # netease music player #   
