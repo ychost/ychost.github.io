@@ -36,6 +36,10 @@ permalink: /about/
     {% endfor %}
 </div>
 
+## 友情链接
+* [蜗牛大叔](https://unclesnail.cn/)
+* [treewu](http://treewu.club/)
+
 <!-- #### 技术库
 <div class="btn-inline">
     {% for keyword in site.skill_mobile_app_keywords %}

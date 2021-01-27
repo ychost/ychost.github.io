@@ -5,10 +5,9 @@ categories: [后端]
 description: 序列化是一种常见的数据传输机制，但是 Lambda 序列化可以将 Java 的一个方法进行传输，从而实现动态脚本等功能
 keywords: Java, 序列化, Lambda, Serialize
 tags: [Java, 序列化, Lambda]
-excerpt: "序列化是一种常见的数据传输机制，但是 Lambda 序列化可以将 Java 的一个方法进行传输，从而实现动态脚本等功能"
+excerpt: 序列化是一种常见的数据传输机制，但是 Lambda 序列化可以将 Java 的一个方法进行传输，从而实现动态脚本等功能
 readMins: 30
 ---
-
 
 Lambda 是 Java8 引进的一项新的能力，日常主要是结合 stream 一起使用，Lambda 也是可以像普通的对象一样进行序列化/反序列化的，就可以像普通对象一样先序列化成字节码然后进行存储或者传输，待需要的时候再将字节码进行反序列化，这样就实现了将一个方法进行了本地存储和传输，通过该方式可以进一步实现类似 Groovy 动态脚本一样的功能
 
