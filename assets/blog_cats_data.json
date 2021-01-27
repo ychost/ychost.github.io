@@ -1,0 +1,755 @@
+
+{
+  
+
+
+ "Private":{
+  "posts":[
+  
+        "title": "2018-年度总结",
+        "url":  "/2019/03/27/summary-for-2018/",
+        "date":"2019/03/27"
+  },
+  
+        "title": "算法-总结",
+        "url":  "/2018/04/06/algorithm-summary/",
+        "date":"2018/04/06"
+  },
+  
+        "title": "记录 Alibaba 2018 春招实习面试",
+        "url":  "/2018/03/13/alibaba-interview-record/",
+        "date":"2018/03/13"
+  },
+  
+        "title": "准备面试",
+        "url":  "/2018/03/10/prepare-interview/",
+        "date":"2018/03/10"
+  },
+  
+        "title": "2016-2017 第二学期课程表",
+        "url":  "/2016/09/05/timetable-2016-2017-01/",
+        "date":"2016/09/05"
+  },
+  
+        "title": "Sublime Text 2 Snippets",
+        "url":  "/2016/08/14/Sublime-snippets/",
+        "date":"2016/08/14"
+  },
+  
+        "title": "芯联电科排班表",
+        "url":  "/2016/08/10/cniots-rostering/",
+        "date":"2016/08/10"
+  },
+  
+        "title": "修改日志",
+        "url":  "/2016/08/10/changeLog/",
+        "date":"2016/08/10"
+  }
+  
+  ]
+}
+,
+
+
+
+ "刷题":{
+  "posts":[
+  
+        "title": "贪心算法[1]-教室安排问题",
+        "url":  "/2018/04/02/greedy-arange-room/",
+        "date":"2018/04/02"
+  },
+  
+        "title": "广度优先[3]-Word Ladder II",
+        "url":  "/2018/03/29/bfs-word-ladder-II/",
+        "date":"2018/03/29"
+  },
+  
+        "title": "广度优先[2]-Minimum Height Trees",
+        "url":  "/2018/03/27/bfs-min-height-trees/",
+        "date":"2018/03/27"
+  },
+  
+        "title": "广度优先[1]-Course Schedule",
+        "url":  "/2018/03/25/bfs-course-schedule/",
+        "date":"2018/03/25"
+  },
+  
+        "title": "美团-数字字符",
+        "url":  "/2018/03/24/min-integral/",
+        "date":"2018/03/24"
+  },
+  
+        "title": "动态规划[11]-钱币拼凑",
+        "url":  "/2018/03/20/dp-money-make-up/",
+        "date":"2018/03/20"
+  },
+  
+        "title": "动态规划[10]-Counting Bits",
+        "url":  "/2018/03/20/dp-count-bits/",
+        "date":"2018/03/20"
+  },
+  
+        "title": "动态规划[9]-正整数分组",
+        "url":  "/2018/03/17/int-array-split/",
+        "date":"2018/03/17"
+  },
+  
+        "title": "动态规划[8]-最大子段和",
+        "url":  "/2018/03/17/dp-sub-seq-sum-max/",
+        "date":"2018/03/17"
+  },
+  
+        "title": "动态规划[7]-最长递增子数列",
+        "url":  "/2018/03/16/dp-long-inc-sub-seq/",
+        "date":"2018/03/16"
+  },
+  
+        "title": "动态规划[6]-多重背包问题",
+        "url":  "/2018/03/15/knapsack-multiple/",
+        "date":"2018/03/15"
+  },
+  
+        "title": "动态规划[5]-完全背包问题",
+        "url":  "/2018/03/15/knapsack-complete/",
+        "date":"2018/03/15"
+  },
+  
+        "title": "动态规划[4]-01背包问题",
+        "url":  "/2018/03/15/knapsack-01/",
+        "date":"2018/03/15"
+  },
+  
+        "title": "动态规划[3]-矩阵取数问题",
+        "url":  "/2018/03/15/dp-matrix-access/",
+        "date":"2018/03/15"
+  },
+  
+        "title": "动态规划[2]-数塔取数问题",
+        "url":  "/2018/03/14/dp-pyramid/",
+        "date":"2018/03/14"
+  },
+  
+        "title": "动态规划[1]-编辑距离问题",
+        "url":  "/2018/03/14/dp-edit-distance/",
+        "date":"2018/03/14"
+  },
+  
+        "title": "程序员代码面试指南 树",
+        "url":  "/2018/03/06/it-guide-tree/",
+        "date":"2018/03/06"
+  },
+  
+        "title": "程序员代码面试指南 链表",
+        "url":  "/2018/02/23/it-guide-linked-list/",
+        "date":"2018/02/23"
+  },
+  
+        "title": "程序员代码面试指南 栈",
+        "url":  "/2018/01/31/it-guide-stack/",
+        "date":"2018/01/31"
+  },
+  
+        "title": "程序员面试宝典 第5版 树与图",
+        "url":  "/2018/01/22/crack-interview-tree-graph/",
+        "date":"2018/01/22"
+  },
+  
+        "title": "程序员面试宝典 第5版 栈和队列",
+        "url":  "/2018/01/18/carck-interview-stack-queue/",
+        "date":"2018/01/18"
+  },
+  
+        "title": "程序员面试宝典 第5版 链表",
+        "url":  "/2018/01/14/crack-interview-linkedlist/",
+        "date":"2018/01/14"
+  },
+  
+        "title": "程序员面试宝典 第5版 数组与字符串",
+        "url":  "/2018/01/12/crack-interview-array-string/",
+        "date":"2018/01/12"
+  },
+  
+        "title": "深度优先搜索",
+        "url":  "/2017/10/19/algorithm-dfs/",
+        "date":"2017/10/19"
+  },
+  
+        "title": "字符串匹配问题",
+        "url":  "/2017/10/11/code-art-c2-2/",
+        "date":"2017/10/11"
+  },
+  
+        "title": "字符串包含问题",
+        "url":  "/2017/10/11/code-art-c2-1/",
+        "date":"2017/10/11"
+  },
+  
+        "title": "左旋字符串",
+        "url":  "/2017/10/10/code-art-c1/",
+        "date":"2017/10/10"
+  },
+  
+        "title": "「LeetCode」Array系列 2：Plus One [Easy]",
+        "url":  "/2017/08/15/leetcode-array-2/",
+        "date":"2017/08/15"
+  },
+  
+        "title": "「LeetCode」Array系列 1：Array Partition I [Easy]",
+        "url":  "/2017/08/14/leetcode-array-1/",
+        "date":"2017/08/14"
+  },
+  
+        "title": "「LeetCode」系列 2：3Sum",
+        "url":  "/2017/08/10/leetcode-2/",
+        "date":"2017/08/10"
+  },
+  
+        "title": "「LeetCode」系列 1：Two Sum",
+        "url":  "/2017/08/09/leetcode-1/",
+        "date":"2017/08/09"
+  }
+  
+  ]
+}
+,
+
+
+
+ "后端":{
+  "posts":[
+  
+        "title": "Java SPI 插件机制",
+        "url":  "/2020/12/02/java-spi/",
+        "date":"2020/12/02"
+  },
+  
+        "title": "Java Lambda 序列化",
+        "url":  "/2020/11/17/lambda-serialize/",
+        "date":"2020/11/17"
+  },
+  
+        "title": "Java 实用技巧",
+        "url":  "/2018/03/28/java-skill/",
+        "date":"2018/03/28"
+  },
+  
+        "title": "Java 中 Integer 的 == 与 equals",
+        "url":  "/2018/02/26/java-integer-equals/",
+        "date":"2018/02/26"
+  },
+  
+        "title": "Java 多线程之原子变量与 CAS 算法",
+        "url":  "/2018/01/17/java-thread-cas/",
+        "date":"2018/01/17"
+  },
+  
+        "title": "C# 与 Java 对比",
+        "url":  "/2018/01/16/csharp-java-diff/",
+        "date":"2018/01/16"
+  },
+  
+        "title": "深入 Java 核心",
+        "url":  "/2018/01/15/deepin-into-java/",
+        "date":"2018/01/15"
+  },
+  
+        "title": "Java 中 String、StringBuffer和StringBuilder的区别",
+        "url":  "/2018/01/13/java-string-buffer-builder/",
+        "date":"2018/01/13"
+  },
+  
+        "title": "java 集合继承关系图",
+        "url":  "/2018/01/13/java-collection/",
+        "date":"2018/01/13"
+  },
+  
+        "title": "Java LinkedHashMap工作原理及实现",
+        "url":  "/2018/01/12/java-linkedhashmap/",
+        "date":"2018/01/12"
+  },
+  
+        "title": "Java HashMap工作原理及实现",
+        "url":  "/2018/01/11/java-hashmap/",
+        "date":"2018/01/11"
+  },
+  
+        "title": "Spring Cloud构建微服务架构（五）服务网关",
+        "url":  "/2017/05/18/spring-cloud-5/",
+        "date":"2017/05/18"
+  },
+  
+        "title": "Spring Cloud构建微服务架构（四）分布式配置中心",
+        "url":  "/2017/05/18/spring-cloud-4/",
+        "date":"2017/05/18"
+  },
+  
+        "title": "Spring Cloud构建微服务架构（三）断路器",
+        "url":  "/2017/05/18/spring-cloud-3/",
+        "date":"2017/05/18"
+  },
+  
+        "title": "Spring Cloud构建微服务架构（二）服务消费者",
+        "url":  "/2017/05/18/spring-cloud-2/",
+        "date":"2017/05/18"
+  },
+  
+        "title": "Spring Cloud构建微服务架构（一）服务注册与发现",
+        "url":  "/2017/05/18/spring-cloud-1/",
+        "date":"2017/05/18"
+  },
+  
+        "title": "使用 JSON 传递函数",
+        "url":  "/2016/08/28/transfer-function-with-json/",
+        "date":"2016/08/28"
+  }
+  
+  ]
+}
+,
+
+
+
+ "嵌入式":{
+  "posts":[
+  
+        "title": "C51 混合式调度器",
+        "url":  "/2016/08/28/hybird-dispatcher-for-c51/",
+        "date":"2016/08/28"
+  }
+  
+  ]
+}
+,
+
+
+
+ "工具":{
+  "posts":[
+  
+        "title": "Jenkins+Docker 持续集成",
+        "url":  "/2018/08/30/jenkins-docker-maven/",
+        "date":"2018/08/30"
+  },
+  
+        "title": "使用 Git hook 实现自动化部署",
+        "url":  "/2018/08/23/deploy-with-git-hook/",
+        "date":"2018/08/23"
+  },
+  
+        "title": "用手机遥控 平板电脑 电视 盒子",
+        "url":  "/2018/02/27/wifi-remote-control/",
+        "date":"2018/02/27"
+  },
+  
+        "title": "docker 实用教程",
+        "url":  "/2017/05/15/docker-usefull-cmd/",
+        "date":"2017/05/15"
+  },
+  
+        "title": "在 Jekyll 中 使用 Markdown 画流程图",
+        "url":  "/2016/09/05/draw-flowchart-in-markdown/",
+        "date":"2016/09/05"
+  }
+  
+  ]
+}
+,
+
+
+
+ "指南":{
+  "posts":[
+  
+        "title": "中文文案排版指北（简体中文版）",
+        "url":  "/2018/01/23/chinese-copywriting-guidelines/",
+        "date":"2018/01/23"
+  }
+  
+  ]
+}
+,
+
+
+
+ "推荐":{
+  "posts":[
+  
+        "title": "SMO 算法超详细解析",
+        "url":  "/2019/04/10/ml-svm-smo/",
+        "date":"2019/04/10"
+  },
+  
+        "title": "支持向量机通俗导论（理解SVM的三层境界）",
+        "url":  "/2019/04/03/ml-svm/",
+        "date":"2019/04/03"
+  },
+  
+        "title": "Jenkins+Docker 持续集成",
+        "url":  "/2018/08/30/jenkins-docker-maven/",
+        "date":"2018/08/30"
+  },
+  
+        "title": "《深入理解 Java 虚拟机》 笔记",
+        "url":  "/2018/03/20/deep-into-jvm/",
+        "date":"2018/03/20"
+  },
+  
+        "title": "C# 与 Java 对比",
+        "url":  "/2018/01/16/csharp-java-diff/",
+        "date":"2018/01/16"
+  },
+  
+        "title": "在 x86 平板上面安装 Ubuntu",
+        "url":  "/2017/04/11/install-ubuntu-on-tablet/",
+        "date":"2017/04/11"
+  },
+  
+        "title": "在 Jekyll 中 使用 Markdown 画流程图",
+        "url":  "/2016/09/05/draw-flowchart-in-markdown/",
+        "date":"2016/09/05"
+  },
+  
+        "title": "使用 JSON 传递函数",
+        "url":  "/2016/08/28/transfer-function-with-json/",
+        "date":"2016/08/28"
+  },
+  
+        "title": "C51 混合式调度器",
+        "url":  "/2016/08/28/hybird-dispatcher-for-c51/",
+        "date":"2016/08/28"
+  },
+  
+        "title": "让百度收录自己的博客",
+        "url":  "/2016/08/28/github-consistent-with-coding/",
+        "date":"2016/08/28"
+  },
+  
+        "title": "固定 Vmware 中的 Linux 的 IP地址",
+        "url":  "/2016/08/10/fixed-ip-in-vmware-linux/",
+        "date":"2016/08/10"
+  },
+  
+        "title": "用 Jekyll 搭建 GitHub 博客",
+        "url":  "/2016/08/10/create-blog-with-jekyll/",
+        "date":"2016/08/10"
+  }
+  
+  ]
+}
+,
+
+
+
+ "数据结构":{
+  "posts":[
+  
+        "title": "通过前序遍历、中序遍历构建一颗二叉树",
+        "url":  "/2018/03/12/build-tree-by-travel-result/",
+        "date":"2018/03/12"
+  },
+  
+        "title": "使用非递归的方式遍历二叉树",
+        "url":  "/2018/03/05/trave-bin-tree-not-recursive/",
+        "date":"2018/03/05"
+  },
+  
+        "title": "数据结构（一） 树",
+        "url":  "/2018/01/23/struct-tree/",
+        "date":"2018/01/23"
+  }
+  
+  ]
+}
+,
+
+
+
+ "机器学习":{
+  "posts":[
+  
+        "title": "机器学习-Adaboost算法",
+        "url":  "/2019/04/13/ml-adaboost/",
+        "date":"2019/04/13"
+  },
+  
+        "title": "SMO 算法的代码实现",
+        "url":  "/2019/04/12/ml-smo-py/",
+        "date":"2019/04/12"
+  },
+  
+        "title": "SMO 算法超详细解析",
+        "url":  "/2019/04/10/ml-svm-smo/",
+        "date":"2019/04/10"
+  },
+  
+        "title": "真正理解拉格朗日乘子法和 KKT 条件",
+        "url":  "/2019/04/06/lagrange-kkt/",
+        "date":"2019/04/06"
+  },
+  
+        "title": "支持向量机通俗导论（理解SVM的三层境界）",
+        "url":  "/2019/04/03/ml-svm/",
+        "date":"2019/04/03"
+  },
+  
+        "title": "机器学习-决策树-ID3",
+        "url":  "/2019/03/28/ml-decision-tree-id3/",
+        "date":"2019/03/28"
+  },
+  
+        "title": "机器学习-kNN算法",
+        "url":  "/2019/03/27/ml-knn/",
+        "date":"2019/03/27"
+  }
+  
+  ]
+}
+,
+
+
+
+ "杂记":{
+  "posts":[
+  
+        "title": "C 语言在 x86 和 x64 平台下面各个类型的长度",
+        "url":  "/2018/03/01/c-x86-x64-type-bytes/",
+        "date":"2018/03/01"
+  },
+  
+        "title": "让百度收录自己的博客",
+        "url":  "/2016/08/28/github-consistent-with-coding/",
+        "date":"2016/08/28"
+  },
+  
+        "title": "显示网页访问量",
+        "url":  "/2016/08/13/use-cnzz-show-pv/",
+        "date":"2016/08/13"
+  },
+  
+        "title": "显示 VisualStudio 未被引用的文件",
+        "url":  "/2016/08/11/show-all-files-in-visualStudio/",
+        "date":"2016/08/11"
+  },
+  
+        "title": "用 Jekyll 搭建 GitHub 博客",
+        "url":  "/2016/08/10/create-blog-with-jekyll/",
+        "date":"2016/08/10"
+  }
+  
+  ]
+}
+,
+
+
+
+ "桌面":{
+  "posts":[
+  
+        "title": "C# 事件总线（弱订阅）",
+        "url":  "/2018/02/11/csharp-weak-event-store/",
+        "date":"2018/02/11"
+  }
+  
+  ]
+}
+,
+
+
+
+ "笔记":{
+  "posts":[
+  
+        "title": "《深入理解 Java 虚拟机》 笔记",
+        "url":  "/2018/03/20/deep-into-jvm/",
+        "date":"2018/03/20"
+  }
+  
+  ]
+}
+,
+
+
+
+ "算法":{
+  "posts":[
+  
+        "title": "算法-统计数字区间中 1 出现的次数",
+        "url":  "/2018/09/20/algorithm-count-digits/",
+        "date":"2018/09/20"
+  },
+  
+        "title": "算法-二叉树",
+        "url":  "/2018/09/07/algorithm-bin-tree/",
+        "date":"2018/09/07"
+  },
+  
+        "title": "算法-雨水问题",
+        "url":  "/2018/09/05/algorithm-rain/",
+        "date":"2018/09/05"
+  },
+  
+        "title": "算法-四则运算",
+        "url":  "/2018/08/29/algorithm-calculator/",
+        "date":"2018/08/29"
+  },
+  
+        "title": "算法-链表排序",
+        "url":  "/2018/08/22/algorithm-sort-list/",
+        "date":"2018/08/22"
+  },
+  
+        "title": "算法-数独",
+        "url":  "/2018/08/21/algorithm-sudoku/",
+        "date":"2018/08/21"
+  },
+  
+        "title": "算法-子数组系列",
+        "url":  "/2018/08/04/algorithm-subarray/",
+        "date":"2018/08/04"
+  },
+  
+        "title": "算法-二分查找",
+        "url":  "/2018/05/25/algorithm-bin-search/",
+        "date":"2018/05/25"
+  },
+  
+        "title": "算法-N 皇后问题",
+        "url":  "/2018/04/14/algorithm-n-queens/",
+        "date":"2018/04/14"
+  },
+  
+        "title": "算法-股票问题",
+        "url":  "/2018/04/12/algorithm-stock/",
+        "date":"2018/04/12"
+  },
+  
+        "title": "算法-组合数问题",
+        "url":  "/2018/04/08/algorithm-combination/",
+        "date":"2018/04/08"
+  },
+  
+        "title": "算法-桶排序",
+        "url":  "/2018/04/07/algorithm-bucket-sort/",
+        "date":"2018/04/07"
+  },
+  
+        "title": "算法-归并排序",
+        "url":  "/2018/04/06/algorithm-merge-sort/",
+        "date":"2018/04/06"
+  },
+  
+        "title": "算法-选择排序",
+        "url":  "/2018/04/05/algorithm-select-sort/",
+        "date":"2018/04/05"
+  },
+  
+        "title": "算法-希尔排序",
+        "url":  "/2018/04/04/algorithm-shell-sort/",
+        "date":"2018/04/04"
+  },
+  
+        "title": "算法-插入排序",
+        "url":  "/2018/04/03/algorithm-insert-sort/",
+        "date":"2018/04/03"
+  },
+  
+        "title": "算法-冒泡排序",
+        "url":  "/2018/04/02/algorithm-bubble-sort/",
+        "date":"2018/04/02"
+  },
+  
+        "title": "算法-快速排序",
+        "url":  "/2018/03/30/algorithm-quick-sort/",
+        "date":"2018/03/30"
+  },
+  
+        "title": "算法-堆排序",
+        "url":  "/2018/03/29/algorithm-heap-sort/",
+        "date":"2018/03/29"
+  },
+  
+        "title": "算法-拓扑排序",
+        "url":  "/2018/03/26/algorithm-dag/",
+        "date":"2018/03/26"
+  },
+  
+        "title": "算法-广度优先",
+        "url":  "/2018/03/26/algorithm-bfs/",
+        "date":"2018/03/26"
+  },
+  
+        "title": "算法-动态规划",
+        "url":  "/2018/03/17/algorithm-dp/",
+        "date":"2018/03/17"
+  }
+  
+  ]
+}
+,
+
+
+
+ "系统":{
+  "posts":[
+  
+        "title": "Linux 双网卡配置",
+        "url":  "/2018/04/06/linux-double-network-set/",
+        "date":"2018/04/06"
+  },
+  
+        "title": "蓝魔平板刷 Android Windows Linux",
+        "url":  "/2018/02/27/ramos-brush/",
+        "date":"2018/02/27"
+  },
+  
+        "title": "在 x86 平板上面安装 Ubuntu",
+        "url":  "/2017/04/11/install-ubuntu-on-tablet/",
+        "date":"2017/04/11"
+  },
+  
+        "title": "Linux 软件推荐 「2017-4-18 更新」",
+        "url":  "/2017/04/09/linux-recommended-software/",
+        "date":"2017/04/09"
+  },
+  
+        "title": "固定 Vmware 中的 Linux 的 IP地址",
+        "url":  "/2016/08/10/fixed-ip-in-vmware-linux/",
+        "date":"2016/08/10"
+  },
+  
+        "title": "修复 Windows10 的 UEFI 引导",
+        "url":  "/2016/08/09/repair-windows-UEFI/",
+        "date":"2016/08/09"
+  }
+  
+  ]
+}
+,
+
+
+
+ "面试":{
+  "posts":[
+  
+        "title": "题集",
+        "url":  "/2018/03/22/interview-mistakes/",
+        "date":"2018/03/22"
+  },
+  
+        "title": "面试题总结",
+        "url":  "/2018/03/01/interview-qa/",
+        "date":"2018/03/01"
+  },
+  
+        "title": "Java 面试题总结",
+        "url":  "/2018/01/11/java-question/",
+        "date":"2018/01/11"
+  }
+  
+  ]
+}
+
+
+}
+

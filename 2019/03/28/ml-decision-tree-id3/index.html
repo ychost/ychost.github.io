@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>机器学习-决策树-ID3 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2019/03/28/ml-decision-tree-id3/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="机器学习-决策树-ID3"> 
+    <meta name="keywords" content="决策树, 机器学习, ID3">
+    <meta name="og:keywords" content="决策树, 机器学习, ID3"> 
+    <meta name="description" content="决策树(Decision Tree）是在已知各种情况发生概率的基础上，通过构成决策树来求取净现值的期望值大于等于零的概率，评价项目风险，判断其可行性的决策分析方法，是直观运用概率分析的一种图解法。由于这种决策分支画成图形很像一棵树的枝干，故称决策树。 ">
+    <meta name="og:description" content="决策树(Decision Tree）是在已知各种情况发生概率的基础上，通过构成决策树来求取净现值的期望值大于等于零的概率，评价项目风险，判断其可行性的决策分析方法，是直观运用概率分析的一种图解法。由于这种决策分支画成图形很像一棵树的枝干，故称决策树。 ">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2019/03/28/ml-decision-tree-id3/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2019-03-28"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+
+<section class="collection-head small geopattern" data-pattern-id="机器学习-决策树-ID3">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">机器学习-决策树-ID3</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2019">2019/03/28</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-机器学习"  title="机器学习">机器学习</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-机器学习"> 机器学习 </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-决策树"> 决策树 </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-ID3"> ID3 </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            <!-- 本文共 722 字， -->
+            本文共 3918 字，需
+              
+               48 分钟阅读
+              
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <p>　　决策树(Decision Tree）是在已知各种情况发生概率的基础上，通过构成决策树来求取净现值的期望值大于等于零的概率，评价项目风险，判断其可行性的决策分析方法，是直观运用概率分析的一种图解法。由于这种决策分支画成图形很像一棵树的枝干，故称决策树。在机器学习中，决策树是一个预测模型，他代表的是对象属性与对象值之间的一种映射关系。Entropy = 系统的凌乱程度，使用算法ID3, C4.5和C5.0生成树算法使用熵。这一度量是基于信息学理论中熵的概念。</p>
+
+<p>　　决策树最经典的算法包括：ID3、C4.5以及CART算法，ID3与C4.5算法相似，C4.5在特征选择时选用的信息准则是信息增益比，而ID3用的是信息增益；因为信息增益偏向于选择具有较多可能取值的特征（例如，某一特征具有5个可能取值，其信息增益会比具有2个特征取值的信息增益大）。</p>
+
+<h3 id="准备">准备</h3>
+
+<h4 id="信息熵">信息熵</h4>
+
+<p>　　熵表示随机变量的不确定性，熵值越大表示随机变量含有的信息越少，变量的不确定性越大。</p>
+
+<p>　　熵也是一个物理量和质量、温度、速度一样都是可以测定的，物理量的测定是需要参考物的，比如当测某个物体的质量时只需要计算该物体的重量为参考物的多少倍即可，比如参考物是 1KG，该物体的重量是它的 3 倍，那么该物体的质量为 3KG。</p>
+
+<p>　　熵的测定也是一样的，不过熵表示不确定性那么选择的参考物为抛 1 个硬币（熵为 1）这种只有 2 种情况的不确定性，但是测量熵不是通过乘法来做的而是通过指数测量的，比如抛 3 个硬币（熵为 3）的情况不是 6 种而是 \(2^3 = 8\) 种，它的熵为 \(log_2{8} = 3\)，再比如某个选择题的答案为 A B C D 中的一个，那么该题的熵为 \(log_2{4} = 2\)。即熵的一般公式为：</p>
+
+\[log_2{m}\]
+
+<blockquote>
+  <p>注：m 表示事件的不确定个数</p>
+</blockquote>
+
+<p>　　当事件为非等概率的时候，其每个事件的不确定个数为概率的倒数</p>
+
+\[l(x_i) = log_2{\frac{1}{p(x_i)}} = - log_2{p(x_i)}\]
+
+<blockquote>
+  <p>注：这里的 \(\frac{1}{p(x_i)}\) 表示 \(x_i\) 的不确定个数</p>
+</blockquote>
+
+<p>所以，样本集合的熵的计算公式如下：</p>
+
+\[H = - \sum_{i=1}^{n}{p(x_i)log_2{p(x_i)}}\]
+
+<p>\(p(x_i)\) 表示 \(x_i\) 在总样本中的概率，熵的单位是 bit(比特)</p>
+
+<p>关于熵解释还可以参考知乎 <a href="https://www.zhihu.com/question/22178202/answer/49929786">信息熵是什么？</a></p>
+
+<h4 id="信息增益">信息增益</h4>
+<p>　　信息增益在决策树算法中是用来选择特征的指标，信息增益越大，则这个特征的选择性越好，在概率中定义为：待分类的集合的熵和选定某个特征的条件熵之差（这里只的是经验熵或经验条件熵，由于真正的熵并不知道，是根据样本计算出来的），公式如下：</p>
+
+\[IG(X|Y) = H(Y) - H(Y|X)\]
+
+<p>信息增益就是 （含所有特征的熵 — 缺少某特征的熵）</p>
+
+<h4 id="决策树">决策树</h4>
+<p>　　决策树的结构是一个树状的，每一节点都是一个决策点，通过做不同的决策可以将样本分到最终叶子点的不同分类里面去，比如下图所示的一个要不要去约会的决策判断</p>
+
+<p><a href="/images/post/ml/decision-tree.png" data-lightbox="decision-tree"><img src="/images/post/ml/decision-tree.png" alt="decision-tree" /></a></p>
+
+<h4 id="id3-实现">ID3 实现</h4>
+
+<h4 id="计算信息熵">计算信息熵</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">calcEntropy</span><span class="p">(</span><span class="n">dataSet</span><span class="p">):</span>
+    <span class="s">"""
+    :param dataSet: 样本集合，最后一列为分类数据
+    :return: 分类数据的信息熵
+    """</span>
+    <span class="n">labelsCount</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">dataSet</span><span class="p">:</span>
+        <span class="c1"># 分类标签
+</span>        <span class="n">label</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">labelsCount</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">labelsCount</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">entroy</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">labelsCount</span><span class="p">:</span>
+        <span class="c1"># 计算熵
+</span>        <span class="n">p</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">labelsCount</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataSet</span><span class="p">)</span>
+        <span class="n">entroy</span> <span class="o">-=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">entroy</span>
+</code></pre></div></div>
+
+<h4 id="划分数据集">划分数据集</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">splitDataSet</span><span class="p">(</span><span class="n">dataSet</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="s">"""
+    删除样本的指定列
+    :param dataSet: 输入样本
+    :param index: 列序号
+    :param value: 样本中的列特征值等于 value 才有效
+    :return: 取出样本中指定列特征等于 value 的所有样本，且删除掉指定的列
+    """</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">feats</span> <span class="ow">in</span> <span class="n">dataSet</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">feats</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="n">value</span><span class="p">:</span>
+            <span class="n">feat</span> <span class="o">=</span> <span class="n">feats</span><span class="p">[:</span><span class="n">index</span><span class="p">]</span>
+            <span class="n">feat</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="n">feats</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:])</span>
+            <span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">feat</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</code></pre></div></div>
+
+<h4 id="选择最好的划分方式">选择最好的划分方式</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">chooseBestFeat</span><span class="p">(</span><span class="n">dataSet</span><span class="p">):</span>
+        <span class="s">"""
+        选择合适的特征列作为样本的划分标准，该特征为区分样本的最好的特征
+        :param dataSet: 样本集合
+        :return: 特征列序号
+        """</span>
+        <span class="c1"># 最后一列为分类信息，不是特征
+</span>        <span class="n">featuresCount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataSet</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="c1"># 整体的信息熵
+</span>        <span class="n">entropy</span> <span class="o">=</span> <span class="n">calcEntropy</span><span class="p">(</span><span class="n">dataSet</span><span class="p">)</span>
+        <span class="n">bestInfoGain</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">bestFeature</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">featuresCount</span><span class="p">):</span>
+            <span class="c1"># 样本的某一列
+</span>            <span class="n">featVals</span> <span class="o">=</span> <span class="p">[</span><span class="n">ex</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">ex</span> <span class="ow">in</span> <span class="n">dataSet</span><span class="p">]</span>
+            <span class="c1"># 过滤掉重复值
+</span>            <span class="n">uniquVals</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">featVals</span><span class="p">)</span>
+            <span class="n">subEntropy</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">uniquVals</span><span class="p">:</span>
+                <span class="c1"># 切分样本
+</span>                <span class="n">subDataSet</span> <span class="o">=</span> <span class="n">splitDataSet</span><span class="p">(</span><span class="n">dataSet</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                <span class="c1"># 计算切分后的信息熵
+</span>                <span class="n">p</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">subDataSet</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataSet</span><span class="p">))</span>
+                <span class="n">subEntropy</span> <span class="o">+=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">calcEntropy</span><span class="p">(</span><span class="n">subDataSet</span><span class="p">)</span>
+            <span class="c1"># 整体的信息熵 - 子样本的信息熵
+</span>            <span class="c1"># 差值越大说明信息增益越大
+</span>            <span class="n">infoGain</span> <span class="o">=</span> <span class="n">entropy</span> <span class="o">-</span> <span class="n">subEntropy</span>
+            <span class="k">if</span> <span class="n">infoGain</span> <span class="o">&gt;</span> <span class="n">bestInfoGain</span><span class="p">:</span>
+                <span class="n">bestInfoGain</span> <span class="o">=</span> <span class="n">infoGain</span>
+                <span class="n">bestFeature</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">return</span> <span class="n">bestFeature</span>
+</code></pre></div></div>
+
+<h4 id="简单的决策树">简单的决策树</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">classify</span><span class="p">(</span><span class="n">inputTree</span><span class="p">,</span> <span class="n">featLabels</span><span class="p">,</span> <span class="n">testVec</span><span class="p">):</span>
+        <span class="s">"""
+        一个简单的决策树抉择
+        :param inputTree: 决策树的结构，该结构为手动实现，通过上述的划分特征来获取各个决策点
+        :param featLabels: 每个特征的名字
+        :param testVec: 测试样本
+        :return: 测试样本所属的分类
+        """</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">inputTree</span><span class="p">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">inputTree</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="c1"># 当前测试的特征
+</span>        <span class="n">featIndex</span> <span class="o">=</span> <span class="n">featLabels</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">classLabel</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">root</span><span class="p">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="c1"># 抉择分类
+</span>            <span class="k">if</span> <span class="n">testVec</span><span class="p">[</span><span class="n">featIndex</span><span class="p">]</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+                <span class="c1"># 决策点
+</span>                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">root</span><span class="p">).</span><span class="n">__name__</span> <span class="o">==</span> <span class="s">"dict"</span><span class="p">:</span>
+                    <span class="n">classLabel</span> <span class="o">=</span> <span class="n">classify</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">featLabels</span><span class="p">,</span> <span class="n">testVec</span><span class="p">)</span>
+                <span class="c1"># 终结点
+</span>                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">classLabel</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">classLabel</span>
+</code></pre></div></div>
+
+<h3 id="总结">总结</h3>
+<p>　　决策树分类就是一个带有终止块的流程图，终止块代表了分类结果。处理数据时根据信息增益来找到最好的划分数据的方式，直到将所有同一类数据划分到一起为止，然后可以通过递归的方式来判断出测试数据所属的分类。</p>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2019/03/27/summary-for-2018/"><span style="color:black">上一篇：</span> 2018-年度总结</a>
+        
+        
+          <a class="next" href="/2019/04/03/ml-svm/"><span style="color:black">下一篇：</span>支持向量机通俗导论（理解SVM的三层境界） </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+    <div class="comment markdown-body"></div>
+    <!--载入js，在</body>之前插入即可-->
+    <!--Leancloud 操作库:-->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <!--Valine 的核心代码库-->
+    <script src="/assets/js/valine.min.js"></script>
+    <script>
+        new Valine({
+            // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+            av: AV, 
+            el: '.comment',
+            app_id: '5Vp12Dnkf6n73MefHqK09vjG-gzGzoHsz', // 这里填写上面得到的APP ID
+            app_key: 'J6cCta4STGVS5TusVex4XUq8', // 这里填写上面得到的APP KEY
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!', // 留言框占位提示文字
+            smiles_url:'/assets/images/smiles',
+            avatar_url:'/assets/avatar/',
+            avatar_count: 20
+        });
+    </script>
+
+<!-- Changyan Comment END -->
+
+      </div>
+
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+
+
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                
+                <span id="busuanzi_container_site_pv"> 您是本站第
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span>
+                    次点击</span>
+                
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://github.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页"
+                    target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类"
+                    target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档"
+                    target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签"
+                    target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于"
+                    target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?a908f0985fa9991b706a3f4a299bb47b";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</body>
+
+</html>

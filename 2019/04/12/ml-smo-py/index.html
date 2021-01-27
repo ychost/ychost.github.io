@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>SMO 算法的代码实现 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2019/04/12/ml-smo-py/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="SMO 算法的代码实现"> 
+    <meta name="keywords" content="SMO, Python, SVM, 机器学习">
+    <meta name="og:keywords" content="SMO, Python, SVM, 机器学习"> 
+    <meta name="description" content="SMO 是解决 SVM 中目标函数优化的一个快速的算法，本文通过 Python 代码实现了该算法，通过将原算法公式和代码进行一一比对让读者更能理会整个算法原理和实现步骤。">
+    <meta name="og:description" content="SMO 是解决 SVM 中目标函数优化的一个快速的算法，本文通过 Python 代码实现了该算法，通过将原算法公式和代码进行一一比对让读者更能理会整个算法原理和实现步骤。">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2019/04/12/ml-smo-py/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2019-04-12"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+
+<section class="collection-head small geopattern" data-pattern-id="SMO 算法的代码实现">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">SMO 算法的代码实现</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2019">2019/04/12</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-机器学习"  title="机器学习">机器学习</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-机器学习"> 机器学习 </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-SVM"> SVM </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-SMO"> SMO </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Python"> Python </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            <!-- 本文共 5688 字， -->
+            本文共 18767 字，需
+              
+                120 分钟阅读
+              
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <p>　　SMO 是解决 SVM 中目标函数优化的一个快速的算法，本文通过 Python 代码实现了该算法，通过将原算法公式和代码进行一一比对让读者更能理会整个算法原理和实现步骤。</p>
+
+<p>　　如果对文中的相关公式不了解请参考另一篇理论文章 <a href="/2019/04/10/ml-svm-smo/">SMO 算法超详细解析</a></p>
+
+<h2 id="准备">准备</h2>
+
+<p>本算法实现参考于《机器学习实战》，相关的数据资源请自行下载</p>
+<blockquote>
+  <p><a href="https://pan.baidu.com/s/1Gc7BDmNyBfGQlfVvhzyZFw">https://pan.baidu.com/s/1Gc7BDmNyBfGQlfVvhzyZFw</a> 提取码：ywuh</p>
+</blockquote>
+
+<p>本文是基于 <code class="language-plaintext highlighter-rouge">Python</code> 来实现的整个算法，且依赖于 <code class="language-plaintext highlighter-rouge">numpy</code></p>
+
+<p>本文的测试数据集在 ch06 文件下面的几个 txt 文件，这些测试文件的数据都是标准的二分类数据</p>
+
+<p><a href="/images/post/ml/svm-test-set.jpg" data-lightbox="smo"><img src="/images/post/ml/svm-test-set.jpg" alt="svm-test-set" /></a></p>
+
+<h2 id="smo-功能函数">SMO 功能函数</h2>
+<h3 id="加载数据">加载数据</h3>
+<p>　　将上图中的 txt 测试数据加载到内存中，并生成指定的矩阵格式，其中特征数据赋值给了 X 矩阵，分类数据赋值给了 Y 矩阵</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">loadDataSet</span><span class="p">(</span><span class="n">fileName</span><span class="p">):</span>
+    <span class="s">"""
+    加载文本数据
+    :param fileName:
+    :return:
+    """</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">fr</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fr</span><span class="p">.</span><span class="n">readlines</span><span class="p">():</span>
+        <span class="n">lineArr</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="n">strip</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">)</span>
+        <span class="n">X</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">lineArr</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">lineArr</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
+        <span class="n">Y</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">lineArr</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+    <span class="c1"># 分别转成矩阵，其中分类矩阵转置成一列
+</span>    <span class="k">return</span> <span class="n">mat</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">mat</span><span class="p">(</span><span class="n">Y</span><span class="p">).</span><span class="n">T</span>
+</code></pre></div></div>
+
+<h3 id="注入数据">注入数据</h3>
+<p>将一些基础数据通过构造函数注入进行注入</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SMO</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">gaussDelta</span><span class="o">=</span><span class="mf">1.3</span><span class="p">):</span>
+        <span class="s">"""
+        初始化构造函数，注入训练样本，常量，容错率
+        :param X: 样本特征
+        :param Y: 样本分类，只能取 {1,-1}
+        :param C: 常量
+        :param e: 容错率
+        :param gaussDetla: 高斯核函数的分母 delta 值
+        """</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">C</span> <span class="o">=</span> <span class="n">C</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">tol</span> <span class="o">=</span> <span class="n">e</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span> <span class="o">=</span> <span class="n">mat</span><span class="p">(</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">eCache</span> <span class="o">=</span> <span class="n">mat</span><span class="p">(</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">K</span> <span class="o">=</span> <span class="n">mat</span><span class="p">(</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">):</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">K</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">kernelGauss</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">gaussDelta</span><span class="p">)</span>
+</code></pre></div></div>
+<h3 id="高斯核">高斯核</h3>
+
+<p>上述代码的最后有一行进行了高斯核处理，并将处理结果 \(K{ij}\) 进行了缓存：</p>
+
+\[K(x, y)=\exp \left(-\frac{\|x-y\|^{2}}{2 \sigma^{2}}\right)\tag{2-1}\]
+
+<p>通过如下代码便可以实现高斯核，同时通过 <code class="language-plaintext highlighter-rouge">calcKernel</code> 方法直接返回了缓存的 \(K_{i,j}\) 结果</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="k">def</span> <span class="nf">kernelGauss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">delta</span><span class="p">):</span>
+        <span class="s">"""
+        计算高斯核函数值
+        :param delta:
+        :return:
+        """</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">mat</span><span class="p">(</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">Y</span>
+            <span class="n">k</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">*</span> <span class="n">diff</span><span class="p">.</span><span class="n">T</span>
+        <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nb">pow</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+    
+     <span class="k">def</span> <span class="nf">calcKernel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+        <span class="s">"""
+        这里直接返回的之前缓存的核函数值
+        :param i:
+        :param j:
+        :return:
+        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="计算-e_i">计算 \(E_i\)</h3>
+<p>\(E_i\) 表示了预测值与真实值的差，其计算方法如下：</p>
+
+\[E_i = f(x_i) - y_i =\sum_{j=1}^{N} \alpha_{j} y_{j} K_{ij}+b - y_i\tag{2-2}\]
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">def</span> <span class="nf">calcEi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="s">"""
+        计算 f(x_i) - y_i
+        :param i: 索引
+        :return: 预测值和真实值的差值
+        """</span>
+        <span class="n">aiyi</span> <span class="o">=</span> <span class="n">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">)</span>
+        <span class="n">ki</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">K</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">fxi</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">aiyi</span><span class="p">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">ki</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">b</span>
+        <span class="n">ei</span> <span class="o">=</span> <span class="n">fxi</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">ei</span>
+</code></pre></div></div>
+
+<h3 id="选择第二个变量-alpha_j">选择第二个变量 \(\alpha_j\)</h3>
+<p>由于第二个变量的选择比较麻烦，所以将其单独提取出来</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">selectJ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">ei</span><span class="p">):</span>
+        <span class="s">"""
+        选择 |Ei - Ej| 取最大值的时候的 j,Ej，要求 Ej 是之前迭代的，否者返回随机选取的 j,Ej
+        :param i: 第一个变量
+        :param ei: 第一个变量的 Ei
+        :return: 第二个变量的 j,Ej
+        """</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">maxDeltaE</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">ej</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">eCache</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">ei</span><span class="p">]</span>
+        <span class="c1"># 要求选择的 Ej 必须是之前迭代过的，否则返回随机值
+</span>        <span class="n">validEcacheList</span> <span class="o">=</span> <span class="n">nonzero</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">eCache</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">].</span><span class="n">A</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">validEcacheList</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">validEcacheList</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">i</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">ek</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcEi</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+                <span class="n">deltaE</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ei</span> <span class="o">-</span> <span class="n">ek</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">deltaE</span> <span class="o">&gt;</span> <span class="n">maxDeltaE</span><span class="p">:</span>
+                    <span class="n">maxDeltaE</span> <span class="o">=</span> <span class="n">deltaE</span>
+                    <span class="n">ej</span> <span class="o">=</span> <span class="n">ek</span>
+                    <span class="n">j</span> <span class="o">=</span> <span class="n">k</span>
+            <span class="k">return</span> <span class="n">j</span><span class="p">,</span> <span class="n">ej</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">selectJRand</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">)</span>
+            <span class="n">ej</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcEi</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">j</span><span class="p">,</span> <span class="n">ej</span>
+
+    <span class="k">def</span> <span class="nf">selectJRand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="s">"""
+        随机选择第二个变量
+        :param i:
+        :param n:
+        :return:
+        """</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">while</span> <span class="n">j</span> <span class="o">==</span> <span class="n">i</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">j</span>
+
+    <span class="k">def</span> <span class="nf">updateEi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="s">"""
+        更新 Ei 的缓存
+        :param i:
+        :return:
+        """</span>
+        <span class="n">ei</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcEi</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">eCache</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">ei</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h2 id="smo-核心处理">SMO 核心处理</h2>
+<h3 id="alpha-更新">\(\alpha\) 更新</h3>
+<h4 id="alpha_2-的更新">\(\alpha_2\) 的更新</h4>
+
+\[\alpha_2^{new,unc}=\alpha_2^{old}+\frac{y_2(E_1-E_2)}{\eta}
+    \tag{2-3}\]
+
+<p>其中，\(\alpha_2^{new}\) 表示本次迭代的计算值，\(\alpha_2^{old}\) 为上一次的迭代值 <br />
+　　\(E_i = f(x_i) - y_i\) 表示预测值与真实值的差 <br />
+　　\(\eta=K_{11}+K_{22}-2K_{12}\)
+$$</p>
+
+\[\alpha_2^{new} = 
+\begin{cases}
+    H, \alpha_2^{new,unc} &gt; H\\
+    \alpha_2^{new,unc}, L \le \alpha_2^{new,unc} \le H \\
+    L, \alpha_2^{new,unc} &lt; L
+\end{cases} \tag{2-4}\]
+
+<p>代码实现，用 <code class="language-plaintext highlighter-rouge">alphas[j]</code> 表示 \(\alpha_2\)</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">eta</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+    <span class="n">ajOld</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+        <span class="n">L</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ajOld</span> <span class="o">-</span> <span class="n">aiOld</span><span class="p">)</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">C</span> <span class="o">+</span> <span class="n">ajOld</span> <span class="o">-</span> <span class="n">aiOld</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">L</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">aiOld</span> <span class="o">+</span> <span class="n">ajOld</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">)</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">,</span> <span class="n">aiOld</span> <span class="o">+</span> <span class="n">ajOld</span><span class="p">)</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ajOld</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">ei</span> <span class="o">-</span> <span class="n">ej</span><span class="p">)</span> <span class="o">/</span> <span class="n">eta</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">truncateAlpha</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">H</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+</code></pre></div></div>
+<p>其中 <code class="language-plaintext highlighter-rouge">self.truncateAlpha(self.alphas[j],H,L)</code> 为 \(\alpha_j\) 的约束</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">truncateAlpha</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aj</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
+        <span class="s">"""
+        对 Aj 进行截取，只能在 H L 之内
+        :param aj:
+        :param H:
+        :param L:
+        :return:
+        """</span>
+        <span class="k">if</span> <span class="n">aj</span> <span class="o">&gt;</span> <span class="n">H</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">H</span>
+        <span class="k">elif</span> <span class="n">aj</span> <span class="o">&lt;</span> <span class="n">L</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">L</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">aj</span>
+</code></pre></div></div>
+<h4 id="alpha_1-的更新">\(\alpha_1\) 的更新</h4>
+<p>\(\alpha_{1}^{n e w}=\alpha_{1}^{o l d}+y_{1} y_{2}\left(\alpha_{2}^{o l d}-\alpha_{2}^{n e w}\right)\tag{2-5}\)</p>
+
+<p>代码实现，用 <code class="language-plaintext highlighter-rouge">alphas[i]</code> 表示 \(\alpha_1\)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="n">aiOld</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">aiOld</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">ajOld</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h3 id="b-的更新">\(b\) 的更新</h3>
+<p>1.　若 \(0 &lt; \alpha_1^{new} &lt; C\)，则</p>
+
+\[b^{new} =  b_{1}^{new}=-E_{1}-y_{1} K_{11}\left(\alpha_{1}^{new}-\alpha_{1}^{old}\right)-y_{2} K_{21}\left(\alpha_{2}^{new}-\alpha_{2}^{old}\right)+b^{old}\tag{2-6}\]
+
+<p>2.　若 \(0 &lt; \alpha_2^{new} &lt; C\)，则</p>
+
+\[b^{new} =  b_{2}^{new}=-E_{2}-y_{1} K_{12}\left(\alpha_{1}^{new}-\alpha_{1}^{old}\right)-y_{2} K_{22}\left(\alpha_{2}^{new}-\alpha_{2}^{old}\right)+b^{old}\tag{2-7}\]
+
+<p>3.　若同时满足 \(0 &lt; \alpha_i^{new} &lt; C\)，则</p>
+
+\[b^{new} = b_1^{new} = b_2^{new}\tag{2-8}\]
+
+<p>4.　若同时不满足 \(0 &lt; \alpha_i^{new} &lt; C\)，则</p>
+
+\[b^{new} = \frac{b_1^{new}  + b_2^{new}}{2} \tag{2-9}\]
+
+<p>代码实现</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="n">b1</span> <span class="o">=</span> <span class="o">-</span><span class="n">ei</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">aiOld</span><span class="p">)</span> \
+            <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">ajOld</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">b</span>
+
+        <span class="n">b2</span> <span class="o">=</span> <span class="o">-</span><span class="n">ej</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">aiOld</span><span class="p">)</span> \
+            <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">ajOld</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">b</span>
+
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">b1</span>
+        <span class="k">elif</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">b2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">b1</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+</code></pre></div></div>
+
+<h3 id="alpha-和-b-更新代码">\(\alpha\) 和 \(b\) 更新代码</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">updateAlphaB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="mf">0.00001</span><span class="p">):</span>
+        <span class="s">"""
+        利用 SMO 算法优化一次 alpha_i, alpha_j, b
+        :param i: 训练样本索引
+        :param e: 最小更新步长
+        :return: 更新成功返回 1，失败返回 0
+        """</span>
+        <span class="n">ei</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcEi</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="c1"># 选择那些在容错率之外的样本作为第一个变量
+</span>        <span class="k">if</span> <span class="p">((</span><span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">ei</span> <span class="o">&lt;</span> <span class="o">-</span><span class="bp">self</span><span class="p">.</span><span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">))</span> <span class="ow">or</span> \
+                <span class="p">((</span><span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">ei</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)):</span>
+            <span class="n">j</span><span class="p">,</span> <span class="n">ej</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">selectJ</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">ei</span><span class="p">)</span>
+            <span class="n">aiOld</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">ajOld</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">L</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ajOld</span> <span class="o">-</span> <span class="n">aiOld</span><span class="p">)</span>
+                <span class="n">H</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">C</span> <span class="o">+</span> <span class="n">ajOld</span> <span class="o">-</span> <span class="n">aiOld</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">L</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">aiOld</span> <span class="o">+</span> <span class="n">ajOld</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">)</span>
+                <span class="n">H</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">,</span> <span class="n">aiOld</span> <span class="o">+</span> <span class="n">ajOld</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">L</span> <span class="o">==</span> <span class="n">H</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">"L == H"</span><span class="p">)</span>
+                <span class="k">return</span> <span class="mi">0</span>
+            <span class="n">eta</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+            <span class="c1"># eta 类似于二阶导数值，只有当它 大于 0 才能取最小值
+</span>            <span class="k">if</span> <span class="n">eta</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">"eta &lt;= 0"</span><span class="p">)</span>
+                <span class="k">return</span> <span class="mi">0</span>
+            <span class="c1"># 计算 alpha_j 并截取在[H,L]之内
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ajOld</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">ei</span> <span class="o">-</span> <span class="n">ej</span><span class="p">)</span> <span class="o">/</span> <span class="n">eta</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">truncateAlpha</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">H</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">updateEi</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">ajOld</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">"j not moving enough"</span><span class="p">)</span>
+                <span class="k">return</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">aiOld</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">ajOld</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">updateEi</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+            <span class="c1"># 更新 b 的值
+</span>            <span class="n">b1</span> <span class="o">=</span> <span class="o">-</span><span class="n">ei</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">aiOld</span><span class="p">)</span> \
+                 <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">ajOld</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">b</span>
+
+            <span class="n">b2</span> <span class="o">=</span> <span class="o">-</span><span class="n">ej</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">aiOld</span><span class="p">)</span> \
+                 <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">ajOld</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">b</span>
+
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">b1</span>
+            <span class="k">elif</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">b2</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">b1</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+</code></pre></div></div>
+
+<h3 id="训练样本">训练样本</h3>
+<p>训练样本主要是从样本的非边界值和所有值来回进行选取</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxIter</span><span class="p">):</span>
+        <span class="s">"""
+        训练样本
+        :param maxIter: 最大迭代次数
+        :return: 训练好的 b,alphas
+        """</span>
+        <span class="nb">iter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">entireSet</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">alphaPairsChanged</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># 在所有值和非边界值上面来回切换选取变量
+</span>        <span class="k">while</span> <span class="p">(</span><span class="nb">iter</span> <span class="o">&lt;</span> <span class="n">maxIter</span><span class="p">)</span> <span class="ow">and</span> <span class="p">((</span><span class="n">alphaPairsChanged</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="n">entireSet</span><span class="p">):</span>
+            <span class="n">alphaPairsChanged</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="c1"># 遍历所有值，更新那些没有迭代过的数据
+</span>            <span class="k">if</span> <span class="n">entireSet</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">):</span>
+                    <span class="n">alphaPairsChanged</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">updateAlphaB</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s">"fullSet, iter: %d i: %d, pairs changed %d"</span> <span class="o">%</span> <span class="p">(</span><span class="nb">iter</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">alphaPairsChanged</span><span class="p">))</span>
+                    <span class="nb">iter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="c1"># 遍历非边界值
+</span>            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># 在 alphas 中取出大于 0 小于 c 的索引值
+</span>                <span class="c1"># 即更新那些之前迭代过的 alpha_i alpha_j
+</span>                <span class="n">nonBoundIs</span> <span class="o">=</span> <span class="n">nonzero</span><span class="p">((</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">.</span><span class="n">A</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">.</span><span class="n">A</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nonBoundIs</span><span class="p">:</span>
+                    <span class="n">alphaPairsChanged</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">updateAlphaB</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s">"non-bound, iter: %d i: %d, pairs changed %d"</span> <span class="o">%</span> <span class="p">(</span><span class="nb">iter</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">alphaPairsChanged</span><span class="p">))</span>
+                <span class="nb">iter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">entireSet</span><span class="p">:</span>
+                <span class="n">entireSet</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">elif</span> <span class="n">alphaPairsChanged</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">entireSet</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"iteration number: %d"</span> <span class="o">%</span> <span class="nb">iter</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span>
+</code></pre></div></div>
+
+<h2 id="样本测试">样本测试</h2>
+<p>这里使用了两组样本，其中 <code class="language-plaintext highlighter-rouge">testSetRBF.txt</code> 为训练样本，<code class="language-plaintext highlighter-rouge">testSetRBF2.txt</code> 为测试样本</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">loadDataSet</span><span class="p">(</span><span class="s">"../source/ch06/testSetRBF.txt"</span><span class="p">)</span>
+    <span class="n">smo</span> <span class="o">=</span> <span class="n">SMO</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">)</span>
+    <span class="n">b</span><span class="p">,</span> <span class="n">alphas</span> <span class="o">=</span> <span class="n">smo</span><span class="p">.</span><span class="n">train</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="c1"># 支持向量即 alphas 大于 0 对应的那些有效的样本向量，这些向量是落在 SVM 的边界上面的
+</span>    <span class="c1"># 支持向量的索引
+</span>    <span class="n">svIndices</span> <span class="o">=</span> <span class="n">nonzero</span><span class="p">(</span><span class="n">smo</span><span class="p">.</span><span class="n">alphas</span><span class="p">.</span><span class="n">A</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># 支持向量特征
+</span>    <span class="n">xSv</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">svIndices</span><span class="p">]</span>
+    <span class="c1"># 支持向量分类
+</span>    <span class="n">ySv</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">svIndices</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"there are %d Support Vectors"</span> <span class="o">%</span> <span class="n">shape</span><span class="p">(</span><span class="n">xSv</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">errorCount</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="mf">1.3</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="c1"># 映射到核函数值
+</span>        <span class="n">kernelEval</span> <span class="o">=</span> <span class="n">smo</span><span class="p">.</span><span class="n">kernelGauss</span><span class="p">(</span><span class="n">xSv</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">delta</span><span class="p">)</span>
+        <span class="n">predict</span> <span class="o">=</span> <span class="n">kernelEval</span><span class="p">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">multiply</span><span class="p">(</span><span class="n">ySv</span><span class="p">,</span> <span class="n">smo</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">svIndices</span><span class="p">])</span> <span class="o">+</span> <span class="n">b</span>
+        <span class="k">if</span> <span class="n">sign</span><span class="p">(</span><span class="n">predict</span><span class="p">)</span> <span class="o">!=</span> <span class="n">sign</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+            <span class="n">errorCount</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># 训练样本误差
+</span>    <span class="k">print</span><span class="p">(</span><span class="s">"the training error rate is : %f"</span> <span class="o">%</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">errorCount</span> <span class="o">/</span> <span class="n">m</span><span class="p">)))</span>
+
+    <span class="n">errorCount</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">loadDataSet</span><span class="p">(</span><span class="s">"../source/ch06/testSetRBF2.txt"</span><span class="p">)</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">kernelEval</span> <span class="o">=</span> <span class="n">smo</span><span class="p">.</span><span class="n">kernelGauss</span><span class="p">(</span><span class="n">xSv</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">delta</span><span class="p">)</span>
+        <span class="n">predict</span> <span class="o">=</span> <span class="n">kernelEval</span><span class="p">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">multiply</span><span class="p">(</span><span class="n">ySv</span><span class="p">,</span> <span class="n">smo</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">svIndices</span><span class="p">])</span> <span class="o">+</span> <span class="n">b</span>
+        <span class="k">if</span> <span class="n">sign</span><span class="p">(</span><span class="n">predict</span><span class="p">)</span> <span class="o">!=</span> <span class="n">sign</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+            <span class="n">errorCount</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># 测试样本误差
+</span>    <span class="k">print</span><span class="p">(</span><span class="s">"the test error rate is : %f"</span> <span class="o">%</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">errorCount</span> <span class="o">/</span> <span class="n">m</span><span class="p">)))</span>
+</code></pre></div></div>
+<p>最终运行的效果截图</p>
+
+<p><a href="/images/post/ml/svm-test.jpg" data-lightbox="smo"><img src="/images/post/ml/svm-test.jpg" alt="svm-test" /></a></p>
+<h2 id="总结">总结</h2>
+<p>　　SMO 算法的实现过程并不复杂，主要处理了核函数，变量\(\alpha_1,\alpha_2\)的选取，\(\alpha,b\) 的更新，样本训练的终止条件等问题<br />
+　　核函数主要使用了高斯核，当然也可以替换成其它的核函数。<br />
+　　\(\alpha_1\) 变量的选取是通过容错率 <code class="language-plaintext highlighter-rouge">self.tol</code> 来进行抉择的，主要选择那些在容错率范围之外的数据来作为 \(\alpha_1\)。<br />
+　　\(\alpha_2\) 变量的选取是当 \(|E_1 - E_2|\) 取最大值的时候对应的变量。<br />
+　　样本训练的终止条件通过最大迭代次数、更新是否成功、完整集训练等标志来确定的。</p>
+
+<h2 id="附录">附录</h2>
+<h3 id="完整代码">完整代码</h3>
+<p>文件 <code class="language-plaintext highlighter-rouge">smo.py</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="k">class</span> <span class="nc">SMO</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">gaussDelta</span><span class="o">=</span><span class="mf">1.3</span><span class="p">):</span>
+        <span class="s">"""
+        初始化构造函数，注入训练样本，常量，容错率
+        :param X: 样本特征
+        :param Y: 样本分类，只能取 {1,-1}
+        :param C: 常量
+        :param e: 容错率
+        """</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">C</span> <span class="o">=</span> <span class="n">C</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">tol</span> <span class="o">=</span> <span class="n">e</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span> <span class="o">=</span> <span class="n">mat</span><span class="p">(</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">eCache</span> <span class="o">=</span> <span class="n">mat</span><span class="p">(</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">K</span> <span class="o">=</span> <span class="n">mat</span><span class="p">(</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">):</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">K</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">kernelGauss</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">gaussDelta</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">calcEi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="s">"""
+        计算 f(x_i) - y_i
+        :param i: 索引
+        :return: 预测值和真实值的差值
+        """</span>
+        <span class="n">aiyi</span> <span class="o">=</span> <span class="n">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">)</span>
+        <span class="n">ki</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">K</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">fxi</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">aiyi</span><span class="p">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">ki</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">b</span>
+        <span class="n">ei</span> <span class="o">=</span> <span class="n">fxi</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">ei</span>
+
+    <span class="k">def</span> <span class="nf">selectJ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">ei</span><span class="p">):</span>
+        <span class="s">"""
+        选择 |Ei - Ej| 取最大值的时候的 j,Ej，要求 Ej 是之前迭代的，否者返回随机选取的 j,Ej
+        :param i: 第一个变量
+        :param ei: 第一个变量的 Ei
+        :return: 第二个变量的 j,Ej
+        """</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">maxDeltaE</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">ej</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">eCache</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">ei</span><span class="p">]</span>
+        <span class="n">validEcacheList</span> <span class="o">=</span> <span class="n">nonzero</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">eCache</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">].</span><span class="n">A</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">validEcacheList</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">validEcacheList</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">i</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">ek</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcEi</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+                <span class="n">deltaE</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ei</span> <span class="o">-</span> <span class="n">ek</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">deltaE</span> <span class="o">&gt;</span> <span class="n">maxDeltaE</span><span class="p">:</span>
+                    <span class="n">maxDeltaE</span> <span class="o">=</span> <span class="n">deltaE</span>
+                    <span class="n">ej</span> <span class="o">=</span> <span class="n">ek</span>
+                    <span class="n">j</span> <span class="o">=</span> <span class="n">k</span>
+            <span class="k">return</span> <span class="n">j</span><span class="p">,</span> <span class="n">ej</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">selectJRand</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">)</span>
+            <span class="n">ej</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcEi</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">j</span><span class="p">,</span> <span class="n">ej</span>
+
+    <span class="k">def</span> <span class="nf">selectJRand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="s">"""
+        随机选择第二个变量
+        :param i:
+        :param n:
+        :return:
+        """</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">while</span> <span class="n">j</span> <span class="o">==</span> <span class="n">i</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">j</span>
+
+    <span class="k">def</span> <span class="nf">updateEi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="s">"""
+        更新 Ei 的缓存
+        :param i:
+        :return:
+        """</span>
+        <span class="n">ei</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcEi</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">eCache</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">ei</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">updateAlphaB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="mf">0.00001</span><span class="p">):</span>
+        <span class="s">"""
+        利用 SMO 算法优化一次 alpha_i 和 alpha_j
+        :param i:
+        :param e:
+        :return:
+        """</span>
+        <span class="n">ei</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcEi</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="c1"># 选择那些在容错率之外的样本作为第一个变量
+</span>        <span class="k">if</span> <span class="p">((</span><span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">ei</span> <span class="o">&lt;</span> <span class="o">-</span><span class="bp">self</span><span class="p">.</span><span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">))</span> <span class="ow">or</span> \
+                <span class="p">((</span><span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">ei</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)):</span>
+            <span class="n">j</span><span class="p">,</span> <span class="n">ej</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">selectJ</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">ei</span><span class="p">)</span>
+            <span class="n">aiOld</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">ajOld</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">L</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ajOld</span> <span class="o">-</span> <span class="n">aiOld</span><span class="p">)</span>
+                <span class="n">H</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">C</span> <span class="o">+</span> <span class="n">ajOld</span> <span class="o">-</span> <span class="n">aiOld</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">L</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">aiOld</span> <span class="o">+</span> <span class="n">ajOld</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">)</span>
+                <span class="n">H</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">,</span> <span class="n">aiOld</span> <span class="o">+</span> <span class="n">ajOld</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">L</span> <span class="o">==</span> <span class="n">H</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">"L == H"</span><span class="p">)</span>
+                <span class="k">return</span> <span class="mi">0</span>
+            <span class="n">eta</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+            <span class="c1"># eta 类似于二阶导数值，只有当它 大于 0 才能取最小值
+</span>            <span class="k">if</span> <span class="n">eta</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">"eta &lt;= 0"</span><span class="p">)</span>
+                <span class="k">return</span> <span class="mi">0</span>
+            <span class="c1"># 计算 alpha_j 并截取在[H,L]之内
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ajOld</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">ei</span> <span class="o">-</span> <span class="n">ej</span><span class="p">)</span> <span class="o">/</span> <span class="n">eta</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">truncateAlpha</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">H</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">updateEi</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">ajOld</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">"j not moving enough"</span><span class="p">)</span>
+                <span class="k">return</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">aiOld</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">ajOld</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">updateEi</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+            <span class="c1"># 更新 b 的值
+</span>            <span class="n">b1</span> <span class="o">=</span> <span class="o">-</span><span class="n">ei</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">aiOld</span><span class="p">)</span> \
+                 <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">ajOld</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">b</span>
+
+            <span class="n">b2</span> <span class="o">=</span> <span class="o">-</span><span class="n">ej</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">aiOld</span><span class="p">)</span> \
+                 <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">calcKernel</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">ajOld</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">b</span>
+
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">b1</span>
+            <span class="k">elif</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">b2</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">b1</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">truncateAlpha</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aj</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
+        <span class="s">"""
+        对 Aj 进行截取，只能在 H L 之内
+        :param aj:
+        :param H:
+        :param L:
+        :return:
+        """</span>
+        <span class="k">if</span> <span class="n">aj</span> <span class="o">&gt;</span> <span class="n">H</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">H</span>
+        <span class="k">elif</span> <span class="n">aj</span> <span class="o">&lt;</span> <span class="n">L</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">L</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">aj</span>
+
+    <span class="k">def</span> <span class="nf">calcKernel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+        <span class="s">"""
+        这里直接返回的之前缓存的核函数值
+        :param i:
+        :param j:
+        :return:
+        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">kernelGauss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">delta</span><span class="p">):</span>
+        <span class="s">"""
+        计算高斯核函数值
+        :param delta:
+        :return:
+        """</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">mat</span><span class="p">(</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">Y</span>
+            <span class="n">k</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">*</span> <span class="n">diff</span><span class="p">.</span><span class="n">T</span>
+        <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nb">pow</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxIter</span><span class="p">):</span>
+        <span class="s">"""
+        训练样本
+        :param maxIter: 最大迭代次数
+        :return: 训练好的 b,alphas
+        """</span>
+        <span class="nb">iter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">entireSet</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">alphaPairsChanged</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># 在所有值和非边界值上面来回切换选取变量
+</span>        <span class="k">while</span> <span class="p">(</span><span class="nb">iter</span> <span class="o">&lt;</span> <span class="n">maxIter</span><span class="p">)</span> <span class="ow">and</span> <span class="p">((</span><span class="n">alphaPairsChanged</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="n">entireSet</span><span class="p">):</span>
+            <span class="n">alphaPairsChanged</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="c1"># 遍历所有值
+</span>            <span class="k">if</span> <span class="n">entireSet</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">):</span>
+                    <span class="n">alphaPairsChanged</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">updateAlphaB</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s">"fullSet, iter: %d i: %d, pairs changed %d"</span> <span class="o">%</span> <span class="p">(</span><span class="nb">iter</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">alphaPairsChanged</span><span class="p">))</span>
+                    <span class="nb">iter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="c1"># 遍历非边界值
+</span>            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># 在 alphas 中取出大于 0 小于 c 的索引值
+</span>                <span class="n">nonBoundIs</span> <span class="o">=</span> <span class="n">nonzero</span><span class="p">((</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">.</span><span class="n">A</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">alphas</span><span class="p">.</span><span class="n">A</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">C</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nonBoundIs</span><span class="p">:</span>
+                    <span class="n">alphaPairsChanged</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">updateAlphaB</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s">"non-bound, iter: %d i: %d, pairs changed %d"</span> <span class="o">%</span> <span class="p">(</span><span class="nb">iter</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">alphaPairsChanged</span><span class="p">))</span>
+                <span class="nb">iter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">entireSet</span><span class="p">:</span>
+                <span class="n">entireSet</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">elif</span> <span class="n">alphaPairsChanged</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">entireSet</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"iteration number: %d"</span> <span class="o">%</span> <span class="nb">iter</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">alphas</span>
+</code></pre></div></div>
+
+<p>文件 <code class="language-plaintext highlighter-rouge">test.py</code></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">smo</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">loadDataSet</span><span class="p">(</span><span class="n">fileName</span><span class="p">):</span>
+    <span class="s">"""
+    加载文本数据
+    :param fileName:
+    :return:
+    """</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">fr</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fr</span><span class="p">.</span><span class="n">readlines</span><span class="p">():</span>
+        <span class="n">lineArr</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="n">strip</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">)</span>
+        <span class="n">X</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">lineArr</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">lineArr</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
+        <span class="n">Y</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">lineArr</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+    <span class="c1"># 分别转成矩阵，其中分类矩阵转置成一列
+</span>    <span class="k">return</span> <span class="n">mat</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">mat</span><span class="p">(</span><span class="n">Y</span><span class="p">).</span><span class="n">T</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">loadDataSet</span><span class="p">(</span><span class="s">"../source/ch06/testSetRBF.txt"</span><span class="p">)</span>
+    <span class="n">smo</span> <span class="o">=</span> <span class="n">SMO</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">)</span>
+    <span class="n">b</span><span class="p">,</span> <span class="n">alphas</span> <span class="o">=</span> <span class="n">smo</span><span class="p">.</span><span class="n">train</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="c1"># 支持向量的索引
+</span>    <span class="n">svIndices</span> <span class="o">=</span> <span class="n">nonzero</span><span class="p">(</span><span class="n">smo</span><span class="p">.</span><span class="n">alphas</span><span class="p">.</span><span class="n">A</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># 支持向量特征
+</span>    <span class="n">xSv</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">svIndices</span><span class="p">]</span>
+    <span class="c1"># 支持向量分类
+</span>    <span class="n">ySv</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">svIndices</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"there are %d Support Vectors"</span> <span class="o">%</span> <span class="n">shape</span><span class="p">(</span><span class="n">xSv</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">errorCount</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="mf">1.3</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="c1"># 映射到核函数值
+</span>        <span class="n">kernelEval</span> <span class="o">=</span> <span class="n">smo</span><span class="p">.</span><span class="n">kernelGauss</span><span class="p">(</span><span class="n">xSv</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">delta</span><span class="p">)</span>
+        <span class="n">predict</span> <span class="o">=</span> <span class="n">kernelEval</span><span class="p">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">multiply</span><span class="p">(</span><span class="n">ySv</span><span class="p">,</span> <span class="n">smo</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">svIndices</span><span class="p">])</span> <span class="o">+</span> <span class="n">b</span>
+        <span class="k">if</span> <span class="n">sign</span><span class="p">(</span><span class="n">predict</span><span class="p">)</span> <span class="o">!=</span> <span class="n">sign</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+            <span class="n">errorCount</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># 训练样本误差
+</span>    <span class="k">print</span><span class="p">(</span><span class="s">"the training error rate is : %f"</span> <span class="o">%</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">errorCount</span> <span class="o">/</span> <span class="n">m</span><span class="p">)))</span>
+
+    <span class="n">errorCount</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">loadDataSet</span><span class="p">(</span><span class="s">"../source/ch06/testSetRBF2.txt"</span><span class="p">)</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">kernelEval</span> <span class="o">=</span> <span class="n">smo</span><span class="p">.</span><span class="n">kernelGauss</span><span class="p">(</span><span class="n">xSv</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">delta</span><span class="p">)</span>
+        <span class="n">predict</span> <span class="o">=</span> <span class="n">kernelEval</span><span class="p">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">multiply</span><span class="p">(</span><span class="n">ySv</span><span class="p">,</span> <span class="n">smo</span><span class="p">.</span><span class="n">alphas</span><span class="p">[</span><span class="n">svIndices</span><span class="p">])</span> <span class="o">+</span> <span class="n">b</span>
+        <span class="k">if</span> <span class="n">sign</span><span class="p">(</span><span class="n">predict</span><span class="p">)</span> <span class="o">!=</span> <span class="n">sign</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+            <span class="n">errorCount</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># 测试样本误差
+</span>    <span class="k">print</span><span class="p">(</span><span class="s">"the test error rate is : %f"</span> <span class="o">%</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">errorCount</span> <span class="o">/</span> <span class="n">m</span><span class="p">)))</span>
+</code></pre></div></div>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2019/04/10/ml-svm-smo/"><span style="color:black">上一篇：</span> SMO 算法超详细解析</a>
+        
+        
+          <a class="next" href="/2019/04/13/ml-adaboost/"><span style="color:black">下一篇：</span>机器学习-Adaboost算法 </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+    <div class="comment markdown-body"></div>
+    <!--载入js，在</body>之前插入即可-->
+    <!--Leancloud 操作库:-->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <!--Valine 的核心代码库-->
+    <script src="/assets/js/valine.min.js"></script>
+    <script>
+        new Valine({
+            // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+            av: AV, 
+            el: '.comment',
+            app_id: '5Vp12Dnkf6n73MefHqK09vjG-gzGzoHsz', // 这里填写上面得到的APP ID
+            app_key: 'J6cCta4STGVS5TusVex4XUq8', // 这里填写上面得到的APP KEY
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!', // 留言框占位提示文字
+            smiles_url:'/assets/images/smiles',
+            avatar_url:'/assets/avatar/',
+            avatar_count: 20
+        });
+    </script>
+
+<!-- Changyan Comment END -->
+
+      </div>
+
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+
+
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                
+                <span id="busuanzi_container_site_pv"> 您是本站第
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span>
+                    次点击</span>
+                
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://github.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页"
+                    target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类"
+                    target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档"
+                    target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签"
+                    target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于"
+                    target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?a908f0985fa9991b706a3f4a299bb47b";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</body>
+
+</html>

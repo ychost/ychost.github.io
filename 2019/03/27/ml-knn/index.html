@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>机器学习-kNN算法 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2019/03/27/ml-knn/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="机器学习-kNN算法"> 
+    <meta name="keywords" content="机器学习, KNN, 邻近算法">
+    <meta name="og:keywords" content="机器学习, KNN, 邻近算法"> 
+    <meta name="description" content="邻近算法，或者说K最近邻(kNN，k-NearestNeighbor)分类算法是数据挖掘分类技术中最简单的方法之一。所谓K最近邻，就是k个最近的邻居的意思，说的是每个样本都可以用它最接近的k个邻居来代表。">
+    <meta name="og:description" content="邻近算法，或者说K最近邻(kNN，k-NearestNeighbor)分类算法是数据挖掘分类技术中最简单的方法之一。所谓K最近邻，就是k个最近的邻居的意思，说的是每个样本都可以用它最接近的k个邻居来代表。">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2019/03/27/ml-knn/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2019-03-27"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+
+<section class="collection-head small geopattern" data-pattern-id="机器学习-kNN算法">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">机器学习-kNN算法</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2019">2019/03/27</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-机器学习"  title="机器学习">机器学习</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-机器学习"> 机器学习 </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-KNN"> KNN </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-邻近算法"> 邻近算法 </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            <!-- 本文共 677 字， -->
+            本文共 2945 字，需
+              
+               36 分钟阅读
+              
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <p>　　邻近算法，或者说K最近邻(kNN，k-NearestNeighbor)分类算法是数据挖掘分类技术中最简单的方法之一。所谓K最近邻，就是k个最近的邻居的意思，说的是每个样本都可以用它最接近的k个邻居来代表。kNN 算法是一个分类算法，通过判断待测试样本与训练样本的距离来确定测试样本的类别。</p>
+
+<h3 id="准备">准备</h3>
+<p>本文的样例和代码均来自于《机器学习实战》</p>
+<blockquote>
+  <p><a href="https://pan.baidu.com/s/1Gc7BDmNyBfGQlfVvhzyZFw">https://pan.baidu.com/s/1Gc7BDmNyBfGQlfVvhzyZFw</a> 提取码：ywuh</p>
+</blockquote>
+
+<h4 id="给定样本">给定样本</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">序号</th>
+      <th style="text-align: center">特征1</th>
+      <th style="text-align: center">特征2</th>
+      <th>特征3</th>
+      <th>分类</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0.8</td>
+      <td style="text-align: center">400</td>
+      <td>0.5</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">12</td>
+      <td style="text-align: center">134000</td>
+      <td>0.9</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">20000</td>
+      <td>1.1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">67</td>
+      <td style="text-align: center">32000</td>
+      <td>0.1</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="欧氏距离">欧氏距离</h4>
+<p>\(N\) 维欧氏空间中两点 \((x_1,x_2)\)  两点的距离公式</p>
+
+\[\sqrt{\sum_{i=1}^{N}({x_1 - x_2})^2}\]
+
+<p>当 \(N=2\) 时，欧式距离即为标准差：</p>
+
+\[\sqrt{({x_1 - x_2})^2}\]
+
+<p>比如 样本3 和 样本4 之间的欧氏距离：</p>
+
+\[\sqrt{(0 - 67)^2 + (20000 - 32000)^2 +(1.1 - 0.1)^2}\]
+
+<h4 id="数据归一化">数据归一化</h4>
+<p>由于样本的某些特征值数据范围过大（比如示例中的特征2）其对欧式距离的影响将会特别大，所以要将其归一化，数据归一的化的原理是将样本中的所有特征值的数据都变成 \([0,1]\) 范围内的数据，即</p>
+
+\[\acute{x_i} = \frac{x_i - min_i}{max_i - min_i}\]
+
+<p>其中 \(x_i\) 为样本 \(x\) 的第 \(i\) 个特征值，\(min_i\) 为所有样本中第 \(i\) 个特征值中的最小值，\(max_i\) 为样本中第 \(i\) 个特征值的最大值</p>
+
+<h3 id="算法思想">算法思想</h3>
+<ol>
+  <li>将特征数据归一化</li>
+  <li>计算测试数据与训练的每一个样本数据的距离</li>
+  <li>将距离有小到大排序取出前 k 个对应的样本数据</li>
+  <li>统计这 k 个样本里面频率最高的分类信息，该分类就是测试数据的分类</li>
+</ol>
+
+<h3 id="算法实现">算法实现</h3>
+
+<h4 id="数据归一化-1">数据归一化</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">autoNorm</span><span class="p">(</span><span class="n">dataSet</span><span class="p">):</span>
+        <span class="n">minVals</span> <span class="o">=</span> <span class="n">dataSet</span><span class="p">.</span><span class="nb">min</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">maxVals</span> <span class="o">=</span> <span class="n">dataSet</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="n">maxVals</span> <span class="o">-</span> <span class="n">minVals</span>
+        <span class="n">normSet</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">(</span><span class="n">dataSet</span><span class="p">))</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">dataSet</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">normSet</span> <span class="o">=</span> <span class="n">dataSet</span> <span class="o">-</span> <span class="n">tile</span><span class="p">(</span><span class="n">minVals</span><span class="p">,(</span><span class="n">m</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">normSet</span> <span class="o">=</span> <span class="n">normSet</span> <span class="o">/</span> <span class="n">tile</span><span class="p">(</span><span class="n">ranges</span><span class="p">,(</span><span class="n">m</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">normSet</span><span class="p">,</span><span class="n">ranges</span><span class="p">,</span><span class="n">minVals</span>
+</code></pre></div></div>
+
+<h4 id="knn-实现">kNN 实现</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1"># intX 为待测试的样本
+</span>    <span class="c1"># dataSet 是归一化之后的数据
+</span>    <span class="c1"># labels 为 dataSet 每一行的分类信息
+</span>    <span class="c1"># k 要取得小距离样本的个数
+</span>    <span class="k">def</span> <span class="nf">classify0</span><span class="p">(</span><span class="n">intX</span><span class="p">,</span><span class="n">dataSet</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+        <span class="c1"># 行数量
+</span>        <span class="n">size</span> <span class="o">=</span> <span class="n">dataSet</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># 样本 intX，重复 size 行 形成一个与 dataSet 维数一样的矩阵，然后做差
+</span>        <span class="n">diffMat</span> <span class="o">=</span> <span class="n">tile</span><span class="p">(</span><span class="n">intX</span><span class="p">,(</span><span class="n">size</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="n">dataSet</span>
+        <span class="c1"># 每个差值取平方
+</span>        <span class="n">sqDiffMat</span> <span class="o">=</span> <span class="n">diffMat</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="c1"># aixs=1 表明对差方矩阵的行求和
+</span>        <span class="c1"># 一行数据变成 1 个，相当于算出输入样本和训练样本每行的距离
+</span>        <span class="n">sqDistance</span> <span class="o">=</span> <span class="n">sqDiffMat</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="n">sqDistance</span> <span class="o">**</span> <span class="mf">0.5</span>
+        <span class="c1"># argSort 返回的是索引，其对应的值从小到大
+</span>        <span class="n">sortIndicies</span> <span class="o">=</span> <span class="n">distance</span><span class="p">.</span><span class="n">argsort</span><span class="p">()</span>
+        <span class="n">classCount</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># 取出前 k 个小距离对应的标签
+</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">voteLabel</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">sortIndicies</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+            <span class="n">classCount</span><span class="p">[</span><span class="n">voteLabel</span><span class="p">]</span> <span class="o">=</span> <span class="n">classCount</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">voteLabel</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span><span class="mi">1</span>
+        <span class="c1"># 取出所有标签中频率最高的标签
+</span>        <span class="n">sortedClassCount</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">classCount</span><span class="p">.</span><span class="n">items</span><span class="p">(),</span>
+             <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="p">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sortedClassCount</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h4 id="测试算法">测试算法</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1"># 注：用到的datingTestSet2.txt 为《机器学习实战》的示例数据
+</span>    <span class="k">def</span> <span class="nf">datingClassTest</span><span class="p">():</span>
+        <span class="n">matrix</span><span class="p">,</span><span class="n">labels</span> <span class="o">=</span> <span class="n">KNN</span><span class="p">.</span><span class="n">file2matrix</span><span class="p">(</span><span class="s">"Ch02/datingTestSet2.txt"</span><span class="p">)</span>
+        <span class="n">hoRatio</span> <span class="o">=</span> <span class="mf">0.10</span>
+        <span class="n">normMat</span><span class="p">,</span><span class="n">ranges</span><span class="p">,</span><span class="n">minVals</span> <span class="o">=</span> <span class="n">KNN</span><span class="p">.</span><span class="n">autoNorm</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">normMat</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">numTestVecs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">hoRatio</span><span class="p">)</span>
+        <span class="n">errorCount</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numTestVecs</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">KNN</span><span class="p">.</span><span class="n">classify0</span><span class="p">(</span><span class="n">normMat</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span><span class="n">normMat</span><span class="p">[</span><span class="n">numTestVecs</span><span class="p">:</span><span class="n">m</span><span class="p">,:],</span>
+                        <span class="n">labels</span><span class="p">[</span><span class="n">numTestVecs</span><span class="p">:</span><span class="n">m</span><span class="p">],</span><span class="mi">3</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">result</span> <span class="o">!=</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                <span class="n">errorCount</span> <span class="o">+=</span> <span class="mf">1.0</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"train: %d, real: %d"</span><span class="p">,(</span><span class="n">result</span><span class="p">,</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"error count: %f"</span><span class="p">,</span><span class="n">errorCount</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">numTestVecs</span><span class="p">))</span>
+        <span class="k">return</span>
+</code></pre></div></div>
+
+<p><a href="/images/post/algorithm/ml-knn-test.jpg" data-lightbox="knn-test"><img src="/images/post/algorithm/ml-knn-test.jpg" alt="knn-test" /></a></p>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2018/09/20/algorithm-count-digits/"><span style="color:black">上一篇：无</span> </a>
+        
+        
+          <a class="next" href="/2019/03/27/summary-for-2018/"><span style="color:black">下一篇：无</span> </a>
+        
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+    <div class="comment markdown-body"></div>
+    <!--载入js，在</body>之前插入即可-->
+    <!--Leancloud 操作库:-->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <!--Valine 的核心代码库-->
+    <script src="/assets/js/valine.min.js"></script>
+    <script>
+        new Valine({
+            // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+            av: AV, 
+            el: '.comment',
+            app_id: '5Vp12Dnkf6n73MefHqK09vjG-gzGzoHsz', // 这里填写上面得到的APP ID
+            app_key: 'J6cCta4STGVS5TusVex4XUq8', // 这里填写上面得到的APP KEY
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!', // 留言框占位提示文字
+            smiles_url:'/assets/images/smiles',
+            avatar_url:'/assets/avatar/',
+            avatar_count: 20
+        });
+    </script>
+
+<!-- Changyan Comment END -->
+
+      </div>
+
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+
+
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                
+                <span id="busuanzi_container_site_pv"> 您是本站第
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span>
+                    次点击</span>
+                
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://github.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页"
+                    target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类"
+                    target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档"
+                    target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签"
+                    target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于"
+                    target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?a908f0985fa9991b706a3f4a299bb47b";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</body>
+
+</html>

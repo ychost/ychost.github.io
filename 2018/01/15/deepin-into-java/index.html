@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>深入 Java 核心 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2018/01/15/deepin-into-java/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="深入 Java 核心"> 
+    <meta name="keywords" content="Java 虚拟机, Jvm, 反射">
+    <meta name="og:keywords" content="Java 虚拟机, Jvm, 反射"> 
+    <meta name="description" content="Java 的类加载器、扩展加载器、引导类加载器的加载顺序，一个 Main 函数究竟经历了哪些加载过程，内存中的堆、栈、方法区有何异同，如何利用反射来实现这些操作？">
+    <meta name="og:description" content="Java 的类加载器、扩展加载器、引导类加载器的加载顺序，一个 Main 函数究竟经历了哪些加载过程，内存中的堆、栈、方法区有何异同，如何利用反射来实现这些操作？">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2018/01/15/deepin-into-java/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2018-01-15"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+
+<section class="collection-head small geopattern" data-pattern-id="深入 Java 核心">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">深入 Java 核心</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2018">2018/01/15</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-后端"  title="后端">后端</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Java"> Java </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Jvm"> Jvm </a>
+            </span>
+            
+            <br />　
+            
+            <span>本文为<font color="#aabbff" style="font-size:18px">「转载」</font>内容，转载地址为 <a style="text-decoration: underline" target="_blank" href="http://www.godql.com/blog/2017/07/07/Core-Java/">Dr.Lester</a></span> 　　　
+
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            <!-- 本文共 1803 字， -->
+            本文共 11658 字，需
+              
+               145 分钟阅读
+              
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <h3 id="类加载">类加载</h3>
+<p>类加载负责加载编译后的class文件（字节码文件）到JVM当中。</p>
+
+<ul>
+  <li>在JRE中，类加载器主要分为以下几种：
+    <ul>
+      <li>引导类加载器（Bootstrap）<br />
+  它本身使用C/C++语言实现的，负责加载Java的核心类库，在jre\lib目录中，当中包括如rt.jar，这些都是Java自带的核心类库，必须由它来完成加载。</li>
+      <li>拓展/扩展类加载器（Extension）<br />
+  这个加载器就是由Java语言实现，负责加载jre\lib\ext目录下的类库，这个目录下的类库都是一些扩展类。</li>
+      <li>应用程序/系统类加载器（Application）<br />
+  这个类加载器同样使用Java语言实现，它主要负责加载classpath下面的所有类库，通常我们编写的Java类都是由这个类加载器完成加载。</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p>三个类加载器的初始化过程：当程序运行时，首先会初始化引导类加载器，它就负责创建和初始化扩展类加载器，当扩展类加载器完成初始化之后，又负责创建和初始化系统类加载器。<br />
+这些类加载器协同起来完成整个类加载的过程，因此这些类加载器的加载模式是基于“双亲委托模型”。</p>
+</blockquote>
+
+<p><a href="/images/post/java/classloader.png" data-lightbox="deepin-java"><img src="/images/post/java/classloader.png" alt="classloader" /></a></p>
+
+<h4 id="举例说明">举例说明</h4>
+<p>当我们编写一个Java类时，首先负责加载这个类的加载器是系统类加载器，但是它不会立马就去执行加载，而是先把这个任务交给父加载器（扩展类加载器），而扩展类加载器同样也会将这个任务交给父加载器（引导类加载器），最终当引导类加载器不能去加载这个类的时候（也就是在自己加载职责范围找不到的时候），又会将这个任务交回给子加载器。以此类推，最终我们编写的类都会配置在classpath环境中，所以，这个类的加载任务还是回到系统类加载器来完成。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+	<span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">say</span><span class="o">(){</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello Word"</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="c1">// 程序的入口的方法，和具体类无关</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Test</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Test</span><span class="o">();</span>	
+		<span class="n">t</span><span class="o">.</span><span class="na">say</span><span class="o">();</span>
+		<span class="c1">// 得到当前的类加载器ApplicationClassLoader</span>
+		<span class="nc">ClassLoader</span> <span class="n">cl</span> <span class="o">=</span> <span class="nc">Test</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getClassLoader</span><span class="o">();</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">cl</span><span class="o">);</span>
+		<span class="c1">// 得到ApplicationClassLoader的父类加载器ExtensionClassLoader</span>
+		<span class="nc">ClassLoader</span> <span class="n">extCl</span> <span class="o">=</span> <span class="n">cl</span><span class="o">.</span><span class="na">getParent</span><span class="o">();</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">extCl</span><span class="o">);</span>
+		<span class="c1">// 得到ExtensionClassLoader的父类加载器BootstrapClassLoader</span>
+		<span class="c1">// 由于BootstrapClassLoader是用C/C++语言编写的，在java中无法直接使用</span>
+		<span class="c1">// 所以才会返回一个null</span>
+		<span class="nc">ClassLoader</span> <span class="n">bootCl</span> <span class="o">=</span> <span class="n">extCl</span><span class="o">.</span><span class="na">getParent</span><span class="o">();</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bootCl</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>当一个class文件最终加载到jvm之后，就表示类加载这个阶段已经全部完成。接下来就是对整个class文件的内容进行解析和做内存的分配。</p>
+
+<h3 id="内存分配">内存分配</h3>
+<p>当JVM运行起来的时候就会给内存划分空间，那么这块空间称之为运行时数据区。
+(备注：当一个Java源程序编译成class字节码文件之后，字节码文件里存放的都是二进制的汇编命令，当程序运行的时候，JVM会将这个二进制的命令逐行解释，交给CPU去执行)</p>
+
+<p>运行时数据区将划分为以下几块内容：</p>
+
+<ul>
+  <li><strong>栈</strong> <br />
+   每一个线程运行起来的时候就会对应一个栈（线程栈），栈当中存放的数据是被当前线程所独有的。而栈当中存放的是栈帧，当线程调用一个方法的时候，就会形成一个栈帧，并将这个栈帧进行压栈操作，当方法执行完之后就会将这个栈帧进行出栈操作。这个栈帧里面包括（局部变量、操作数栈、指向当前方法对应类的常量池引用、方法的返回地址等信息）。
+    <blockquote>
+      <p>备注：由于局部变量都是存放在栈中，而每一个线程都对应自己的线程栈，因此局部变量是线程安全的，不会才产生资源共享的情况。</p>
+    </blockquote>
+
+    <p><a href="/images/post/java/stack-method.png" data-lightbox="deepin-java"><img src="/images/post/java/stack-method.png" alt="stack-method" /></a></p>
+  </li>
+  <li>
+    <p><strong>本地方法栈</strong> <br />
+   本地方法栈的机制和栈的机制类似，区别在于，栈是运行Java所实现的方法，而本地方法栈是运行的本地方法(Native Method)。所谓的本地方法指的是在本地jvm中需要调用非Java语言所实现的方法，例如c语言。在JVM的规范中，其实没有强制性要求实现方一定要划分出本地方法栈的和具体的实现，这一部分可以根据实现方具体要求来实现。因此在HotSport虚拟机的实现中就将方法栈和本地方法栈二合为一</p>
+
+    <p><a href="/images/post/java/native-method-stack.png" data-lightbox="deepin-java"><img src="/images/post/java/native-method-stack.png" alt="stack-method" /></a></p>
+  </li>
+  <li><strong>程序计数器</strong>  <br />
+   程序计数器也可以称之为PC寄存器。它主要用于存放当前程序下一条将要执行的指令地址。CPU会根据这个地址找到对应的指令来执行。通俗的讲就是指令缓存。这个寄存器是有JVM内部实现的，并不是物理概念上的寄存器，但是JVM在实现功能的逻辑上是相同的。</li>
+  <li><strong>堆</strong> <br />
+   堆内存中主要存放创建的对象以及数组。 堆内存是可以被多个线程所共享的一块区域,因此多个线程栈都可以去访问同一块堆的内存区域。堆里面的每一对象都存放了该实例的实例变量。
+当在方法中定义了一个局部变量，如果这个变量是基本数据类型，那么这个变量的值就直接存放在栈中，如果这个变量是引用数据类型，那么这个对象变量就存放在堆内存中，而栈中存放的是一个指向堆内存中这个对象的首地址。
+    <blockquote>
+      <p>(备注：Java中除了8个基本数据类型以外的所有类型都是引用数据类型)</p>
+    </blockquote>
+  </li>
+  <li><strong>引用</strong> <br />
+  <a href="/images/post/java/string-heap.png" data-lightbox="deepin-java"><img src="/images/post/java/string-heap.png" alt="string-heap" /></a></li>
+  <li><strong>更改</strong> <br />
+  <a href="/images/post/java/string-heap-change.png" data-lightbox="deepin-java"><img src="/images/post/java/string-heap-change.png" alt="string-heap-change" /></a></li>
+  <li><strong>数组</strong>  <br />
+  <a href="/images/post/java/array-heap.png" data-lightbox="deepin-java"><img src="/images/post/java/array-heap.png" alt="array-heap" /></a></li>
+  <li>
+    <p><strong>循环</strong> <br />
+  <a href="/images/post/java/for-heap.png" data-lightbox="deepin-java"><img src="/images/post/java/for-heap.png" alt="for-heap" /></a></p>
+  </li>
+  <li><strong>实例变量和静态变量的区别：</strong>
+    <ul>
+      <li>实例变量：实例变量是随着对象的创建而创建，而实例是存放在堆中，所以实例变量自然也就跟实例一并保存在堆内存。只要创建多少个实例，就会有多少份实例变量。当实例被回收的时候，实例变量也随之而销毁。</li>
+      <li>静态变量：静态变量也叫类变量，它是在类加载的时候就已经初始化好，并存放在方法区，并且只有一份，所以它是被多个实例所共享的一个变量。</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>方法区</strong>  <br />
+方法区在JVM中也是一个非常重要的一块内存区域，它和堆一样，是可以被多个线程所共享的一块区域。这个区域中主要存放了每一个加载的class文件信息。  <br />
+在一个class文件中主要包含魔数(代码中出现但没有解释的数字常量或字符串)（用来确定是否是一个class文件）、常量池（常量池在下面会有完整说明）、访问标志（当前的class是类还是接口，是否是抽象类，
+是否是public修饰，是否使用了final修饰等描述信息…）、字段表集合信息（使用什么访问修饰符、是实例变量还是静态变量，是否用final修饰等描述信息…）、
+方法表集合信息（访问修饰符，是否静态方法，是否用final修饰，是否用了synchronized修饰，是否是native方法…）等内容。 <br />
+当一个类加载器加载一个class文件的时候，会根据这个class文件的内容创建一个Class对象，而这个Class对象就包括了上述的这些内容。后续要创建这个类的所有实例，都是通过这个Class对象创建出来的。<br />
+  <a href="/images/post/java/method-area.png" data-lightbox="deepin-java"><img src="/images/post/java/method-area.png" alt="method-area" /></a></p>
+  </li>
+  <li><strong>常量池</strong>  <br />
+常量池也是方法区中的一部分，它存放的内容是class文件中最重要的资源，JVM为每一个class对象都维护一个常量池。它主要存储两种类型的常量。
+    <ol>
+      <li>字面常量
+        <blockquote>
+          <p>字面常量通常就是在Java中定义的字面量值，如：int i =1,这个1就是字面量；String s = (“abc”)，这个abc就是字面量。或者使用final修饰的常量值等等。</p>
+        </blockquote>
+      </li>
+      <li>符号引用
+        <blockquote>
+          <p>符号引用主要包括类和接口的完整类名、属性字段的名称和描述符、方法名称和描述符等信息</p>
+        </blockquote>
+      </li>
+    </ol>
+
+    <p><a href="/images/post/java/method-area.png" data-lightbox="deepin-java"><img src="/images/post/java/const-pool.jpg" alt="const-pool" /></a></p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>在Java当中，8个基本数据类型都有对应的包装类型，而大部分包装类型都实现了常量池的技术，除了Double和Float类。
+(备注说明：在JDK8之后，方法区已经取消，方法区被一个叫MetaSpace，它和堆合并到一起管理)</p>
+</blockquote>
+
+<ul>
+  <li><strong>内存运行时数据区</strong><br />
+ <a href="/images/post/java/main-load-step.png" data-lightbox="deepin-java"><img src="/images/post/java/main-load-step.png" alt="main-load-stop" /></a></li>
+</ul>
+
+<blockquote>
+  <p>扯了好多Java虚拟机的内容，也没讲多深，因为这里主要的目的是为了大家方便理解Java反射机制，下面正式进入正题</p>
+</blockquote>
+
+<h3 id="类加载-1">类加载</h3>
+
+<p>当ClassLoader加载一个class文件到JVM的时候，会自动创建一个该类的Class对象，并且这个对象是唯一的，后续要创建这个类的任何实例，都会根据这个Class对象来创建。因此每当加载一个class文件的时候，都会创建一个与之对应的Class对象。</p>
+
+<ul>
+  <li><strong>解析一个类的各个部分，形成一个对象。</strong><br />
+ <a href="/images/post/java/stack-ref-heap.png" data-lightbox="deepin-java"><img src="/images/post/java/stack-ref-heap.png" alt="stack-ref-heap" /></a><br />
+  外存中的类，加载到内存中，会形成该对象的Class类，例如：String类，加载到内存中，就是StringClass对象。
+也就是说类是java.lang.Class类的实例对象，而Class是所有类的类
+对于普通的对象，一般都的创建方式：</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">();</span>
+</code></pre></div></div>
+<p>既然类都是Class的对象，那么能否像普通对象一样创建呢，当看源码时，是这样写的 ：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nf">Class</span><span class="o">(</span><span class="nc">ClassLoader</span> <span class="n">loader</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">classLoader</span> <span class="o">=</span> <span class="n">loader</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>源码里构造器是私有的，只有JVM可以创建Class的对象，虽然我们不能new一个Class对象，但是可以从已有的类得到一个Class对象，共有三种方式，如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 类名.class  通过获取类的静态成员变量class得到(任何类都有一个隐含的静态成员变量class)</span>
+<span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+<span class="c1">// 对象.getClass</span>
+<span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">().</span><span class="na">getClass</span><span class="o">();</span>
+<span class="c1">// Class.forName("全量限定名")</span>
+<span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz3</span> <span class="o">=</span> <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"java.lang.String"</span><span class="o">);</span>
+</code></pre></div></div>
+<blockquote>
+  <p>(注意：这三种方式都是利用反射获取的都是同一个Class对象，这也叫做String的类类型，也就是描述何为类，一个类都有哪些东西，所以可以通过类类型知道一个类的属性和方法，并可以调用一个类的属性和方法，这就是反射的基础。)</p>
+</blockquote>
+
+<h3 id="反射">反射</h3>
+<blockquote>
+  <p>反射是指在程序的运行期间动态的去操作某个Class对象里面的成员（包括类信息、属性信息、方法信息等元素）。它可以让Java这种静态语言具备一定的动态性。目前大部分的开源框架实现都是基于反射的机制实现。<br />
+JVM → 类加载 → class文件 → 创建 → Class对象 → 构建类的实例 → instance(实例)；<br />
+重点在运行时动态的操作Class对象。</p>
+</blockquote>
+
+<h4 id="反射机制的利与弊">反射机制的利与弊</h4>
+<p>为何要用反射机制？直接new对象不ok了吗，这就涉及到了动态与静态的概念</p>
+
+<ul>
+  <li>静态编译：在编译时确定类型，绑定对象,即通过。</li>
+  <li>动态编译：运行时确定类型，绑定对象。动态编译最大限度发挥了java的灵活性，体现了多态的应用，有利于降低类之间的藕合。</li>
+  <li>优点:
+    <ul>
+      <li>可以实现动态创建对象和编译。比如，一个软件，不可能第一个版本就把它设计的很完美，当这个程序编译成功，发布后，当发现某些功能需要更新时，我们不可能要用户把旧版的卸载，再重新安装新的版本。采用静态的话，需要把整个程序重新编译一次才可以实现功能的更新，而采用反射机制的话，它就可以不用卸载，只需要在运行时才动态的创建和编译，就可以实现该功能。
+一句话总结：运行期类型的判断，动态类加载，动态代理就使用了反射</li>
+    </ul>
+  </li>
+  <li>缺点:
+    <ol>
+      <li>对性能有影响。反射相当于一系列解释操作，通知JVM要做的事情。性能比直接的java代码执行相同的操作要慢很多。</li>
+      <li>由于反射允许代码执行一些在正常情况下不被允许的操作（比如访问私有的属性和方法），所以使用反射可能会导致意料之外的副作用，反射代码破坏了抽象性，因此当平台发生改变的时候，代码的行为就有可能也随着变化。</li>
+    </ol>
+  </li>
+</ul>
+
+<h4 id="反射机制的相关操作">反射机制的相关操作</h4>
+
+<ul>
+  <li>
+    <p><strong>创建实例</strong></p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 在反射操作之前的第一步，就是要先获取Class对象</span>
+<span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"org.demo.reflect.bean.People"</span><span class="o">);</span>
+<span class="c1">// 根据Class对象创建一个实例</span>
+<span class="n">clazz</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>动态操作属性</strong><br />
+通过Class对象可以动态的获取和操作类中的属性，属性在JDK中有一个类来进行封装，就是Field,Field提供了一些常用的API方法让我们去访问和操作类中的属性</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">getField</span><span class="o">()</span> <span class="c1">// 获取所有公开的属性字段（包括继承父类的公有属性）</span>
+<span class="n">getDeclaredField</span><span class="o">()</span> <span class="c1">// 获取本类所有（包括公有和私有，但是不包括父类的）的属性字段（注意：如果要访问和操作私有属性，必须调用setAccessible方法，打开访问开关）</span>
+<span class="n">getFields</span><span class="o">()</span> <span class="c1">// 获取所有公有的属性（包括继承自父类的公有属性）</span>
+<span class="n">getDeclaredFields</span><span class="o">()</span> <span class="c1">// 获取本类所有的属性（包括共有和私有的，但是不包括父类的）</span>
+<span class="n">set</span><span class="o">()</span> <span class="c1">// 给属性赋值，需要传入两个参数，第一个参数是当前类的一个实例，第二个参数是具体要赋予的值</span>
+<span class="n">get</span><span class="o">()</span> <span class="c1">// 获取属性的值，需要传入一个当前类的实例作为参数</span>
+<span class="n">getName</span><span class="o">()</span> <span class="c1">// 获取属性的名称</span>
+<span class="n">getType</span><span class="o">()</span> <span class="c1">// 获取属性的类型</span>
+<span class="n">isAnnotationPresent</span><span class="o">()</span> <span class="c1">// 判断该属性上是否定义了指定的注解，需要传入一个注解的Class对象作为参数</span>
+<span class="n">getAnnotation</span><span class="o">()</span> <span class="c1">// 获取当前属性上的注解对象，需要传入一个注解的Class对象作为参数</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+     
+    <span class="c1">// 在反射操作之前的第一步，就是要先获取Class对象</span>
+    <span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"org.demo.reflect.bean.People"</span><span class="o">);</span>
+    <span class="c1">// 根据Class对象创建一个实例</span>
+    <span class="nc">Object</span> <span class="n">instance</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
+    <span class="c1">// 获取指定的属性</span>
+    <span class="nc">Field</span> <span class="n">f1</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getField</span><span class="o">(</span><span class="s">"userName"</span><span class="o">);</span>
+    <span class="c1">// 获取属性的值,get方法需要传入一个当前类的实例</span>
+    <span class="nc">Object</span> <span class="n">value</span> <span class="o">=</span> <span class="n">f1</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">instance</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+    <span class="c1">// 通过反射给属性赋值</span>
+    <span class="c1">// 第一个参数是当前类的实例，第二个参数是要赋予的值</span>
+    <span class="n">f1</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">instance</span><span class="o">,</span> <span class="s">"godql"</span><span class="o">);</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">f1</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">instance</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+    <span class="c1">// 获取一个私有的属性</span>
+    <span class="c1">// 如果需要访问和操作私有的成员，必须打开访问开关</span>
+    <span class="c1">// 打开访问开关其实就是破坏封装</span>
+    <span class="nc">Field</span> <span class="n">f2</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="s">"age"</span><span class="o">);</span>
+    <span class="c1">// 强制打开访问权限</span>
+    <span class="n">f2</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="nc">Object</span> <span class="n">value2</span> <span class="o">=</span> <span class="n">f2</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">instance</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">value2</span><span class="o">);</span>
+    <span class="n">f2</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">instance</span><span class="o">,</span> <span class="mi">30</span><span class="o">);</span>
+    <span class="n">value2</span> <span class="o">=</span> <span class="n">f2</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">instance</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">value2</span><span class="o">);</span>
+    <span class="c1">// 获取属性的名称</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">f1</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">f2</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="c1">// 获取属性的类型</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">f1</span><span class="o">.</span><span class="na">getType</span><span class="o">());</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">f2</span><span class="o">.</span><span class="na">getType</span><span class="o">());</span>
+    <span class="c1">// 获取所有公有的属性(包括继承自父类的公有属性)</span>
+    <span class="nc">Field</span><span class="o">[]</span> <span class="n">fs1</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getFields</span><span class="o">();</span>
+    <span class="c1">// 获取本类所有的属性（包括共有和私有的，但是不包括父类的）</span>
+    <span class="nc">Field</span><span class="o">[]</span> <span class="n">fs2</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getDeclaredFields</span><span class="o">();</span>
+    <span class="c1">// 判断当前属性上是否定义了注解</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">f1</span><span class="o">.</span><span class="na">isAnnotationPresent</span><span class="o">(</span><span class="nc">MyAnno</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+    <span class="n">ystem</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">f2</span><span class="o">.</span><span class="na">isAnnotationPresent</span><span class="o">(</span><span class="nc">MyAnno</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+    <span class="c1">// 获取属性上定义的注解</span>
+    <span class="nc">MyAnno</span> <span class="n">anno</span> <span class="o">=</span> <span class="n">f1</span><span class="o">.</span><span class="na">getAnnotation</span><span class="o">(</span><span class="nc">MyAnno</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="c1">// 获取注解上的属性值</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">anno</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li><strong>动态操作方法</strong><br />
+对于Class中的方法，API也提供了相应的类来进行封装，就是Method</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">getMethod</span><span class="o">()</span> <span class="c1">// 获取指定的公共的方法（包括继承自父类公共的），需要传递两个参数，第一个参数是方法名称，第二个参数是一个可变参数，传递的是方法参数的类型</span>
+<span class="n">getMethods</span><span class="o">()</span> <span class="c1">// 获取所有的公共的方法（包括继承父类的公共方法）。</span>
+<span class="n">getDeclaredMethod</span><span class="o">()</span> <span class="c1">// 获取本类中指定的方法（包括私有和共有的，不包括父类的），需要传递两个参数，第一个参数是方法名称，第二个参数是一个可变参数，传递的是方法参数的类型。如果是私有方法，同样需要先打开访问开关(setAccessible(true))。</span>
+<span class="n">getDeclaredMethods</span><span class="o">()</span> <span class="c1">// 获取本地中所有的方法（包括私有和公共的，不包括父类）</span>
+<span class="n">getName</span><span class="o">()</span> <span class="c1">// 获取方法名称</span>
+<span class="n">getReturnType</span><span class="o">()</span> <span class="c1">// 获取方法的返回值类型</span>
+<span class="n">getParameterTypes</span><span class="o">()</span> <span class="c1">// 获取方法中所有的参数类型</span>
+<span class="n">getParameterCount</span><span class="o">()</span><span class="c1">// 获取方法中参数的总个数</span>
+<span class="n">getParameters</span><span class="o">()</span> <span class="c1">// (JDK1.8新特性)获取方法中所有的参数信息，每一个参数信息都是一个Parameter类的对象。可以通过这个对象获取各个参数的类型以及名称(注意：如果要获取参数名，在编译的时候需要加上一个parameters参数，如：javac -parameters Xxx.java。或者是在开发环境中设置相应的编译选项)。</span>
+<span class="n">invoke</span><span class="o">()</span> <span class="c1">// 回调当前方法,需要传递两个参数，第一个是当前类的实例，第二个是一个可变参数，需要传入调用方法是所需的参数值。</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+     
+    <span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"org.demo.reflect.bean.People"</span><span class="o">);</span>
+    <span class="nc">Object</span> <span class="n">instance</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
+    <span class="c1">// 获取指定的Method</span>
+    <span class="nc">Method</span> <span class="n">m1</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getMethod</span><span class="o">(</span><span class="s">"say"</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="kt">int</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="c1">// 获取方法名</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">m1</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="c1">// 获取方法的返回值类型</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">m1</span><span class="o">.</span><span class="na">getReturnType</span><span class="o">());</span>
+    <span class="c1">// 获取方法的所有参数类型</span>
+    <span class="nc">Class</span><span class="o">&lt;?&gt;[]</span> <span class="n">paramsType</span> <span class="o">=</span> <span class="n">m1</span><span class="o">.</span><span class="na">getParameterTypes</span><span class="o">();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">c</span> <span class="o">:</span> <span class="n">paramsType</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="c1">// 获取参数名称（JDK1.8开始支持）</span>
+    <span class="nc">Parameter</span><span class="o">[]</span> <span class="n">params</span> <span class="o">=</span> <span class="n">m1</span><span class="o">.</span><span class="na">getParameters</span><span class="o">();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">Parameter</span> <span class="n">p</span> <span class="o">:</span> <span class="n">params</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"参数类型:"</span><span class="o">+</span><span class="n">p</span><span class="o">.</span><span class="na">getType</span><span class="o">());</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"参数名称:"</span><span class="o">+</span><span class="n">p</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="c1">// 通过当前的方法，获取定义这个方法的类</span>
+    <span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">m1</span><span class="o">.</span><span class="na">getDeclaringClass</span><span class="o">();</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+  
+    <span class="c1">// 方法回调，目的就是通过反射去调用一个方法</span>
+    <span class="n">m1</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">instance</span><span class="o">,</span> <span class="s">"godql"</span><span class="o">,</span> <span class="mi">21</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li><strong>动态操作构造方法</strong> <br />
+Constructor是在反射API中用于封装构造方法的一个类，因此通过这个类可以获取构造方法的一些信息，以及通过这个对象来实例化一个类的实例。</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">getConstructor</span><span class="o">()</span> <span class="c1">// 获取无参并且公共的构造方法</span>
+<span class="n">getDeclaredConstructor</span><span class="o">()</span> <span class="c1">// 获取一个构造方法可以是私有的也可以是公共的，需要传入一个可变参数，就是构造方法的参数类型（注意：如果是私有的，必须先打开访问开关）</span>
+<span class="n">newInstance</span><span class="o">()</span> <span class="c1">// 通过构造方法创建实例，也需要传入一个可变参数，传入的是具体的值</span>
+<span class="n">getConstructors</span><span class="o">()</span> <span class="c1">// 获取所有公共的构造方法，返回的是一个Constructor数组</span>
+<span class="n">getDeclaredConstructors</span><span class="o">()</span> <span class="c1">// 获取所有的构造方法(包括私有和共有的),同样返回的是一个数组</span>
+<span class="n">getParameters</span><span class="o">()</span> <span class="c1">// 获取所有的参数对象，和Method一样</span>
+<span class="n">getParameterTypes</span><span class="o">()</span> <span class="c1">// 获取所有的参数类型，同Method一样</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+      
+    <span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="nc">People</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+    <span class="c1">// 获取无参的构造方法</span>
+    <span class="nc">Constructor</span><span class="o">&lt;?&gt;</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getConstructor</span><span class="o">();</span>
+    <span class="c1">// 获取构造方法的名称</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">c1</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="c1">// 获取一个私有并且带参数的构造方法</span>
+    <span class="nc">Constructor</span><span class="o">&lt;?&gt;</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getDeclaredConstructor</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+  
+    <span class="c1">// 可以通过构造方法实例化一个对象</span>
+    <span class="c1">//（注意：如果默认有一个无参并且是公共的构造方法，</span>
+    <span class="c1">// 那么可以直接使用class.newInstance()方法创建实例，</span>
+    <span class="c1">// 如果构造方法是私有的，或者是带参数的，就必须先获取</span>
+    <span class="c1">// Constructor对象，在通过这个对象来创建类实例）</span>
+  
+    <span class="c1">// 1.适用于无参并且是公共的构造方法</span>
+    <span class="cm">/* 
+      Object instance = clazz.newInstance();
+      System.out.println(instance);
+    */</span>
+  
+    <span class="c1">// 2.适用于带参数或是私有的构造方法</span>
+    <span class="c1">// 由于构造方法也可以私有化，所以必须先打开访问开关</span>
+    <span class="n">c2</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="nc">Object</span> <span class="n">instance</span> <span class="o">=</span> <span class="n">c2</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="s">"godql"</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instance</span><span class="o">);</span>
+  
+    <span class="c1">// 获取所有public修饰的构造方法</span>
+    <span class="nc">Constructor</span><span class="o">&lt;?&gt;[]</span> <span class="n">cons</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getConstructors</span><span class="o">();</span>
+    <span class="c1">// 获取所有构造方法（包括私有的）</span>
+    <span class="nc">Constructor</span><span class="o">&lt;?&gt;[]</span> <span class="n">cons2</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getDeclaredConstructors</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li><strong>Class中的一些API</strong><br />
+Class对象本身提供了很多的API方法用于获取和操作Class对象。</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">getPackage</span><span class="o">()</span> <span class="c1">// 获取当前类所在的包，使用Package对象进行封装，可以从中获取包的信息，例如：包名</span>
+<span class="n">getSimpleName</span><span class="o">()</span> <span class="c1">// 获取当前类的简单类名（不包括包名）</span>
+<span class="n">getName</span><span class="o">()</span> <span class="c1">// 获取当前类的完整类名(包括包名)</span>
+<span class="n">getSuperclass</span><span class="o">()</span> <span class="c1">// 获取当前类的父类，返回的也是一个Class对象</span>
+<span class="n">getInterfaces</span><span class="o">()</span> <span class="c1">// 获取当前类所实现的所有接口，返回的是一个Class数组</span>
+<span class="n">isAnnotationPresent</span><span class="o">()</span> <span class="c1">// 判断当前类上是否定义了注解</span>
+<span class="n">getAnnotation</span><span class="o">()</span> <span class="c1">// 获取类上定义的注解</span>
+</code></pre></div></div>
+
+<h4 id="通过反射了解集合泛型的本质">通过反射了解集合泛型的本质</h4>
+
+<p>Java中集合的泛型，是防止错误输入的，只在编译阶段有效，绕过编译到了运行期就无效了。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+     
+    <span class="nc">List</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">();</span> 
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span> 
+   
+    <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"godql"</span><span class="o">);</span>
+    <span class="c1">// list1.add(20); 错误的</span>
+    <span class="nc">Class</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">getClass</span><span class="o">();</span>
+    <span class="nc">Class</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">list1</span><span class="o">.</span><span class="na">getClass</span><span class="o">();</span>
+   
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">c1</span> <span class="o">==</span> <span class="n">c2</span><span class="o">);</span> <span class="c1">// 结果：true，说明类类型完全相同</span>
+    <span class="c1">// 反射的操作都是编译之后的操作(运行时)</span>
+   
+    <span class="cm">/*
+     * 以上说明编译之后集合的泛型是泛型擦除的
+     * Java中集合的泛型，是防止错误输入的，只在编译阶段有效，绕过编译就无效了。
+     * 验证: 通过方法的反射来操作，绕过编译 
+     */</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="c1">// 通过动态操作方法的反射得到add方法</span>
+        <span class="nc">Method</span> <span class="n">m</span> <span class="o">=</span> <span class="n">c2</span><span class="o">.</span><span class="na">getMethod</span><span class="o">(</span><span class="s">"add"</span><span class="o">,</span> <span class="nc">Object</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="c1">// 方法回调 给list1添加一个int型的，这是在运行时的操作，所以编译器编译时没有泛型检查，所以不会报错</span>
+        <span class="c1">// 绕过编译操作</span>
+        <span class="n">m</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">list1</span><span class="o">,</span> <span class="mi">20</span><span class="o">);</span>
+        <span class="c1">// 验证是否有添加进list集合里</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list1</span><span class="o">.</span><span class="na">size</span><span class="o">());</span> 
+        <span class="c1">// 这时候不能使用foreach遍历，否则集合会认为集合里边全是String类型的值</span>
+        <span class="c1">// 且有类型转换错误，因为这个集合里面有int类型、String类</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list1</span><span class="o">);</span> 
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+           <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<h4 id="使用场景">使用场景</h4>
+<p>通用的应用程序<br />
+框架比如：</p>
+<ol>
+  <li>Spring 的 Ioc/Di</li>
+  <li>SpringMVC 监控 Controller中的注解</li>
+  <li>MyBatis 利用反射获取和设置对象值</li>
+  <li>Struts2 的 FormBean 和页面之间…</li>
+  <li>Hibernate的 find(Class clazz)</li>
+  <li>JavaBean和JSP之间调用</li>
+  <li>JDBC 的 classForName()</li>
+</ol>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2018/01/14/crack-interview-linkedlist/"><span style="color:black">上一篇：</span> 程序员面试宝典 第5版 链表</a>
+        
+        
+          <a class="next" href="/2018/01/16/csharp-java-diff/"><span style="color:black">下一篇：</span>C# 与 Java 对比 </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+    <div class="comment markdown-body"></div>
+    <!--载入js，在</body>之前插入即可-->
+    <!--Leancloud 操作库:-->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <!--Valine 的核心代码库-->
+    <script src="/assets/js/valine.min.js"></script>
+    <script>
+        new Valine({
+            // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+            av: AV, 
+            el: '.comment',
+            app_id: '5Vp12Dnkf6n73MefHqK09vjG-gzGzoHsz', // 这里填写上面得到的APP ID
+            app_key: 'J6cCta4STGVS5TusVex4XUq8', // 这里填写上面得到的APP KEY
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!', // 留言框占位提示文字
+            smiles_url:'/assets/images/smiles',
+            avatar_url:'/assets/avatar/',
+            avatar_count: 20
+        });
+    </script>
+
+<!-- Changyan Comment END -->
+
+      </div>
+
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+
+
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                
+                <span id="busuanzi_container_site_pv"> 您是本站第
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span>
+                    次点击</span>
+                
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://github.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页"
+                    target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类"
+                    target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档"
+                    target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签"
+                    target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于"
+                    target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?a908f0985fa9991b706a3f4a299bb47b";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</body>
+
+</html>

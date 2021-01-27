@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>Linux 双网卡配置 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2018/04/06/linux-double-network-set/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="Linux 双网卡配置"> 
+    <meta name="keywords" content="keyword1, keyword2">
+    <meta name="og:keywords" content="keyword1, keyword2"> 
+    <meta name="description" content="服务器一般配置有两块以上的网卡，有时候需要一个网卡供外网访问，一个网卡供内网访问，两个网卡所处的网段不一样。为了能使两个网卡一起工作就得自己手动配置 Linux 的路由表将指定的网段 ip 走固定的网卡。">
+    <meta name="og:description" content="服务器一般配置有两块以上的网卡，有时候需要一个网卡供外网访问，一个网卡供内网访问，两个网卡所处的网段不一样。为了能使两个网卡一起工作就得自己手动配置 Linux 的路由表将指定的网段 ip 走固定的网卡。">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2018/04/06/linux-double-network-set/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2018-04-06"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+
+<section class="collection-head small geopattern" data-pattern-id="Linux 双网卡配置">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">Linux 双网卡配置</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2018">2018/04/06</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-系统"  title="系统">系统</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Linux"> Linux </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Route"> Route </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            <!-- 本文共 317 字， -->
+            本文共 1771 字，需
+              
+               22 分钟阅读
+              
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <font color="red">请不要直接复制下面的命令，根据自己的实际网络情况来定</font>
+
+<h2 id="背景">背景</h2>
+<ol>
+  <li>有两张网卡，网卡 1 和网卡 2，其中网卡 1 连接在能上外网的路由器，网卡 2 连接在内网路由器</li>
+  <li>网卡 1 参数
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ip      192.168.0.14
+ netmask 255.255.0.0
+ gateway 192.168.0.8
+</code></pre></div>    </div>
+  </li>
+  <li>网卡 2 参数
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ip      192.168.88.14
+ netmask 255.255.0.0
+ gateway 192.168.88.1
+</code></pre></div>    </div>
+  </li>
+  <li>目的
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 网卡 1 能上外网，且能访问 192.168.0.x 的设设备（连接在外网路由器上的设备）
+ 网卡 2 只能上内网，能访问除 192.168.0.x 以外的设备（连接在内网路由器上的设备）
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="初始化网卡">初始化网卡</h2>
+
+<ol>
+  <li>配置网卡信息
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ sudo vim /etc/network/interfaces
+</code></pre></div>    </div>
+  </li>
+  <li>配置两个网卡的信息，这里静态分配了两个网卡的信息，网卡 1 和 网卡 2，注意：<font color="red">网卡 2 没有配置网关</font>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # 网卡 1，名称 eno1
+ auto eno1
+ iface eno1 inet static
+ address 192.168.0.14
+ netmask 255.255.0.0
+ gateway 192.168.0.8
+
+ # 网卡 2，名称 eno2
+ auto eno2
+ iface eno2 inet static
+ address 192.168.88.14
+ netmask 255.255.0.0
+ # 注意内网网卡没有设置网关
+</code></pre></div>    </div>
+  </li>
+  <li>配置 DNS
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ sudo vim /etc/resolvconf/resolv.conf.d/base
+
+ # 添加下面内容
+ nameserver 114.114.114.114
+ nameserver 8.8.8.8
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="配置路由">配置路由</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ route
+目标            网关            子网掩码        标志  跃点   引用  使用 接口
+default         192.168.0.8     0.0.0.0         UG    0      0        0 eno1
+172.17.0.0      *               255.255.0.0     U     0      0        0 docker0
+192.168.0.0     *               255.255.0.0     U     0      0        0 eno1
+192.168.0.0     *               255.255.0.0     U     0      0        0 eno2
+</code></pre></div></div>
+
+<p><strong>可知</strong></p>
+<ol>
+  <li>访问 192.168.x.x 的地址的时走的是 eno1，虽然 eno2 也能走但是被覆盖了。</li>
+  <li>访问 192.168.x.x 之外的地址走的是 eno1 且经过网关 192.168.0.8</li>
+</ol>
+
+<p><strong>配置路由</strong></p>
+
+<ol>
+  <li>配置 192.168.0.x 走 eno1，注意网段与掩码
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ sudo route add -net 192.168.0.0 netmask 255.255.255.0 dev eno1
+</code></pre></div>    </div>
+  </li>
+  <li>配置 192.168.x.x 走 eno2，注意网段与掩码
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ sudo route add -net 192.168.0.0 netmask 255.255.0.0 dev eno2
+</code></pre></div>    </div>
+  </li>
+  <li>测试生效
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # 测试网卡 1
+ ping www.baidu.com
+ ping 192.168.0.15 
+
+ # 测试网卡 2
+ ping 192.168.200.66
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="重启生效">重启生效</h2>
+<p>将上述两个命令添加到 <code class="language-plaintext highlighter-rouge">/etc/rc.local</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    vim  vim /etc/rc.local
+
+    # 添加下面的内容
+    route add -net 192.168.0.0 netmask 255.255.0.0 dev eno2
+    route add -net 192.168.0.0 netmask 255.255.255.0 dev eno1
+</code></pre></div></div>
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2018/04/06/algorithm-summary/"><span style="color:black">上一篇：</span> 算法-总结</a>
+        
+        
+          <a class="next" href="/2018/04/07/algorithm-bucket-sort/"><span style="color:black">下一篇：</span>算法-桶排序 </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+    <div class="comment markdown-body"></div>
+    <!--载入js，在</body>之前插入即可-->
+    <!--Leancloud 操作库:-->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <!--Valine 的核心代码库-->
+    <script src="/assets/js/valine.min.js"></script>
+    <script>
+        new Valine({
+            // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+            av: AV, 
+            el: '.comment',
+            app_id: '5Vp12Dnkf6n73MefHqK09vjG-gzGzoHsz', // 这里填写上面得到的APP ID
+            app_key: 'J6cCta4STGVS5TusVex4XUq8', // 这里填写上面得到的APP KEY
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!', // 留言框占位提示文字
+            smiles_url:'/assets/images/smiles',
+            avatar_url:'/assets/avatar/',
+            avatar_count: 20
+        });
+    </script>
+
+<!-- Changyan Comment END -->
+
+      </div>
+
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+
+
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                
+                <span id="busuanzi_container_site_pv"> 您是本站第
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span>
+                    次点击</span>
+                
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://github.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页"
+                    target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类"
+                    target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档"
+                    target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签"
+                    target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于"
+                    target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?a908f0985fa9991b706a3f4a299bb47b";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</body>
+
+</html>

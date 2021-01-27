@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>Java Lambda 序列化 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2020/11/17/lambda-serialize/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="Java Lambda 序列化"> 
+    <meta name="keywords" content="Java, 序列化, Lambda, Serialize">
+    <meta name="og:keywords" content="Java, 序列化, Lambda, Serialize"> 
+    <meta name="description" content="序列化是一种常见的数据传输机制，但是 Lambda 序列化可以将 Java 的一个方法进行传输，从而实现动态脚本等功能">
+    <meta name="og:description" content="序列化是一种常见的数据传输机制，但是 Lambda 序列化可以将 Java 的一个方法进行传输，从而实现动态脚本等功能">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2020/11/17/lambda-serialize/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2020-11-17"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+
+<section class="collection-head small geopattern" data-pattern-id="Java Lambda 序列化">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">Java Lambda 序列化</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2020">2020/11/17</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-后端"  title="后端">后端</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Java"> Java </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-序列化"> 序列化 </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Lambda"> Lambda </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            <!-- 本文共 709 字， -->
+            本文共 3867 字，需
+              
+                30 分钟阅读
+              
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <p>Lambda 是 Java8 引进的一项新的能力，日常主要是结合 stream 一起使用，Lambda 也是可以像普通的对象一样进行序列化/反序列化的，就可以像普通对象一样先序列化成字节码然后进行存储或者传输，待需要的时候再将字节码进行反序列化，这样就实现了将一个方法进行了本地存储和传输，通过该方式可以进一步实现类似 Groovy 动态脚本一样的功能</p>
+
+<h2 id="序列化">序列化</h2>
+<p>Lambda 的序列化和普通对象的序列化一样，主要使用<code class="language-plaintext highlighter-rouge">ObjectOutputStream/ObjectInputStream</code></p>
+<blockquote>
+  <p>该方法就是普通的序列化方法，主要调用了 <code class="language-plaintext highlighter-rouge">ObjectOutputStream</code> 进行序列化输出</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 序列化普通的 serializable
+ *
+ * @param serializable lambda 接口
+ * @return 序列化数组
+ * @throws IOException
+*/</span>
+<span class="nd">@SneakThrows</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">Serializable</span><span class="o">&gt;</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">serialize</span><span class="o">(</span><span class="nd">@Nonnull</span> <span class="no">T</span> <span class="n">serializable</span><span class="o">){</span>
+    <span class="nc">ByteArrayOutputStream</span> <span class="n">outStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ByteArrayOutputStream</span><span class="o">();</span>
+    <span class="nc">ObjectOutputStream</span> <span class="n">oos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectOutputStream</span><span class="o">(</span><span class="n">outStream</span><span class="o">);</span>
+    <span class="n">oos</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">serializable</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">outStream</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="反序列化">反序列化</h2>
+<blockquote>
+  <p>反序列化主要调用了 <code class="language-plaintext highlighter-rouge">ObjectInputStream</code> 进行反序列化解析</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 反序列化普通的 serializable
+ *
+ * @param inBytes 序列化的数组
+ * @return serializable 接口 lambda
+ * @throws IOException
+ * @throws ClassNotFoundException
+ */</span>
+<span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"ALL"</span><span class="o">)</span>
+<span class="nd">@SneakThrows</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="no">T</span> <span class="nf">deserialize</span><span class="o">(</span><span class="nd">@Nonnull</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">inBytes</span><span class="o">){</span>
+    <span class="nc">ByteArrayInputStream</span> <span class="n">inStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ByteArrayInputStream</span><span class="o">(</span><span class="n">inBytes</span><span class="o">);</span>
+    <span class="nc">ObjectInputStream</span> <span class="n">ois</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectInputStream</span><span class="o">(</span><span class="n">inStream</span><span class="o">);</span>
+    <span class="no">T</span> <span class="n">obj</span> <span class="o">=</span> <span class="o">(</span><span class="no">T</span><span class="o">)</span><span class="n">ois</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span>
+    <span class="k">return</span> <span class="n">obj</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="使用样例">使用样例</h2>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="nd">@SneakThrows</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">serializeLambdaTest</span><span class="o">(){</span>
+    <span class="c1">// 这里调用了序列化</span>
+    <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="nc">LambdaUtil</span><span class="o">.</span><span class="na">serialize</span><span class="o">(</span>
+        <span class="o">(</span><span class="nc">Function</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="nc">Serializable</span><span class="o">)</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">"hello: "</span> <span class="o">+</span> <span class="n">name</span>
+    <span class="o">);</span>
+    <span class="c1">// 这里调用了反序列化</span>
+    <span class="nc">Function</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">func</span> <span class="o">=</span> <span class="nc">LambdaUtil</span><span class="o">.</span><span class="na">deserialize</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span>
+    <span class="nc">Assert</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="s">"hello: apple"</span><span class="o">,</span> <span class="n">func</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="s">"apple"</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<blockquote>
+  <p>可见，这里将自定义的 Function 先是序列化成了字节码，然后再将字节码进行了反序列化，同时进行了 <code class="language-plaintext highlighter-rouge">apply</code> 调用
+<code class="language-plaintext highlighter-rouge">(Function&lt;String, String&gt; &amp; Serializable)</code> 这是 Java8 引入的新<a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.16">语法</a></p>
+</blockquote>
+
+<h2 id="serializedlambda">SerializedLambda</h2>
+<p>Lambda 的展示形式主要有两种，第一种为 Lambda 表达式，第二种为方法引用，如下</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">compareTest</span><span class="o">(){</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="nc">Lists</span><span class="o">.</span><span class="na">newArrayList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">4</span><span class="o">);</span>
+    <span class="c1">// Lambda 表达式</span>
+    <span class="n">numbers</span><span class="o">.</span><span class="na">sort</span><span class="o">((</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="o">)-&gt;</span><span class="n">a</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">b</span><span class="o">))</span>
+    <span class="c1">// 方法引用</span>
+    <span class="n">numbers</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="nl">Integer:</span><span class="o">:</span><span class="n">compareTo</span><span class="o">)</span>
+  
+<span class="o">}</span>
+</code></pre></div></div>
+<p>那么这两种 Lambda 有什么区别呢，如果不涉及到捕获 Lambda 所处的 <code class="language-plaintext highlighter-rouge">Method/Class</code> 等信息没有太大区别，但是当需要通过 <code class="language-plaintext highlighter-rouge">SerializedLambda</code> 去捕获相关信息就会有较大的区别了，<code class="language-plaintext highlighter-rouge">SerializedLambda</code> 是 Java8 提供的一个新的类，凡是继承了<code class="language-plaintext highlighter-rouge">Serializable</code>的函数式接口的实例都可以获取一个属于它的<code class="language-plaintext highlighter-rouge">SerializedLambda</code>实例，提供如下的功能：</p>
+
+<ol>
+  <li>引用方法的 Method 信息（方法名，签名）</li>
+  <li>Lambda 的 FunctionInterface 信息（方法名，签名）</li>
+  <li>引用方法的所在的 Class</li>
+  <li>Lambda 里面捕获的变量信息</li>
+</ol>
+
+<p>如何得到 <code class="language-plaintext highlighter-rouge">SerializedLambda</code> 呢？主要调用了 <code class="language-plaintext highlighter-rouge">writeReplace</code> 方法实现，如下</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 获取序列化的 lambda 信息
+ * &lt;example&gt;
+ * SerializedLambda[
+ *   capturingClass=class com.dingtalk.zeus.validator.constraint.SimpleValidAdapterTest,
+ *   functionalInterfaceMethod=com/dingtalk/zeus/interfaces/LambdaSerialize.get:(Ljava/lang/Object;)
+ *   Ljava/lang/Object;,
+ *   implementation=invokeStatic com/dingtalk/zeus/validator/constraint/AtMethods.appCode:(Ljava/lang/String;)
+ *   Ljava/lang/Void;,
+ *   instantiatedMethodType=(Ljava/lang/String;)Ljava/lang/Void;,
+ *   numCaptured=0
+ * ]
+ * &lt;/example&gt;
+ *
+ * @return 序列化的 lambda 对象
+ * @throws Exception invoke 异常
+*/</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="nc">SerializedLambda</span> <span class="nf">getSerializedLambda</span><span class="o">(</span>
+    <span class="nd">@NonNull</span> <span class="nc">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Serializable</span><span class="o">&gt;</span> <span class="n">funInterfaceCls</span><span class="o">,</span>
+    <span class="nd">@NonNull</span> <span class="nc">Serializable</span> <span class="n">serializable</span>
+<span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+    <span class="nc">Method</span> <span class="n">write</span> <span class="o">=</span> <span class="n">funInterfaceCls</span><span class="o">.</span><span class="na">getDeclaredMethod</span><span class="o">(</span><span class="s">"writeReplace"</span><span class="o">);</span>
+    <span class="n">write</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="k">return</span> <span class="o">(</span><span class="nc">SerializedLambda</span><span class="o">)</span><span class="n">write</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">serializable</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>这里获取的 <code class="language-plaintext highlighter-rouge">SerializedLambda</code> 对象的所有属性都是 <code class="language-plaintext highlighter-rouge">String</code> 类型的，需要再通过反射获取的真实的 <code class="language-plaintext highlighter-rouge">Method</code> 和 <code class="language-plaintext highlighter-rouge">Class</code> 信息。
+获取了 <code class="language-plaintext highlighter-rouge">SerializedLambda</code> 并得到了 <code class="language-plaintext highlighter-rouge">Method</code> 和 <code class="language-plaintext highlighter-rouge">Class</code> 之后有什么用途呢？其主要用途如下：</p>
+<ol>
+  <li>获取 <code class="language-plaintext highlighter-rouge">getter/setter</code> 对应的属性名字
+    <blockquote>
+      <p>比如，在 <code class="language-plaintext highlighter-rouge">tk.mybatis</code> 里面可以直接通过 <code class="language-plaintext highlighter-rouge">obj::getColumn</code> 直接就能映射到数据库的 <code class="language-plaintext highlighter-rouge">column</code> 字段</p>
+    </blockquote>
+  </li>
+  <li>快速获取 <code class="language-plaintext highlighter-rouge">Method</code> 信息
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// 传统获取 method</span>
+ <span class="nc">MethodUtils</span><span class="o">.</span><span class="na">getMatchingMethod</span><span class="o">(</span><span class="nc">BaseMockTest</span><span class="o">.</span><span class="na">class</span><span class="o">,</span><span class="s">"init"</span><span class="o">,</span><span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+ <span class="c1">// 基于 SerializedLambda 获取，LambdaUtil 是自己封装的，解析 SerializedLambda 的 Method 信息</span>
+ <span class="nc">LambdaUtil</span><span class="o">.</span><span class="na">getMethod</span><span class="o">(</span><span class="nl">BaseMockTest:</span><span class="o">:</span><span class="n">init</span><span class="o">)</span>
+ <span class="c1">// 传统方式依赖方法名和签名，如果方法重构了会有影响，</span>
+ <span class="c1">// 第二种方式使用起来更简单，同时方法重构会自动跟着重构</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="总结">总结</h2>
+<p>Java Lambda 的序列化/反序列化和普通对象的使用方法一致，Java8 引入了 <code class="language-plaintext highlighter-rouge">SerializedLambda</code> 对象，该对象主要是应用在方法引用的 Lambda 上面，通过它可以快速获取引用方法的信息，主要包括引用方法的 <code class="language-plaintext highlighter-rouge">Method</code>，<code class="language-plaintext highlighter-rouge">Class</code>，<code class="language-plaintext highlighter-rouge">CaptureVars</code> 等信息，通过序列化/反序列化可以很方便地将一个 Java Lambda 进行传输，可以使用类似动态脚本的能力。</p>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2019/04/13/ml-adaboost/"><span style="color:black">上一篇：</span> 机器学习-Adaboost算法</a>
+        
+        
+          <a class="next" href="/2020/12/02/java-spi/"><span style="color:black">下一篇：</span>Java SPI 插件机制 </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+    <div class="comment markdown-body"></div>
+    <!--载入js，在</body>之前插入即可-->
+    <!--Leancloud 操作库:-->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <!--Valine 的核心代码库-->
+    <script src="/assets/js/valine.min.js"></script>
+    <script>
+        new Valine({
+            // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+            av: AV, 
+            el: '.comment',
+            app_id: '5Vp12Dnkf6n73MefHqK09vjG-gzGzoHsz', // 这里填写上面得到的APP ID
+            app_key: 'J6cCta4STGVS5TusVex4XUq8', // 这里填写上面得到的APP KEY
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!', // 留言框占位提示文字
+            smiles_url:'/assets/images/smiles',
+            avatar_url:'/assets/avatar/',
+            avatar_count: 20
+        });
+    </script>
+
+<!-- Changyan Comment END -->
+
+      </div>
+
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+
+
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                
+                <span id="busuanzi_container_site_pv"> 您是本站第
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span>
+                    次点击</span>
+                
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://github.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页"
+                    target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类"
+                    target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档"
+                    target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签"
+                    target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于"
+                    target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?a908f0985fa9991b706a3f4a299bb47b";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</body>
+
+</html>

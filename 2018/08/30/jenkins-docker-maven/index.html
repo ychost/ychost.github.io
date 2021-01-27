@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>Jenkins+Docker 持续集成 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2018/08/30/jenkins-docker-maven/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="Jenkins+Docker 持续集成"> 
+    <meta name="keywords" content="Jenkins, Docker, Maven, Java, Gogs, Dockerfile">
+    <meta name="og:keywords" content="Jenkins, Docker, Maven, Java, Gogs, Dockerfile"> 
+    <meta name="description" content="记录在使用 Jenkins 与 Docker 的配置过程，方便日后再来进行相关的配置">
+    <meta name="og:description" content="记录在使用 Jenkins 与 Docker 的配置过程，方便日后再来进行相关的配置">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2018/08/30/jenkins-docker-maven/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2018-08-30"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+
+<section class="collection-head small geopattern" data-pattern-id="Jenkins+Docker ">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">Jenkins+Docker 持续集成</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2018">2018/08/30</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-工具"  title="工具">工具</a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-推荐"  title="推荐">推荐</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Jenkins"> Jenkins </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Docker"> Docker </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-持续集成"> 持续集成 </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            <!-- 本文共 685 字， -->
+            本文共 3889 字，需
+              
+               48 分钟阅读
+              
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <h3 id="背景">背景</h3>
+<p>Jenkins 部署流程</p>
+
+<p><a href="/images/post/tutorial/jenkins-process.png" data-lightbox="jenkins"><img src="/images/post/tutorial/jenkins-process.png" alt="jenkins" /></a></p>
+
+<p>有了 jenkins 之后我们只需要 push 代码到仓库，后续的编译、测试、打包、启动服务等操作都是自动完成的。第 3-5 步骤可以自己写 Dockerfile 来执行这样可以任意变更执行的内容和结果。</p>
+
+<p>注：</p>
+<ol>
+  <li>关于 Jenkins，Docker  怎么安装不在本文的范围内，网上有很多教程自行搜索</li>
+  <li>本文测试的时候 Jenkins 和 Docker 是装在同一个服务器的，如果非同一个服务器可以通过 SSH 插件解决</li>
+</ol>
+
+<h3 id="jenkins-配置">Jenkins 配置</h3>
+<h4 id="安装插件">安装插件</h4>
+<p>系统管理 -&gt; 插件管理 -&gt; 可选插件 -&gt; 直接安装</p>
+<ol>
+  <li>Maven Integration</li>
+  <li>Gogs plugin</li>
+</ol>
+
+<p><a href="/images/post/tutorial/jenkins-3.png" data-lightbox="jenkins"><img src="/images/post/tutorial/jenkins-3.png" alt="jenkins" /></a></p>
+
+<h4 id="环境配置">环境配置</h4>
+<p>系统管理 -&gt; 全局工具配置</p>
+<ol>
+  <li>配置好 JDK、Git、Maven 等路径
+<a href="/images/post/tutorial/jenkins-2.png" data-lightbox="jenkins"><img src="/images/post/tutorial/jenkins-2.png" alt="jenkins" /></a></li>
+</ol>
+
+<h3 id="创建任务">创建任务</h3>
+<ol>
+  <li>新建任务-&gt;构建一个maven项目
+<a href="/images/post/tutorial/jenkins-1.png" data-lightbox="jenkins"><img src="/images/post/tutorial/jenkins-1.png" alt="jenkins" /></a></li>
+  <li>
+    <p>源码管理 -&gt; Git</p>
+
+    <p>输入自己的代码仓库 URL 及登录的 Credentials
+<a href="/images/post/tutorial/jenkins-4.png" data-lightbox="jenkins"><img src="/images/post/tutorial/jenkins-4.png" alt="jenkins" /></a>
+<a href="/images/post/tutorial/jenkins-5.png" data-lightbox="jenkins"><img src="/images/post/tutorial/jenkins-5.png" alt="jenkins" /></a></p>
+  </li>
+  <li>
+    <p>构建触发器 -&gt; Build when a change is pushed to Gogs</p>
+
+    <p>这样每次 push 到 Gogs 仓库都会触发任务
+<a href="/images/post/tutorial/jenkins-6.png" data-lightbox="jenkins"><img src="/images/post/tutorial/jenkins-6.png" alt="jenkins" /></a></p>
+  </li>
+  <li>Gogs 仓库设置 Webhook
+  <a href="/images/post/tutorial/jenkins-7.png" data-lightbox="jenkins"><img src="/images/post/tutorial/jenkins-7.png" alt="jenkins" /></a>
+  注意替换 url 中的域名和 taskName
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> http://jenkins.xx.com/gogs-webhook?/?job=taskName
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Build, PostSteps</p>
+
+    <p>这里设置代码的构建命令和构建完成后执行的命令，第一个是普通 maven 项目的构建命令可以去查相关的构建参数含义，第二个是任务构建成功后执行的命令这里将执行命令的具体内容放到了<font color="red">代码根目录的 run.sh</font>
+<a href="/images/post/tutorial/jenkins-9.png" data-lightbox="jenkins"><img src="/images/post/tutorial/jenkins-9.png" alt="jenkins" /></a>
+<a href="/images/post/tutorial/jenkins-8.png" data-lightbox="jenkins"><img src="/images/post/tutorial/jenkins-8.png" alt="jenkins" /></a></p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> clean <span class="nb">install</span> <span class="nt">-D</span> maven.test.skip<span class="o">=</span><span class="nb">true</span>
+</code></pre></div>    </div>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c">#!/bin/bash</span>
+ <span class="nb">chmod</span> +x ./run.sh
+ <span class="nb">sudo</span> ./run.sh
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>注：</p>
+<ol>
+  <li>通过第 3、4 步设置那么每次的 push 都会触发 Webhook 进而触发 jenkins 的构建任务</li>
+  <li>一般情况都是自己手工点构建，不需要通过 push 来触发从而可以避免不必要的构建任务</li>
+  <li>PostSteps 里面执行的是 run.sh 该文件在后面会有介绍</li>
+</ol>
+
+<h3 id="创建-maven-项目">创建 Maven 项目</h3>
+<p>这里直接创建了一个简单的 SpringBoot 的项目，注意在根目录多加了一个 run.sh 和 Dockerfile，具体内容在 Dockerfile 段落中介绍</p>
+
+<p><a href="/images/post/tutorial/jenkins-10.png" data-lightbox="jenkins"><img src="/images/post/tutorial/jenkins-10.png" alt="jenkins" /></a></p>
+
+<h3 id="docker-私有仓库">Docker 私有仓库</h3>
+<p>上述步骤基本完成了 Jenkins 的配置，剩下的就是 Docker 方面的配置了。采用 Docker 私有仓库的原因是方便镜像的构建比如同一个内网中需要用到同一个镜像这样拉取速度就很快了而且可以任意的对镜像进行配置。</p>
+
+<ol>
+  <li>拉取创建私有仓库必备的 registry，并创建容器
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker run <span class="nt">-itd</span> <span class="nt">-p</span> 5000:5000 <span class="nt">-v</span> <span class="nv">$PWD</span>/data:/var/lib/registry <span class="nt">--name</span> registry registry
+</code></pre></div>    </div>
+    <p>注：这里是将当前目录下面的 ./data 目录用来挂载的，主要用来存自己的镜像文件</p>
+  </li>
+  <li>修改 /etc/docker/daemon.json 因为没有配置 https 证书所以要直接放行，根据自己的 ip 来设置，这里只放行了本地 ip
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"insecure-registries"</span><span class="p">:[</span><span class="s2">"localhost:5000"</span><span class="p">]}</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>测试推送，假设本地已经有镜像 centos
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker tag tomcat localhost:5000/centos
+ docker push localhost:5000/centos
+</code></pre></div>    </div>
+    <p>注：通过修改本地镜像的 tag，tag 的格式必须是 url/xxx 才能进行正确的推送</p>
+  </li>
+  <li>测试拉取镜像
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker pull localhost:5000/centos
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="dockerfile">Dockerfile</h3>
+<p>Dockerfile 语法很简单请参考 <a href="https://www.cnblogs.com/boshen-hzb/p/6400272.html">dockerfile 介绍</a></p>
+<ol>
+  <li>基础镜像，替换为国内源的 Centos7，注意 localhost:5000/centos 来自于私有仓库
+    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># base image is centos</span>
+ <span class="c"># replace repo to aliyun mirror</span>
+ FROM localhost:5000/centos
+
+ RUN yum install -y wget &amp;&amp; \
+         cd /etc/yum.repos.d/ &amp;&amp; \
+         mv CentOS-Base.repo CentOS-Base.repo_bak &amp;&amp; \
+         wget -O CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo &amp;&amp; \
+         yum clean all &amp;&amp; \
+         yum makecache &amp;&amp; \
+         yum -y update
+
+ ENTRYPOINT bash
+</code></pre></div>    </div>
+    <ul>
+      <li>将文件命名为 Dockerfile 然后执行命令，注意最后有个 . 代表当前目录
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="nv">$ </span><span class="nb">sudo </span>docker build localhost:5000/base <span class="nb">.</span>
+   <span class="c"># 提交到私有仓库 </span>
+   <span class="nv">$ </span><span class="nb">sudo </span>docker push localhost:5000/base
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>JDK8 镜像，在基础镜像的基础上添加了 JDK 文件
+    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code> FROM localhost:5000/base
+ <span class="c"># 注 jdk1.8.0_181.tar.gz 要与 Dockerfile 同目录</span>
+ <span class="c"># ADD 命令会自动解压</span>
+ ADD jdk1.8.0_181.tar.gz /opt/
+
+ ENV JAVA_HOME=/opt/jdk1.8.0_181
+ ENV PATH=$JAVA_HOME/bin:$PATH
+
+ ENTRYPOINT bash
+</code></pre></div>    </div>
+    <ul>
+      <li>将 JDK 文件放到和 Dockerfile 同目录，注意名字，这里是 jdk1.8.0_181.tar.gz</li>
+      <li>执行命令
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="nv">$ </span><span class="nb">sudo </span>docker build localhost:5000/jdk8 <span class="nb">.</span>
+   <span class="c"># 提交到私有仓库</span>
+   <span class="nv">$ </span><span class="nb">sudo </span>docker push localhost:5000/jdk8
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>编写工程的 Dockerfile，放在<font color="red">工程根目录</font>，注意 jar 文件名字
+    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c">############################################################</span>
+ <span class="c"># Dockerfile to build SpringBoot Installed Containers</span>
+ <span class="c"># Based on Centos</span>
+ <span class="c">############################################################</span>
+ <span class="c"># 基础镜像 jdk8</span>
+ FROM localhost:5000/jdk8
+
+ <span class="c"># 作者</span>
+ MAINTAINER ychost&lt;ychost@outlook.com&gt;
+
+ # 添加编译结果到镜像里面
+ ADD target/hello-0.0.1-SNAPSHOT.jar /opt
+
+ <span class="c"># 暴露端口</span>
+ EXPOSE 8080
+
+ <span class="c"># 容器启动后执行的命令</span>
+ ENTRYPOINT ["java" ,"-jar","/opt/hello-0.0.1-SNAPSHOT.jar"]
+</code></pre></div>    </div>
+  </li>
+  <li>编写工程的的入口脚本 run.sh，放在<font color="red">工程根目录</font>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c">#!/usr/bin/env bash</span>
+ <span class="c"># 删除旧容器</span>
+ docker <span class="nb">rm</span> <span class="nt">-vf</span> helloContainer
+ <span class="c"># 删除旧镜像</span>
+ docker rmi <span class="nt">-f</span> helloImage
+ <span class="c"># 构建新镜像</span>
+ docker build <span class="nt">-t</span> helloImage <span class="nb">.</span>
+ <span class="c"># 创建容器启动服务</span>
+ docker run <span class="nt">-d</span> <span class="nt">-p</span> 10236:8080 <span class="nt">--name</span> helloContainer helloImage
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>注：</p>
+<ol>
+  <li>步骤 1、2 只是在私有仓库创建 base 镜像和 jdk8 镜像</li>
+  <li>步骤 3、4 是自己工程的配置，可根据自己的项目来决定</li>
+</ol>
+
+<h3 id="测试">测试</h3>
+<ol>
+  <li>将工程代码提交到 Gogs 仓库</li>
+  <li>Jenkins 会收到来自 Gogs Webhook 的通知自动构建任务，也可以自己手动在任务界面点击「构建」按钮</li>
+  <li>点击「控制台输出」可以看到构建的明细</li>
+</ol>
+
+<p><a href="/images/post/tutorial/jenkins-11.png" data-lightbox="jenkins"><img src="/images/post/tutorial/jenkins-11.png" alt="jenkins" /></a>
+<a href="/images/post/tutorial/jenkins-12.png" data-lightbox="jenkins"><img src="/images/post/tutorial/jenkins-12.png" alt="jenkins" /></a></p>
+
+<h3 id="总结">总结</h3>
+<ol>
+  <li>本文只是一个简单的通过 jenkins 配合 Docker 实现构建任务</li>
+  <li>大部分的操作还是在于自己手工写 Dockerfile 来解决，当然你也可以选择其他 jenkins 插件来配置</li>
+  <li>不单是 Maven 项目的构建，其它项目也可以通过 Jenkins 配置，去找找插件就行了</li>
+  <li>可以通过配置里面的邮件通知，当任务部署后会自动通过邮件通知过来</li>
+</ol>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2018/08/29/algorithm-calculator/"><span style="color:black">上一篇：</span> 算法-四则运算</a>
+        
+        
+          <a class="next" href="/2018/09/05/algorithm-rain/"><span style="color:black">下一篇：</span>算法-雨水问题 </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+    <div class="comment markdown-body"></div>
+    <!--载入js，在</body>之前插入即可-->
+    <!--Leancloud 操作库:-->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <!--Valine 的核心代码库-->
+    <script src="/assets/js/valine.min.js"></script>
+    <script>
+        new Valine({
+            // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+            av: AV, 
+            el: '.comment',
+            app_id: '5Vp12Dnkf6n73MefHqK09vjG-gzGzoHsz', // 这里填写上面得到的APP ID
+            app_key: 'J6cCta4STGVS5TusVex4XUq8', // 这里填写上面得到的APP KEY
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!', // 留言框占位提示文字
+            smiles_url:'/assets/images/smiles',
+            avatar_url:'/assets/avatar/',
+            avatar_count: 20
+        });
+    </script>
+
+<!-- Changyan Comment END -->
+
+      </div>
+
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+
+
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                
+                <span id="busuanzi_container_site_pv"> 您是本站第
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span>
+                    次点击</span>
+                
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://github.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页"
+                    target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类"
+                    target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档"
+                    target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签"
+                    target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于"
+                    target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?a908f0985fa9991b706a3f4a299bb47b";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</body>
+
+</html>

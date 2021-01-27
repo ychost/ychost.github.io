@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>让百度收录自己的博客 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2016/08/28/github-consistent-with-coding/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="让百度收录自己的博客"> 
+    <meta name="keywords" content="镜像, GitHub, Coding">
+    <meta name="og:keywords" content="镜像, GitHub, Coding"> 
+    <meta name="description" content="　　由于 GitHub 的限制百度无法收录搭建在 GitHub 上的博客的，这样我们玩儿的博客就在国内就成单机的了，本文就是一篇解决这个问题的一个教程">
+    <meta name="og:description" content="　　由于 GitHub 的限制百度无法收录搭建在 GitHub 上的博客的，这样我们玩儿的博客就在国内就成单机的了，本文就是一篇解决这个问题的一个教程">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2016/08/28/github-consistent-with-coding/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2016-08-28"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+
+<section class="collection-head small geopattern" data-pattern-id="让百度收录自己的博客">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">让百度收录自己的博客</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2016">2016/08/28</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-杂记"  title="杂记">杂记</a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-推荐"  title="推荐">推荐</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-GitHub"> GitHub </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-Coding"> Coding </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            <!-- 本文共 505 字， -->
+            本文共 3304 字，需
+              
+               41 分钟阅读
+              
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <p>　　由于 GitHub 的限制百度无法收录搭建在 GitHub 上的博客的，这样我们玩儿的博客就在国内就成单机的了，本文就是一篇解决这个问题的一个教程</p>
+
+<blockquote>
+  <p>如果你还不熟悉如何搭建 GitHub 博客请点击 <a href="/2016/08/10/create-blog-with-jekyll/">「此处」</a></p>
+</blockquote>
+
+<h3 id="原理">原理</h3>
+
+<ol>
+  <li>
+    <p>如何让百度收录：</p>
+
+    <p>百度是无法收录 GitHub Pages 的所以不能通过 SEO 优化等来解决此问题，比较好的解决办法就是搭建一个百度能收录的 GitHub Pages 的镜像网站，本文推荐在 <a href="https://coding.net/user">Coding</a> 上面创建一个仓库作为 GitHub Pages 的镜像，这样百度就能收录到 Coding 上面的博客了，但是我们还是在 GitHub 上面工作的因为 Coding 仅仅是一个镜像而已。</p>
+  </li>
+  <li>
+    <p>镜像原理：</p>
+
+    <p><a href="/images/post/tutorial/github-coding-flow.jpg" data-lightbox="github-mirror"><img src="/images/post/tutorial/github-coding-flow.jpg" alt="github-coding-flow" /></a></p>
+
+    <ol>
+      <li>
+        <p>用户<code class="highlight language-bash" data-lang="bash">git push</code>更新到 GitHub上面</p>
+      </li>
+      <li>
+        <p>GitHub 接受到部署更新后会自动调用 Webhooks</p>
+      </li>
+      <li>
+        <p>Webhooks 通知 OpenShift 服务器，OpenShift 服务器执行 <code class="highlight language-sh" data-lang="sh">git pull</code>获取 GitHub 上面刚刚更新的内容</p>
+      </li>
+      <li>
+        <p>当 OpenShift 服务器更新完之后，执行 	<code class="highlight language-sh" data-lang="sh">git push coding master</code> 将 Coding 上的内容进行更新</p>
+      </li>
+      <li>
+        <p>这时 Coding 和 GitHub 上面的内容就是一致的了，也就在 Coding 上面搭建了 GitHub 的一个简单的镜像仓库</p>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<h3 id="openshift-配置">OpenShift 配置</h3>
+
+<ul>
+  <li>
+    <h4 id="什么是-openshift">什么是 OpenShift</h4>
+
+    <blockquote>
+      <p>　　OpenShift 是红帽的云开发平台即服务（PaaS）。自由和开放源码的云计算平台使开发人员能够创建、测试和运行他们的应用程序，并且可以把它们部署到云中。Openshift广泛支持多种编程语言和框架，如Java，Ruby和PHP等。另外它还提供了多种集成开发工具如 Eclipse integration，JBoss Developer Studio和 Jenkins等。OpenShift  基于一个开源生态系统为移动应用，数据库服务等，提供支持。 —- 摘自百度</p>
+    </blockquote>
+
+    <p>　　总之，<a href="http://openshift.com/">OpenShift</a> 就是一个可以免费使用 Linux 服务器，我们可以在上面搭建网站，但是由于 GFW 等原因国内访问的速度并不理想，但是 OpenShift 上面的带宽是很大的。</p>
+
+    <p>　　先去　<a href="http://openshift.com/">OpenShift</a> (如果访问不了可以使用 <a href="https://lanterncn.org/">Lantern</a> 翻出去) 注册一个账号，然打开 OPENSHFIT WEB CONSOLE 接着　Add Application 这里为了简单起见我们添加一个 PHP 5.4 应用程序</p>
+
+    <p><a href="/images/post/tutorial/open-openshift-web-console.jpg" data-lightbox="github-mirror"><img src="/images/post/tutorial/open-openshift-web-console.jpg" alt="open-openshift-web-console" /></a></p>
+
+    <p><a href="/images/post/tutorial/openshift-add-phpapp.jpg" data-lightbox="github-mirror"><img src="/images/post/tutorial/openshift-add-phpapp.jpg" alt="openshift-add-phpapp" /></a></p>
+  </li>
+  <li>
+    <h4 id="登录-openshift">登录 OpenShift</h4>
+
+    <p>　这里有两种方式登录，第一种是利用 rhc 登录，第二种方式是用putty登录，第一种方式简单快捷不需要自己去配置 .ssh 文件等等，第二种方式比较通用不仅限用于登录 OpenShift 其它主机也可以登录，但这里我选择以第一种方式来登录 OpenShift, 如果有兴趣使用putty登录，请参考 <a href="http://jingyan.baidu.com/article/0f5fb099cdc2426d8334ea0d.html">「putty远程连接openshift云服务器」</a>。</p>
+
+    <ul>
+      <li>安装 rhc</li>
+    </ul>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 	gem install rhc
+</code></pre></div>    </div>
+
+    <ul>
+      <li>配置 OpenShift, 在配置种输入自己的 OpenShift 登录帐号及密码</li>
+    </ul>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 	rhc setup
+</code></pre></div>    </div>
+    <ul>
+      <li>登录 OpenShift, 注意把 <font color="red">APP_NAME</font> 替换成上面建立的 OpenShift 应用名称</li>
+    </ul>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	rhc ssh APP_NAME 
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>登录成功了如图所示</p>
+
+        <p><a href="/images/post/tutorial/rch-login-successfully.jpg" data-lightbox="github-mirror"><img src="/images/post/tutorial/rch-login-successfully.jpg" alt="rch-login-successfully" /></a></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="联动-github-与-coding">联动 GitHub 与 Coding</h3>
+
+<ul>
+  <li>
+    <p>利用 rhc 或者 putty 成功登陆了之后，进入 data 文件夹，这个文件夹我们才具有操作权限</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> cd $OPENSHIFT_DATA_DR
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>将 GitHub 上面的仓库 Clone 一份到该目录，注意将 <font color="red">REPO_URL</font>替换你博客的仓库地址</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git clone REPO_URL
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>修改 .git/config 文件内容，将 Coding.net 的信息和 GitHub的信息直接添加上去，当然如果觉得不安全可以考虑用 SSH</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  vim ./git/config
+</code></pre></div>    </div>
+
+    <p>注意将 <font color="red">GITHUB_PWD</font>, <font color="red">CODING_PWD</font> 等等替换成自己的信息，这里主要是利用 HTTPS 来认证账户，没有 Coding 账户的先去 <a href="https://coding.net/user">Coding.net</a> 注册</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    [core]
+      repositoryformatversion = 0
+      filemode = true
+      bare = false
+      logallrefupdates = true
+[remote "origin"]
+      url = https://GITHUB_PWD@github.com/USER_NAME/USER_NAME.github.io.git
+      fetch = +refs/heads/*:refs/remotes/origin/*
+[remote "coding"]
+      url = https://USER_NAME:CODING_PWD@git.coding.net/USER_NAME/USER_NAME.git
+      fetch = +refs/heads/*:refs/remotes/coding/*
+[branch "master"]
+      remote = origin
+      merge = refs/heads/master
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="php-执行脚本">PHP 执行脚本</h4>
+
+<ul>
+  <li>
+    <p>进入 app-root/repo 文件夹，app-root 是 data 文件夹的上层目录</p>
+  </li>
+  <li>
+    <p>添加 php 脚本文件  pushCodingNet.php ，并加入如下内容，这里就是主要实现请求这个文件后自动获取 GitHub 的最近更新并强行推送到 Coding 上面去，注意替换 <font color="red">YOUR_NAME</font></p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cp">&lt;?php</span>
+  <span class="k">if</span><span class="p">(</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">'key'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'PUSH'</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">echo</span> <span class="nb">shell_exec</span><span class="p">(</span><span class="s1">'cd $OPENSHIFT_DATA_DIR/YOUR_NAME.github.io;git pull;git push -f coding'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+      <span class="nb">header</span><span class="p">(</span><span class="s1">'HTTP/1.1 400 Bad Request'</span><span class="p">);</span>
+      <span class="k">echo</span> <span class="sh">&lt;&lt;&lt;HTML
+  // Fallback
+  HTML;</span>
+  <span class="p">}</span>
+    
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="添加-webhooks">添加 Webhooks</h4>
+
+<p>进入你的 GitHub 仓库 → Setting → Webhooks &amp; Services → Add Webhook, 注意 Payload URL 加入 <font color="red">YOUR_OPENSHIFT_WEB</font>/pushCodingNet.php?key=PUSH</p>
+
+<p><a href="/images/post/tutorial/github-add-webhooks.jpg" data-lightbox="github-mirror"><img src="/images/post/tutorial/github-add-webhooks.jpg" alt="github-add-webhooks" /></a></p>
+
+<h3 id="完成">完成</h3>
+
+<p>　　到这里已经搭建好了，只要我们向 GitHub 提交更新，GitHub 上面设置的 Webhook 会自动去请求 OpenShift 主机，然后 OpenShift 主机接到请求之后会自动拉取 GitHub 的最新内容然后强行推送到 Coding 的仓库中去，所以 Coding 和 GitHub的内容就保持一致了</p>
+
+<h4 id="注意事项">注意事项</h4>
+
+<ul>
+  <li>
+    <p>SEO 问题</p>
+
+    <p>如果担心 SEO 问题在每个页面上添加 <a href="http://www.chinaz.com/web/2011/0630/192530.shtml">canonical</a> 标签就好</p>
+  </li>
+</ul>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2016/08/14/Sublime-snippets/"><span style="color:black">上一篇：</span> Sublime Text 2 Snippets</a>
+        
+        
+          <a class="next" href="/2016/08/28/hybird-dispatcher-for-c51/"><span style="color:black">下一篇：</span>C51 混合式调度器 </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+    <div class="comment markdown-body"></div>
+    <!--载入js，在</body>之前插入即可-->
+    <!--Leancloud 操作库:-->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <!--Valine 的核心代码库-->
+    <script src="/assets/js/valine.min.js"></script>
+    <script>
+        new Valine({
+            // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+            av: AV, 
+            el: '.comment',
+            app_id: '5Vp12Dnkf6n73MefHqK09vjG-gzGzoHsz', // 这里填写上面得到的APP ID
+            app_key: 'J6cCta4STGVS5TusVex4XUq8', // 这里填写上面得到的APP KEY
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!', // 留言框占位提示文字
+            smiles_url:'/assets/images/smiles',
+            avatar_url:'/assets/avatar/',
+            avatar_count: 20
+        });
+    </script>
+
+<!-- Changyan Comment END -->
+
+      </div>
+
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+
+
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                
+                <span id="busuanzi_container_site_pv"> 您是本站第
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span>
+                    次点击</span>
+                
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://github.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页"
+                    target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类"
+                    target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档"
+                    target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签"
+                    target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于"
+                    target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?a908f0985fa9991b706a3f4a299bb47b";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</body>
+
+</html>

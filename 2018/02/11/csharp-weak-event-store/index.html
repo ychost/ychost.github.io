@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>C# 事件总线（弱订阅） &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2018/02/11/csharp-weak-event-store/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="C# 事件总线（弱订阅）"> 
+    <meta name="keywords" content="C#,WeakEventStore">
+    <meta name="og:keywords" content="C#,WeakEventStore"> 
+    <meta name="description" content="基于 WeakEventManager 的一种事件总线模式的实现，在 WPF 中使用尤为方便，摒弃掉传统的各种 Service 注入，将程序的架构做成响应式的。">
+    <meta name="og:description" content="基于 WeakEventManager 的一种事件总线模式的实现，在 WPF 中使用尤为方便，摒弃掉传统的各种 Service 注入，将程序的架构做成响应式的。">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2018/02/11/csharp-weak-event-store/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2018-02-11"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+
+<section class="collection-head small geopattern" data-pattern-id="C# 事件总线（弱订阅）">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">C# 事件总线（弱订阅）</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2018">2018/02/11</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-桌面"  title="桌面">桌面</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-C#"> C# </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-WeakEvent"> WeakEvent </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-WPF"> WPF </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            <!-- 本文共 1481 字， -->
+            本文共 8134 字，需
+              
+               101 分钟阅读
+              
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <h4 id="普通订阅">普通订阅</h4>
+<p>对于 C# 而言实现消息订阅尤为简单，只需要简单的使用委托即可，比如：</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">Subscriber1</span><span class="p">{</span>
+    <span class="k">public</span> <span class="n">Action</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">actions</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="n">Action</span> <span class="nf">AddListener</span><span class="p">(</span><span class="n">Action</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">action</span><span class="p">){</span>
+        <span class="n">actions</span> <span class="p">+=</span> <span class="n">action</span><span class="p">;</span>
+        <span class="k">return</span> <span class="p">()=&gt;{</span>
+            <span class="n">actions</span> <span class="p">-=</span> <span class="n">action</span><span class="p">;</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Raise</span><span class="p">(</span><span class="kt">string</span> <span class="n">message</span><span class="p">){</span>
+        <span class="n">actions</span><span class="p">?.</span><span class="nf">Invoke</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Test</span><span class="p">(){</span>
+        <span class="kt">var</span> <span class="n">rmLsr</span> <span class="p">=</span> <span class="nf">AddListener</span><span class="p">(</span><span class="n">msg</span><span class="p">=&gt;{</span>
+                <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"test received message: "</span><span class="p">+</span><span class="n">msg</span><span class="p">);</span>
+        <span class="p">});</span>
+        <span class="nf">Raise</span><span class="p">(</span><span class="s">"Hello world"</span><span class="p">);</span>
+        <span class="nf">rmLsr</span><span class="p">();</span>
+        <span class="nf">Raise</span><span class="p">(</span><span class="s">"Goodbay"</span><span class="p">);</span>
+        <span class="c1">//output:</span>
+        <span class="c1">//test received message: Hello worl</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h4 id="弱订阅">弱订阅</h4>
+<p>上述的 <code class="language-plaintext highlighter-rouge">AddListener</code> 为强引用，即被引用的 <code class="language-plaintext highlighter-rouge">action</code> 如果为某一对象的属性，那么该对象就会被 <code class="language-plaintext highlighter-rouge">EventSouce</code> 强引用了，即使将被引用的对象置空也不能使之被回收掉，所以这里需要自己手动取消订阅即 <code class="language-plaintext highlighter-rouge">rmLsr()</code>，在 .Net4.5 以上的版本引入了 <code class="language-plaintext highlighter-rouge">WeakEventManager&lt;TSource,TArags&gt;</code> 实现对事件的弱引用。上面的版本改进如下：</p>
+<blockquote>
+  <p>弱订阅就必须使用 event 且格式必须是 <code class="language-plaintext highlighter-rouge">Action&lt;object,EventArgs&gt;</code> 这种 Windows 编程常用的事件触发模式，相对繁琐，不过也很简单</p>
+</blockquote>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="c1">/// &lt;summary&gt;</span>
+    <span class="c1">/// event 模式的事件源</span>
+    <span class="c1">/// &lt;/summary&gt;</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">SubEventSource</span> <span class="p">:</span> <span class="n">EventSource</span> <span class="p">{</span>
+        <span class="k">public</span> <span class="k">event</span> <span class="n">Action</span><span class="p">&lt;</span><span class="kt">object</span><span class="p">,</span> <span class="n">SubEventArgs</span><span class="p">&gt;</span> <span class="n">Event</span><span class="p">;</span>
+
+        <span class="k">public</span> <span class="k">void</span> <span class="nf">Raise</span><span class="p">(</span><span class="n">SubEventArgs</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">Event</span><span class="p">?.</span><span class="nf">Invoke</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// &lt;summary&gt;</span>
+    <span class="c1">/// event 模式的事件参数</span>
+    <span class="c1">/// &lt;/summary&gt;</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">SubEventArgs</span> <span class="p">:</span> <span class="n">EventArgs</span> <span class="p">{</span>
+        <span class="k">public</span> <span class="kt">object</span> <span class="n">Data</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">Subscriber2</span> <span class="p">{</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 事件源</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="k">private</span> <span class="k">readonly</span> <span class="n">SubEventSource</span> <span class="n">evnetSource</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">SubEventSource</span><span class="p">();</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 添加订阅，可不必手动取消</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name="handler"&gt;&lt;/param&gt;</span>
+        <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
+        <span class="k">public</span> <span class="n">Action</span> <span class="nf">AddListener</span><span class="p">(</span><span class="n">EventHandler</span><span class="p">&lt;</span><span class="n">SubEventArgs</span><span class="p">&gt;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">//注意第二个参数，该订阅使用的反射通过字符串去找到 evnetSource.Event 这个事件</span>
+            <span class="n">WeakEventManager</span><span class="p">&lt;</span><span class="n">SubEventSource</span><span class="p">,</span> <span class="n">SubEventArgs</span><span class="p">&gt;.</span><span class="nf">AddHandler</span><span class="p">(</span><span class="n">evnetSource</span><span class="p">,</span> 
+                <span class="k">nameof</span><span class="p">(</span><span class="n">evnetSource</span><span class="p">.</span><span class="n">Event</span><span class="p">),</span> <span class="n">handler</span><span class="p">);</span>
+            <span class="c1">//手动取消订阅</span>
+            <span class="k">return</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="n">WeakEventManager</span><span class="p">&lt;</span><span class="n">SubEventSource</span><span class="p">,</span> <span class="n">SubEventArgs</span><span class="p">&gt;.</span><span class="nf">RemoveHandler</span><span class="p">(</span><span class="n">evnetSource</span><span class="p">,</span> 
+                 <span class="k">nameof</span><span class="p">(</span><span class="n">evnetSource</span><span class="p">.</span><span class="n">Event</span><span class="p">),</span>
+                    <span class="n">handler</span><span class="p">);</span>
+            <span class="p">};</span>
+        <span class="p">}</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 测试自动取消订阅</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="k">public</span> <span class="k">void</span> <span class="nf">Test</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">handler</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">TestHandler</span><span class="p">();</span>
+            <span class="nf">AddListener</span><span class="p">(</span><span class="n">handler</span><span class="p">.</span><span class="n">Handle</span><span class="p">);</span>
+            <span class="n">evnetSource</span><span class="p">.</span><span class="nf">Raise</span><span class="p">(</span><span class="k">new</span> <span class="nf">SubEventArgs</span><span class="p">()</span> <span class="p">{</span> <span class="n">Data</span> <span class="p">=</span> <span class="s">"hello"</span> <span class="p">});</span>
+            <span class="n">handler</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+            <span class="c1">//垃圾回收</span>
+            <span class="n">GC</span><span class="p">.</span><span class="nf">Collect</span><span class="p">();</span>
+            <span class="n">GC</span><span class="p">.</span><span class="nf">WaitForFullGCComplete</span><span class="p">();</span>
+            <span class="n">evnetSource</span><span class="p">.</span><span class="nf">Raise</span><span class="p">(</span><span class="k">new</span> <span class="nf">SubEventArgs</span><span class="p">()</span> <span class="p">{</span> <span class="n">Data</span> <span class="p">=</span> <span class="s">"world"</span> <span class="p">});</span>
+            <span class="c1">//output:</span>
+            <span class="c1">//hello</span>
+        <span class="p">}</span>
+
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 事件处理方</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="k">public</span> <span class="k">class</span> <span class="nc">TestHandler</span> <span class="p">{</span>
+            <span class="k">public</span> <span class="k">void</span> <span class="nf">Handle</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">SubEventArgs</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">args</span><span class="p">?.</span><span class="n">Data</span><span class="p">?.</span><span class="nf">ToString</span><span class="p">());</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+<h4 id="事件总线">事件总线</h4>
+<p>基于上述的事件弱订阅模式，这里实现了一个消息总线，在 WPF 中使用起来尤为方便，从此不再需要各种 Service 注入，只需要简单的 Subscribe/Dispatch 就行了</p>
+<blockquote>
+  <p>各个订阅者依赖于 Payload 的 Type 来区分各个事件，类似于 MvvmLight 的 Messenger</p>
+</blockquote>
+
+<p><strong>使用：</strong></p>
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">Cmd</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Data</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">App</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">YEventStore</span> <span class="n">EventStore</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">YEventStore</span><span class="p">();</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span> <span class="n">args</span><span class="p">[]){</span>
+       <span class="n">EventStore</span><span class="p">.</span><span class="nf">Subscribe</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">Cmd</span><span class="p">),(</span><span class="n">s</span><span class="p">,</span><span class="n">e</span><span class="p">)=&gt;{</span>
+            <span class="kt">var</span> <span class="n">cmd</span> <span class="p">=</span> <span class="n">e</span><span class="p">.</span><span class="n">Payload</span> <span class="k">as</span> <span class="n">Cmd</span><span class="p">;</span>
+            <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="n">Data</span><span class="p">);</span>
+        <span class="p">})</span>
+       <span class="n">EventStore</span><span class="p">.</span><span class="nf">Dispatch</span><span class="p">(</span><span class="k">new</span> <span class="nf">Cmd</span><span class="p">(){</span><span class="n">Data</span><span class="p">=</span><span class="s">"hello"</span><span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p><strong>实现：</strong></p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">public</span> <span class="k">delegate</span> <span class="k">void</span> <span class="nf">Unsubscibe</span><span class="p">();</span>
+    <span class="c1">/// &lt;summary&gt;</span>
+    <span class="c1">/// 事件总线模式的一种实现</span>
+    <span class="c1">/// [x] 使用的是 WeakEvent ，支持（手动/自动）取消订阅</span>
+    <span class="c1">/// [x] 所有操作都是同步的，所以注意每个操作不要耗费太时间和死锁问题</span>
+    <span class="c1">/// &lt;author&gt;ychost&lt;/author&gt;</span>
+    <span class="c1">/// &lt;date&gt;2018-2-10&lt;/date&gt;</span>
+    <span class="c1">/// &lt;/summary&gt;</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">YEventStore</span> <span class="p">{</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 所有操作上的锁</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="k">private</span> <span class="k">readonly</span> <span class="kt">object</span> <span class="n">locker</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">object</span><span class="p">();</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 所有事件源代</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="k">private</span> <span class="k">readonly</span> <span class="n">IDictionary</span><span class="p">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">YEventSource</span><span class="p">&gt;</span> <span class="n">eventSource</span><span class="p">;</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 最近 Dispatch 的对象</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="k">private</span> <span class="kt">object</span> <span class="n">latestPayload</span><span class="p">;</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 初始化</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="k">public</span> <span class="nf">YEventStore</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">eventSource</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">YEventSource</span><span class="p">&gt;();</span>
+        <span class="p">}</span>
+
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 派遣事件</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name="payload"&gt;&lt;/param&gt;</span>
+        <span class="k">public</span> <span class="k">void</span> <span class="nf">Dispatch</span><span class="p">(</span><span class="kt">object</span> <span class="n">payload</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">payload</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="kt">var</span> <span class="n">type</span> <span class="p">=</span> <span class="n">payload</span><span class="p">.</span><span class="nf">GetType</span><span class="p">();</span>
+            <span class="k">lock</span> <span class="p">(</span><span class="n">locker</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">latestPayload</span> <span class="p">=</span> <span class="n">payload</span><span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">eventSource</span><span class="p">.</span><span class="nf">TryGetValue</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">source</span><span class="p">))</span> <span class="p">{</span>
+                    <span class="n">StackTrace</span> <span class="n">trace</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">StackTrace</span><span class="p">();</span>
+                    <span class="n">StackFrame</span> <span class="n">frame</span> <span class="p">=</span> <span class="n">trace</span><span class="p">.</span><span class="nf">GetFrame</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+                    <span class="n">source</span><span class="p">.</span><span class="n">CallFrame</span> <span class="p">=</span> <span class="n">frame</span><span class="p">;</span>
+                    <span class="n">source</span><span class="p">.</span><span class="nf">RaiseEvent</span><span class="p">(</span><span class="k">new</span> <span class="nf">YEventArgs</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 单一订阅</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name="actionType"&gt;&lt;/param&gt;</span>
+        <span class="c1">/// &lt;param name="handler"&gt;&lt;/param&gt;</span>
+        <span class="c1">/// &lt;param name="useLatestPayload"&gt;&lt;/param&gt;</span>
+        <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
+        <span class="k">public</span> <span class="n">Unsubscibe</span> <span class="nf">Subscribe</span><span class="p">(</span><span class="n">Type</span> <span class="n">actionType</span><span class="p">,</span> <span class="n">EventHandler</span><span class="p">&lt;</span><span class="n">YEventArgs</span><span class="p">&gt;</span> <span class="n">handler</span><span class="p">,</span>
+                                    <span class="kt">bool</span> <span class="n">useLatestPayload</span> <span class="p">=</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">lock</span> <span class="p">(</span><span class="n">locker</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(!</span><span class="n">eventSource</span><span class="p">.</span><span class="nf">ContainsKey</span><span class="p">(</span><span class="n">actionType</span><span class="p">))</span> <span class="p">{</span>
+                    <span class="n">eventSource</span><span class="p">[</span><span class="n">actionType</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">YEventSource</span><span class="p">();</span>
+                <span class="p">}</span>
+                <span class="kt">var</span> <span class="n">source</span> <span class="p">=</span> <span class="n">eventSource</span><span class="p">[</span><span class="n">actionType</span><span class="p">];</span>
+                <span class="n">WeakEventManager</span><span class="p">&lt;</span><span class="n">YEventSource</span><span class="p">,</span> <span class="n">YEventArgs</span><span class="p">&gt;.</span><span class="nf">AddHandler</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> 
+                                        <span class="k">nameof</span><span class="p">(</span><span class="n">YEventSource</span><span class="p">.</span><span class="n">Event</span><span class="p">),</span> <span class="n">handler</span><span class="p">);</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">useLatestPayload</span> <span class="p">&amp;&amp;</span> <span class="n">latestPayload</span><span class="p">?.</span><span class="nf">GetType</span><span class="p">()</span> <span class="p">==</span> <span class="n">actionType</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">handler</span><span class="p">?.</span><span class="nf">Invoke</span><span class="p">(</span><span class="k">new</span> <span class="nf">YEventSource</span><span class="p">()</span> <span class="p">{</span>
+                                        <span class="n">CallFrame</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">StackTrace</span><span class="p">().</span><span class="nf">GetFrame</span><span class="p">(</span><span class="m">0</span><span class="p">)</span>
+                                    <span class="p">},</span>
+                          <span class="k">new</span> <span class="nf">YEventArgs</span><span class="p">(</span><span class="n">latestPayload</span><span class="p">));</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">lock</span> <span class="p">(</span><span class="n">locker</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kt">var</span> <span class="n">source</span> <span class="p">=</span> <span class="n">eventSource</span><span class="p">[</span><span class="n">actionType</span><span class="p">];</span>
+                    <span class="n">WeakEventManager</span><span class="p">&lt;</span><span class="n">YEventSource</span><span class="p">,</span> <span class="n">YEventArgs</span><span class="p">&gt;.</span><span class="nf">RemoveHandler</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> 
+                                            <span class="k">nameof</span><span class="p">(</span><span class="n">YEventSource</span><span class="p">.</span><span class="n">Event</span><span class="p">),</span> <span class="n">handler</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">};</span>
+        <span class="p">}</span>
+
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 集合订阅</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name="handlers"&gt;&lt;/param&gt;</span>
+        <span class="c1">/// &lt;param name="useLatestPayload"&gt;&lt;/param&gt;</span>
+        <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
+        <span class="k">public</span> <span class="n">Unsubscibe</span> <span class="nf">Subscribe</span><span class="p">(</span><span class="n">IDictionary</span><span class="p">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">EventHandler</span><span class="p">&lt;</span><span class="n">YEventArgs</span><span class="p">&gt;&gt;</span> <span class="n">handlers</span><span class="p">,</span>
+                                    <span class="kt">bool</span> <span class="n">useLatestPayload</span> <span class="p">=</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">lock</span> <span class="p">(</span><span class="n">locker</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">pair</span> <span class="k">in</span> <span class="n">handlers</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kt">var</span> <span class="n">actionType</span> <span class="p">=</span> <span class="n">pair</span><span class="p">.</span><span class="n">Key</span><span class="p">;</span>
+                    <span class="kt">var</span> <span class="n">handler</span> <span class="p">=</span> <span class="n">pair</span><span class="p">.</span><span class="n">Value</span><span class="p">;</span>
+                    <span class="k">if</span> <span class="p">(!</span><span class="n">eventSource</span><span class="p">.</span><span class="nf">ContainsKey</span><span class="p">(</span><span class="n">actionType</span><span class="p">))</span> <span class="p">{</span>
+                        <span class="n">eventSource</span><span class="p">[</span><span class="n">actionType</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">YEventSource</span><span class="p">();</span>
+                    <span class="p">}</span>
+                    <span class="kt">var</span> <span class="n">source</span> <span class="p">=</span> <span class="n">eventSource</span><span class="p">[</span><span class="n">actionType</span><span class="p">];</span>
+                    <span class="n">WeakEventManager</span><span class="p">&lt;</span><span class="n">YEventSource</span><span class="p">,</span> <span class="n">YEventArgs</span><span class="p">&gt;.</span><span class="nf">AddHandler</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> 
+                                                    <span class="k">nameof</span><span class="p">(</span><span class="n">YEventSource</span><span class="p">.</span><span class="n">Event</span><span class="p">),</span> <span class="n">handler</span><span class="p">);</span>
+
+                    <span class="k">if</span> <span class="p">(</span><span class="n">useLatestPayload</span> <span class="p">&amp;&amp;</span> <span class="n">latestPayload</span><span class="p">?.</span><span class="nf">GetType</span><span class="p">()</span> <span class="p">==</span> <span class="n">actionType</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">handler</span><span class="p">?.</span><span class="nf">Invoke</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">new</span> <span class="nf">YEventArgs</span><span class="p">(</span><span class="n">latestPayload</span><span class="p">));</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">lock</span> <span class="p">(</span><span class="n">locker</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">pair</span> <span class="k">in</span> <span class="n">handlers</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="kt">var</span> <span class="n">source</span> <span class="p">=</span> <span class="n">eventSource</span><span class="p">[</span><span class="n">pair</span><span class="p">.</span><span class="n">Key</span><span class="p">];</span>
+                        <span class="n">WeakEventManager</span><span class="p">&lt;</span><span class="n">YEventSource</span><span class="p">,</span> <span class="n">YEventArgs</span><span class="p">&gt;.</span><span class="nf">RemoveHandler</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> 
+                                                <span class="k">nameof</span><span class="p">(</span><span class="n">YEventSource</span><span class="p">.</span><span class="n">Event</span><span class="p">),</span> <span class="n">pair</span><span class="p">.</span><span class="n">Value</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">};</span>
+        <span class="p">}</span>
+      
+    <span class="p">}</span>
+</code></pre></div></div>
+<p><strong>参考文献：</strong></p>
+
+<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/wpf/advanced/weak-event-patterns">Weak Event Patterns</a></p>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2018/01/31/it-guide-stack/"><span style="color:black">上一篇：</span> 程序员代码面试指南 栈</a>
+        
+        
+          <a class="next" href="/2018/02/23/it-guide-linked-list/"><span style="color:black">下一篇：</span>程序员代码面试指南 链表 </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+    <div class="comment markdown-body"></div>
+    <!--载入js，在</body>之前插入即可-->
+    <!--Leancloud 操作库:-->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <!--Valine 的核心代码库-->
+    <script src="/assets/js/valine.min.js"></script>
+    <script>
+        new Valine({
+            // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+            av: AV, 
+            el: '.comment',
+            app_id: '5Vp12Dnkf6n73MefHqK09vjG-gzGzoHsz', // 这里填写上面得到的APP ID
+            app_key: 'J6cCta4STGVS5TusVex4XUq8', // 这里填写上面得到的APP KEY
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!', // 留言框占位提示文字
+            smiles_url:'/assets/images/smiles',
+            avatar_url:'/assets/avatar/',
+            avatar_count: 20
+        });
+    </script>
+
+<!-- Changyan Comment END -->
+
+      </div>
+
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+
+
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                
+                <span id="busuanzi_container_site_pv"> 您是本站第
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span>
+                    次点击</span>
+                
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://github.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页"
+                    target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类"
+                    target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档"
+                    target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签"
+                    target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于"
+                    target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?a908f0985fa9991b706a3f4a299bb47b";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</body>
+
+</html>

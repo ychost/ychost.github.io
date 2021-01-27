@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- add baidu vertify    -->
+    <meta name="baidu-site-verification" content="5WXAH3PIF0" />
+    
+    <title>SMO 算法超详细解析 &mdash; 夏天</title>
+
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/vendor/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/vendor/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/assets/css/components/collection.css">
+    <link rel="stylesheet" href="/assets/css/components/repo-card.css">
+    <link rel="stylesheet" href="/assets/css/sections/repo-list.css">
+    <link rel="stylesheet" href="/assets/css/sections/mini-repo-list.css">
+    <link rel="stylesheet" href="/assets/css/components/boxed-group.css">
+
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/vendor/share.js/dist/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
+    <link rel="stylesheet" href="/assets/css/posts/index.css">
+
+    <link rel="stylesheet" href="/assets/css/components/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/css/custom/custom.css">
+    <link rel="stylesheet" href="/assets/css/jqcloud.min.css">
+
+
+
+    <!-- Latest compiled and minified CSS -->
+     
+   
+    <link rel="canonical" href="http://blog.sudoyc.com/2019/04/10/ml-svm-smo/">
+
+    <link rel="alternate" type="application/atom+xml" title="夏天" href="/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <meta property="og:title" content="SMO 算法超详细解析"> 
+    <meta name="keywords" content="SVM, SMO">
+    <meta name="og:keywords" content="SVM, SMO"> 
+    <meta name="description" content="1996年，John Platt 发布一个称为 SMO（Sequential Minimal Optimization，序列最小优化）的强大算法，用于训练 SVM，该算法的核心思想是将原问题分解成多个小问题分别进行优化求解。">
+    <meta name="og:description" content="1996年，John Platt 发布一个称为 SMO（Sequential Minimal Optimization，序列最小优化）的强大算法，用于训练 SVM，该算法的核心思想是将原问题分解成多个小问题分别进行优化求解。">     
+    <meta property="og:url" content="http://blog.sudoyc.com/2019/04/10/ml-svm-smo/">
+    <meta property="og:site_name" content="夏天">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_CN" /> 
+    <meta property="article:published_time" content="2019-04-10"> 
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+
+    <script src="/assets/js/custom/blog.js"></script>
+    <script src="/assets/js/custom/blog-cats-data.js"></script>
+
+    <script type="text/javascript">
+    function toggleMenu() {
+        var nav = document.getElementsByClassName("site-header-nav")[0];
+        if (nav.style.display == "inline-flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "inline-flex";
+        }
+    }
+    </script>
+
+</head>
+
+<body class="" data-mz="">
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" title="夏天"><span class="octicon octicon-mark-github"></span> 夏天</a></h1>
+            <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <nav class="site-header-nav" role="navigation">
+                
+                <a href="/" class=" site-header-nav-item" target="" title="首页">首页</a> 
+                <a href="/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> 
+                <a href="/archive/" class=" site-header-nav-item" target="" title="归档">归档</a> 
+                <a href="/tags/" class=" site-header-nav-item" target="" title="标签">标签</a> 
+                <a href="/about/" class=" site-header-nav-item" target="" title="关于">关于</a> 
+            </nav>
+        </div>
+    </header>
+    <!-- / header -->
+    <link rel="stylesheet" href="/assets/css/mermaid/mermaid.css">
+<link rel="stylesheet" href="/assets/css/mermaid/mermaid.forest.css">
+<style>
+  .PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+</style>
+
+<section class="collection-head small geopattern" data-pattern-id="SMO 算法超详细解析">
+  <div class="container">
+    <div class="columns">
+      <div class="column three-fourths">
+        <div class="collection-title">
+          <h1 class="collection-header">SMO 算法超详细解析</h1>
+          <div class="collection-info">
+            
+            <span class="meta-info">
+              
+              <span class="octicon octicon-calendar"></span> 
+              <a href="/archive/#year-2019">2019/04/10</a>
+            </span>
+            
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-机器学习"  title="机器学习">机器学习</a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-file-directory"></span>
+              <a href="/categories/#cat-推荐"  title="推荐">推荐</a>
+            </span>
+            
+
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-SMO"> SMO </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-SVM"> SVM </a>
+            </span>
+            
+            <span class="meta-info">
+              <span class="octicon octicon-tag"></span><a href="/tags/#tag-机器学习"> 机器学习 </a>
+            </span>
+            
+            <br />　
+            
+
+            <span >本文为<font color="#10ccbb" style="font-size:18px">「原创」</font>内容，如需转载请注明出处！</span>
+            　　　　　　　　
+            　　　
+            <br/>
+            <span style="margin:20px"> 
+            
+            <!-- 本文共 884 字， -->
+            本文共 8862 字，需
+              
+                60 分钟阅读
+              
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / .banner -->
+<section class="container content">
+  <div class="columns">
+    <div class="column three-fourths" >
+      <article class="article-content markdown-body">
+        <p>　　1996年，John Platt 发布一个称为 SMO（Sequential Minimal Optimization，序列最小优化）的强大算法，用于训练 SVM，该算法的核心思想是将原问题分解成多个小问题分别进行优化求解，即 SMO 算法是为了解决 SVM 中的优化目标函数。</p>
+
+<p>　　本文对于 SMO 算法进行了非常详细的剖析，建议读者对里面的公式推导进行亲自的演算，本文需要 SVM 的相关基础，如果对于 SVM 不熟悉可以参考 <a href="/2019/04/03/ml-svm/">支持向量机通俗导论（理解SVM的三层境界）</a>。</p>
+
+<h3 id="优化目标">优化目标</h3>
+
+<p>SVM 的优化目标函数：</p>
+
+\[\begin{split}
+    \mathop{min}\limits_{\vec{\alpha}} \Psi(\vec{\alpha}) = \begin{cases}
+        \underbrace{ min }_{\alpha}  \frac{1}{2} \sum\limits_{i=1}^{N} \sum\limits_{j=1}^{N} \alpha_i\alpha_jy_iy_jK(x_i,x_j) - \sum\limits_{i=1}^{N}\alpha_i\\
+        s.t. \; \sum\limits_{i=1}^{N}\alpha_iy_i = 0 \\
+        0 \le \alpha_i \le C
+    \end{cases}
+\end{split}\tag{1-1}\]
+
+<p>其中，\(x_i\) 表示样本特征<br />
+　　\(y_i\) 表示样本标签，且 \(y_i \in \{-1,1\}\) <br />
+　　\(\alpha_i\) 为要求解的参数 <br />
+　　\(C\) 为惩罚系数（自己设定）</p>
+
+<h3 id="smo-算法剖析">SMO 算法剖析</h3>
+<p>　　SMO 算法的基本思想是将原问题求解 \((\alpha_1,\alpha_2,...,\alpha_N)\) 这 \(N\) 个参数的问题分解成多个子二次规划的问题分别求解，每个子问题只需要求解其中的 2 个参数，每次通过启发式选择两个变量进行优化，不断循环，直到达到函数的最优值。</p>
+
+<h4 id="选择-alpha_1-alpha_2-为变量">选择 \(\alpha_1\) \(\alpha_2\) 为变量</h4>
+<p>　　将 \(\Psi(\vec{\alpha})\) 中 \(\alpha_1,\alpha_2\) 视作变量，其余的 \(\alpha_i i=3,4,...,N\) 的参数视为常数，则原优化目标函数变换如下：</p>
+
+\[\begin{split}
+\begin{align*}
+    min\Psi(\alpha_1,\alpha_2)  =&amp;\frac{1}{2}K_{11}\alpha_{1}^2y_1^2 + \frac{1}{2}K_{22}\alpha_{2}^2y_2^2 \\
+   &amp; + \frac12K_{12}\alpha_1\alpha_2y_1y_2 + \frac12K_{21}\alpha_2\alpha_1y_2y_1 \\
+   &amp; - (\alpha_1 + \alpha_2)  + y_1v_1\alpha_1 + y_2v_2\alpha_2 + P
+\end{align*}
+\end{split}\tag{2-1}\]
+
+<p>由于，\(y_i^2 = 1\)，\(K_{ij}= K_{ji}\)，化简可得：</p>
+
+\[\begin{split}
+\begin{align*}
+    min\Psi(\alpha_1,\alpha_2) 
+       =&amp;\frac12K_{11}\alpha_1^2 + \frac12K_{22}\alpha_2^2 + K_{12}\alpha_1\alpha_2y_1y_2\\ 
+       &amp;-(\alpha_1 + \alpha_2) + y_1v_1\alpha_1 + y_2v_2\alpha_2 + P
+\end{align*}
+\end{split}\tag{2-2}\]
+
+<p>其中，\(K_{ij}\) 为核函数<br />
+　　\(v_i = \sum\limits_{j=3}^{N} \alpha_jy_jK_{ij} = 0\) <br />
+　　\(P\) 为常数项</p>
+
+<h4 id="用-alpha_2-表示-alpha_1">用 \(\alpha_2\) 表示 \(\alpha_1\)</h4>
+
+<p>由 \(\sum\limits_{i=1}^{N} \alpha_iy_i = 0\) 得：</p>
+
+\[\alpha_1y_1 + \alpha_2y_2 = - \sum\limits_{i=3}^{N} \alpha_iy_i = \zeta \tag{2-3}\]
+
+<p>等式两边同时乘 \(y_1\) 可得：</p>
+
+\[\alpha_1 = (\zeta - y_2\alpha_2)y_1 \tag{2-4}\]
+
+<p>将 (2-4) 代入到 (2-2) 可得：</p>
+
+\[\begin{align*}
+    \Psi(\alpha_2) = &amp;\frac12K_{11}(\zeta - \alpha_2y_2)^2y_1^2 + \frac12K_{22}\alpha_2^2 + K_{12}(\zeta - \alpha_2y_2)\alpha_2y_1^2y_2\\
+                    &amp; -(\zeta - \alpha_2y_2)y_1 - \alpha_2 + v_1(\zeta - \alpha_2y_2)y_1^2 + y_2v_2\alpha_2 + P
+
+\end{align*} \tag{2-5}\]
+
+<p>化简可得：</p>
+
+\[\begin{align*}
+        \Psi(\alpha_2) = &amp; \frac12K_{11}(\zeta - \alpha_2y_2)^2 + \frac12K_{22}\alpha_2^2 + K_{12}(\zeta - \alpha_2y_2)\alpha_2y_2\\
+        &amp; -(\zeta - \alpha_2y_2)y_1 - \alpha_2 + v_1(\zeta - \alpha_2y_2) + y_2v_2\alpha_2 + P
+    \end{align*} \tag{2-6}\]
+
+<h4 id="对-alpha_2-求极值">对 \(\alpha_2\) 求极值</h4>
+<p>由 (2-6) 可知，现在目标函数只是关于 \(\alpha_2\) 的函数，对其求导并令它等于 0</p>
+
+\[\begin{align}
+    \frac{\partial \Psi (\alpha_2)}{\partial \alpha_2}&amp;=(K_{11}+K_{22}-2K_{12})\alpha_2-K_{11}\zeta y_2+K_{12}\zeta y_2\\
+    &amp;\quad+y_1y_2-1-v_1y_2+v_2y_2\\
+    &amp; =0
+\end{align} \tag{2-7}\]
+
+<p>SMO 的思想是一个迭代求解的思想，所以必须构造出 \(\alpha_2^{new}\) 与 \(\alpha_2^{old}\) 之间的关系，由 (2-3) 可知：</p>
+
+\[\alpha_1^{new}y_1 + \alpha_2^{new}y_2 = \alpha_1^{old}y_1 + \alpha_2^{old}y_2 = \zeta \tag{2-8}\]
+
+<p>由</p>
+
+\[\begin{align*}
+    &amp;f(x) =\omega^T x + b  = \sum_{i=1}^{N} \alpha_iy_iK_{ix} + b\\
+    &amp;v_i = \sum\limits_{j=3}^{N}\alpha_jy_jK_{ij} \quad\quad i=1,2
+ \end{align*} \tag{2-9}\]
+
+<p>可得</p>
+
+\[\begin{align*}
+    v_1 = f(x_1) - \sum\limits_{j=1}^{2}\alpha_jy_jK_{1j} - b = f(x) - \alpha_1y_1K_{11} - \alpha_2y_2K_{12} - b \\
+    v_2 = f(x_2) - \sum\limits_{j=1}^{2}\alpha_jy_jK_{2j} - b = f(x) - \alpha_1y_1K_{21} - \alpha_2y_2K_{22} - b 
+\end{align*} \tag{2-10}\]
+
+<p>将等式 (2-7) 中的 \(\zeta\) 替换成 (2-8)，\(v_i\) 替换成 (2-9)，\(\alpha_2\) 表示待求值，为了和 (2-8) 中的 \(\alpha_2^{old}\) 区分则用 \(\alpha_2^{new}\) 表示：</p>
+
+\[\begin{align*}
+    \frac{\partial \Psi (\alpha_2)}{\partial \alpha_2} = &amp;(K_{11} + K_{22} -2K_{12})\alpha_2^{new} - K_{11}(\alpha_1^{old}y_1 + \alpha_2^{old}y_2)y_2\\
+    &amp;+ K_{12}(\alpha_1^{old}y_1 + \alpha_2^{old}y_2)y_2 + y_1y_2 - 1\\
+    &amp;- \left[f(x_1) - \alpha_1^{old}y_1K_{11} - \alpha_2^{old}y_2K_{12} - b\right]y_2 \\
+    &amp;+ \left[f(x_2) - \alpha_1^{old}y_1K_{21} - \alpha_2^{old}y_2K_{22} - b\right]y_2 \\
+    &amp;= 0
+ \end{align*} \tag{2-11}\]
+
+<p>对 (2-11) 进行展开</p>
+
+\[\begin{align*}
+    (k_{11} + K_{22} - 2K_{12})\alpha_2^{new} = &amp; K_{11}\alpha_1^{old}y_1y_2 + K_{11}\alpha_2^{old}y_2^2 - K_{12}\alpha_1^{old}y_1y_2\\
+     &amp; - K_{12}\alpha_2^{old}y_2^2 - y_1y_2 + 1 + f(x_1)y_2 - K_{11}\alpha_1^{old}y_1y_2 \\
+     &amp; - K_{12}\alpha_2^{old}y_2^2 - by_2 - f(x_2)y_2 + K_{12}\alpha_1^{old}y_1y_2 \\
+     &amp; + K_{22}\alpha_2^{old}y_2^2 + by_2
+\end{align*} \tag{2-12}\]
+
+<p>由 \(y_i^2 = 1\) 化简可得</p>
+
+\[\begin{align*}
+    (K_{11}+K_{22}-2K_{12})\alpha_2^{new}=&amp;(K_{11}+K_{22}-2K_{12})\alpha_2^{old}\\
+    &amp; +y_2\left[(f(x_1) - y_1) - (f(x_2) - y_2)\right]
+\end{align*}\tag{2-13}\]
+
+<p>令 \(Ei = f(x_i) - y_i\)，\(\eta = K_{11} + K_{22} - 2K_{12}\)，可得</p>
+
+\[\alpha_2^{new}=\alpha_2^{old}+\frac{y_2(E_1-E_2)}{\eta}
+    \tag{2-14}\]
+
+<p>其中，\(\alpha_2^{new}\) 表示本次迭代的计算值，\(\alpha_2^{old}\) 为上一次的迭代值 <br />
+　　\(E_i = f(x_i) - y_i\) 表示预测值与真实值的差 <br />
+　　\(\eta=K_{11}+K_{22}-2K_{12}\)</p>
+
+<h4 id="alpha_2new-的约束">\(\alpha_2^{new}\) 的约束</h4>
+<p>　　上面通过求导的方式计算出的 \(\alpha_2^{new}\) 是未经过约束的，即计算出来的值可能不满足约定的条件</p>
+
+\[\begin{cases}
+    0 \le \alpha_i \le C \\
+    \alpha_1y_1 + \alpha_2y_2 = \zeta
+\end{cases}\tag{2-15}\]
+
+<p>这两个约束条件可以在二维平面上进行直观的展示</p>
+
+<p><a href="/images/post/ml/smo-alpha-constrains.jpg" data-lightbox="smo"><img src="/images/post/ml/smo-alpha-constrains.jpg" alt="alpha-constrains" /></a></p>
+
+<p>上图横坐标为 \(\alpha_1\)，纵坐标为 \(\alpha_2\)，\(\alpha_2^{new}\) 必须要在方框内和斜线上取值，其最大最小值一定是其交点，所以有 \(L \le \alpha_2^{new} \le H\)</p>
+
+<ol>
+  <li>当 \(y_1 \ne y_2\) 时，\(L = max\left(0,\alpha_2^{old} - \alpha_1^{old}\right)\)；\(H = min\left(C,C+\alpha_2^{old} - \alpha_1^{old}\right)\)</li>
+  <li>当 \(y_1 = y_2\) 时，\(L = max\left(0, \alpha_1^{old} + \alpha_2^{old} - C\right)\)；\(H = min\left(C,\alpha_2^{old} + \alpha_1^{old}\right)\)</li>
+</ol>
+
+<p>所以 \(\alpha_2^{new}\) 的约束如下：</p>
+
+\[\alpha_2^{new} = 
+\begin{cases}
+    H, \alpha_2^{new,unc} &gt; H\\
+    \alpha_2^{new,unc}, L \le \alpha_2^{new,unc} \le H \\
+    L, \alpha_2^{new,unc} &lt; L
+\end{cases} \tag{2-16}\]
+
+<p>其中，\(\alpha_2^{new,unc}\) 表示 \(\alpha_2^{new}\) 未经约束的结果（上述通过求导的结果）</p>
+
+<h4 id="求解-alpha_1new">求解 \(\alpha_1^{new}\)</h4>
+
+<p>由公式 (2-8) 可知</p>
+
+\[\alpha_1^{new} = \alpha_1^{old} + y_1y_2(\alpha_2^{old} - \alpha_2^{new}) \tag{2-17}\]
+
+<p>　　至此，通过公式 (2-14)，(2-16)，(2-17) 可以接出 \(\alpha_1^{new}\) 和 \(\alpha_2^{new}\)，SMO 算法的核心逻辑已介绍完毕，后面将介绍如何选取变量 \(\alpha_1\) 和 \(\alpha_2\) 以及对 SVM 优化目标中的 \(b\) 求值。</p>
+
+<h3 id="smo-变量选取">SMO 变量选取</h3>
+
+<h4 id="第一个变量选择">第一个变量选择</h4>
+<p>　　第一个变量的选择称为外循环，首先遍历整个样本然后选择违反 KKT 条件的 \(\alpha_i\) 作为第一个变量，其 KKT 条件如下：</p>
+
+\[\begin{aligned}
+     \alpha_{i}=0 &amp; \Rightarrow y_i\left(w^{T} x_i+b\right) \geq 1 \\ 
+     \alpha_{i}=C &amp; \Rightarrow y_i\left(w^{T} x_i+b\right) \leq 1 \\ 
+     0&lt;\alpha_{i}&lt;C &amp; \Rightarrow y_i\left(w^{T} x_i+b\right)=1 
+    \end{aligned}\]
+
+<blockquote>
+  <p>一般而言，首选选择违反 \(0&lt;\alpha_{i}&lt;C  \Rightarrow y_i\left(w^{T} x_i+b\right)=1\) 这个条件点</p>
+</blockquote>
+
+<blockquote>
+  <p>如果支持向量都满足 KKT 条件，再选择 \(\alpha_{i}=0  \Rightarrow y_i\left(w^{T} x_i+b\right) \geq 1\) 和 \(\alpha_{i}=C \Rightarrow y_i\left(w^{T} x_i+b\right) \leq 1\) 这两个条件点</p>
+</blockquote>
+
+<h4 id="第二个变量选择">第二个变量选择</h4>
+<p>　　第二个变量选择的过程为内循环，选择 \(|E_1 - E_2|\) 取得最大值的 \(\alpha_2\)</p>
+<blockquote>
+  <p>如果内循环中找不到点能够使目标函数有足够的下降，则可遍历支持向量来做 \(\alpha_2\)</p>
+</blockquote>
+
+<blockquote>
+  <p>如果所有支持向量均不能使得目标函数有足够的下降，则跳出循环，重新选择 \(\alpha_1\)</p>
+</blockquote>
+
+<h3 id="smo-阈值-b-的计算">SMO 阈值 \(b\) 的计算</h3>
+
+<p><strong>1.　若 \(0 &lt; \alpha_1^{new} &lt; C\)，则</strong></p>
+
+<p>由 \(y_1 = \left(\omega^Tx_1 + b\right) = \sum_{i=1}^{N} K_{i1}\alpha_iy_i + b\) 得：</p>
+
+\[b_1^{new} = y_1 - \sum\limits_{i=3}^{N}K_{i1}\alpha_iy_i - K_{11}\alpha_1^{new}y_1  - K_{21}\alpha_2^{new}y_2\tag{4-1}\]
+
+<p>而</p>
+
+\[\begin{align*}
+    y_1 - \sum\limits_{i=3}^{N}K_{i1}\alpha_iy_i  &amp;= y_1 - f(x_1) + K_{11}\alpha_1^{old}y_1 + K_{21}\alpha_2^{old}y_2 + b^{old} 
+\end{align*}\tag{4-2}\]
+
+<p>将 (4-2) 代入到 (4-1) 得：</p>
+
+\[\begin{align*}
+    b_1^{new} = &amp; y_1 - f(x_1) + K_{11}\alpha_1^{old}y_1 + K_{21}\alpha_2^{old}y_2 + b^{old} \\
+    &amp;- \alpha_1^{new}y_1K_{11} - \alpha_2^{new}y_2K_{21}        
+\end{align*}\tag{4-3}\]
+
+<p>由 \(E_i = f(x_i) - y_i\) 化简可得：</p>
+
+\[\begin{align*}
+   b^{new} =  b_{1}^{new}=-E_{1}-y_{1} K_{11}\left(\alpha_{1}^{new}-\alpha_{1}^{old}\right)-y_{2} K_{21}\left(\alpha_{2}^{new}-\alpha_{2}^{old}\right)+b^{old}
+\end{align*}\tag{4-4}\]
+
+<p><strong>2.　若 \(0 &lt; \alpha_2^{new} &lt; C\)，则</strong></p>
+
+\[b^{new} =  b_{2}^{new}=-E_{2}-y_{1} K_{12}\left(\alpha_{1}^{new}-\alpha_{1}^{old}\right)-y_{2} K_{22}\left(\alpha_{2}^{new}-\alpha_{2}^{old}\right)+b^{old}\tag{4-5}\]
+
+<p><strong>3.　若同时满足 \(0 &lt; \alpha_i^{new} &lt; C\)，则</strong></p>
+
+\[b^{new} = b_1^{new} = b_2^{new}\tag{4-6}\]
+
+<p><strong>4.　若同时不满足 \(0 &lt; \alpha_i^{new} &lt; C\)，则</strong></p>
+
+\[b^{new} = \frac{b_1^{new}  + b_2^{new}}{2} \tag{4-7}\]
+
+<p>关于上述取值分析可参考：<a href="https://ask.julyedu.com/question/696">SMO算法在更新参数b过程中的疑问</a></p>
+
+<p>至此，SMO 算法剖析完毕。</p>
+
+<h3 id="总结">总结</h3>
+<p>　　输入是 N 个样本 \((x_1,y_1),(x_2,y_2),...,(x_n,y_n)\)，其中 \(x_i\) 为输入特征，\(y_i\) 为样本分类（只能取 \(1\) 或者 \(-1\)），输出是近似解 \(\alpha\)</p>
+<blockquote>
+  <p>注：\(\alpha_i\) 并不是只能取 \(1\) 或 \(-1\)</p>
+</blockquote>
+
+<p>求解步骤：</p>
+
+<ol>
+  <li>取初值 \(\alpha = 0,t=0\)</li>
+  <li>选择变量 \(\alpha_1^t\) 和 \(\alpha_2^t\)，根据公式求解出 \(\alpha_2^{t+1}\)</li>
+  <li>利用 \(\alpha_1^{t+1}\) 和 \(\alpha_1^t,\alpha_2^t,\alpha_2^{t+1}\) 的关系求解出 \(\alpha_1^{t+1}\)</li>
+  <li>通过 \(\alpha_1^{t+1}\) 和 \(\alpha_2^{t+1}\) 的满足的 KKT 条件关系求出 \(b^{t+1}\)</li>
+  <li>检查 \(E_i\) 是否在允许的精度 \(e\) 之内</li>
+  <li>检查求出的 \(\alpha_1^{t+1}\) 和  \(\alpha_2^{t+1}\) 是否满足 KKT 条件</li>
+  <li>如果上面两个条件都满足则返回 \(\alpha_1^{t+1}\) 和 \(\alpha_2^{t+1}\)，否则跳转到第 2 步</li>
+</ol>
+
+<p>　　SMO 算法可以实现对 SVM 的目标函数的快速优化，其推导过程是十分复杂的，所以需要有耐心将它一一进行剖析，但是 SMO 的求解步骤是十分清晰的，下一步将通过代码实现 SMO 算法。</p>
+
+
+      </article>
+      <div class="PageNavigation">
+        
+          <a class="prev" href="/2019/04/06/lagrange-kkt/"><span style="color:black">上一篇：</span> 真正理解拉格朗日乘子法和 KKT 条件</a>
+        
+        
+          <a class="next" href="/2019/04/12/ml-smo-py/"><span style="color:black">下一篇：</span>SMO 算法的代码实现 </a>
+         
+      </div>
+      <div class="share">
+        <div class="share-component"></div>
+      </div>
+      <div class="comment">
+         
+    <div class="comment markdown-body"></div>
+    <!--载入js，在</body>之前插入即可-->
+    <!--Leancloud 操作库:-->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <!--Valine 的核心代码库-->
+    <script src="/assets/js/valine.min.js"></script>
+    <script>
+        new Valine({
+            // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+            av: AV, 
+            el: '.comment',
+            app_id: '5Vp12Dnkf6n73MefHqK09vjG-gzGzoHsz', // 这里填写上面得到的APP ID
+            app_key: 'J6cCta4STGVS5TusVex4XUq8', // 这里填写上面得到的APP KEY
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!', // 留言框占位提示文字
+            smiles_url:'/assets/images/smiles',
+            avatar_url:'/assets/avatar/',
+            avatar_count: 20
+        });
+    </script>
+
+<!-- Changyan Comment END -->
+
+      </div>
+
+    </div>
+    <div class="column one-fourth">
+      
+<h3>搜索</h3>
+
+	<div id="site_search" style="display:inline-flex">
+		<input     name="word"  size="30" type="text" id="search_box" placeholder="搜索">
+		<span><button  type="button" class="btn btn-default" id="site_search_do">
+			<span class="octicon octicon-search"></span></button>
+		</div>
+		<ul id="search_results"></ul>
+
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/modules/sidebar-search.css">
+		<script src="/assets/js/lunr.min.js"></script>
+		<script src="/assets/js/search.js"></script>
+
+
+      
+<h3>文章目录</h3>
+<div id="post-directory-module" class="mobile-hidden">
+  <section class="post-directory">
+  <!-- Links that trigger the jumping -->
+  <!-- Added by javascript below -->
+  <dl></dl>
+  </section>
+</div>
+
+<script src="/assets/js/jquery.toc.js"></script>
+
+    </div>
+  </div>
+</section>
+
+<!-- /section.content -->
+
+<script>
+(function(blog,$){
+  blog.encodeHylinks($(".post-cat-hylink"));
+
+  var hylink = $(".markdown-body").find("a");
+  $.each(hylink,function(i,v){
+    $(v).attr("target","_blank");
+  })
+
+}(blog,$))
+</script>
+
+
+<script>
+    $(function(){
+         window.onSearchLoad(function(){
+            $(".example").each(function(){
+                var search= $(this).attr("search");
+                var results = window.idx.search(search); 
+                $(this).append("<ul></ul>");
+                var $ul = $(this).children("ul");
+                window.data.then(function(loaded_data) {
+                    results.forEach(function(result) {
+                        var item = loaded_data[result.ref];
+                        //忽略对本文的索引
+                        if(window.location.href.indexOf(item.url) == -1){
+                          var appendString = '<li><a target="_blank" href="' + item.url + '">' + item.title + '</a></li>';
+                          $ul.append(appendString);
+                        }
+                    });
+                });
+            });
+        })
+    });
+</script>
+
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+            © 2016
+            <span title="ychost">ychost</span>
+
+            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                
+                <span id="busuanzi_container_site_pv"> 您是本站第
+                    <span id="busuanzi_value_site_uv"></span> 位访问者，本页第 <span id="busuanzi_value_page_pv"></span>
+                    次点击</span>
+                
+                <a href="javascript:window.scrollTo(0,0)">TOP</a>
+            </li>
+        </ul>
+        <a href="https://github.com/ychost/ychost.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+
+        </a>
+        <ul class="site-footer-links mobile-hidden">
+            
+            <li>
+                <a href="/" title="首页"
+                    target="">首页</a>
+            </li>
+            
+            <li>
+                <a href="/categories/" title="分类"
+                    target="">分类</a>
+            </li>
+            
+            <li>
+                <a href="/archive/" title="归档"
+                    target="">归档</a>
+            </li>
+            
+            <li>
+                <a href="/tags/" title="标签"
+                    target="">标签</a>
+            </li>
+            
+            <li>
+                <a href="/about/" title="关于"
+                    target="">关于</a>
+            </li>
+            
+            <li>
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--  just for baidu SEO -->
+    
+</footer>
+<!-- show the onelineTotal in remote -->
+
+<script src="/assets/js/jqcloud.min.js"></script>
+<script src="/assets/js/lightbox.min.js"></script>
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+<script src="/assets/js/geopattern.js"></script>
+<script src="/assets/js/prism.js"></script>
+<link rel="stylesheet" href="/assets/css/globals/prism.css">
+
+<script src="/assets/js/custom/blog.js"></script>
+<script src="/assets/js/custom/blog-cats-data.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+    jQuery(document).ready(function ($) {
+        $('.geopattern').each(function () {
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+<!--    baidu  analytics-->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?a908f0985fa9991b706a3f4a299bb47b";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</body>
+
+</html>
