@@ -52,34 +52,6 @@
 
 
 
- "cate1":{
-  "posts":[
-  
-        "title": "template page",
-        "url":  "/2021/03/16/zeus-lib/",
-        "date":"2021/03/16"
-  }
-  
-  ]
-}
-,
-
-
-
- "cate2":{
-  "posts":[
-  
-        "title": "template page",
-        "url":  "/2021/03/16/zeus-lib/",
-        "date":"2021/03/16"
-  }
-  
-  ]
-}
-,
-
-
-
  "刷题":{
   "posts":[
   
@@ -246,11 +218,6 @@
 
  "后端":{
   "posts":[
-  
-        "title": "Java SPI 插件机制",
-        "url":  "/2020/12/02/java-spi/",
-        "date":"2020/12/02"
-  },
   
         "title": "Java Lambda 序列化",
         "url":  "/2020/11/17/lambda-serialize/",

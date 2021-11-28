@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://blog.sudoyc.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://blog.sudoyc.com/" rel="alternate" type="text/html" /><updated>2021-11-27T12:13:01+08:00</updated><id>http://blog.sudoyc.com/feed.xml</id><title type="html">夏天</title><subtitle>夏天的个人博客</subtitle><author><name>ychost</name></author><entry><title type="html">Zeus</title><link href="http://blog.sudoyc.com/2021/03/27/zeus/" rel="alternate" type="text/html" title="Zeus" /><published>2021-03-27T00:00:00+08:00</published><updated>2021-03-27T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2021/03/27/zeus</id><content type="html" xml:base="http://blog.sudoyc.com/2021/03/27/zeus/">&lt;p&gt;/**
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://blog.sudoyc.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://blog.sudoyc.com/" rel="alternate" type="text/html" /><updated>2021-11-28T17:24:50+08:00</updated><id>http://blog.sudoyc.com/feed.xml</id><title type="html">夏天</title><subtitle>夏天的个人博客</subtitle><author><name>ychost</name></author><entry><title type="html">Zeus</title><link href="http://blog.sudoyc.com/2021/03/27/zeus/" rel="alternate" type="text/html" title="Zeus" /><published>2021-03-27T00:00:00+08:00</published><updated>2021-03-27T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2021/03/27/zeus</id><content type="html" xml:base="http://blog.sudoyc.com/2021/03/27/zeus/">&lt;p&gt;/**
      * 是否包含某个方法，可注入 checker 判断重载
      */
     public boolean containMethod(JCClassDecl jcClassDecl, String method, Function&amp;lt;JCMethodDecl, Boolean&amp;gt; checker) {
@@ -10,8 +10,7 @@
             }
         }
         return false;
-    }&lt;/p&gt;</content><author><name>ychost</name></author><summary type="html">/** * 是否包含某个方法，可注入 checker 判断重载 */ public boolean containMethod(JCClassDecl jcClassDecl, String method, Function&amp;lt;JCMethodDecl, Boolean&amp;gt; checker) { for (JCTree def : jcClassDecl.defs) { if (def instanceof JCMethodDecl &amp;amp;&amp;amp; method.equals(((JCMethodDecl)def).name.toString())) { if (checker != null &amp;amp;&amp;amp; Boolean.TRUE.equals(checker.apply((JCMethodDecl)def))) { return true; } } } return false; }</summary></entry><entry><title type="html">template page</title><link href="http://blog.sudoyc.com/2021/03/16/zeus-lib/" rel="alternate" type="text/html" title="template page" /><published>2021-03-16T00:00:00+08:00</published><updated>2021-03-16T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2021/03/16/zeus-lib</id><content type="html" xml:base="http://blog.sudoyc.com/2021/03/16/zeus-lib/">&lt;p&gt;Content here
-「」&lt;/p&gt;</content><author><name>ychost</name></author><category term="cate1" /><category term="cate2" /><category term="tag1" /><category term="tag2" /><summary type="html">主页梗概</summary></entry><entry><title type="html">Java Compile Annotation</title><link href="http://blog.sudoyc.com/2020/12/05/java-compile-annotation/" rel="alternate" type="text/html" title="Java Compile Annotation" /><published>2020-12-05T00:00:00+08:00</published><updated>2020-12-05T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2020/12/05/java-compile-annotation</id><content type="html" xml:base="http://blog.sudoyc.com/2020/12/05/java-compile-annotation/"></content><author><name>ychost</name></author><summary type="html"></summary></entry><entry><title type="html">Java SPI 插件机制</title><link href="http://blog.sudoyc.com/2020/12/02/java-spi/" rel="alternate" type="text/html" title="Java SPI 插件机制" /><published>2020-12-02T00:00:00+08:00</published><updated>2020-12-02T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2020/12/02/java-spi</id><content type="html" xml:base="http://blog.sudoyc.com/2020/12/02/java-spi/">&lt;p&gt;hello, world&lt;/p&gt;</content><author><name>ychost</name></author><category term="后端" /><category term="Java" /><category term="SPI" /><category term="Plugin" /><summary type="html">SPI全称Service Provider Interface，是Java提供的一套用来被第三方实现或者扩展的API，它可以用来启用框架扩展和替换组件</summary></entry><entry><title type="html">Java Lambda 序列化</title><link href="http://blog.sudoyc.com/2020/11/17/lambda-serialize/" rel="alternate" type="text/html" title="Java Lambda 序列化" /><published>2020-11-17T00:00:00+08:00</published><updated>2020-11-17T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2020/11/17/lambda-serialize</id><content type="html" xml:base="http://blog.sudoyc.com/2020/11/17/lambda-serialize/">&lt;p&gt;Lambda 是 Java8 引进的一项新的能力，日常主要是结合 stream 一起使用，Lambda 也是可以像普通的对象一样进行序列化/反序列化的，就可以像普通对象一样先序列化成字节码然后进行存储或者传输，待需要的时候再将字节码进行反序列化，这样就实现了将一个方法进行了本地存储和传输，通过该方式可以进一步实现类似 Groovy 动态脚本一样的功能&lt;/p&gt;
+    }&lt;/p&gt;</content><author><name>ychost</name></author><summary type="html">/** * 是否包含某个方法，可注入 checker 判断重载 */ public boolean containMethod(JCClassDecl jcClassDecl, String method, Function&amp;lt;JCMethodDecl, Boolean&amp;gt; checker) { for (JCTree def : jcClassDecl.defs) { if (def instanceof JCMethodDecl &amp;amp;&amp;amp; method.equals(((JCMethodDecl)def).name.toString())) { if (checker != null &amp;amp;&amp;amp; Boolean.TRUE.equals(checker.apply((JCMethodDecl)def))) { return true; } } } return false; }</summary></entry><entry><title type="html">Java Lambda 序列化</title><link href="http://blog.sudoyc.com/2020/11/17/lambda-serialize/" rel="alternate" type="text/html" title="Java Lambda 序列化" /><published>2020-11-17T00:00:00+08:00</published><updated>2020-11-17T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2020/11/17/lambda-serialize</id><content type="html" xml:base="http://blog.sudoyc.com/2020/11/17/lambda-serialize/">&lt;p&gt;Lambda 是 Java8 引进的一项新的能力，日常主要是结合 stream 一起使用，Lambda 也是可以像普通的对象一样进行序列化/反序列化的，就可以像普通对象一样先序列化成字节码然后进行存储或者传输，待需要的时候再将字节码进行反序列化，这样就实现了将一个方法进行了本地存储和传输，通过该方式可以进一步实现类似 Groovy 动态脚本一样的功能&lt;/p&gt;
 
 &lt;h2 id=&quot;序列化&quot;&gt;序列化&lt;/h2&gt;
 &lt;p&gt;Lambda 的序列化和普通对象的序列化一样，主要使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ObjectOutputStream/ObjectInputStream&lt;/code&gt;&lt;/p&gt;
@@ -1245,4 +1244,384 @@ h_2(x)=0
 
 &lt;p&gt;    强对偶性质非常好，但是要求也很苛刻，比 KKT 条件要苛刻。如果问题满足强对偶一定也满足 KKT 条件，反之不一定。对于这类优化问题，KKT 条件、强对偶、规范性条件之间的关系是：&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;/images/post/ml/kkt-rc-relation.png&quot; data-lightbox=&quot;kkt&quot;&gt;&lt;img src=&quot;/images/post/ml/kkt-rc-relation.png&quot; alt=&quot;kkt-rc-relation&quot; /&gt;&lt;/a&gt;&lt;/p&gt;</content><author><name>ychost</name></author><category term="机器学习" /><category term="机器学习" /><category term="KKT" /><category term="拉格朗日乘子法" /><summary type="html">KKT 条件是解决最优化问题的时用到的一种方法。最优化问题通常是指对于给定的某一函数，求其在指定作用域上的全局最小值。</summary></entry><entry><title type="html">支持向量机通俗导论（理解SVM的三层境界）</title><link href="http://blog.sudoyc.com/2019/04/03/ml-svm/" rel="alternate" type="text/html" title="支持向量机通俗导论（理解SVM的三层境界）" /><published>2019-04-03T00:00:00+08:00</published><updated>2019-04-03T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2019/04/03/ml-svm</id><content type="html" xml:base="http://blog.sudoyc.com/2019/04/03/ml-svm/"></content><author><name>ychost</name></author><category term="机器学习" /><category term="推荐" /><category term="机器学习" /><category term="SVM" /><summary type="html">支持向量机，因其英文名为support vector machine，故一般简称SVM，通俗来讲，它是一种二类分类模型，其基本模型定义为特征空间上的间隔最大的线性分类器，其学习策略便是间隔最大化，最终可转化为一个凸二次规划问题的求解。</summary></entry></feed>
+&lt;p&gt;&lt;a href=&quot;/images/post/ml/kkt-rc-relation.png&quot; data-lightbox=&quot;kkt&quot;&gt;&lt;img src=&quot;/images/post/ml/kkt-rc-relation.png&quot; alt=&quot;kkt-rc-relation&quot; /&gt;&lt;/a&gt;&lt;/p&gt;</content><author><name>ychost</name></author><category term="机器学习" /><category term="机器学习" /><category term="KKT" /><category term="拉格朗日乘子法" /><summary type="html">KKT 条件是解决最优化问题的时用到的一种方法。最优化问题通常是指对于给定的某一函数，求其在指定作用域上的全局最小值。</summary></entry><entry><title type="html">支持向量机通俗导论（理解SVM的三层境界）</title><link href="http://blog.sudoyc.com/2019/04/03/ml-svm/" rel="alternate" type="text/html" title="支持向量机通俗导论（理解SVM的三层境界）" /><published>2019-04-03T00:00:00+08:00</published><updated>2019-04-03T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2019/04/03/ml-svm</id><content type="html" xml:base="http://blog.sudoyc.com/2019/04/03/ml-svm/"></content><author><name>ychost</name></author><category term="机器学习" /><category term="推荐" /><category term="机器学习" /><category term="SVM" /><summary type="html">支持向量机，因其英文名为support vector machine，故一般简称SVM，通俗来讲，它是一种二类分类模型，其基本模型定义为特征空间上的间隔最大的线性分类器，其学习策略便是间隔最大化，最终可转化为一个凸二次规划问题的求解。</summary></entry><entry><title type="html">机器学习-决策树-ID3</title><link href="http://blog.sudoyc.com/2019/03/28/ml-decision-tree-id3/" rel="alternate" type="text/html" title="机器学习-决策树-ID3" /><published>2019-03-28T00:00:00+08:00</published><updated>2019-03-28T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2019/03/28/ml-decision-tree-id3</id><content type="html" xml:base="http://blog.sudoyc.com/2019/03/28/ml-decision-tree-id3/">&lt;p&gt;　　决策树(Decision Tree）是在已知各种情况发生概率的基础上，通过构成决策树来求取净现值的期望值大于等于零的概率，评价项目风险，判断其可行性的决策分析方法，是直观运用概率分析的一种图解法。由于这种决策分支画成图形很像一棵树的枝干，故称决策树。在机器学习中，决策树是一个预测模型，他代表的是对象属性与对象值之间的一种映射关系。Entropy = 系统的凌乱程度，使用算法ID3, C4.5和C5.0生成树算法使用熵。这一度量是基于信息学理论中熵的概念。&lt;/p&gt;
+
+&lt;p&gt;　　决策树最经典的算法包括：ID3、C4.5以及CART算法，ID3与C4.5算法相似，C4.5在特征选择时选用的信息准则是信息增益比，而ID3用的是信息增益；因为信息增益偏向于选择具有较多可能取值的特征（例如，某一特征具有5个可能取值，其信息增益会比具有2个特征取值的信息增益大）。&lt;/p&gt;
+
+&lt;h3 id=&quot;准备&quot;&gt;准备&lt;/h3&gt;
+
+&lt;h4 id=&quot;信息熵&quot;&gt;信息熵&lt;/h4&gt;
+
+&lt;p&gt;　　熵表示随机变量的不确定性，熵值越大表示随机变量含有的信息越少，变量的不确定性越大。&lt;/p&gt;
+
+&lt;p&gt;　　熵也是一个物理量和质量、温度、速度一样都是可以测定的，物理量的测定是需要参考物的，比如当测某个物体的质量时只需要计算该物体的重量为参考物的多少倍即可，比如参考物是 1KG，该物体的重量是它的 3 倍，那么该物体的质量为 3KG。&lt;/p&gt;
+
+&lt;p&gt;　　熵的测定也是一样的，不过熵表示不确定性那么选择的参考物为抛 1 个硬币（熵为 1）这种只有 2 种情况的不确定性，但是测量熵不是通过乘法来做的而是通过指数测量的，比如抛 3 个硬币（熵为 3）的情况不是 6 种而是 \(2^3 = 8\) 种，它的熵为 \(log_2{8} = 3\)，再比如某个选择题的答案为 A B C D 中的一个，那么该题的熵为 \(log_2{4} = 2\)。即熵的一般公式为：&lt;/p&gt;
+
+\[log_2{m}\]
+
+&lt;blockquote&gt;
+  &lt;p&gt;注：m 表示事件的不确定个数&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;　　当事件为非等概率的时候，其每个事件的不确定个数为概率的倒数&lt;/p&gt;
+
+\[l(x_i) = log_2{\frac{1}{p(x_i)}} = - log_2{p(x_i)}\]
+
+&lt;blockquote&gt;
+  &lt;p&gt;注：这里的 \(\frac{1}{p(x_i)}\) 表示 \(x_i\) 的不确定个数&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;所以，样本集合的熵的计算公式如下：&lt;/p&gt;
+
+\[H = - \sum_{i=1}^{n}{p(x_i)log_2{p(x_i)}}\]
+
+&lt;p&gt;\(p(x_i)\) 表示 \(x_i\) 在总样本中的概率，熵的单位是 bit(比特)&lt;/p&gt;
+
+&lt;p&gt;关于熵解释还可以参考知乎 &lt;a href=&quot;https://www.zhihu.com/question/22178202/answer/49929786&quot;&gt;信息熵是什么？&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;信息增益&quot;&gt;信息增益&lt;/h4&gt;
+&lt;p&gt;　　信息增益在决策树算法中是用来选择特征的指标，信息增益越大，则这个特征的选择性越好，在概率中定义为：待分类的集合的熵和选定某个特征的条件熵之差（这里只的是经验熵或经验条件熵，由于真正的熵并不知道，是根据样本计算出来的），公式如下：&lt;/p&gt;
+
+\[IG(X|Y) = H(Y) - H(Y|X)\]
+
+&lt;p&gt;信息增益就是 （含所有特征的熵 — 缺少某特征的熵）&lt;/p&gt;
+
+&lt;h4 id=&quot;决策树&quot;&gt;决策树&lt;/h4&gt;
+&lt;p&gt;　　决策树的结构是一个树状的，每一节点都是一个决策点，通过做不同的决策可以将样本分到最终叶子点的不同分类里面去，比如下图所示的一个要不要去约会的决策判断&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/ml/decision-tree.png&quot; data-lightbox=&quot;decision-tree&quot;&gt;&lt;img src=&quot;/images/post/ml/decision-tree.png&quot; alt=&quot;decision-tree&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;id3-实现&quot;&gt;ID3 实现&lt;/h4&gt;
+
+&lt;h4 id=&quot;计算信息熵&quot;&gt;计算信息熵&lt;/h4&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;calcEntropy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    :param dataSet: 样本集合，最后一列为分类数据
+    :return: 分类数据的信息熵
+    &quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;labelsCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# 分类标签
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;label&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;labelsCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labelsCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;entroy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labelsCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# 计算熵
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;labelsCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;entroy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;entroy&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;划分数据集&quot;&gt;划分数据集&lt;/h4&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;splitDataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    删除样本的指定列
+    :param dataSet: 输入样本
+    :param index: 列序号
+    :param value: 样本中的列特征值等于 value 才有效
+    :return: 取出样本中指定列特征等于 value 的所有样本，且删除掉指定的列
+    &quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;feats&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;feats&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;feat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;feats&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;feat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;feats&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:])&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;feat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;选择最好的划分方式&quot;&gt;选择最好的划分方式&lt;/h4&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;chooseBestFeat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+        选择合适的特征列作为样本的划分标准，该特征为区分样本的最好的特征
+        :param dataSet: 样本集合
+        :return: 特征列序号
+        &quot;&quot;&quot;&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# 最后一列为分类信息，不是特征
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;featuresCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# 整体的信息熵
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;entropy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calcEntropy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;bestInfoGain&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;bestFeature&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;featuresCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;# 样本的某一列
+&lt;/span&gt;            &lt;span class=&quot;n&quot;&gt;featVals&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;# 过滤掉重复值
+&lt;/span&gt;            &lt;span class=&quot;n&quot;&gt;uniquVals&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;featVals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;subEntropy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;uniquVals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;# 切分样本
+&lt;/span&gt;                &lt;span class=&quot;n&quot;&gt;subDataSet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;splitDataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;# 计算切分后的信息熵
+&lt;/span&gt;                &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subDataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;subEntropy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calcEntropy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subDataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;# 整体的信息熵 - 子样本的信息熵
+&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;# 差值越大说明信息增益越大
+&lt;/span&gt;            &lt;span class=&quot;n&quot;&gt;infoGain&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;entropy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subEntropy&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;infoGain&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bestInfoGain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;bestInfoGain&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;infoGain&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;bestFeature&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bestFeature&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;简单的决策树&quot;&gt;简单的决策树&lt;/h4&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;classify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inputTree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;featLabels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;testVec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+        一个简单的决策树抉择
+        :param inputTree: 决策树的结构，该结构为手动实现，通过上述的划分特征来获取各个决策点
+        :param featLabels: 每个特征的名字
+        :param testVec: 测试样本
+        :return: 测试样本所属的分类
+        &quot;&quot;&quot;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inputTree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inputTree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# 当前测试的特征
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;featIndex&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;featLabels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;classLabel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;# 抉择分类
+&lt;/span&gt;            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;testVec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;featIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;# 决策点
+&lt;/span&gt;                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;dict&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;classLabel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;classify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;featLabels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;testVec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;# 终结点
+&lt;/span&gt;                &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;classLabel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;classLabel&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;总结&quot;&gt;总结&lt;/h3&gt;
+&lt;p&gt;　　决策树分类就是一个带有终止块的流程图，终止块代表了分类结果。处理数据时根据信息增益来找到最好的划分数据的方式，直到将所有同一类数据划分到一起为止，然后可以通过递归的方式来判断出测试数据所属的分类。&lt;/p&gt;</content><author><name>ychost</name></author><category term="机器学习" /><category term="机器学习" /><category term="决策树" /><category term="ID3" /><summary type="html">决策树(Decision Tree）是在已知各种情况发生概率的基础上，通过构成决策树来求取净现值的期望值大于等于零的概率，评价项目风险，判断其可行性的决策分析方法，是直观运用概率分析的一种图解法。由于这种决策分支画成图形很像一棵树的枝干，故称决策树。</summary></entry><entry><title type="html">机器学习-kNN算法</title><link href="http://blog.sudoyc.com/2019/03/27/ml-knn/" rel="alternate" type="text/html" title="机器学习-kNN算法" /><published>2019-03-27T00:00:00+08:00</published><updated>2019-03-27T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2019/03/27/ml-knn</id><content type="html" xml:base="http://blog.sudoyc.com/2019/03/27/ml-knn/">&lt;p&gt;　　邻近算法，或者说K最近邻(kNN，k-NearestNeighbor)分类算法是数据挖掘分类技术中最简单的方法之一。所谓K最近邻，就是k个最近的邻居的意思，说的是每个样本都可以用它最接近的k个邻居来代表。kNN 算法是一个分类算法，通过判断待测试样本与训练样本的距离来确定测试样本的类别。&lt;/p&gt;
+
+&lt;h3 id=&quot;准备&quot;&gt;准备&lt;/h3&gt;
+&lt;p&gt;本文的样例和代码均来自于《机器学习实战》&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://pan.baidu.com/s/1Gc7BDmNyBfGQlfVvhzyZFw&quot;&gt;https://pan.baidu.com/s/1Gc7BDmNyBfGQlfVvhzyZFw&lt;/a&gt; 提取码：ywuh&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;给定样本&quot;&gt;给定样本&lt;/h4&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;序号&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;特征1&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;特征2&lt;/th&gt;
+      &lt;th&gt;特征3&lt;/th&gt;
+      &lt;th&gt;分类&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0.8&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;400&lt;/td&gt;
+      &lt;td&gt;0.5&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;12&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;134000&lt;/td&gt;
+      &lt;td&gt;0.9&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;20000&lt;/td&gt;
+      &lt;td&gt;1.1&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;67&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;32000&lt;/td&gt;
+      &lt;td&gt;0.1&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;欧氏距离&quot;&gt;欧氏距离&lt;/h4&gt;
+&lt;p&gt;\(N\) 维欧氏空间中两点 \((x_1,x_2)\)  两点的距离公式&lt;/p&gt;
+
+\[\sqrt{\sum_{i=1}^{N}({x_1 - x_2})^2}\]
+
+&lt;p&gt;当 \(N=2\) 时，欧式距离即为标准差：&lt;/p&gt;
+
+\[\sqrt{({x_1 - x_2})^2}\]
+
+&lt;p&gt;比如 样本3 和 样本4 之间的欧氏距离：&lt;/p&gt;
+
+\[\sqrt{(0 - 67)^2 + (20000 - 32000)^2 +(1.1 - 0.1)^2}\]
+
+&lt;h4 id=&quot;数据归一化&quot;&gt;数据归一化&lt;/h4&gt;
+&lt;p&gt;由于样本的某些特征值数据范围过大（比如示例中的特征2）其对欧式距离的影响将会特别大，所以要将其归一化，数据归一的化的原理是将样本中的所有特征值的数据都变成 \([0,1]\) 范围内的数据，即&lt;/p&gt;
+
+\[\acute{x_i} = \frac{x_i - min_i}{max_i - min_i}\]
+
+&lt;p&gt;其中 \(x_i\) 为样本 \(x\) 的第 \(i\) 个特征值，\(min_i\) 为所有样本中第 \(i\) 个特征值中的最小值，\(max_i\) 为样本中第 \(i\) 个特征值的最大值&lt;/p&gt;
+
+&lt;h3 id=&quot;算法思想&quot;&gt;算法思想&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;将特征数据归一化&lt;/li&gt;
+  &lt;li&gt;计算测试数据与训练的每一个样本数据的距离&lt;/li&gt;
+  &lt;li&gt;将距离有小到大排序取出前 k 个对应的样本数据&lt;/li&gt;
+  &lt;li&gt;统计这 k 个样本里面频率最高的分类信息，该分类就是测试数据的分类&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;算法实现&quot;&gt;算法实现&lt;/h3&gt;
+
+&lt;h4 id=&quot;数据归一化-1&quot;&gt;数据归一化&lt;/h4&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;autoNorm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;minVals&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;maxVals&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ranges&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;maxVals&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;minVals&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;normSet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;normSet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;minVals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;normSet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;normSet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ranges&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;normSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ranges&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;minVals&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;knn-实现&quot;&gt;kNN 实现&lt;/h4&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;c1&quot;&gt;# intX 为待测试的样本
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# dataSet 是归一化之后的数据
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# labels 为 dataSet 每一行的分类信息
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# k 要取得小距离样本的个数
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;classify0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intX&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# 行数量
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# 样本 intX，重复 size 行 形成一个与 dataSet 维数一样的矩阵，然后做差
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;diffMat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intX&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dataSet&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# 每个差值取平方
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;sqDiffMat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diffMat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# aixs=1 表明对差方矩阵的行求和
+&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# 一行数据变成 1 个，相当于算出输入样本和训练样本每行的距离
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;sqDistance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqDiffMat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;distance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqDistance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# argSort 返回的是索引，其对应的值从小到大
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;sortIndicies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;distance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argsort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;classCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# 取出前 k 个小距离对应的标签
+&lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;voteLabel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sortIndicies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;classCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;voteLabel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;classCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;voteLabel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# 取出所有标签中频率最高的标签
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;sortedClassCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+             &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;operator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itemgetter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reverse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sortedClassCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;测试算法&quot;&gt;测试算法&lt;/h4&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;c1&quot;&gt;# 注：用到的datingTestSet2.txt 为《机器学习实战》的示例数据
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;datingClassTest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KNN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file2matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Ch02/datingTestSet2.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;hoRatio&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.10&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;normMat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ranges&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;minVals&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KNN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;autoNorm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;normMat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;numTestVecs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hoRatio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;errorCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numTestVecs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KNN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classify0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normMat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,:],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normMat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numTestVecs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,:],&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numTestVecs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]):&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;errorCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;train: %d, real: %d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;error count: %f&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;errorCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numTestVecs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/algorithm/ml-knn-test.jpg&quot; data-lightbox=&quot;knn-test&quot;&gt;&lt;img src=&quot;/images/post/algorithm/ml-knn-test.jpg&quot; alt=&quot;knn-test&quot; /&gt;&lt;/a&gt;&lt;/p&gt;</content><author><name>ychost</name></author><category term="机器学习" /><category term="机器学习" /><category term="KNN" /><category term="邻近算法" /><summary type="html">邻近算法，或者说K最近邻(kNN，k-NearestNeighbor)分类算法是数据挖掘分类技术中最简单的方法之一。所谓K最近邻，就是k个最近的邻居的意思，说的是每个样本都可以用它最接近的k个邻居来代表。</summary></entry><entry><title type="html">2018-年度总结</title><link href="http://blog.sudoyc.com/2019/03/27/summary-for-2018/" rel="alternate" type="text/html" title="2018-年度总结" /><published>2019-03-27T00:00:00+08:00</published><updated>2019-03-27T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2019/03/27/summary-for-2018</id><content type="html" xml:base="http://blog.sudoyc.com/2019/03/27/summary-for-2018/">&lt;p&gt;　　今天是 2019年3月27日，遥想上次更新博客还是在 2018年9月20日，已经有超过 6 个月都没有写博客了，一直觉得自己很忙没有时间写，好在这两天把毕业论文搞定了终于松了一口气有时间写个博客来让自己浮躁的内心变得安静。这是第一次以博客的形式做的一个年度总结，回顾整个 2018 年，总的感觉就是遗憾与收获并存。&lt;/p&gt;
+
+&lt;h3 id=&quot;大事记&quot;&gt;大事记&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;签约了工作&lt;/p&gt;
+
+    &lt;p&gt;整个 2018 年都在奔波于找工作，从 3 月份的春招实习到 9 月份的正式秋招一直都处于一种紧绷的状态，昨年的博客产出挺高的不过都是记录的为了找工作刷的一些算法题、面经等等。春招实习顺利拿到了阿里的 Offer 且征得老板同意去杭州实习，最后也顺利转正了。秋招也收获了一些其它公司的 Offer 比如 华为、大疆、海康威视、ThoughtWorks、招银网络等等，都是 Java 软开岗位。回想整个硕士期间一直都在使用 C# 搞 WPF 和 ASP.NET，找工作的时候不得不向岗位应聘需求低头（C# 的岗位太少了），这些公司最让我纠结的就是招银网络（成都）和阿里（杭州），招银基本不加班工资给的还不错（SP Offer），阿里给的是白菜 Offer，两者的年薪差不多，不过阿里加班比较严重而且还在杭州。最后再三思索还是决定去阿里干个 3、5 年然后再跳回成都这种「曲线救国」的战略。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;考驾照&lt;/p&gt;
+
+    &lt;p&gt;在 2017 年 7 月份就报名的驾校终于在 2018 年 11 月去练车了，一晃就是一年多啊，之前主要由于长期在外地出差一直没有时间去练车，好在研二找工作的时候老板把我们放了，终于可以腾出一点时间去练车了。在 2018 年 的末尾终于把科二考过了（挂了一把，第二把 90 分惊险略过），后天（2019-3-29）就要考科三了，现在正在写博客的我瑟瑟发抖。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;2019-3-30：顺利拿证并搞了个共享汽车开了几个小时&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;机器学习&lt;/p&gt;
+
+    &lt;p&gt;这是 2019 年年初的事情了不过也一并记录了，2019 年开学伊始借了一堆机器学习方面的书籍，现在还在慢慢啃，希望在毕业之前能够有所成，同时还借了一些历史书主要是关于春秋战国时代的书籍，想慢慢的把从春秋战国到近代的历史过一遍，让自己充满对中华上下五千年的自豪感，这两天没事的时候还在听《大秦崛起》评书。下面就是借的一些书，图书馆还是挺强大的，包括《xx实战》这类书都能借到。&lt;/p&gt;
+
+    &lt;p&gt;&lt;a href=&quot;/images/post/essay/ml-books.jpg&quot; data-lightbox=&quot;ml-books&quot;&gt;&lt;img src=&quot;/images/post/essay/ml-books.jpg&quot; alt=&quot;ml-books&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;编码&quot;&gt;编码&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;微服务&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;　　签约了工作之后利用闲暇时间去学习了微服务，并基于 Spring Cloud 搭建了一套微服务框架，再利用 WPF 实现了一个简单的打字游戏，在 2014 年的时候自己也模仿 10Fastfingers 实现了一个打字的网站，但是代码实在是太丑没法维护，这次通过 WPF 重新实现了整套前端界面。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/essay/fastfingers.jpg&quot; data-lightbox=&quot;tesla&quot;&gt;&lt;img src=&quot;/images/post/essay/fastfingers.jpg&quot; alt=&quot;fastfingers&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;算法&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;　　这一年学习了很多的基础算法，比如动态规划、排序、最短路径等等，同时也刷了很多的题，把《剑指Offer》刷了三遍，牛客网的一些基础题也都刷了个编，LeetCode 上面刷了 254 道题，自己也写了很多的算法博客来总结自己所刷的题，不过在找完工作之后就没怎么去看了，现在回想起来当初学的那些算法都忘得差不多了。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/essay/fastfingers.jpg&quot; data-lightbox=&quot;algorithm&quot;&gt;&lt;img src=&quot;/images/post/essay/leetcode-session.jpg&quot; alt=&quot;leetcode&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;游玩&quot;&gt;游玩&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;2018-06-02，雷峰塔-西湖，杭州
+  &lt;a href=&quot;/images/post/essay/west-lake.jpg&quot; data-lightbox=&quot;scenery&quot;&gt;&lt;img src=&quot;/images/post/essay/west-lake.jpg&quot; alt=&quot;west-lake&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;2018-08-10，湖畔花园，杭州
+  &lt;a href=&quot;/images/post/essay/lakeside-garden.jpg&quot; data-lightbox=&quot;scenery&quot;&gt;&lt;img src=&quot;/images/post/essay/lakeside-garden.jpg&quot; alt=&quot;lakeside-garden&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;2018-08-13，外滩，上海
+  &lt;a href=&quot;/images/post/essay/shanghai.jpg&quot; data-lightbox=&quot;scenery&quot;&gt;&lt;img src=&quot;/images/post/essay/shanghai.jpg&quot; alt=&quot;disney&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;2018-12-08，滇池，昆明
+  &lt;a href=&quot;/images/post/essay/dian-lake.jpg&quot; data-lightbox=&quot;scenery&quot;&gt;&lt;img src=&quot;/images/post/essay/dian-lake.jpg&quot; alt=&quot;dian-lake&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;其它&quot;&gt;其它&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;复活了电脑&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;　　之前电脑坏了一直没时间去修，在 2018 年国庆后通过在 Intel 上班的同学以 5 折的内部价格买了 I7-8700 和 Gaming3Pro ，终于把沉寂一年的电脑复活了，想想自己买的 GTX1070 基本就没有发挥过它的性能，不过后面肯定可以通过机器学习来发挥它的性能。
+   &lt;a href=&quot;/images/post/essay/my-pc.jpg&quot; data-lightbox=&quot;pc&quot;&gt;&lt;img src=&quot;/images/post/essay/my-pc.jpg&quot; alt=&quot;pc&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;103 WPM&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;　　时隔几年又回到了打字速度巅峰&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/essay/103-wpm.jpg&quot; data-lightbox=&quot;wpm&quot;&gt;&lt;img src=&quot;/images/post/essay/103-wpm.jpg&quot; alt=&quot;103wpm&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;结语&quot;&gt;结语&lt;/h3&gt;
+&lt;p&gt;　　回顾整个 2018 年发现自己的在目标规划上面还欠妥，完成了一件事之后就会变得懈怠，希望在 2019 年有所改善。&lt;/p&gt;
+
+&lt;p&gt;　　2019 年应详细制定几个计划并认真去完成，比如掌握基础的机器学习算法、完满完成毕业答辩、看够 10 本技术无关书籍等等&lt;/p&gt;
+
+&lt;p&gt;　　另外还应该加强身体素质的锻炼，6 月份毕业之后就要去工作了，没有一个好的身体是扛不住高强度的工作的，还有就是多陪陪家人后面工作之后假期就没现在这么充裕了。&lt;/p&gt;
+
+&lt;p&gt;　　最后希望自己能够在 2019 年有所获，也祝大家有一个愉快、充实的 2019。&lt;/p&gt;</content><author><name>ychost</name></author><category term="Private" /><category term="2018" /><category term="年度终结" /><summary type="html">2018 年弹指一挥间，是时候对其进行总结，不然感觉 2018 年白过了</summary></entry></feed>

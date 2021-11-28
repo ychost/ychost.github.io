@@ -7,27 +7,6 @@
     
   },
   
-  "2021-03-16-zeus-lib": { 
-      "title": "template page",
-      "url": " /2021/03/16/zeus-lib/",
-      "category": "cate1"
-    
-  },
-  
-  "2020-12-05-java-compile-annotation": { 
-      "title": "Java Compile Annotation",
-      "url": " /2020/12/05/java-compile-annotation/",
-      "category": ""
-    
-  },
-  
-  "2020-12-02-java-spi": { 
-      "title": "Java SPI 插件机制",
-      "url": " /2020/12/02/java-spi/",
-      "category": "后端"
-    
-  },
-  
   "2020-11-17-lambda-serialize": { 
       "title": "Java Lambda 序列化",
       "url": " /2020/11/17/lambda-serialize/",
@@ -841,8 +820,6 @@
     "title": "标签",
     "url": "/tags/"
   }
-  
-  
   
   
   
