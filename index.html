@@ -116,38 +116,6 @@
                 
                 <li class="repo-list-item">
                     <h3 class="repo-list-name">
-                        <a href="/2021/03/27/zeus/">Zeus</a>
-                    </h3>
-                    <p class="repo-list-description">
-                        /**
-     * 是否包含某个方法，可注入 checker 判断重载
-     */
-    public boolean containMethod(JCClassDecl jcClassDecl, String method, Function&lt;JCMethodDecl, Boolean&gt; checker) {
-        for (JCTree def : jcClassDecl.defs) {
-            if (def instanceof JCMethodDecl &amp;&amp; method.equals(((JCMethodDecl)def).name.toString())) {
-                if (checker != null &amp;&amp; Boolean.TRUE.equals(checker.apply((JCMethodDecl)def))) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-                    </p>
-                    <p class="repo-list-meta">
-                        <span class="meta-info">
-                            
-                          <span class="octicon octicon-calendar"></span>
-                          <a href="/archive/#year-2021"> 2021/03/27</a>
-                        </span>
-                        
-                        
-                    </p>
-                </li>
-                
-                
-                
-                <li class="repo-list-item">
-                    <h3 class="repo-list-name">
                         <a href="/2020/11/17/lambda-serialize/">Java Lambda 序列化</a>
                     </h3>
                     <p class="repo-list-description">
@@ -408,6 +376,8 @@
                         
                     </p>
                 </li>
+                
+                
                 
                 
             </ol>

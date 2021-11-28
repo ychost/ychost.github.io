@@ -1,16 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://blog.sudoyc.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://blog.sudoyc.com/" rel="alternate" type="text/html" /><updated>2021-11-28T17:24:50+08:00</updated><id>http://blog.sudoyc.com/feed.xml</id><title type="html">夏天</title><subtitle>夏天的个人博客</subtitle><author><name>ychost</name></author><entry><title type="html">Zeus</title><link href="http://blog.sudoyc.com/2021/03/27/zeus/" rel="alternate" type="text/html" title="Zeus" /><published>2021-03-27T00:00:00+08:00</published><updated>2021-03-27T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2021/03/27/zeus</id><content type="html" xml:base="http://blog.sudoyc.com/2021/03/27/zeus/">&lt;p&gt;/**
-     * 是否包含某个方法，可注入 checker 判断重载
-     */
-    public boolean containMethod(JCClassDecl jcClassDecl, String method, Function&amp;lt;JCMethodDecl, Boolean&amp;gt; checker) {
-        for (JCTree def : jcClassDecl.defs) {
-            if (def instanceof JCMethodDecl &amp;amp;&amp;amp; method.equals(((JCMethodDecl)def).name.toString())) {
-                if (checker != null &amp;amp;&amp;amp; Boolean.TRUE.equals(checker.apply((JCMethodDecl)def))) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }&lt;/p&gt;</content><author><name>ychost</name></author><summary type="html">/** * 是否包含某个方法，可注入 checker 判断重载 */ public boolean containMethod(JCClassDecl jcClassDecl, String method, Function&amp;lt;JCMethodDecl, Boolean&amp;gt; checker) { for (JCTree def : jcClassDecl.defs) { if (def instanceof JCMethodDecl &amp;amp;&amp;amp; method.equals(((JCMethodDecl)def).name.toString())) { if (checker != null &amp;amp;&amp;amp; Boolean.TRUE.equals(checker.apply((JCMethodDecl)def))) { return true; } } } return false; }</summary></entry><entry><title type="html">Java Lambda 序列化</title><link href="http://blog.sudoyc.com/2020/11/17/lambda-serialize/" rel="alternate" type="text/html" title="Java Lambda 序列化" /><published>2020-11-17T00:00:00+08:00</published><updated>2020-11-17T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2020/11/17/lambda-serialize</id><content type="html" xml:base="http://blog.sudoyc.com/2020/11/17/lambda-serialize/">&lt;p&gt;Lambda 是 Java8 引进的一项新的能力，日常主要是结合 stream 一起使用，Lambda 也是可以像普通的对象一样进行序列化/反序列化的，就可以像普通对象一样先序列化成字节码然后进行存储或者传输，待需要的时候再将字节码进行反序列化，这样就实现了将一个方法进行了本地存储和传输，通过该方式可以进一步实现类似 Groovy 动态脚本一样的功能&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://blog.sudoyc.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://blog.sudoyc.com/" rel="alternate" type="text/html" /><updated>2021-11-28T17:26:38+08:00</updated><id>http://blog.sudoyc.com/feed.xml</id><title type="html">夏天</title><subtitle>夏天的个人博客</subtitle><author><name>ychost</name></author><entry><title type="html">Java Lambda 序列化</title><link href="http://blog.sudoyc.com/2020/11/17/lambda-serialize/" rel="alternate" type="text/html" title="Java Lambda 序列化" /><published>2020-11-17T00:00:00+08:00</published><updated>2020-11-17T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2020/11/17/lambda-serialize</id><content type="html" xml:base="http://blog.sudoyc.com/2020/11/17/lambda-serialize/">&lt;p&gt;Lambda 是 Java8 引进的一项新的能力，日常主要是结合 stream 一起使用，Lambda 也是可以像普通的对象一样进行序列化/反序列化的，就可以像普通对象一样先序列化成字节码然后进行存储或者传输，待需要的时候再将字节码进行反序列化，这样就实现了将一个方法进行了本地存储和传输，通过该方式可以进一步实现类似 Groovy 动态脚本一样的功能&lt;/p&gt;
 
 &lt;h2 id=&quot;序列化&quot;&gt;序列化&lt;/h2&gt;
 &lt;p&gt;Lambda 的序列化和普通对象的序列化一样，主要使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ObjectOutputStream/ObjectInputStream&lt;/code&gt;&lt;/p&gt;
@@ -1624,4 +1612,11 @@ h_2(x)=0
 
 &lt;p&gt;　　另外还应该加强身体素质的锻炼，6 月份毕业之后就要去工作了，没有一个好的身体是扛不住高强度的工作的，还有就是多陪陪家人后面工作之后假期就没现在这么充裕了。&lt;/p&gt;
 
-&lt;p&gt;　　最后希望自己能够在 2019 年有所获，也祝大家有一个愉快、充实的 2019。&lt;/p&gt;</content><author><name>ychost</name></author><category term="Private" /><category term="2018" /><category term="年度终结" /><summary type="html">2018 年弹指一挥间，是时候对其进行总结，不然感觉 2018 年白过了</summary></entry></feed>
+&lt;p&gt;　　最后希望自己能够在 2019 年有所获，也祝大家有一个愉快、充实的 2019。&lt;/p&gt;</content><author><name>ychost</name></author><category term="Private" /><category term="2018" /><category term="年度终结" /><summary type="html">2018 年弹指一挥间，是时候对其进行总结，不然感觉 2018 年白过了</summary></entry><entry><title type="html">算法-统计数字区间中 1 出现的次数</title><link href="http://blog.sudoyc.com/2018/09/20/algorithm-count-digits/" rel="alternate" type="text/html" title="算法-统计数字区间中 1 出现的次数" /><published>2018-09-20T00:00:00+08:00</published><updated>2018-09-20T00:00:00+08:00</updated><id>http://blog.sudoyc.com/2018/09/20/algorithm-count-digits</id><content type="html" xml:base="http://blog.sudoyc.com/2018/09/20/algorithm-count-digits/">&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
+&lt;p&gt;[1,13] 区间中 1 出现的次数为 5 次分别为 1、10、11、12、13，现在求 [1,n] 区间中 1 出现的次数，推而广之能否求出 [1,n] 区间中任意数字出现的次数
+&lt;a href=&quot;https://www.nowcoder.com/practice/bd7f978302044eee894445e244c7eee6?tpId=13&amp;amp;tqId=11184&amp;amp;rp=2&amp;amp;ru=/ta/coding-interviews&amp;amp;qru=/ta/coding-interviews/question-ranking&quot;&gt;牛客网连接&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;分析&quot;&gt;分析&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;对于每个位置来说都能把十进制的数分成两部分，比如对于 n=31415952&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>ychost</name></author><category term="算法" /><category term="Java" /><category term="数字" /><summary type="html">\[1,13] 区间中 1 出现的次数为 5 次分别为 1、10、11、12、13，现在求 [1,n] 区间中 1 出现的次数，推而广之能否求出 [1,n] 区间中任意数字出现的次数</summary></entry></feed>
