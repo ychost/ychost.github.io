@@ -1,0 +1,13 @@
+<p>/**
+     * 是否包含某个方法，可注入 checker 判断重载
+     */
+    public boolean containMethod(JCClassDecl jcClassDecl, String method, Function&lt;JCMethodDecl, Boolean&gt; checker) {
+        for (JCTree def : jcClassDecl.defs) {
+            if (def instanceof JCMethodDecl &amp;&amp; method.equals(((JCMethodDecl)def).name.toString())) {
+                if (checker != null &amp;&amp; Boolean.TRUE.equals(checker.apply((JCMethodDecl)def))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }</p>
